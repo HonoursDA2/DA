@@ -10,6 +10,7 @@
     <script src="js/ui.js" type="text/javascript"></script>
     <script src="js/script.js" type="text/javascript"></script>
     <script src="js/scripts.js" type="text/javascript"></script>
+	<script src="js/ajaxjsp.js" type="text/javascript"></script>
 </head>
 <body>
 
@@ -17,6 +18,13 @@
 <img src="images/silver.jpg">
 <h1>DA2</h1>
 <h2>Diabetes Advisor</h2>
+<FORM name="f1" TARGET="_blank" METHOD=POST ACTION="profile.jsp">
+Name:<input id="name" name="word" type="text" value="" placeholder="Enter your name here">
+Gender:<input id="name" name="gender" type="text" value="" placeholder="Enter your gender here">
+<input value="Go" type="button" onclick='JavaScript:xmlhttpPost("profile.jsp")'>
+</FORM>
+
+<h1 id="n"></h1>
 </div>
 
 <div id="profile">
@@ -25,6 +33,7 @@
 <span>Hi, I am Doctor Mellitus, a Diabetes Advisor.</span> <br /><br /><br /><br /><br /><br />
 <span>What is your name ?</span> <input id="name" type="text" value="" placeholder="Enter your name here">
 </p>
+
 <p class="speech" id="gender">
 <span>Are you a male <span id="man">(man)</span> or female <span id="woman">(woman)</span>?</span></p>
 <div id="male" onclick="gSpecific(male)"><img src="images/male-sign.jpg"></div><div id="female" onclick="gSpecific(female)"><img src="images/female-sign.jpg"></div>

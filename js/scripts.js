@@ -63,5 +63,5 @@ function gSpecific(gender) {
 }
 
 function splash() {
-    $("#splash").delay(2000).effect("puff", 500);
+/*    $("#splash").delay(2000).effect("puff", 500);*/
 }
