@@ -19,14 +19,14 @@
 			<h1>DA2</h1>
 			<h2>Diabetes Advisor</h2>
 
-			Name:<input id="name" name="word" type="text" value="" placeholder="Enter your name here">
-			Gender:<input id="name" name="gender" type="text" value="" placeholder="Enter your gender here">
-			<input id="post" value="Go" type="button">
+			Name:<input name="word" type="text" value="" placeholder="Enter your name here">
+			Gender:<input name="gender" type="text" value="" placeholder="Enter your gender here">
+			<input value="Go" type="button">
 
 			<script>
 				$(document).ready(function() {
 					
-					$('#post').click(function() {
+					$('#button').click(function() {
 					       var nam = $("#name").val();	
 						$.get('servlet',{name:nam}, function(responseText) {
 							$('#somediv').text(responseText);         

@@ -1,4 +1,4 @@
-﻿thirst = { id: "#thirst", clicked: false };
+thirst = { id: "#thirst", clicked: false };
 urinating = { id: "#urinating", clicked: false };
 itchiness = { id: "#vitchiness", clicked: false };
 dysfunction = { id: "#dysfunction", clicked: false };
@@ -40,7 +40,7 @@ function confirm() {
     if (count == 0) {
         name = document.getElementById('name').value;
         $("#intro").fadeOut();
-        document.getElementById("advisorH1").innerHTML = "Hello " + name + " how may I help you with ?";
+        document.getElementById("advisorH1").innerHTML = "Hello " + name + " how may I help you ?";
         count++;
         $("#gender,#profile #male, #profile #female").fadeIn();
     }
@@ -63,5 +63,5 @@ function gSpecific(gender) {
 }
 
 function splash() {
-/*    $("#splash").delay(2000).effect("puff", 500);*/
+    $("#splash").delay(2000).effect("puff", 500);
 }
