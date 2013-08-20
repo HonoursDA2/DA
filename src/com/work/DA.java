@@ -19,7 +19,7 @@ public class DA extends HttpServlet{
 
 			response.setContentType("text/plain");  
 			response.setCharacterEncoding("UTF-8");
-			response.getWriter().write(text);     	
+			response.getWriter().write(text+ " from jess");     	
 			Rete engine =(Rete)(getServletContext().getAttribute("engine"));
 
 			engine.executeCommand("(printout t " + text + " crlf)");

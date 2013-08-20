@@ -10,32 +10,24 @@
 		<script src="js/ui.js" type="text/javascript"></script>
 		<script src="js/script.js" type="text/javascript"></script>
 		<script src="js/scripts.js" type="text/javascript"></script>
-		<script src="js/ajaxjsp.js" type="text/javascript"></script>
 	</head>
 	<body>
-
-		<div id="splash">
-			<img src="images/silver.jpg">
-			<h1>DA2</h1>
-			<h2>Diabetes Advisor</h2>
-
-			Name:<input name="word" type="text" value="" placeholder="Enter your name here">
-			Gender:<input name="gender" type="text" value="" placeholder="Enter your gender here">
-			<input value="Go" type="button">
-
-			<script>
+		<script>
 				$(document).ready(function() {
 					
 					$('#button').click(function() {
 					       var nam = $("#name").val();	
 						$.get('servlet',{name:nam}, function(responseText) {
-							$('#somediv').text(responseText);         
+							$('#advisorH1').text(responseText);         
 							});
 					});
 				});	
 			</script>	
 
-			<div id="somediv"></div>
+		<<div id="splash">
+			<img src="images/silver.jpg">
+			<h1>DA2</h1>
+			<h2>Diabetes Advisor</h2>
 		</div>
 
 		<div id="profile">

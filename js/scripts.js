@@ -30,7 +30,6 @@ function diagnose() {
     }
 }
 
-var name;
 var count = 0;
 function confirm() {
 
@@ -38,9 +37,7 @@ function confirm() {
         $("#profile").fadeOut();
     }
     if (count == 0) {
-        name = document.getElementById('name').value;
         $("#intro").fadeOut();
-        document.getElementById("advisorH1").innerHTML = "Hello " + name + " how may I help you ?";
         count++;
         $("#gender,#profile #male, #profile #female").fadeIn();
     }
