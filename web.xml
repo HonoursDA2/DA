@@ -16,7 +16,7 @@
 	</servlet-mapping>
 	<context-param>
 		<param-name>rulesfile</param-name>
-		<param-value>src\rules.clp</param-value>
+		<param-value>/WEB-INF/rules.clp</param-value>
 	</context-param>
 
 
