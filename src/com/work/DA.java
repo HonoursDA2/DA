@@ -27,13 +27,17 @@ public class DA extends HttpServlet{
 
 		}
 	}
-
+	//load the jess rulesfile.
 	protected void checkInitialized()
 		throws ServletException {
 		ServletContext servletContext = getServletContext();
+		String rulesFile = servletContext.getInitParameter("rulesfile");
+		System.out.println(rulesFile);
 		if (servletContext.getAttribute("engine") == null) {
 			try {
 				Rete engine = new Rete (this);
+				System.out.println(servletContext.getRealPath(rulesFile));
+				engine.batch(servletContext.getRealPath(rulesFile));
 				engine.reset();
 				System.out.println("creating jess object");
 				servletContext.setAttribute("engine", engine);
@@ -44,4 +48,3 @@ public class DA extends HttpServlet{
 	}
 
 }
-
