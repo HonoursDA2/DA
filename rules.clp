@@ -22,24 +22,16 @@
    (Reason (name Teeth_and_Gum_Problems) (explanation ""))
    (Reason (name Extreme_Hunger) (explanation "The dropping blood sugar levels lead to a desire for more food and energy"))
    (Reason (name Errectional_Disfunction) (explanation "This is a result of the nerve damage in the body.") )
-   )
+    )
 
 (defrule showExplanation
     ?input <- (Input (name ?inputName))
     ?reason <- (Reason (name ?name) (explanation ?explanation))
     =>
-   	(if (eq ?inputName ?name) then (printout t ?explanation))
-    ;(retract (?input))
+    (assert (rubbish-fact))
+    (if (eq ?inputName ?name) then (printout out ?explanation))    
     )
 
-(deffunction input()
-    (bind ?read (read))    
-    (assert (Input (name ?read))
-        )
-    )
-(defrule start
-    => 
-    (input())
-    )
+
 
 
