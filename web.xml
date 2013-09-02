@@ -18,7 +18,5 @@
 		<param-name>rulesfile</param-name>
 		<param-value>/WEB-INF/rules.clp</param-value>
 	</context-param>
-
-
 </web-app>
 
