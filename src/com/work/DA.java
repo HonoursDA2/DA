@@ -7,36 +7,48 @@ import jess.*;
 
 public class DA extends HttpServlet{
 
-
+	StringWriter sw = null;
+	int number=0;
 	public void doGet(HttpServletRequest request,
 			HttpServletResponse response) 
 		throws IOException, ServletException
 	{
+		sw = new StringWriter();
 		try {
+			number++;
+			System.out.println(number);
+			//	if (number%2==0) {
 			checkInitialized();
 			System.out.println("working");
 			String text = request.getParameter("name");
-
 			response.setContentType("text/plain");  
-			response.setCharacterEncoding("UTF-8");
-			response.getWriter().write(text+ " from jess");     	
+			response.setCharacterEncoding("UTF-8");	
 			Rete engine =(Rete)(getServletContext().getAttribute("engine"));
-
-			engine.executeCommand("(printout t " + text + " crlf)");
-		} catch (JessException jess) {
+			engine.assertString("(Input (name "+text+"))");
+			System.out.println("(Input (name "+text+"))");
+			//engine.eval("(facts)");
+			//engine.eval("(facts)");
+			//engine.executeCommand("(printout out " + text + " crlf)");
+			engine.eval("(facts)");
+			engine.run();
+			System.out.println("done");
+			response.getWriter().write( engine.getOutputRouter("out").toString());
+			//	}
+		}
+		catch (JessException jess) {
 
 		}
+
 	}
 	//load the jess rulesfile.
 	protected void checkInitialized()
 		throws ServletException {
 		ServletContext servletContext = getServletContext();
 		String rulesFile = servletContext.getInitParameter("rulesfile");
-		System.out.println(rulesFile);
 		if (servletContext.getAttribute("engine") == null) {
 			try {
 				Rete engine = new Rete (this);
-				System.out.println(servletContext.getRealPath(rulesFile));
+				engine.addOutputRouter("out", sw);
 				engine.batch(servletContext.getRealPath(rulesFile));
 				engine.reset();
 				System.out.println("creating jess object");
