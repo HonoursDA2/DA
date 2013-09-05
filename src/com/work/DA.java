@@ -17,7 +17,7 @@ public class DA extends HttpServlet{
 		try {
 			number++;
 			System.out.println(number);
-			//	if (number%2==0) {
+			if (number%2==0) {
 			checkInitialized();
 			System.out.println("working");
 			String text = request.getParameter("name");
@@ -32,8 +32,10 @@ public class DA extends HttpServlet{
 			engine.eval("(facts)");
 			engine.run();
 			System.out.println("done");
-			response.getWriter().write( engine.getOutputRouter("out").toString());
-			//	}
+			String jessText = engine.getOutputRouter("out").toString();
+			((StringWriter)(engine.getOutputRouter("out"))).getBuffer().setLength(0);
+			response.getWriter().write( jessText);
+			}
 		}
 		catch (JessException jess) {
 
