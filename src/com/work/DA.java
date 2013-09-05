@@ -9,10 +9,15 @@ public class DA extends HttpServlet{
 
 	StringWriter sw = null;
 	int number=0;
+	HttpServletRequest request = null;
+	HttpServletResponse response = null;
+
 	public void doGet(HttpServletRequest request,
 			HttpServletResponse response) 
 		throws IOException, ServletException
 	{
+		this.request = request;
+		this.response = response;
 		sw = new StringWriter();
 		try {
 			number++;
@@ -20,21 +25,7 @@ public class DA extends HttpServlet{
 			if (number%2==0) {
 			checkInitialized();
 			System.out.println("working");
-			String text = request.getParameter("name");
-			response.setContentType("text/plain");  
-			response.setCharacterEncoding("UTF-8");	
-			Rete engine =(Rete)(getServletContext().getAttribute("engine"));
-			engine.assertString("(Input (name "+text+"))");
-			System.out.println("(Input (name "+text+"))");
-			//engine.eval("(facts)");
-			//engine.eval("(facts)");
-			//engine.executeCommand("(printout out " + text + " crlf)");
-			engine.eval("(facts)");
-			engine.run();
-			System.out.println("done");
-			String jessText = engine.getOutputRouter("out").toString();
-			((StringWriter)(engine.getOutputRouter("out"))).getBuffer().setLength(0);
-			response.getWriter().write( jessText);
+			chooseFunction();
 			}
 		}
 		catch (JessException jess) {
@@ -59,6 +50,35 @@ public class DA extends HttpServlet{
 				throw new ServletException(jess);
 			}
 		}
+	}
+
+	public void chooseFunction()
+	throws IOException, JessException
+	{
+		if (request.getParameterMap().containsKey("name")) {
+			symptom();
+		} else if (request.getParameterMap().containsKey("symptoms")) {
+				factList();}
+	}
+
+	public void symptom()
+        throws IOException, JessException	{
+			String text = request.getParameter("name");
+			response.setContentType("text/plain");  
+			response.setCharacterEncoding("UTF-8");	
+			Rete engine =(Rete)(getServletContext().getAttribute("engine"));
+			engine.assertString("(Input (name "+text+"))");
+			System.out.println("(Input (name "+text+"))");
+			engine.eval("(facts)");
+			engine.run();
+			System.out.println("done");
+			String jessText = engine.getOutputRouter("out").toString();
+			((StringWriter)(engine.getOutputRouter("out"))).getBuffer().setLength(0);
+			response.getWriter().write( jessText);
+	}
+
+	public void factList() {
+		
 	}
 
 }

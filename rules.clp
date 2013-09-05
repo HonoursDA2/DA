@@ -3,7 +3,10 @@
     (slot name)
     (slot explanation)
     )
-
+(deftemplate Information
+    (slot name)
+    (slot explanation)
+    )
 (deftemplate Input
     (slot name)
     )
@@ -23,6 +26,9 @@
    (Reason (name Extreme_Hunger) (explanation "The dropping blood sugar levels lead to a desire for more food and energy"))
    (Reason (name Errectional_Disfunction) (explanation "This is a result of the nerve damage in the body.") )
     )
+(deffacts additional
+   (Information (name Gastroparesis) (explanation "Gastroparesis is a disease of the muscles of the stomach or the nerves controlling the muscles that causes the muscles to stop working"))
+   )
 
 (defrule showExplanation
     ?input <- (Input (name ?inputName))
@@ -31,6 +37,10 @@
     (assert (rubbish-fact))
     (if (eq ?inputName ?name) then (printout out ?explanation))    
     )
+
+(deffunction addFact(?fact)
+    (assert (Symptom ?fact))
+)
 
 
 
