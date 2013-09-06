@@ -38,8 +38,12 @@
     (if (eq ?inputName ?name) then (printout out ?explanation))    
     )
 
-(deffunction addFact(?fact)
-    (assert (Symptom ?fact))
+(deffunction addFact(?factToAdd, ?fact)
+    (if (eq "Symptom" ?factToAdd) then
+    	(assert (Symptom ?fact)) else
+        	(if (eq "LifeStyle" ?factToAdd) then
+    			(assert (LifeStyle ?fact)))
+    )
 )
 
 
