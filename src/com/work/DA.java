@@ -4,12 +4,12 @@ import java.io.*;
 import javax.servlet.http.*;
 import javax.servlet.*;
 import jess.*;
-//im not sure why the DoGet is called twice
+//im not sure why the doGet is called twice
 
 public class DA extends HttpServlet{
 
 	StringWriter sw = null;
-	int number=0;
+	int number = 0;
 	HttpServletRequest request = null;
 	HttpServletResponse response = null;
 
@@ -89,5 +89,15 @@ public class DA extends HttpServlet{
 			}
 			engine.run();	
 		}
+	public void diabetic()
+       		throws JessException	{
+		
+		Rete engine = (Rete)(getServletContext().getAttribute("engine"));
+		String answer = request.getParameter("diabetic");
+		if (answer.equals("Yes")) {
+			engine.eval("(Diabetic_yes)");
+		}	else
+			engine.eval("(Diabetic_no)");
+	}
 
 }
