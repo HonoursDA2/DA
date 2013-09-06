@@ -93,7 +93,7 @@ public class DA extends HttpServlet{
        		throws JessException	{
 		
 		Rete engine = (Rete)(getServletContext().getAttribute("engine"));
-		String answer = request.getParameterValue("diabetic");
+		String answer = request.getParameter("diabetic");
 		if (answer.equals("Yes")) {
 			engine.eval("(Diabetic_yes)");
 		}	else

@@ -59,6 +59,10 @@ public class DA extends HttpServlet{
 		if (request.getParameterMap().containsKey("name"))//need to change the name of this
 	       	{
 			symptom();
+		}  else if (request.getParameterMap().containsKey("gender")) {
+			gender();
+		}  else if (request.getParameterMap().containsKey("diabetic")) {
+			diabetic();
 		} else if (request.getParameterMap().containsKey("symptoms")) {
 			symptomList();
 		}
@@ -89,9 +93,9 @@ public class DA extends HttpServlet{
 			}
 			engine.run();	
 		}
+
 	public void diabetic()
        		throws JessException	{
-		
 		Rete engine = (Rete)(getServletContext().getAttribute("engine"));
 		String answer = request.getParameter("diabetic");
 		if (answer.equals("Yes")) {
@@ -99,5 +103,16 @@ public class DA extends HttpServlet{
 		}	else
 			engine.eval("(Diabetic_no)");
 	}
+	
+	public void gender()
+       		throws JessException	{
+		Rete engine = (Rete)(getServletContext().getAttribute("engine"));
+		String answer = request.getParameter("gender");
+		if (answer.equals("Male")) {
+			engine.eval("(Gender_male)");
+		}	else
+			engine.eval("(Gender_female)");
+	}
+
 
 }
