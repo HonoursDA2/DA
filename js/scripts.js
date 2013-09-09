@@ -1,4 +1,4 @@
-﻿thirst = { id: "#thirst", clicked: false };
+thirst = { id: "#thirst", clicked: false };
 urinating = { id: "#urinating", clicked: false };
 itchiness = { id: "#vitchiness", clicked: false };
 dysfunction = { id: "#dysfunction", clicked: false };
@@ -15,6 +15,7 @@ numbness = { id: "#numbness", clicked: false };
 teethandgum = { id: "#teethandgum", clicked: false };
 hunger = { id: "#hunger", clicked: false };
 
+
 function clicked(symptom) {
 
     if (!symptom.clicked) {
@@ -27,17 +28,51 @@ function clicked(symptom) {
     }
 }
 
+<<<<<<< HEAD
 function diagnose() { //Comment this out
     
     if (thirst.clicked) {
         document.getElementById("advisorH1").innerHTML = "Drink Something";
+=======
+function createArray() {
+    var submitArray = [thirst,urinating,itchiness,dysfunction,blurvision,fatigue,weightloss,drymouth,vomiting,abdomenalpain];
+    return submitArray;
+}
+
+function countClicks() {
+    var count = 0;
+    var array = createArray();
+    for (var x=0;x<array.length;x++) {
+        if (array[x].clicked) {
+            count++;
+        }
+>>>>>>> origin/master
     }
-    if (thirst.clicked && fatigue.clicked) {
-        document.getElementById("advisorH1").innerHTML = "Drink water and rest";
+    return count;
+}
+
+function submitSymptoms() {
+    var submitArray = createArray();
+    var counter = 0;
+    var count = countClicks();
+    for (var x=0;x<submitArray.length;x++) {
+        if (submitArray[x].clicked) {
+            var symptomObject = submitArray[x];
+            var symptomName = $(symptomObject.id).attr('value'); 
+            alert(symptomName + " " + count +" " +counter);
+            if (counter == (count - 1)) {
+                $.get('servlet',{symptoms:symptomName,process:"complete"});
+                x = submitArray.length;
+            } else {
+                $.get('servlet',{symptoms:symptomName,process:"incomplete"});
+                }
+            
+            counter++;
+        }
+
     }
 }
 
-var name;
 var count = 0;
 
 function revert()
@@ -66,9 +101,13 @@ function confirm() {
         
     }
     if (count == 0) {
+<<<<<<< HEAD
         name = document.getElementById('name').value; //Comment this out
         $("#intro").fadeOut(0);
         document.getElementById("advisorH1").innerHTML = "Hello " + name + " how may I help you with ?"; //Comment this out
+=======
+        $("#intro").fadeOut();
+>>>>>>> origin/master
         count++;
         $("#gender,#profile #male, #profile #female").fadeIn(0);
         $("#button").css({"margin":"0 0 1.5% 250px"});

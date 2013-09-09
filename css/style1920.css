@@ -22,7 +22,6 @@ body
     top:0;
     left:0;
     z-index:5;
-    display:none;
 }
 
 #splash img
@@ -44,6 +43,10 @@ body
     height:100%;
     z-index:2;
     position:absolute;
+<<<<<<< HEAD:css/style1920.css
+=======
+
+>>>>>>> origin/master:css/style.css
 }
 
 #profile div
@@ -259,7 +262,7 @@ span#woman
 
 .section
 {
-    position:fixed;
+    position:absolute;
     background:white;
     box-shadow:0px 2px 7px grey;
     width:97%;
