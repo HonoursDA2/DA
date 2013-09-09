@@ -228,13 +228,14 @@ span#woman
 
 .section
 {
-    position:fixed;
+    position:absolute;
     background:white;
     box-shadow:0px 2px 7px grey;
     width:97%;
     height:47%;
     left:1.5%;
     border-radius:5px;
+    overflow:auto;
 }
 
 #advisor
