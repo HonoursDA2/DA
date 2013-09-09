@@ -1,22 +1,11 @@
 ﻿window.onload = function () {
     splash();
-    info();
 };
 
-
-
-function info() {
-    var info = "images/information.png";
-    var buttonInfo = "buttonInfo";
-    $(".buttons").append("<img class=" + buttonInfo + " src=" + info + " />");
-}
-
-
-
-$(function () {
-    $(document).on('click', '.buttonInfo', function () {
-        var def = $(this).parent().attr("id");
-        $("p.speech span").css({ 'text-align': 'left' });
+$(function () { //Comment this out
+    $(".buttons").hover(function(){
+        var def = $(this).attr("id");
+        $("div.speech span").css({ 'text-align': 'left' });
         if (def == 'thirst') {
             document.getElementById("advisorH1").innerHTML = "<span id='def'>" + def + "</span>" + "is blah blah";
         }
@@ -24,7 +13,7 @@ $(function () {
             document.getElementById("advisorH1").innerHTML = "<span id='def'>" + def + "</span>" + "is blah blah";
         }
         else if (def == 'vitchiness') {
-            document.getElementById("advisorH1").innerHTML = "<span id='def'>Vaginal Itchiness</span>" + "<span id='definition'>is blah blah</span>";
+            document.getElementById("advisorH1").innerHTML = "<span id='def'>Vaginal Itchiness</span>" + "is blah blah";
         }
 
     });
@@ -41,11 +30,37 @@ $(function () {
     });
     
     $("#symptom").click(function (){
-        $("#symptoms").fadeIn();
+        $("#symptoms").delay(200).fadeIn();
         $("#choice, #menu").fadeOut();
+        $("#backbutton").delay(200).fadeIn();
     });
     
+    $("#backbutton").click(function (){
+        $("#symptoms, #factors, #lifestyle").delay(200).fadeOut();
+        $("#choice, #menu").delay(200).fadeIn();
+        $(this).fadeOut();
+    });
+
+    var clicked = clicked2 = false;
     $("#nearest").click(function (){
+        if(!clicked){
         $("#directions").fadeIn();
+        clicked = true;
+        }
+        else{
+        $("#directions").fadeOut();
+        clicked = false;
+        }
+    });
+    
+    $("#extra").click(function (){
+        if(!clicked2){
+        $("#definition").fadeIn();
+        clicked2 = true;
+        }
+        else{
+        $("#definition").fadeOut();
+        clicked2 = false;
+        }
     });
 });
