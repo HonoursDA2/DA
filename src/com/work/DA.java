@@ -1,4 +1,4 @@
-package com.work;
+	package com.work;
 
 import java.io.*;
 import javax.servlet.http.*;
@@ -12,6 +12,7 @@ public class DA extends HttpServlet{
 	int number = 0;
 	HttpServletRequest request = null;
 	HttpServletResponse response = null;
+	boolean symptomsChecked = false;
 
 	public void doGet(HttpServletRequest request,
 			HttpServletResponse response) 
@@ -23,11 +24,9 @@ public class DA extends HttpServlet{
 		try {
 			number++;
 			System.out.println(number);
-			if (number%2==0) {
 				checkInitialized();
 				System.out.println("working");
 				chooseFunction();
-			}
 		}
 		catch (JessException jess) {
 
@@ -56,7 +55,7 @@ public class DA extends HttpServlet{
 	public void chooseFunction()
 		throws IOException, JessException
 	{
-		if (request.getParameterMap().containsKey("name"))//need to change the name of this
+		if (request.getParameterMap().containsKey("symptom"))//need to change the name of this
 	       	{
 			symptom();
 		}  else if (request.getParameterMap().containsKey("gender")) {
@@ -70,7 +69,7 @@ public class DA extends HttpServlet{
 
 	public void symptom()
 		throws IOException, JessException	{
-		String text = request.getParameter("name");
+		String text = request.getParameter("symptom");
 		response.setContentType("text/plain");  
 		response.setCharacterEncoding("UTF-8");	
 		Rete engine =(Rete)(getServletContext().getAttribute("engine"));
@@ -87,11 +86,18 @@ public class DA extends HttpServlet{
 		throws IOException, JessException
 
 		{	Rete engine =(Rete)(getServletContext().getAttribute("engine"));
-			String[] symptoms = request.getParameterValues("symptoms");
-			for (int x=0;x<symptoms.length;x++) {
-				engine.eval("(addFact Symptom "+symptoms[x] +")");
-			}
-			engine.run();	
+			String symptoms = request.getParameter("symptoms");
+			if (symptomsChecked==false) {
+				System.out.println(request.getParameter("symptoms") +" " + request.getParameter("process"));
+				System.out.println("(addFact Symptom "+symptoms+")");	
+				engine.eval("(addFact Symptom "+symptoms+")");
+				if (request.getParameter("process").equals("complete")) {
+					symptomsChecked=true;
+					System.out.println("checking facts");
+					engine.eval("(facts)");
+					System.out.println("checking facts");
+				}
+			} 	
 		}
 
 	public void diabetic()
@@ -107,12 +113,17 @@ public class DA extends HttpServlet{
 	public void gender()
        		throws JessException	{
 		Rete engine = (Rete)(getServletContext().getAttribute("engine"));
-		String answer = request.getParameter("gender");
-		if (answer.equals("Male")) {
-			engine.eval("(Gender_male)");
+		String gender = request.getParameter("gender");
+		if (gender.equals("Male")) {
+			engine.assertString("(Gender_male)");
 		}	else
-			engine.eval("(Gender_female)");
+			engine.assertString("(Gender_female)");
 	}
 
-
+	public void name()
+       		throws JessException	{
+		Rete engine = (Rete)(getServletContext().getAttribute("engine"));
+		String name = request.getParameter("name");
+		engine.assertString("(name "+name+" )");
+		}
 }
