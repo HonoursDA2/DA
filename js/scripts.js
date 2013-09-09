@@ -1,4 +1,4 @@
-﻿thirst = { id: "#thirst", clicked: false };
+thirst = { id: "#thirst", clicked: false };
 urinating = { id: "#urinating", clicked: false };
 itchiness = { id: "#vitchiness", clicked: false };
 dysfunction = { id: "#dysfunction", clicked: false };
@@ -8,6 +8,7 @@ weightloss = { id: "#weightloss", clicked: false };
 drymouth = { id: "#drymouth", clicked: false };
 vomiting = { id: "#vomiting", clicked: false };
 abdomenalpain = { id: "#abdomenalpain", clicked: false };
+
 
 function clicked(symptom) {
 
@@ -21,16 +22,44 @@ function clicked(symptom) {
     }
 }
 
-function diagnose() {
-    if (thirst.clicked) {
-        document.getElementById("advisorH1").innerHTML = "Drink Something";
+function createArray() {
+    var submitArray = [thirst,urinating,itchiness,dysfunction,blurvision,fatigue,weightloss,drymouth,vomiting,abdomenalpain];
+    return submitArray;
+}
+
+function countClicks() {
+    var count = 0;
+    var array = createArray();
+    for (var x=0;x<array.length;x++) {
+        if (array[x].clicked) {
+            count++;
+        }
     }
-    if (thirst.clicked && fatigue.clicked) {
-        document.getElementById("advisorH1").innerHTML = "Drink water and rest";
+    return count;
+}
+
+function submitSymptoms() {
+    var submitArray = createArray();
+    var counter = 0;
+    var count = countClicks();
+    for (var x=0;x<submitArray.length;x++) {
+        if (submitArray[x].clicked) {
+            var symptomObject = submitArray[x];
+            var symptomName = $(symptomObject.id).attr('value'); 
+            alert(symptomName + " " + count +" " +counter);
+            if (counter == (count - 1)) {
+                $.get('servlet',{symptoms:symptomName,process:"complete"});
+                x = submitArray.length;
+            } else {
+                $.get('servlet',{symptoms:symptomName,process:"incomplete"});
+                }
+            
+            counter++;
+        }
+
     }
 }
 
-var name;
 var count = 0;
 function confirm() {
 
@@ -38,9 +67,7 @@ function confirm() {
         $("#profile").fadeOut();
     }
     if (count == 0) {
-        name = document.getElementById('name').value;
         $("#intro").fadeOut();
-        document.getElementById("advisorH1").innerHTML = "Hello " + name + " how may I help you with ?";
         count++;
         $("#gender,#profile #male, #profile #female").fadeIn();
     }
