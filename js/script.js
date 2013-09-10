@@ -2,23 +2,6 @@
     splash();
 };
 
-$(function () { //Comment this out
-    $(".buttons").hover(function(){
-        var def = $(this).attr("id");
-        $("div.speech span").css({ 'text-align': 'left' });
-        if (def == 'thirst') {
-            document.getElementById("advisorH1").innerHTML = "<span id='def'>" + def + "</span>" + "is blah blah";
-        }
-        else if (def == 'urinating') {
-            document.getElementById("advisorH1").innerHTML = "<span id='def'>" + def + "</span>" + "is blah blah";
-        }
-        else if (def == 'vitchiness') {
-            document.getElementById("advisorH1").innerHTML = "<span id='def'>Vaginal Itchiness</span>" + "is blah blah";
-        }
-
-    });
-
-
     $("#symptom").hover(function () {
         document.getElementById("patientH1").innerHTML = "Symptoms";
     });
