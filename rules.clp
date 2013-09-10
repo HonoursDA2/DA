@@ -20,7 +20,7 @@
    (Reason (name Irritability) (explanation "Cells no have any enegery, so they want more"))
    (Reason (name Yeast-Infection) (explanation "Cells no have any enegery, so they want more"))
    (Reason (name Blurred-Vision) (explanation "The fluctuation in blood glucose levels leads to a light sensitivity"))
-   (Reason (name Slow-Healing-Wounds) (explanation "Elevated blood sugar levels cause narrowing of blood vessels, leading to a decreased blood flow and oxygen to the wounds-without sufficient nutrients and oxygen, wounds heal slowly"))
+   (Reason (name Slow-Healing-Wounds) (explanation "Elevated blood sugar levels cause narrowing of blood vessels, leading to a decreased blood flow and oxygen to the wounds."))
    (Reason (name Numbness) (explanation "The nerves in the body get damaged over time, leading to a tingling sensation, pain and eventual loss of sensation"))
    (Reason (name Teeth-and-Gum-Problems) (explanation ""))
    (Reason (name Extreme-Hunger) (explanation "The dropping blood sugar levels lead to a desire for more food and energy"))

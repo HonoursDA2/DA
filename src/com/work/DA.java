@@ -4,7 +4,6 @@ import java.io.*;
 import javax.servlet.http.*;
 import javax.servlet.*;
 import jess.*;
-//im not sure why the doGet is called twice
 
 public class DA extends HttpServlet{
 
