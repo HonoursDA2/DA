@@ -71,9 +71,7 @@ var count = 0;
 function revert()
 {
 	if (count == 1) {
-		name = document.getElementById('name').value; //Comment this out
 		$("#intro").fadeIn(0);
-		document.getElementById("advisorH1").innerHTML = "Hello " + name + " how may I help you with ?"; //Comment this out
 		count--;
 		$("#gender,#profile #male, #profile #female").fadeOut(0);
 		$("#button").css({"margin":"0 0 1.5% 1.5%"});
