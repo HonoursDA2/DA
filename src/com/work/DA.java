@@ -60,11 +60,14 @@ public class DA extends HttpServlet{
 			symptom();
 		}  else if (request.getParameterMap().containsKey("gender")) {
 			gender();
-		}  else if (request.getParameterMap().containsKey("diabetic")) {
-			diabetic();
-		} else if (request.getParameterMap().containsKey("symptoms")) {
-			symptomList();
-		}
+			}  else if (request.getParameterMap().containsKey("diabetic")) {
+				diabetic();
+				} else if (request.getParameterMap().containsKey("name")) {
+					name();
+					}
+					else if (request.getParameterMap().containsKey("symptoms")) {
+					symptomList();
+					}
 	}
 
 	public void symptom()
@@ -79,7 +82,7 @@ public class DA extends HttpServlet{
 		System.out.println("done");
 		String jessText = engine.getOutputRouter("out").toString();
 		((StringWriter)(engine.getOutputRouter("out"))).getBuffer().setLength(0);
-		response.getWriter().write( jessText);
+		response.getWriter().write(jessText);
 	}
 
 	public void symptomList() 
@@ -95,7 +98,6 @@ public class DA extends HttpServlet{
 					symptomsChecked=true;
 					System.out.println("checking facts");
 					engine.eval("(facts)");
-					System.out.println("checking facts");
 				}
 			} 	
 		}
@@ -121,9 +123,12 @@ public class DA extends HttpServlet{
 	}
 
 	public void name()
-       		throws JessException	{
+       		throws JessException, IOException	{
+       			System.out.println("name bruuu");
 		Rete engine = (Rete)(getServletContext().getAttribute("engine"));
 		String name = request.getParameter("name");
 		engine.assertString("(name "+name+" )");
+		response.getWriter().write("Hello "+ name + " welcome to the Diabetes Risk Advisor Expert System \n Please select an option below.");
 		}
+
 }
