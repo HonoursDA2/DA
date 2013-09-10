@@ -98,7 +98,7 @@ public class DA extends HttpServlet{
 					System.out.println("checking facts");
 				}
 			} 	
-		}
+		}//stupid comment
 
 	public void diabetic()
        		throws JessException	{
