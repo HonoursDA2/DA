@@ -7,7 +7,7 @@ fatigue = { id: "#fatigue", clicked: false };
 weightloss = { id: "#weightloss", clicked: false };
 drymouth = { id: "#drymouth", clicked: false };
 abdominalpain = { id: "#abdominalpain", clicked: false };
-neusea = { id: "#neusea", clicked: false };
+nausea = { id: "#nausea", clicked: false };
 irritability = { id: "#irritability", clicked: false };
 yeast = { id: "#yeast", clicked: false };
 wounds = { id: "#wounds", clicked: false };
@@ -29,7 +29,7 @@ function clicked(symptom) {
 }
 
 function createArray() {
-	var submitArray = [thirst,urinating,itchiness,dysfunction,blurvision,fatigue,weightloss,drymouth,abdominalpain];
+	var submitArray = [thirst,urinating,itchiness,dysfunction,blurvision,fatigue,weightloss,drymouth,abdominalpain,nausea,irritability,yeast,wounds,numbness,teethandgum,hunger];
 	return submitArray;
 }
 
