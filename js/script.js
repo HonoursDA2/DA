@@ -48,4 +48,16 @@ $(function () {
         clicked2 = false;
         }
     });
+
+    window.oncontextmenu = function () {
+        if (!clicked2) {
+            $("#definition").fadeIn();
+            clicked2 = true;
+        }
+        else {
+            $("#definition").fadeOut();
+            clicked2 = false;
+        }
+    return false;
+}
 });
