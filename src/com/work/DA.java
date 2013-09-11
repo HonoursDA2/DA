@@ -113,9 +113,10 @@ public class DA extends HttpServlet{
 		Rete engine = (Rete)(getServletContext().getAttribute("engine"));
 		String answer = request.getParameter("diabetic");
 		if (answer.equals("Yes")) {
-			engine.assertString("(Diabetic_yes)");
-		}	else
-			engine.assertString("(Diabetic_no)");
+			engine.assertString("(Diabetic Yes)");
+		}	else{
+			engine.assertString("(Diabetic No)");
+		}
 	}
 	
 	public void gender()
@@ -123,9 +124,11 @@ public class DA extends HttpServlet{
 		Rete engine = (Rete)(getServletContext().getAttribute("engine"));
 		String gender = request.getParameter("gender");
 		if (gender.equals("Male")) {
-			engine.assertString("(Gender_male)");
+			engine.assertString("(Gender Male)");
 		}	else
-			engine.assertString("(Gender_female)");
+		{
+			engine.assertString("(Gender Female)");
+		}
 	}
 
 	public void name()
