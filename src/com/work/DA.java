@@ -71,17 +71,24 @@ public class DA extends HttpServlet{
 
 	public void symptom()
 		throws IOException, JessException	{
+		String jessText;
 		String text = request.getParameter("symptom");
-		response.setContentType("text/plain");  
-		response.setCharacterEncoding("UTF-8");	
-		Rete engine =(Rete)(getServletContext().getAttribute("engine"));
-		engine.assertString("(Input (name "+text+"))");
-		System.out.println("(Input (name "+text+"))");
+		Rete engine =(Rete)(getServletContext().getAttribute("engine"));	
+		if (text.equals("extra")) {
+				engine.assertString("(Extra-Info)");		
+		} else {
+			engine.assertString("(Input (name "+text+"))");
+			System.out.println("(Input (name "+text+"))");
+		}
+
 		engine.run();
 		System.out.println("done");
-		String jessText = engine.getOutputRouter("out").toString();
+		jessText = engine.getOutputRouter("out").toString();
 		((StringWriter)(engine.getOutputRouter("out"))).getBuffer().setLength(0);
+		response.setContentType("text/plain");  
+		response.setCharacterEncoding("UTF-8");		
 		response.getWriter().write(jessText);
+		
 	}
 
 	public void symptomList() 

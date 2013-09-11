@@ -53,6 +53,8 @@ $(function () {
         if (!clicked2) {
             $("#definition").fadeIn();
             clicked2 = true;
+           $.get('servlet',{symptom:"extra"}, function (responseText) {
+                    $('#definition').text(responseText);});
         }
         else {
             $("#definition").fadeOut();

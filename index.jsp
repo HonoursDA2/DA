@@ -63,7 +63,7 @@
 
 <div class="speech"><span id="advisorH1">Hello</span>
     
-<div id="definition">Extra Definitions here</div>
+<div id="definition"></div>
 <img id="extra" src="images/information.png">
 </div>
     

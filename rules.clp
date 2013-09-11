@@ -1,4 +1,3 @@
-
 (deftemplate Reason
     (slot name)
     (slot explanation)
@@ -10,7 +9,6 @@
 (deftemplate Input
     (slot name)
     )
-
 (deffacts symptoms
    (Reason (name Fatigue) (explanation "The glucose is not being converted into energy this weakens the cells and causes fatigue"))
    (Reason (name Extreme-Thirst) (explanation "Dehydration is caused by excess urine, this prompts an increased desire for water consumption"))
@@ -28,32 +26,33 @@
    (Reason (name Vaginal-Itchiness) (explanation "Icthy Vagina"))
    (Reason (name Dry-Mouth) (explanation "Saliva is on the run"))
    (Reason (name Abdominal-Pain) (explanation "Abdominal Pain"))
-     
     )
 (deffacts additional
-   (Information (name Gastroparesis) (explanation "Gastroparesis is a disease of the muscles of the stomach or the nerves controlling the muscles that causes the muscles to stop working"))
+	(Information (name Nausea) (explanation "Gastroparesis is a disease of the muscles of the stomach or the nerves controlling the muscles that causes the muscles to stop working"))
    )
 
 (defrule showExplanation
     ?input <- (Input (name ?inputName))
     ?reason <- (Reason (name ?name) (explanation ?explanation))
     =>
+    (bind ?*currentSymptom* ?inputName)
     (if (eq ?inputName ?name) then 
     (printout out ?explanation)
     (retract ?input) 
     )   
     )
 (defrule showInformation
-    ?input <- (Input (name ?inputName))
-    ?reason <- (Information (name ?name) (explanation ?explanation))
+    ?extraInfo <- (Extra-Info)
+    ?reason <-(Information (name ?symptom)(explanation ?explanation))
     =>
-    (if (eq ?inputName ?name) then (printout out ?explanation))    
+    (if (eq ?symptom ?*currentSymptom*) then 
+    (printout out ?explanation))
+    (retract ?extraInfo)
     )
-
 (deffunction addFact(?factToAdd ?fact)
     (if (eq Symptom ?factToAdd) then
     	(assert (Symptom ?fact))else
-       	(if (eq "LifeStyle" ?factToAdd) then
+       	(if (eq LifeStyle ?factToAdd) then
     	(assert (LifeStyle ?fact)))
     )
 )
