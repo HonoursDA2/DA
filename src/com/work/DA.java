@@ -113,9 +113,9 @@ public class DA extends HttpServlet{
 		Rete engine = (Rete)(getServletContext().getAttribute("engine"));
 		String answer = request.getParameter("diabetic");
 		if (answer.equals("Yes")) {
-			engine.eval("(Diabetic_yes)");
+			engine.assertString("(Diabetic_yes)");
 		}	else
-			engine.eval("(Diabetic_no)");
+			engine.assertString("(Diabetic_no)");
 	}
 	
 	public void gender()
@@ -130,7 +130,6 @@ public class DA extends HttpServlet{
 
 	public void name()
        		throws JessException, IOException	{
-       			System.out.println("name bruuu");
 		Rete engine = (Rete)(getServletContext().getAttribute("engine"));
 		String name = request.getParameter("name");
 		engine.assertString("(name "+name+" )");

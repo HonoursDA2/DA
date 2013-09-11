@@ -82,14 +82,14 @@ function revert()
 function confirm() {
 
 	if (count == 2) {
-		$("#profile").fadeOut();
+	    $("#profile").fadeOut();
+	    $.get('servlet', { gender: gendertype });
+	    $.get('servlet', { diabetic: isADiabetic });
 	}
 	if (count == 1){
 		$("#isDiabetic,#profile #yes,#profile #no").fadeIn(0);
 		$("#gender,#profile #male, #profile #female").fadeOut(0);
 		count++;
-
-
 	}
 	if (count == 0) {
 		$("#intro").fadeOut(0);
@@ -100,15 +100,18 @@ function confirm() {
 	}
 }
 
+var gendertype ="";
 function gSpecific(gender) {//Comment this out
 
-	if (gender.id == "male") {
+    if (gender.id == "male") {
+        gendertype = "Male";
 		$("#vitchiness").fadeOut();
 		$("#dysfunction").fadeIn();
 		$("#" + gender.id).css({ "color": "rgba(255,0,0,0.7)", "border-bottom": "5px solid rgba(255,0,0,0.7)" });
 		$("#female").css({ "color": "grey", "border-bottom": "0px solid rgba(255,0,0,0.7)" });
 	}
-	if (gender.id == "female") {
+if (gender.id == "female") {
+        gendertype = "Female";
 		$("#dysfunction").fadeOut();
 		$("#vitchiness").fadeIn();
 		$("#" + gender.id).css({ "color": "rgba(255,0,0,0.7)", "border-bottom": "5px solid rgba(255,0,0,0.7)" });
@@ -116,13 +119,16 @@ function gSpecific(gender) {//Comment this out
 	}
 }
 
+var isADiabetic ="";
 function isDiabetic(answer) {
 
-	if (answer.id == "yes") {
+    if (answer.id == "yes") {
+        isADiabetic = "Yes";
 		$("#" + answer.id).css({ "color": "green", "border-bottom": "5px solid rgba(0,100,0,0.7)" });
 		$("#no").css({ "color": "white", "border-bottom": "0px solid rgba(255,0,0,0.7)" });
 	}
-	if (answer.id == "no") {
+if (answer.id == "no") {
+        isADiabetic = "No";
 		$("#" + answer.id).css({ "color": "red", "border-bottom": "5px solid rgba(255,0,0,0.7)" });
 		$("#yes").css({ "color": "white", "border-bottom": "0px solid rgba(255,0,0,0.7)" });
 	}
