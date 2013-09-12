@@ -109,7 +109,7 @@
 <div class="buttons" id="yeast" value="Yeast-Infection" onclick="clicked(yeast)">Yeast Infection</div>
 <div class="buttons" id="wounds" value="Slow-Healing-Wounds" onclick="clicked(wounds)">Slow Healing of Wounds</div>
 <div class="buttons" id="numbness" value="Numbness" onclick="clicked(numbness)">Numbness</div>
-<div class="buttons" id="teethandgum" value="Teeth-and-Gum-Problems" onclick="clicked(teethandgum)">Teeth and gum problems</div>
+<div class="buttons" id="teethandgum" value="Gum-Infection" onclick="clicked(teethandgum)">Teeth and gum problems</div>
 <div class="buttons" id="hunger" value="Extreme-Hunger" onclick="clicked(hunger)">Extreme Hunger</div>
 <div class="buttons" id="Div1" onclick="submitSymptoms()">Submit</div>
 </div>
