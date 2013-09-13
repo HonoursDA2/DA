@@ -75,7 +75,8 @@ public class DA extends HttpServlet{
 		String text = request.getParameter("symptom");
 		Rete engine =(Rete)(getServletContext().getAttribute("engine"));	
 		if (text.equals("extra")) {
-				engine.assertString("(Extra-Info)");		
+				engine.assertString("(Extra-Info)");
+
 		} else {
 			engine.assertString("(Input (name "+text+"))");
 			System.out.println("(Input (name "+text+"))");

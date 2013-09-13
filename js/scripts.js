@@ -52,7 +52,6 @@ function submitSymptoms() {
 		if (submitArray[x].clicked) {
 			var symptomObject = submitArray[x];
 			var symptomName = $(symptomObject.id).attr('value'); 
-			alert(symptomName + " " + count +" " +counter);
 			if (counter == (count - 1)) {
 				$.get('servlet',{symptoms:symptomName,process:"complete"});
 				x = submitArray.length;
