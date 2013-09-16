@@ -194,7 +194,7 @@ public class DA extends HttpServlet{
 		Rete engine = (Rete)(getServletContext().getAttribute("engine"));
 		String name = request.getParameter("name");
 		engine.assertString("(name "+name+" )");
-		response.getWriter().write("Hello "+ name + " welcome to the Diabetes Risk Advisor Expert System \n Please select an option below.");
+		response.getWriter().write("Hello "+ name + " welcome to the Diabetes Risk Assesment and Advisory Expert System \n Please select an option below.");
 		}
 
 }

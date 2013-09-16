@@ -14,10 +14,10 @@
    (Reason (name Extreme-Thirst) (explanation "Dehydration is caused by excess urine, this prompts an increased desire for water consumption."))
    (Reason (name Excessive-Urination) (explanation "There is a high loss of Glucose through the urine."))
    (Reason (name Nausea) (explanation "Nausea is caused by gastroparesis."))
-   (Reason (name Weightloss) (explanation "Insulin deficiency leads to loss of weight, as the sugar cannot be converted into bodily fat."))
-   (Reason (name Irritability) (explanation "Caused by a lack of energy. As the sugar is not being converted into energy to be sued by the cells."))
+   (Reason (name Weightloss) (explanation "Insulin deficiency leads to loss of weight, as the sugar cannot be converted into energy, so the body seeks alternative sources like muscle tissue and fat."))
+   (Reason (name Irritability) (explanation "Caused by a lack of energy. As the sugar is not being converted into energy to be used by the cells."))
    (Reason (name Yeast-Infection) (explanation "Yeast organisms are present in most woman, but these organisms tend to overgrow in a sugar rich environment. A result of badly managed diabetes"))
-   (Reason (name Blurred-Vision) (explanation "The fluctuation in blood glucose levels leads to a light sensitivity."))
+   (Reason (name Blurred-Vision) (explanation "The fluctuation in blood glucose levels leads to a light sensitivity. Also this can be caused by the tissue being pulled from the eye lenses tob e used for energy by the body."))
    (Reason (name Slow-Healing-Wounds) (explanation "Elevated blood sugar levels cause narrowing of blood vessels, leading to a decreased blood flow and oxygen to the wounds."))
    (Reason (name Numbness) (explanation "The nerves in the body get damaged over time, leading to a tingling sensation, pain and eventual loss of sensation"))
    (Reason (name Gum-Infection) (explanation "High glucose levels in saliva promotes growth of bacteria that cause gum disease."))
@@ -44,9 +44,7 @@
     (Information (name Extreme-Hunger) (explanation ""))
     (Information (name Erectile-Dysfunction) (explanation "") )
     (Information (name Vaginal-Itchiness) (explanation ""))
-    
     )
-
 (defrule showExplanation
     ?input <- (Input (name ?inputName))
     ?reason <- (Reason (name ?name) (explanation ?explanation))
@@ -57,20 +55,35 @@
     (retract ?input) 
     )   
     )
-
 (defrule showInformation
     ?extraInfo <- (Extra-Info)
     ?reason <-(Information (name ?symptom)(explanation ?explanation))
     =>
     (if (eq ?symptom ?*currentSymptom*) then 
-    (printout out ?explanation)
+    (printout out (filter ?explanation))
     (retract ?extraInfo))
     )
-
+(defrule bmi
+    (Height ?userHeight)
+    (Weight ?UserWeight)
+    =>
+    (bind ?bmi (/ ?userWeight ?userHeight))
+    (assert (BMI ?bmi))
+    )
+;(defrule weightAnalyzer)
+(deffunction filter (?text)
+    (bind ?current ?text)
+    (if (eq ?current "") then
+        (bind ?current "No extra information is available"))
+    ?current 
+    )
 (deffunction addFact(?factToAdd ?fact)
     (if (eq Symptom ?factToAdd) then
     	(assert (Symptom ?fact))else
-       	(if (eq LifeStyle ?factToAdd) then
-    	(assert (LifeStyle ?fact)))
-    )
+       				(if (eq Weight ?factToAdd) then
+    					(assert (Weight ?weight))else
+       						(if (eq Height ?factToAdd) then
+    							(assert (Height ?fact)))
+                	)            
+     )
 )
