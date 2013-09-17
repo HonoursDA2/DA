@@ -148,7 +148,7 @@ input
     cursor:text;
 } 
 
-#profile #button, #profile #backb
+#profile #button, #profile #backb, #age div
 {
     position:absolute;
     width:150px;
@@ -162,6 +162,15 @@ input
     border-bottom:0px solid rgba(255,0,0,0.7);
     padding-top:10px;
     box-sizing:border-box;
+}
+
+#age div
+{
+    position:relative;
+    float:left;
+    top:150px;
+    vertical-align:top;
+    margin-right:1.5%;
 }
 
 #profile #button:hover,#profile #backb:hover
@@ -180,14 +189,14 @@ input
     
 }
 
-#profile #gender, #profile #isDiabetic
+#profile #gender, #profile #isDiabetic, #profile #knowledge, #profile #race, #profile #age, #profile #history, #profile #pregnancy
 {
     z-index:1;
     height:30%;
     display:none;
 }
 
-#profile #male, #profile #female, #profile #yes, #profile #no
+#profile #male, #profile #female, #profile .yes, #profile .no
 {
     position:absolute;
     width:430px;
@@ -204,7 +213,7 @@ input
     cursor:pointer;
 }
 
-#profile #yes, #profile #no
+#profile .yes, #profile .no
 {
     width:430px;
     font-size:15em;
@@ -212,22 +221,32 @@ input
     background-image:radial-gradient(lime,green);
     border:5px darkgreen solid;
     color:white;
+    display:block;
 }
 
-#profile #no
+#profile .no
 {
     border:5px rgb(95,0,0) solid;
     background-image:radial-gradient(rgb(255,0,0),rgb(125,0,0));
 }
 
-#male, #female, #yes, #no
+#male, #female, .yes, .no
 {
     bottom:15%;
     left:1.5%;
     transition: 200ms ease;
 }
 
-#female, #no
+#profile .yes,#profile .no
+{
+    position:fixed;
+    bottom:12%;
+    left:3%;
+    box-sizing:border-box;
+    overflow:hidden;
+}
+
+#female, #profile .no
 {
     left:35.5%;
 }
@@ -237,12 +256,12 @@ input
     box-shadow:0px 0px 5px 2px rgba(0,0,255,0.9);
 }
 
-#yes:hover
+.yes:hover
 {
     box-shadow:0px 0px 5px 2px rgba(0,255,0,0.9);
 }
 
-#female:hover, #no:hover
+#female:hover, .no:hover
 {
     box-shadow:0px 0px 5px 2px rgba(255,0,0,0.9);
 }
@@ -257,6 +276,15 @@ span#woman
 {
     color:pink;
     font-size:1em;
+}
+
+#eyj
+{
+    position:absolute;
+    top:300px;
+    left:0;
+    height:20%;
+    font-size:2em;
 }
 
 .section

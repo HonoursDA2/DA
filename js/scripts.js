@@ -78,23 +78,46 @@ function revert()
     }
     if (count == 2) {
         count--;
-        $("#isDiabetic,#profile #yes,#profile #no").fadeOut(0);
+        $("#isDiabetic,#profile .yes,#profile .no").fadeOut(0);
         $("#gender,#profile #male, #profile #female").fadeIn(0);
     }
 }
 
 function confirm() {
 
-	if (count == 2) {
+	if (count == 6) {
 	    $("#profile").fadeOut();
 	    $.get('servlet', { gender: gendertype });
 	    $.get('servlet', { diabetic: isADiabetic });
+	    $.get('servlet', { pregnant: pregnant });
+	    $.get('servlet', { family-history: history });
+	    $.get('servlet', { diabetic: isADiabetic });
 	}
-	if (count == 1){
-		$("#isDiabetic,#profile #yes,#profile #no").fadeIn(0);
-		$("#gender,#profile #male, #profile #female").fadeOut(0);
+	if (count == 5) {
+	    $("#pregnancy").fadeIn(0);
+	    $("#history").fadeOut(0);
+	    count++;
+	}
+	if (count == 4) {
+	    $("#history").fadeIn(0);
+	    $("#age").fadeOut(0);
+	    count++;
+	}
+	if (count == 3) {
+	    $("#age").fadeIn(0);
+	    $("#isDiabetic").fadeOut(0);
+	    count++;
+	}
+	if (count == 2){
+		$("#isDiabetic").fadeIn(0);
+		$("#knowledge").fadeOut(0);
 		count++;
-	}
+    }
+    if (count == 1) {
+        $("#knowledge").fadeIn(0);
+        $("#gender,#profile #male, #profile #female").fadeOut(0);
+        count++;
+    }
 	if (count == 0) {
 		$("#intro").fadeOut(0);
 		count++;
@@ -123,19 +146,60 @@ if (gender.id == "female") {
 	}
 }
 
+var knowz = "";
+function knows(answer) {
+    if (answer.id == "ido") {
+        knowz = "Yes";
+        $("#" + answer.id).css({ "color": "green", "border-bottom": "5px solid rgba(0,100,0,0.7)" });
+        $("#idont").css({ "color": "white", "border-bottom": "0px solid rgba(255,0,0,0.7)" });
+    }
+    if (answer.id == "idont") {
+        knowz = "No";
+        $("#" + answer.id).css({ "color": "red", "border-bottom": "5px solid rgba(255,0,0,0.7)" });
+        $("#ido").css({ "color": "white", "border-bottom": "0px solid rgba(255,0,0,0.7)" });
+    }
+}
+
 var isADiabetic ="";
 function isDiabetic(answer) {
-
-    if (answer.id == "yes") {
+        if (answer.id == "yes") {
         isADiabetic = "Yes";
 		$("#" + answer.id).css({ "color": "green", "border-bottom": "5px solid rgba(0,100,0,0.7)" });
 		$("#no").css({ "color": "white", "border-bottom": "0px solid rgba(255,0,0,0.7)" });
 	}
-if (answer.id == "no") {
+    if (answer.id == "no") {
         isADiabetic = "No";
 		$("#" + answer.id).css({ "color": "red", "border-bottom": "5px solid rgba(255,0,0,0.7)" });
 		$("#yes").css({ "color": "white", "border-bottom": "0px solid rgba(255,0,0,0.7)" });
 	}
+}
+
+var history = "";
+function hasHistory(answer) {
+    if (answer.id == "yess") {
+        history = "Yes";
+        $("#" + answer.id).css({ "color": "green", "border-bottom": "5px solid rgba(0,100,0,0.7)" });
+        $("#noo").css({ "color": "white", "border-bottom": "0px solid rgba(255,0,0,0.7)" });
+    }
+    if (answer.id == "noo") {
+        history = "No";
+        $("#" + answer.id).css({ "color": "red", "border-bottom": "5px solid rgba(255,0,0,0.7)" });
+        $("#yess").css({ "color": "white", "border-bottom": "0px solid rgba(255,0,0,0.7)" });
+    }
+}
+
+var pregnant = "";
+function isPregnant(answer) {
+    if (answer.id == "isPreg") {
+        pregnant = "Yes";
+        $("#" + answer.id).css({ "color": "green", "border-bottom": "5px solid rgba(0,100,0,0.7)" });
+        $("#isNotPreg").css({ "color": "white", "border-bottom": "0px solid rgba(255,0,0,0.7)" });
+    }
+    if (answer.id == "isNotPreg") {
+        pregnant = "No";
+        $("#" + answer.id).css({ "color": "red", "border-bottom": "5px solid rgba(255,0,0,0.7)" });
+        $("#isPreg").css({ "color": "white", "border-bottom": "0px solid rgba(255,0,0,0.7)" });
+    }
 }
 
 function splash() {
