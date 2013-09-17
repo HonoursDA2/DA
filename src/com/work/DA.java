@@ -54,7 +54,7 @@ public class DA extends HttpServlet{
 	public void chooseFunction()
 		throws IOException, JessException
 	{
-		if (request.getParameterMap().containsKey("symptom"))//need to change the name of this
+		if (request.getParameterMap().containsKey("symptom"))
 	       	{
 			symptom();
 		}  else if (request.getParameterMap().containsKey("gender")) {
@@ -66,7 +66,17 @@ public class DA extends HttpServlet{
 					}
 					else if (request.getParameterMap().containsKey("symptoms")) {
 					symptomList();
-					}
+					} else if (request.getParameterMap().containsKey("diabetes-knowledge")) {
+						diabetesKowledge();
+						} else if (request.getParameterMap().containsKey("pregnant")) {
+							pregnant();
+						} else if (request.getParameterMap().containsKey("family-history")) {
+							familyHistory();
+							} else if (request.getParameterMap().containsKey("age")) {
+								age();
+								} else if (request.getParameterMap().containsKey("race")) {
+									race();
+									}	  
 	}
 
 	public void symptom()
@@ -112,11 +122,58 @@ public class DA extends HttpServlet{
 	public void diabetic()
        		throws JessException	{
 		Rete engine = (Rete)(getServletContext().getAttribute("engine"));
-		String answer = request.getParameter("diabetic");
-		if (answer.equals("Yes")) {
+		String Danswer = request.getParameter("diabetic");
+		if (Danswer.equals("Yes")) {
 			engine.assertString("(Diabetic Yes)");
 		}	else{
 			engine.assertString("(Diabetic No)");
+		}
+	}
+
+		public void age()
+       		throws JessException	{
+		Rete engine = (Rete)(getServletContext().getAttribute("engine"));
+		String age = request.getParameter("age");
+			engine.assertString("(Age "+age+ ")");
+	}
+
+		public void race()
+       		throws JessException	{
+		Rete engine = (Rete)(getServletContext().getAttribute("engine"));
+		String Ranswer = request.getParameter("race");
+			//engine.assertString("(Race "+Danswer+ ")");
+	}
+
+
+		public void diabetesKowledge()
+       		throws JessException	{
+		Rete engine = (Rete)(getServletContext().getAttribute("engine"));
+		String DKanswer = request.getParameter("diabetes-knowledge");
+		if (DKanswer.equals("Yes")) {
+			engine.assertString("(Diabetes-Kowledge Yes)");
+		}	else{
+			engine.assertString("(Diabetes-Kowledge No)");
+		}
+	}	
+		public void pregnant()
+       		throws JessException	{
+		Rete engine = (Rete)(getServletContext().getAttribute("engine"));
+		String Panswer = request.getParameter("pregnant");
+		if (Panswer.equals("Yes")) {
+			engine.assertString("(Pregnant Yes)");
+		}	else{
+			engine.assertString("(Pregnant No)");
+		}
+	}
+
+		public void familyHistory()
+       		throws JessException	{
+		Rete engine = (Rete)(getServletContext().getAttribute("engine"));
+		String FHanswer = request.getParameter("family-history");
+		if (FHanswer.equals("Yes")) {
+			engine.assertString("(Family-History Yes)");
+		}	else{
+			engine.assertString("(Family-History No)");
 		}
 	}
 	
@@ -137,7 +194,7 @@ public class DA extends HttpServlet{
 		Rete engine = (Rete)(getServletContext().getAttribute("engine"));
 		String name = request.getParameter("name");
 		engine.assertString("(name "+name+" )");
-		response.getWriter().write("Hello "+ name + " welcome to the Diabetes Risk Advisor Expert System \n Please select an option below.");
+		response.getWriter().write("Hello "+ name + " welcome to the Diabetes Risk Assesment and Advisory Expert System \n Please select an option below.");
 		}
 
 }
