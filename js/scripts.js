@@ -90,8 +90,10 @@ function confirm() {
 	    $.get('servlet', { gender: gendertype });
 	    $.get('servlet', { diabetic: isADiabetic });
 	    $.get('servlet', { pregnant: pregnant });
-	    
 	    $.get('servlet', { diabetic: isADiabetic });
+
+	    var oldness = $("#eyj").val();
+	    $.get('servlet', { age: oldness });
 	}
 	if (count == 5) {
 	    $("#pregnancy").fadeIn(0);
