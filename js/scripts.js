@@ -90,7 +90,7 @@ function confirm() {
 	    $.get('servlet', { gender: gendertype });
 	    $.get('servlet', { diabetic: isADiabetic });
 	    $.get('servlet', { pregnant: pregnant });
-	    $.get('servlet', { family-history: history });
+	    
 	    $.get('servlet', { diabetic: isADiabetic });
 	}
 	if (count == 5) {
