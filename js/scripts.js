@@ -192,7 +192,6 @@ var isADiabetic = dStatus ="";
 function isDiabetic(answer) {
     if (answer.id == "yes") {
         isADiabetic = "Yes";
-		 Updated upstream
         hasDiabetes = true;
         dStatus = "Is Diabetic";
 	$("#" + answer.id).css({ "color": "green", "border-bottom": "5px solid rgba(0,100,0,0.7)" });
