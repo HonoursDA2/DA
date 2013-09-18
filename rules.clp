@@ -26,6 +26,9 @@
    (Reason (name Vaginal-Itchiness) (explanation "Signs of a yeast infection due to excess sugar in the areas suroundiong the vagina."))
    (Reason (name Dry-Mouth) (explanation "This is caused by dehydration in the body."))
    (Reason (name Abdominal-Pain) (explanation "Because of the gastroparesis, the stomach cannot its contents properly leading to stomach pain and cramping"))
+   (Reason (name Diabetes) (explanation "Diabetes Mellitus, more commonly known simply as Diabetes is a chronic medical condition where a person has 
+            high blood sugar levels.This is either because the insulin production in the body is insufficient or because the body does not respond properly to insulin"))
+    
     )
 (deffacts additional
 	(Information (name Nausea) (explanation "Gastroparesis is a disease of the muscles of the stomach or the nerves controlling the muscles that causes the muscles to stop working, affecting the digestive process"))
@@ -44,6 +47,8 @@
     (Information (name Extreme-Hunger) (explanation ""))
     (Information (name Erectile-Dysfunction) (explanation "") )
     (Information (name Vaginal-Itchiness) (explanation ""))
+    (Information (name Diabetes) (explanation "Insulin is a hormone produced by the Pancreas that is the main regulator of the glucose (sugar) in the blood. Insulin converts the glucose into energy to be used by the cells"))
+    
     )
 (defrule showExplanation
     ?input <- (Input (name ?inputName))
@@ -55,19 +60,23 @@
     (retract ?input) 
     )   
     )
-(defrule showInformation
+(defrule showExtraInformation
     ?extraInfo <- (Extra-Info)
-    ?reason <-(Information (name ?symptom)(explanation ?explanation))
+    (Information (name ?symptom)(explanation ?explanation))
     =>
     (if (eq ?symptom ?*currentSymptom*) then 
     (printout out (filter ?explanation))
     (retract ?extraInfo))
     )
+
 (defrule bmi
     (Height ?userHeight)
     (Weight ?UserWeight)
     =>
-    (bind ?bmi (/ ?userWeight ?userHeight))
+    (bind ?weight ?userWeight)
+    (bind ?height ?userHeight)
+    ;(bind ?bmi (/ (call Integer parseInt ?weight) (call Integer parseInt ?height)))
+    (bind ?bmi (+ ?height ?weight))
     (assert (BMI ?bmi))
     )
 ;(defrule weightAnalyzer)
