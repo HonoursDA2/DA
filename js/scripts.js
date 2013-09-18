@@ -106,7 +106,6 @@ function confirm() {
 	    }
 	}
 	if (count == 4) {
-	    alert(isFemale);
 	    $("#history").fadeIn(0);
 	    $("#age").fadeOut(0);
 	    count++;
