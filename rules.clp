@@ -9,6 +9,7 @@
 (deftemplate Input
     (slot name)
     )
+;The list of symptoms and their explanations
 (deffacts symptoms
    (Reason (name Fatigue) (explanation "The glucose is not being converted into energy this weakens the cells and causes fatigue."))
    (Reason (name Extreme-Thirst) (explanation "Dehydration is caused by excess urine, this prompts an increased desire for water consumption."))
@@ -28,8 +29,18 @@
    (Reason (name Abdominal-Pain) (explanation "Because of the gastroparesis, the stomach cannot its contents properly leading to stomach pain and cramping"))
    (Reason (name Diabetes) (explanation "Diabetes Mellitus, more commonly known simply as Diabetes is a chronic medical condition where a person has 
             high blood sugar levels.This is either because the insulin production in the body is insufficient or because the body does not respond properly to insulin"))
-    
+   (Reason (name Type-1) (explanation "Type 1 Diabetes occurs when the beta cells in the pancreas are damaged. 
+            Therefore the pancreas does not produce insulin anymore. Type 1 normally occurs in people under the age of 30 (it used to be called Juvenile Diabetes)."))
+   (Reason (name Type-2) (explanation "Type 2 Diabetes occurs when the beta cells in the body are resistant to the effect of insulin. 
+            It develops gradually over a period of time.There is a high association with a family history of Diabetes and obesity. 
+            Type 2 normally occurs in people older than 40 years of age."))
+   (Reason (name Pre-Diabetes) (explanation "Pre-diabetes is the pre-cursor of diabetes where the blood glucose levels are higher than normal but not high enough to be considered as Diabetes. However, if the condition is tackled at this stage through diet, exercise and other healthy lifestyle changes (weight management programme), the risk can be significantly reduced."))    
+   (Reason (name Gestational) (explanation "This type of diabetes affects about 2%-10% of females during last months of pregnancy. 
+            Pregnant women have enough insulin, but the effect of insulin is partially blocked by other hormones produced in the placenta during pregnancy.
+            This causes a rise in sugar levels.
+            The disease normally disappears after pregnancy." )) 
     )
+; Extra information that accompanies the symptoms
 (deffacts additional
 	(Information (name Nausea) (explanation "Gastroparesis is a disease of the muscles of the stomach or the nerves controlling the muscles that causes the muscles to stop working, affecting the digestive process"))
    	(Information (name Yeast-Infection) (explanation "Yeast is a type of fungus; yeast infection refers to the fungus scientifically known as Candida"))
@@ -47,8 +58,17 @@
     (Information (name Extreme-Hunger) (explanation ""))
     (Information (name Erectile-Dysfunction) (explanation "") )
     (Information (name Vaginal-Itchiness) (explanation ""))
-    (Information (name Diabetes) (explanation "Insulin is a hormone produced by the Pancreas that is the main regulator of the glucose (sugar) in the blood. Insulin converts the glucose into energy to be used by the cells"))
-    )
+    (Information (name Diabetes) (explanation "Insulin is a hormone produced by the Pancreas that is the main regulator of the glucose (sugar) in the blood.
+            Insulin converts the glucose into energy to be used by the cells"))
+   	(Reason (name Type-1) (explanation "The Pancreas is a long soft organ that secrets insulin when the level of sugar in the blood rises in the body after a meal.
+            Insulin is a hormone produced by the Pancreas that is the main regulator of the glucose (sugar) in the blood."))
+   	(Reason (name Type-2) (explanation "The Pancreas is a long soft organ that secrets insulin when the level of sugar in the blood rises in the body after a meal.
+            Insulin is a hormone produced by the Pancreas that is the main regulator of the glucose (sugar) in the blood."))
+    (Reason (name Pre-Diabetes) (explanation ""))    
+    (Reason (name Gestational) (explanation ""))    
+    	
+     )
+;shows the explanation of the symptom in question
 (defrule showExplanation
     ?input <- (Input (name ?inputName))
     ?reason <- (Reason (name ?name) (explanation ?explanation))
@@ -59,6 +79,7 @@
     (retract ?input) 
     )   
     )
+;shows the extra information of the symptom in question
 (defrule showExtraInformation
     ?extraInfo <- (Extra-Info)
     (Information (name ?symptom)(explanation ?explanation))
@@ -67,7 +88,7 @@
     (printout out (filter ?explanation))
     (retract ?extraInfo))
     )
-
+;calculates the BMI with the provided weight and height of the user
 (defrule bmi
     (Height ?userHeight)
     (Weight ?userWeight)
@@ -78,12 +99,20 @@
     (assert (BMI ?bmi))
     )
 ;(defrule weightAnalyzer)
+(defrule printSymptoms
+    (Symptoms)
+    (Reason (name ?name) (explanation ?explanation))
+    =>
+    (printout out (?name crlf ?explanation))
+    )
+;This methods checks if there is any extra information, if not prints a generic message
 (deffunction filter (?text)
     (bind ?current ?text)
     (if (eq ?current "") then
         (bind ?current "No extra information is available"))
     ?current 
     )
+;adds a fact to the working memory
 (deffunction addFact(?factToAdd ?fact)
     (if (eq Symptom ?factToAdd) then
     	(assert (Symptom ?fact))else
