@@ -48,7 +48,6 @@
     (Information (name Erectile-Dysfunction) (explanation "") )
     (Information (name Vaginal-Itchiness) (explanation ""))
     (Information (name Diabetes) (explanation "Insulin is a hormone produced by the Pancreas that is the main regulator of the glucose (sugar) in the blood. Insulin converts the glucose into energy to be used by the cells"))
-    
     )
 (defrule showExplanation
     ?input <- (Input (name ?inputName))
@@ -71,12 +70,11 @@
 
 (defrule bmi
     (Height ?userHeight)
-    (Weight ?UserWeight)
+    (Weight ?userWeight)
     =>
     (bind ?weight ?userWeight)
     (bind ?height ?userHeight)
-    ;(bind ?bmi (/ (call Integer parseInt ?weight) (call Integer parseInt ?height)))
-    (bind ?bmi (+ ?height ?weight))
+    (bind ?bmi (/ ?userWeight (* ?userHeight ?userHeight)))
     (assert (BMI ?bmi))
     )
 ;(defrule weightAnalyzer)
