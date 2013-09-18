@@ -96,6 +96,7 @@ function confirm() {
 	if (count == 5) {
 	    if (isFemale) {
 	        $("#pregnancy").fadeIn(0);
+	        $("#feedback").append("Family History : " + aHistory + "<br>");
 	        $("#history").fadeOut(0);
 	        count++;
 	    }
@@ -107,6 +108,8 @@ function confirm() {
 	}
 	if (count == 4) {
 	    $("#history").fadeIn(0);
+	    $("#feedback").append("Race : " + humanRace + "<br>");
+	    $("#feedback").append("Age : " + $("#eyj").val() + "<br>");
 	    $("#age").fadeOut(0);
 	    count++;
 	}
@@ -138,6 +141,7 @@ function confirm() {
 	if (count == 0) {
 		$("#intro").fadeOut(0);
 		count++;
+		$("#feedback").fadeIn();
 		$("#feedback").append("Your Name is : " + $("#name").val() + "<br>");
 		$("#gender,#profile #male, #profile #female").fadeIn(0);
 		$("#button").css({"margin":"0 0 1.5% 250px"});
@@ -202,22 +206,24 @@ function isDiabetic(answer) {
 	}
 }
 
-var history = "";
+var history = aHistory = "";
 function hasHistory(answer) {
     if (answer.id == "yess") {
         history = "Yes";
+        aHistory = "Diabetes runs in the family";
         $("#" + answer.id).css({ "color": "green", "border-bottom": "5px solid rgba(0,100,0,0.7)" });
         $("#noo").css({ "color": "white", "border-bottom": "0px solid rgba(255,0,0,0.7)" });
     }
     if (answer.id == "noo") {
         history = "No";
+        aHistory = "Diabetes does not run in the family";
         $("#" + answer.id).css({ "color": "red", "border-bottom": "5px solid rgba(255,0,0,0.7)" });
         $("#yess").css({ "color": "white", "border-bottom": "0px solid rgba(255,0,0,0.7)" });
     }
 }
 
 var pregnancy = "";
-function isPregnant(answer) {
+function isPregnant(answer) {s
     if (answer.id == "isPreg") {
         pregnancy = "Yes";
         $("#" + answer.id).css({ "color": "green", "border-bottom": "5px solid rgba(0,100,0,0.7)" });
@@ -227,6 +233,30 @@ function isPregnant(answer) {
         pregnancy = "No";
         $("#" + answer.id).css({ "color": "red", "border-bottom": "5px solid rgba(255,0,0,0.7)" });
         $("#isPreg").css({ "color": "white", "border-bottom": "0px solid rgba(255,0,0,0.7)" });
+    }
+}
+
+var humanRace = theAge = "";
+function race(answer) {
+    if (answer.id == "white") {
+        humanRace = "White";
+        $("#" + answer.id).css({ "color": "rgb(200,200,200)", "border-bottom": "5px solid rgba(200,200,200,0.7)" });
+        $("#black,#asian,#other").css({ "color": "black", "border-bottom": "0px solid rgba(255,0,0,0.7)" });
+    }
+    if (answer.id == "black") {
+        humanRace = "Black";
+        $("#" + answer.id).css({ "color": "brown", "border-bottom": "5px solid brown" });
+        $("#white,#asian,#other").css({ "color": "black", "border-bottom": "0px solid rgba(255,0,0,0.7)" });
+    }
+    if (answer.id == "asian") {
+        humanRace = "Asian";
+        $("#" + answer.id).css({ "color": "orange", "border-bottom": "5px solid orange" });
+        $("#black,#white,#other").css({ "color": "black", "border-bottom": "0px solid rgba(255,0,0,0.7)" });
+    }
+    if (answer.id == "other") {
+        humanRace = "Other";
+        $("#" + answer.id).css({ "color": "black", "border-bottom": "5px solid black" });
+        $("#black,#white,#asian").css({ "color": "black", "border-bottom": "0px solid rgba(255,0,0,0.7)" });
     }
 }
 

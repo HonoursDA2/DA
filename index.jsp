@@ -63,7 +63,7 @@
 <div class="speech" id="age">
 <span>What is your age and race ?</span>
 <input id="eyj" type="text" value="" placeholder="Enter your age here"><br>
-<div>White</div><div>Black</div><div>Asian</div><div>Other</div>
+<div id="white" onclick="race(white)">White</div><div id="black" onclick="race(black)">Black</div><div id="asian" onclick="race(asian)">Asian</div><div id="other" onclick="race(other)">Other</div>
 </div>
 
 <div class="speech" id="pregnancy">
