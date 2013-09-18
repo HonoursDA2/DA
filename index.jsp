@@ -40,7 +40,6 @@
 <h2>Diabetes Advisor</h2>
 </div>
 
-+
 <div id="profile">
 <div><h1>Welcome To DA2</h1>
 <div class="speech" id="intro">
@@ -77,10 +76,7 @@
 <div class="yes" id="yess" onclick="hasHistory(yess)">Yes</div><div class="no" id="noo" onclick="hasHistory(noo)">No</div>
 </div>
 
-<div class="speech" id="race">
-<span>What Race are you?</span>
-
-</div>
+<div id="feedback"></div>
 
 <div id="backb" onclick="revert()">Back</div><div id="button" onclick="confirm()">Continue</div>
 </div>

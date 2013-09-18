@@ -37,6 +37,17 @@ body
 	text-shadow: 2px 2px 5px rgb(200,200,200);
 }
 
+#profile #feedback
+{
+    width:250px;
+    height:250px;
+    border:1px solid silver;
+    position:fixed;
+    bottom:30px;
+    right:50px;
+    padding:10px;
+}
+
 #profile
 {
     background:rgb(235,235,235);

@@ -114,6 +114,7 @@ function confirm() {
 	if (count == 3) {
 	    if (!hasDiabetes) {
 	        $("#age").fadeIn(0);
+	        $("#feedback").append("Diabetic Status : " + dStatus + "<br>");
 	        $("#isDiabetic").fadeOut(0);
 	        count++;
 	    }
@@ -124,30 +125,33 @@ function confirm() {
         }
 	}
 	if (count == 2) {
-	        $("#isDiabetic").fadeIn(0);
-	        $("#knowledge").fadeOut(0);
-	        count++;
+	    $("#isDiabetic").fadeIn(0);
+	    $("#feedback").append("Familiarity : " + familiar + "<br>");
+	    $("#knowledge").fadeOut(0);
+	    count++;
     }
     if (count == 1) {
         $("#knowledge").fadeIn(0);
         $("#gender,#profile #male, #profile #female").fadeOut(0);
+        $("#feedback").append("Gender : " + aGender + "<br>");
         count++;
     }
 	if (count == 0) {
 		$("#intro").fadeOut(0);
 		count++;
+		$("#feedback").append("Your Name is : " + $("#name").val() + "<br>");
 		$("#gender,#profile #male, #profile #female").fadeIn(0);
 		$("#button").css({"margin":"0 0 1.5% 250px"});
 		$("#backb").fadeIn();
 	}
 }
 
-var gendertype ="";
+var gendertype = aGender ="";
 function gSpecific(gender) {//Comment this out
-
 if (gender.id == "male") {
     gendertype = "Male";
     isFemale = false;
+    aGender = "Male";
 	$("#vitchiness").fadeOut();
 	$("#dysfunction").fadeIn();
 	$("#" + gender.id).css({ "color": "rgba(255,0,0,0.7)", "border-bottom": "5px solid rgba(255,0,0,0.7)" });
@@ -156,6 +160,7 @@ if (gender.id == "male") {
 if (gender.id == "female") {
     gendertype = "Female";
     isFemale = true;
+    aGender = "Female";
     $("#dysfunction").fadeOut();
     $("#vitchiness").fadeIn();
     $("#" + gender.id).css({ "color": "rgba(255,0,0,0.7)", "border-bottom": "5px solid rgba(255,0,0,0.7)" });
@@ -164,31 +169,35 @@ if (gender.id == "female") {
 	}
 }
 
-var knowz = "";
+var knowz = familiar = "";
 function knows(answer) {
     if (answer.id == "ido") {
         knowz = "Yes";
+        familiar = "Familiar with Diabetes";
         $("#" + answer.id).css({ "color": "green", "border-bottom": "5px solid rgba(0,100,0,0.7)" });
         $("#idont").css({ "color": "white", "border-bottom": "0px solid rgba(255,0,0,0.7)" });
     }
     if (answer.id == "idont") {
         knowz = "No";
+        familiar = "Not familiar with Diabetes";
         $("#" + answer.id).css({ "color": "red", "border-bottom": "5px solid rgba(255,0,0,0.7)" });
         $("#ido").css({ "color": "white", "border-bottom": "0px solid rgba(255,0,0,0.7)" });
     }
 }
 
-var isADiabetic ="";
+var isADiabetic = dStatus ="";
 function isDiabetic(answer) {
     if (answer.id == "yes") {
         isADiabetic = "Yes";
         hasDiabetes = true;
+        dStatus = "Is Diabetic";
 		$("#" + answer.id).css({ "color": "green", "border-bottom": "5px solid rgba(0,100,0,0.7)" });
 		$("#no").css({ "color": "white", "border-bottom": "0px solid rgba(255,0,0,0.7)" });
 	}
     if (answer.id == "no") {
         isADiabetic = "No";
         hasDiabetes = false;
+        dStatus = "Is not Diabetic";
 		$("#" + answer.id).css({ "color": "red", "border-bottom": "5px solid rgba(255,0,0,0.7)" });
 		$("#yes").css({ "color": "white", "border-bottom": "0px solid rgba(255,0,0,0.7)" });
 	}
