@@ -16,14 +16,17 @@ $(function () {
     
     $("#symptom").click(function (){
         $("#symptoms").delay(200).fadeIn();
-        $("#choice, #menu").fadeOut();
-        $("#backbutton").delay(200).fadeIn();
+        $("#choice").fadeOut();
     });
-    
+
+    $("#life").click(function () {
+        $("#lifestyle").delay(200).fadeIn();
+        $("#choice").fadeOut();
+    });
+
     $("#backbutton").click(function (){
         $("#symptoms, #factors, #lifestyle").delay(200).fadeOut();
-        $("#choice, #menu").delay(200).fadeIn();
-        $(this).fadeOut();
+        $("#choice").delay(200).fadeIn();
     });
 
     var clicked = clicked2 = false;

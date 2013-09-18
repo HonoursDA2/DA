@@ -107,19 +107,17 @@
 </div>
 
 <div class="section" id="patient">
-<div id="backbutton"><img src="images/icons/back.png"></div>
     
 <div id="menu">
-<div>Menu</div>
+<div id="backbutton"><img src="images/icons/back.png"></div>
 <div id="nearest">Nearest Clinic</div>
-<div>Exit</div>
+<div>Restart</div>
 </div>
 
 <div id="choice">
 <h1 id="patientH1">...</h1>
 <div id="symptom">Symptoms</div>
-<div id="factor">.<img src="images/risk.png"></div>
-<div id="life">.<img src="images/lifestyle.jpg"></div>
+<div id="life">.<img src="images/risk.png"></div>
 </div>
 
 <div id="symptoms">
@@ -142,14 +140,8 @@
 <div class="buttons" id="Div1" onclick="submitSymptoms()">Submit</div>
 </div>
 
-<div id="factors">
-    <div></div>
-    <div></div>
-</div>
-
-
 <div id="lifestyle">
-    
+   <h1>Lifestyle</h1>
 </div>
 
 </div>

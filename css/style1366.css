@@ -330,40 +330,42 @@ span#woman
 
 #backbutton
 {
-    position:fixed;
-    bottom:30px;
-    right:40px;
+    position:absolute;
     display:none;
     cursor:pointer;
+    width:100%;
 }
 
 #backbutton img
 {
-    width:90px;
+    width:100%;
     height:auto;
     cursor:pointer;
 }
 
 #menu, #choice
 {
-    box-shadow:0px 2px 5px 2px silver;
     border-radius:5px; 
+    border:silver 1px solid;
 }
 
 #menu
 {
-    width:45%;
-    height:80%;
-    position:absolute;
-    right:1.5%;
-    top:10%;
+    width:5%;
+    height:30%;
+    position:fixed;
+    right:50px;
+    top:auto;
+    bottom:50px;
     text-align:center;
+    padding:5px;
+    font-size:0.8em;
 }
 
 #choice
 {
     z-index:1;
-    width:50%;
+    width:1180px;
     height:90%;
     position:relative;
     top:5%;
@@ -387,6 +389,18 @@ span#woman
     top:5%;
 }
 
+#menu div
+{
+    width:100%;
+    display:block;
+    height:auto;
+    top:0;
+    box-shadow:0 0 0 0 transparent;
+    border:1px silver solid;
+    border-radius:0px;
+    margin-bottom:5px;
+}
+
 #choice div#life,#choice div#factor
 {
     background:none;
@@ -404,12 +418,6 @@ span#woman
 #choice div#symptom:after{content:"Symptoms";left:30px;}
 #choice div#factor:after{content:"Risk Factors";left:30px;}
 #choice div#life:after{content:"Lifestyle";}
-
-#menu div
-{
-    top:30%;
-    vertical-align:top;
-}
 
 #choice div img
 {
