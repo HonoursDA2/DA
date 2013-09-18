@@ -134,7 +134,6 @@
 	throws JessException	{
 		Rete engine = (Rete)(getServletContext().getAttribute("engine"));
 		String Danswer = request.getParameter("diabetic");
-		System.out.println("AHHHHHHHHHHHHHHHHHHHHHHHHHH");
 		if (Danswer.equals("Yes")) {
 			engine.assertString("(Diabetic Yes)");
 		}	else{

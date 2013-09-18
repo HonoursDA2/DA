@@ -192,9 +192,10 @@ var isADiabetic = dStatus ="";
 function isDiabetic(answer) {
     if (answer.id == "yes") {
         isADiabetic = "Yes";
+		 Updated upstream
         hasDiabetes = true;
         dStatus = "Is Diabetic";
-		$("#" + answer.id).css({ "color": "green", "border-bottom": "5px solid rgba(0,100,0,0.7)" });
+	$("#" + answer.id).css({ "color": "green", "border-bottom": "5px solid rgba(0,100,0,0.7)" });
 		$("#no").css({ "color": "white", "border-bottom": "0px solid rgba(255,0,0,0.7)" });
 	}
     if (answer.id == "no") {
