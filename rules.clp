@@ -105,6 +105,12 @@
     =>
     (printout out (?name crlf ?explanation))
     )
+;if the suer is male then they are not pregnant.
+(defrule isMale
+    (Gender Male)
+    =>
+    (assert (Pregnant No))
+    )
 ;This methods checks if there is any extra information, if not prints a generic message
 (deffunction filter (?text)
     (bind ?current ?text)

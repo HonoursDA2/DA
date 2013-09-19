@@ -150,7 +150,7 @@ function confirm() {
 }
 
 var gendertype = aGender ="";
-function gSpecific(gender) {//Comment this out
+function gSpecific(gender) {
 if (gender.id == "male") {
     gendertype = "Male";
     isFemale = false;
@@ -223,7 +223,7 @@ function hasHistory(answer) {
 }
 
 var pregnancy = "";
-function isPregnant(answer) {s
+function isPregnant(answer) {
     if (answer.id == "isPreg") {
         pregnancy = "Yes";
         $("#" + answer.id).css({ "color": "green", "border-bottom": "5px solid rgba(0,100,0,0.7)" });
