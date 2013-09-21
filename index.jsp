@@ -117,22 +117,21 @@
 </div>
 
 <div id="symptoms">
-<div class="buttons" id="thirst" value="Extreme-Thirst" onclick="clicked(thirst)">Thirst</div>
-<div class="buttons" id="urinating" value="Excessive-Urination" onclick="clicked(urinating)">Frequent Urination</div>
-<div class="buttons" id="vitchiness" value="Vaginal-Itchiness" onclick="clicked(itchiness)">Vaginal Itchiness</div>
-<div class="buttons" id="dysfunction" value="Erectile-Dysfunction" onclick="clicked(dysfunction)">Erectile Dysfunction</div>
-<div class="buttons" id="blurvision" value="Blurred-Vision" onclick="clicked(blurvision)">Blury Vision</div>
-<div class="buttons" id="fatigue" value="Fatigue" onclick="clicked(fatigue)">Fatigue</div>
 <div class="buttons" id="weightloss" value="Weightloss" onclick="clicked(weightloss)">Weightloss</div>
+<div class="buttons" id="thirst" value="Extreme-Thirst" onclick="clicked(thirst)">Thirst</div>
 <div class="buttons" id="drymouth" value="Dry-Mouth" onclick="clicked(drymouth)">Dry Mouth</div>
-<div class="buttons" id="abdominalpain" value="Abdominal-Pain" onclick="clicked(abdominalpain)">Abdominal Pain</div>
+<div class="buttons" id="hunger" value="Extreme-Hunger" onclick="clicked(hunger)">Extreme Hunger</div>
+<div class="buttons" id="urinating" value="Excessive-Urination" onclick="clicked(urinating)">Frequent Urination</div>
 <div class="buttons" id="nausea" value="Nausea" onclick="clicked(nausea)">Nausea</div>
+<div class="buttons" id="fatigue" value="Fatigue" onclick="clicked(fatigue)">Fatigue</div>
+<div class="buttons" id="dysfunction" value="Erectile-Dysfunction" onclick="clicked(dysfunction)">Erectile Dysfunction</div>
+<div class="buttons" id="yeast" value="Yeast-Infection" onclick="clicked(yeast)">Vaginal Yeast Infection</div>
+<div class="buttons" id="blurvision" value="Blurred-Vision" onclick="clicked(blurvision)">Blury Vision</div>
+<div class="buttons" id="abdominalpain" value="Abdominal-Pain" onclick="clicked(abdominalpain)">Abdominal Pain</div>
 <div class="buttons" id="irritability" value="Irritability" onclick="clicked(irritability)">Irritability</div>
-<div class="buttons" id="yeast" value="Yeast-Infection" onclick="clicked(yeast)">Yeast Infection</div>
 <div class="buttons" id="wounds" value="Slow-Healing-Wounds" onclick="clicked(wounds)">Slow Healing of Wounds</div>
 <div class="buttons" id="numbness" value="Numbness" onclick="clicked(numbness)">Numbness</div>
 <div class="buttons" id="teethandgum" value="Gum-Infection" onclick="clicked(teethandgum)">Teeth and gum problems</div>
-<div class="buttons" id="hunger" value="Extreme-Hunger" onclick="clicked(hunger)">Extreme Hunger</div>
 <div class="buttons" id="Div1" onclick="submitSymptoms()">Submit</div>
 </div>
 

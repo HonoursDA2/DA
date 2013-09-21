@@ -155,7 +155,7 @@ if (gender.id == "male") {
     gendertype = "Male";
     isFemale = false;
     aGender = "Male";
-	$("#vitchiness").fadeOut();
+	$("#yeast").fadeOut();
 	$("#dysfunction").fadeIn();
 	$("#" + gender.id).css({ "color": "rgba(255,0,0,0.7)", "border-bottom": "5px solid rgba(255,0,0,0.7)" });
 	$("#female").css({ "color": "grey", "border-bottom": "0px solid rgba(255,0,0,0.7)" });
@@ -165,7 +165,7 @@ if (gender.id == "female") {
     isFemale = true;
     aGender = "Female";
     $("#dysfunction").fadeOut();
-    $("#vitchiness").fadeIn();
+    $("#yeast").fadeIn();
     $("#" + gender.id).css({ "color": "rgba(255,0,0,0.7)", "border-bottom": "5px solid rgba(255,0,0,0.7)" });
     $("#male").css({ "color": "grey", "border-bottom": "0px solid rgba(255,0,0,0.7)" });
 
