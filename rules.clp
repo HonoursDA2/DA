@@ -33,6 +33,7 @@
     )
 (deffacts symtpomDescription
    (Description(name Fatigue) (explanation "Do you feel tired a lot? A feeling of tiredness that can not be explained."))
+   (Description(name Frequent-Headache) (explanation "Do you have frequent headaches and do they sometimes last a long time (2-3 days)?"))
    (Description(name Extreme-Thirst) (explanation "Do you feel thirsty often throughout the day?"))
    (Description (name Excessive-Urination) (explanation "Do you make frequent trips to the toilet to urinate (pee)?"))
    (Description (name Nausea) (explanation "Do you have an uneasy feeling in your stomach? A feeling that makes you feel like vomitting, especially after eating?"))
@@ -64,7 +65,8 @@
 ;The list of symptoms and their explanations
 (deffacts symptomReason
    (Reason (name Fatigue) (explanation "Fatigue- The glucose is not being converted into energy this weakens the cells and causes fatigue."))
-   (Reason (name Extreme-Thirst) (explanation "Extreme Thirst - Dehydration is caused by excess urine, this prompts an increased desire for water consumption."))
+   (Reason (name Frequent-Headache) (explanation "Frequent Headaches - This is due to the high level of glucose in the blood, this leads to frequent headaches experiecned for prolonged periods of time."))
+    (Reason (name Extreme-Thirst) (explanation "Extreme Thirst - Dehydration is caused by excess urine, this prompts an increased desire for water consumption."))
    (Reason (name Excessive-Urination) (explanation "Excessive Urination - There is a high loss of Glucose through the urine."))
    (Reason (name Nausea) (explanation "Nausea - Nausea is caused by gastroparesis."))
    (Reason (name Weightloss) (explanation "Weightloss - Insulin deficiency leads to loss of weight, as the sugar cannot be converted into energy, so the body seeks alternative sources like muscle tissue and fat."))

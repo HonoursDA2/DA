@@ -124,6 +124,7 @@
 <div class="buttons" id="urinating" value="Excessive-Urination" onclick="clicked(urinating)">Frequent Urination</div>
 <div class="buttons" id="nausea" value="Nausea" onclick="clicked(nausea)">Nausea</div>
 <div class="buttons" id="fatigue" value="Fatigue" onclick="clicked(fatigue)">Fatigue</div>
+<div class="buttons" id="headache" value="Frequent-Headache" onclick="clicked(headache)">Frequent Headaches</div>
 <div class="buttons" id="dysfunction" value="Erectile-Dysfunction" onclick="clicked(dysfunction)">Erectile Dysfunction</div>
 <div class="buttons" id="yeast" value="Yeast-Infection" onclick="clicked(yeast)">Vaginal Yeast Infection</div>
 <div class="buttons" id="gestational" value="Gestational-Diabetes" onclick="clicked(gestational)">Gestational Diabetes</div>
