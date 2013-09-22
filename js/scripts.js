@@ -107,11 +107,16 @@ function confirm() {
 	    }
 	}
 	if (count == 4) {
-	    $("#history").fadeIn(0);
-	    $("#feedback").append("Race : " + humanRace + "<br>");
-	    $("#feedback").append("Age : " + $("#eyj").val() + "<br>");
-	    $("#age").fadeOut(0);
-	    count++;
+		var intRegex = /^\d+$/;
+		if(intRegex.test($("#eyj").val())) {
+	    	$("#history").fadeIn(0);
+	    	$("#feedback").append("Race : " + humanRace + "<br>");
+	    	$("#feedback").append("Age : " + $("#eyj").val() + "<br>");
+	    	$("#age").fadeOut(0);
+	    	count++;
+	    } else {
+	    	alert("Please Enter a valid number in the age field");
+	    }
 	}
 	if (count == 3) {
 	    if (!hasDiabetes) {
