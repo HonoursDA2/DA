@@ -66,7 +66,7 @@
 (deffacts symptomReason
    (Reason (name Fatigue) (explanation "Fatigue- The glucose is not being converted into energy this weakens the cells and causes fatigue."))
    (Reason (name Frequent-Headache) (explanation "Frequent Headaches - This is due to the high level of glucose in the blood, this leads to frequent headaches experiecned for prolonged periods of time."))
-    (Reason (name Extreme-Thirst) (explanation "Extreme Thirst - Dehydration is caused by excess urine, this prompts an increased desire for water consumption."))
+   (Reason (name Extreme-Thirst) (explanation "Extreme Thirst - Dehydration is caused by excess urine, this prompts an increased desire for water consumption."))
    (Reason (name Excessive-Urination) (explanation "Excessive Urination - There is a high loss of Glucose through the urine."))
    (Reason (name Nausea) (explanation "Nausea - Nausea is caused by gastroparesis."))
    (Reason (name Weightloss) (explanation "Weightloss - Insulin deficiency leads to loss of weight, as the sugar cannot be converted into energy, so the body seeks alternative sources like muscle tissue and fat."))
@@ -96,7 +96,8 @@
 ; Extra information that accompanies the symptoms
 (deffacts additional
 	(Information (name Nausea) (explanation "Gastroparesis is a disease of the muscles of the stomach or the nerves controlling the muscles that causes the muscles to stop working, affecting the digestive process"))
-   	(Information (name Yeast-Infection) (explanation "Yeast is a type of fungus; yeast infection refers to the fungus scientifically known as Candida"))
+   	(Information (name Frequent-Headache) (explanation ""))
+    (Information (name Yeast-Infection) (explanation "Yeast is a type of fungus; yeast infection refers to the fungus scientifically known as Candida"))
    	(Information (name Dry-Mouth) (explanation "Dehydration is a result of the high demand for bodily fluids drawn from the tissues to help excrete the excess sugar from the body"))
    	(Information (name Abdominal-Pain) (explanation "Gastroparesis is a disease of the muscles of the stomach or the nerves controlling the muscles that causes the muscles to stop working, affecting the digestive process"))
    	(Information (name Gum-Infection) (explanation "Diabetes reduces the body’s resistance to infection, which increases the probability of the gums becoming infected."))
@@ -110,15 +111,14 @@
     (Information (name Numbness) (explanation ""))
     (Information (name Extreme-Hunger) (explanation ""))
     (Information (name Erectile-Dysfunction) (explanation "") )
-    (Information (name Vaginal-Itchiness) (explanation ""))
     (Information (name Diabetes) (explanation "Insulin is a hormone produced by the Pancreas that is the main regulator of the glucose (sugar) in the blood.
             Insulin converts the glucose into energy to be used by the cells"))
-   	(Reason (name Type-1) (explanation "The Pancreas is a long soft organ that secrets insulin when the level of sugar in the blood rises in the body after a meal.
+   	(Information (name Type-1) (explanation "The Pancreas is a long soft organ that secrets insulin when the level of sugar in the blood rises in the body after a meal.
             Insulin is a hormone produced by the Pancreas that is the main regulator of the glucose (sugar) in the blood."))
-   	(Reason (name Type-2) (explanation "The Pancreas is a long soft organ that secrets insulin when the level of sugar in the blood rises in the body after a meal.
+   	(Information (name Type-2) (explanation "The Pancreas is a long soft organ that secrets insulin when the level of sugar in the blood rises in the body after a meal.
             Insulin is a hormone produced by the Pancreas that is the main regulator of the glucose (sugar) in the blood."))
-    (Reason (name Pre-Diabetes) (explanation ""))    
-    (Reason (name Gestational) (explanation ""))    
+    (Information (name Pre-Diabetes) (explanation ""))    
+    (Information (name Gestational) (explanation ""))    
     	
      )
 ;shows the explanation of the symptom in question

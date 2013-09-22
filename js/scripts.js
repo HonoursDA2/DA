@@ -87,14 +87,16 @@ function revert()
 var isFemale = knowsDiabetes = hasDiabetes = false;
 
 function confirm() {
-
-	if (count == 6) {
+	switch(count)
+	{
+	case 6:
 	    $("#profile").fadeOut();
 	    var oldness = $("#eyj").val();
-		$.get('servlet', { gender: gendertype, pregnant:pregnancy, diabetic: isADiabetic, age: oldness, diabetesK: knowz, familyH: history });
-	}
-	if (count == 5) {
-	    if (isFemale) {
+		$.get('servlet', {pregnant:pregnancy});
+		break;
+	case 5:   
+		if (isFemale) {
+	    	$.get('servlet', {familyH: history});
 	        $("#pregnancy").fadeIn(0);
 	        $("#feedback").append("Family History : " + aHistory + "<br>");
 	        $("#history").fadeOut(0);
@@ -105,10 +107,11 @@ function confirm() {
 	        count++;
 	        confirm();
 	    }
-	}
-	if (count == 4) {
+	    break;
+	case 4:
 		var intRegex = /^\d+$/;
 		if(intRegex.test($("#eyj").val())) {
+			$.get('servlet', {age: oldness});
 	    	$("#history").fadeIn(0);
 	    	$("#feedback").append("Race : " + humanRace + "<br>");
 	    	$("#feedback").append("Age : " + $("#eyj").val() + "<br>");
@@ -117,9 +120,10 @@ function confirm() {
 	    } else {
 	    	alert("Please Enter a valid number in the age field");
 	    }
-	}
-	if (count == 3) {
-	    if (!hasDiabetes) {
+	    break;
+	case 3:
+		$.get('servlet', {diabetic: isADiabetic});
+		if (!hasDiabetes) {
 	        $("#age").fadeIn(0);
 	        $("#feedback").append("Diabetic Status : " + dStatus + "<br>");
 	        $("#isDiabetic").fadeOut(0);
@@ -130,27 +134,30 @@ function confirm() {
 	        $("#choice").fadeOut();
 	        $("#lifestyle").fadeIn();
         }
-	}
-	if (count == 2) {
-	    $("#isDiabetic").fadeIn(0);
+		break;
+	case 2:
+		$("#isDiabetic").fadeIn(0);
 	    $("#feedback").append("Familiarity : " + familiar + "<br>");
 	    $("#knowledge").fadeOut(0);
+	    $.get('servlet', {diabetesK: knowz});	
 	    count++;
-    }
-    if (count == 1) {
-        $("#knowledge").fadeIn(0);
+	    break;
+    case 1:
+    	$("#knowledge").fadeIn(0);
         $("#gender,#profile #male, #profile #female").fadeOut(0);
         $("#feedback").append("Gender : " + aGender + "<br>");
+        $.get('servlet', { gender: gendertype});	
         count++;
-    }
-	if (count == 0) {
+		break;
+	case 0:
 		$("#intro").fadeOut(0);
-		count++;
 		$("#feedback").fadeIn();
 		$("#feedback").append("Your Name is : " + $("#name").val() + "<br>");
 		$("#gender,#profile #male, #profile #female").fadeIn(0);
 		$("#button").css({"margin":"0 0 1.5% 250px"});
 		$("#backb").fadeIn();
+		count++;
+		break;
 	}
 }
 
