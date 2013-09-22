@@ -10,6 +10,9 @@
     (slot name)
     (slot explanation)
     )
+(deftemplate advice
+    (slot text)
+    )
 (deftemplate Input
     (slot name)
     )
@@ -18,10 +21,10 @@
     (slot answerType)
     )
 (deffacts Questions
-    (Question (text "Do You smoke cigarettes "))
-    (Question (text "Do you drink alcohol regularly"))
     (Question (text "What is your weight (KG)"))
     (Question (text "What is your height (M)"))
+    (Question (text "Do You smoke cigarettes "))
+    (Question (text "Do you drink alcohol regularly"))
     (Question (text ""))
     (Question (text ""))
     (Question (text ""))
@@ -39,10 +42,10 @@
    (Description (name Blurred-Vision) (explanation "Do you have problems seeing at times? Is your eyesight problematic?"))
    (Description(name Slow-Healing-Wounds) (explanation "Do your cuts and soars take a very long time to patch up and heal?"))
    (Description (name Numbness) (explanation "Do you lose sensation and feeling in certain body parts? Do your hands and feet ever feel numb?"))
-   (Description(name Gum-Infection) (explanation "Do you have an infection in your mouth? Have you been experiencing any teeth and gum related problems recently?"))
+   (Description(name Gum-Infection) (explanation "Have you been experiencing any teeth and gum related problems recently, like gum infection or loss of teeth?"))
    (Description(name Extreme-Hunger) (explanation "Do you experience hunger that seems unnatural, like soon after a big meal?"))
    (Description(name Erectile-Dysfunction) (explanation "Are you experiencing sexual difficulty with your woman, do you find it hard to get an erect penis?") )
-   (Description(name Vaginal-Itchiness) (explanation "Does your vagina get itchy at times, even though you clean and wash regularly?"))
+   (Description(name Gestational-Diabetes) (explanation "Have you ever been diagnosed with Gestational Diabetes during pregnancy?") )
    (Description(name Dry-Mouth) (explanation "Does your mouth feel dry at  times, do you often find that you have little to no saliva in your mouth?"))
    (Description(name Abdominal-Pain) (explanation "Does the area surrounding your stomach pain, especially after eating food and during digestion?"))
    (Description(name Diabetes) (explanation "Diabetes Mellitus, more commonly known simply as Diabetes is a chronic medical condition where a person has 
@@ -145,6 +148,18 @@
     (bind ?height ?userHeight)
     (bind ?bmi (/ ?userWeight (* ?userHeight ?userHeight)))
     (assert (BMI ?bmi))
+    (if (> ?bmi 30) then 
+    	(assert (weight-classification Obese)) else
+        	(if (> ?bmi 25) then
+        		( assert (weight-classification Overweight)) else
+            		(if (> ?bmi 18.5) then 
+                		(assert (weight-classification OptimalWeight)) else
+                			(if (< ?bmi 18.5 ) then
+                    			(assert (weight-classification Underweight))
+                    		)
+                	)
+        	)
+    )  
     )
 ;(defrule weightAnalyzer)
 (defrule printSymptoms
