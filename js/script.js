@@ -1,5 +1,8 @@
 ﻿window.onload = function () {
     splash();
+        $.get('DA', { command: "first", number: "-1" }, function (responseText) {
+                       $('.profileH1').text(responseText);
+                   });
 };
 
 $(function () {
@@ -59,7 +62,7 @@ $(function () {
         $("#patient").animate({ "bottom": "2.55%" }, 1000, "easeInOutCirc");
     });
 
-    window.oncontextmenu = function () {
+   /* window.oncontextmenu = function () {
         if (!clicked2) {
             $("#definition").fadeIn();
             clicked2 = true;
@@ -73,4 +76,5 @@ $(function () {
         }
         return false;
     }
+    */
 });

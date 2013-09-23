@@ -96,9 +96,10 @@ function revert()
 var isFemale = knowsDiabetes = hasDiabetes = false;
 
 function confirm() {
-    $.get('servlet', { command: "first" }, function (responseText) { 
-        $('.profileH1').text(responseText);
-        alert(responseText);
+    $.get('DA', { command: "first", number: count }, function (responseText) { 
+        $('.profileH1').text(responseText + count++);
+        //count++;
+        alert(count + responseText);
     });
     /*
 	switch(count)
@@ -293,7 +294,4 @@ function race(answer) {
 
 function splash() {
 	$("#splash").delay(2000).effect("puff", 500);
-	$.get('servlet', { command: "first" }, function (responseText) {
-	                   $('.profileH1').text(responseText);
-	               });
 	 }

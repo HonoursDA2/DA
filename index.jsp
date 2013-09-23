@@ -3,10 +3,10 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
     <title>Diabetes Advisor</title>
-    <link href="css/style1366.css" media="screen and (min-device-width: 1366px)" rel="stylesheet" type="text/css"/>
-    <link href="css/style1920.css" media="screen and (min-device-width: 1920px)" rel="stylesheet" type="text/css" />
-    <link href="css/styleF.css" rel="stylesheet" type="text/css" />
-    <link href="css/fonts.css" rel="stylesheet" type="text/css" />
+    <link href="http://localhost:8080/DA/css/style1366.css" media="screen and (min-device-width: 1366px)" rel="stylesheet" type="text/css"/>
+    <link href="http://localhost:8080/DA/css/style1920.css" media="screen and (min-device-width: 1920px)" rel="stylesheet" type="text/css" />
+    <link href="http://localhost:8080/DA/css/styleF.css" rel="stylesheet" type="text/css" />
+    <link href="http://localhost:8080/DA/css/fonts.css" rel="stylesheet" type="text/css" />
     <script src="js/JQuery.js" type="text/javascript"></script>
     <script src="js/ui.js" type="text/javascript"></script>
     <script src="js/script.js" type="text/javascript"></script>

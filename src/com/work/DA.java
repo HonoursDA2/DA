@@ -4,14 +4,19 @@
 	import javax.servlet.http.*;
 	import javax.servlet.*;
 	import jess.*;
-
+	import org.json.*;
 	public class DA extends HttpServlet{
 
-		StringWriter sw = null;
-		int number = 0;
+		StringWriter sw = new StringWriter();
+		StringWriter sw2 = new StringWriter();
+		StringWriter sw3 = new StringWriter();
+		int number = -1;
 		HttpServletRequest request = null;
 		HttpServletResponse response = null;
 		boolean symptomsChecked = false;
+		Rete engine = null;
+		boolean init = false;
+		String jessText;			
 
 		public void doGet(HttpServletRequest request,
 			HttpServletResponse response) 
@@ -19,43 +24,53 @@
 		{
 			this.request = request;
 			this.response = response;
-			sw = new StringWriter();
-			try {
-				number++;
-				System.out.println(number);
+		try {
+			if (!init){
 				checkInitialized();
-				System.out.println("working");
+			}
 				chooseFunction();
-			}
-			catch (JessException jess) {
-
-			}
-
 		}
+		catch (JessException e) {
+				System.out.println("PROBLEM with jess");
+		}
+		catch (JSONException e) {
+						System.out.println("PROBLEM with json");
+				
+				}
+		}
+		 public void doPost(HttpServletRequest request,
+                     HttpServletResponse response)
+      throws ServletException, IOException {
+     doGet(request, response);
+ }
 	//load the jess rulesfile.
 		protected void checkInitialized()
 		throws ServletException {
-			ServletContext servletContext = getServletContext();
+			if (getServletContext().getAttribute("engine") == null) {
+				ServletContext servletContext = getServletContext();
 			String rulesFile = servletContext.getInitParameter("rulesfile");
-			if (servletContext.getAttribute("engine") == null) {
 				try {
-					Rete engine = new Rete (this);
+					engine = new Rete (this);
 					engine.addOutputRouter("out", sw);
+					engine.addOutputRouter("out2", sw2);
+					engine.addOutputRouter("out3", sw3);
 					engine.batch(servletContext.getRealPath(rulesFile));
 					engine.reset();
 					System.out.println("creating jess object");
 					servletContext.setAttribute("engine", engine);
+					init = true;
 				} catch (Exception jess) {
 					throw new ServletException(jess);
-				}
+				} 
+				
 			}
 		}
 
 		public void chooseFunction()
-		throws IOException, JessException
+		throws IOException, JessException, JSONException
 		{
 
-			if (request.getParameterMap().containsKey("name")) {
+			/*if (request.getParameterMap().containsKey("name")) {
 					name();
 				}else 
 			if (request.getParameterMap().containsKey("symptom"))
@@ -65,7 +80,7 @@
 				symptomList();
 			}
 			else {
-
+*/
 				if (request.getParameterMap().containsKey("gender")) {
 					gender();
 				}
@@ -88,27 +103,39 @@
 					race();
 				}
 				if (request.getParameterMap().containsKey("command")) {
+					System.out.println("question");
 					question();
 				}
-			}	  
+//			}	  
 		}
 
-		public void question() throws IOException, JessException	{
-			String jessText;
-			String text = request.getParameter("command");
-			Rete engine =(Rete)(getServletContext().getAttribute("engine"));	
+		public void question() throws IOException, JessException, JSONException	{
+			String text ="DEFAULT"; 
+			text = request.getParameter("command");
+			System.out.println("getCommand");
+			System.out.println(text);		
 			if (text.equals("first")) {
-				//System.out.println("(Ask-Question)");
+				System.out.println("(Ask-Question)");
 				engine.assertString("(Ask-Question)");
-				} 
 			engine.run();
 			System.out.println("done");
 			jessText = engine.getOutputRouter("out").toString();
+			String jessText2 = engine.getOutputRouter("out2").toString();
+			String jessText3 = engine.getOutputRouter("out3").toString();
 			((StringWriter)(engine.getOutputRouter("out"))).getBuffer().setLength(0);
-			response.setContentType("text/plain");  
-			response.setCharacterEncoding("UTF-8");		
-			response.getWriter().write(jessText);
+			((StringWriter)(engine.getOutputRouter("out2"))).getBuffer().setLength(0);	
+			((StringWriter)(engine.getOutputRouter("out3"))).getBuffer().setLength(0);	
+			response.setContentType("application/json");  
+			PrintWriter out = response.getWriter();
+			JSONObject jsonObject = new JSONObject();
+			jsonObject.put("question", jessText);
+			jsonObject.put("type", jessText2);
+			jsonObject.put("id", jessText3);
+			out.print(jsonObject);
+			out.flush();
 			System.out.println(jessText +"here");
+			System.out.println(jessText2 +"here");
+			}
 			}
 
 		public void symptom()
