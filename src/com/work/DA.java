@@ -87,8 +87,29 @@
 				if (request.getParameterMap().containsKey("race")) {
 					race();
 				}
+				if (request.getParameterMap().containsKey("command")) {
+					question();
+				}
 			}	  
 		}
+
+		public void question() throws IOException, JessException	{
+			String jessText;
+			String text = request.getParameter("command");
+			Rete engine =(Rete)(getServletContext().getAttribute("engine"));	
+			if (text.equals("first")) {
+				System.out.println("(Ask-Question)");
+				engine.assertString("(Ask-Question)");
+				} 
+			engine.run();
+			System.out.println("done");
+			jessText = engine.getOutputRouter("out").toString();
+			((StringWriter)(engine.getOutputRouter("out"))).getBuffer().setLength(0);
+			response.setContentType("text/plain");  
+			response.setCharacterEncoding("UTF-8");		
+			response.getWriter().write(jessText);
+			System.out.println(jessText +"here");
+			}
 
 		public void symptom()
 		throws IOException, JessException	{

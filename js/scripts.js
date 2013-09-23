@@ -287,4 +287,7 @@ function race(answer) {
 
 function splash() {
 	$("#splash").delay(2000).effect("puff", 500);
-}
+	$.get('servlet', { command: "first" }, function (responseText) {
+	                   $('#intro').text(responseText);
+	               });
+	 }

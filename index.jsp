@@ -43,11 +43,9 @@
 <div id="profile">
 <div><h1>Welcome To DA2</h1>
 <div class="speech" id="intro">
-<span>Hi, I am Doctor Mellitus, a Diabetes Advisor.</span> <br /><br /><br /><br /><br /><br />
-<span>What is your name ?</span> <input id="name" type="text" value="" placeholder="Enter your name here">
+<input id="name" type="text" value="" placeholder="Enter your name here">
 </div>
-<div class="speech" id="gender">
-<span>Are you a male <span id="man">(man)</span> or female <span id="woman">(woman)</span>?</span></div>
+<div class="speech" id="gender"></div>
 <div id="male" onclick="gSpecific(male)"><img src="images/male-sign.jpg"></div><div id="female" onclick="gSpecific(female)"><img src="images/female-sign.jpg"></div>
     
 <div class="speech" id="knowledge">

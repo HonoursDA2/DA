@@ -1,3 +1,4 @@
+(defglobal ?*currentQuestion* = 1)
 (deftemplate Description
     (slot name)
     (slot explanation)
@@ -23,12 +24,12 @@
         (default "YES-NO"))
     (slot shouldAsk
         (default yes))
-    (slot askNext
-        (default no))
+    (slot ask
+        (default yes))
     (slot order)
     )
 (deffacts Questions
-    (Question (type "welcome")(text "Hi, I am Doctor Mellitus, a Diabetes Advisor, what is your name?") (answerType "INPUT") (askNext yes)(order 1))
+    (Question (type "welcome")(text "Hi, I am Doctor Mellitus, a Diabetes Advisor, what is your name?") (answerType "INPUT") (order 1))
     (Question (type "gender")(text "Are you male or female?")(answerType "MALE-FEMALE") (order 2))
     (Question (type "knowledge")(text "Do you know about Diabetes?") (answerType "YES-NO") (order 3))
     (Question (type "diabetic")(text "Are you Diabetic?") (answerType "YES-NO") (order 4))
@@ -133,10 +134,11 @@
      )
 (defrule askQuestion
     ?ask <- (Ask-Question)
-    ?question <- (Question (text ?questionText) (answerType ?answerType) (askNext yes))
+    ?question <- (Question (text ?questionText) (answerType ?answerType) (ask yes) (order ?*currentQuestion*))
     =>
+    (bind ?*currentQuestion* (+ ?*currentQuestion* 1))
     (printout out ?questionText)
-    (modify ?question (askNext no))
+    ;(modify ?question (askNext no))
     (retract ?ask)
     )
 ;shows the explanation of the symptom in question
@@ -191,8 +193,10 @@
 ;if the suer is male then they are not pregnant.
 (defrule isMale
     (Gender Male)
+    ?question <- (Question (type "pregnant") (text ?questionText) (answerType ?answerType) (ask yes) (order ?*currentQuestion*))
     =>
     (assert (Pregnant No))
+    (?modify ?question (ask no))
     )
 ;This methods checks if there is any extra information, if not prints a generic message
 (deffunction filter (?text)
