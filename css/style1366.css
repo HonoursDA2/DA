@@ -58,7 +58,6 @@ body
     z-index: 2;
     position: absolute;
     background-image: url('../images/bg2.jpg');
-    display:none;
 }
 
 #profile div
