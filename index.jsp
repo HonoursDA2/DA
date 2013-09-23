@@ -42,38 +42,9 @@
 
 <div id="profile">
 <div><h1>Welcome To DA2</h1>
-<div class="speech" id="intro">
+<div class="speech">
 <span class="profileH1"></span>
-<input id="name" type="text" value="" placeholder="Enter your name here">
 </div>
-
-<div class="speech" id="gender"></div>
-<div id="male" onclick="gSpecific(male)"><img src="images/male-sign.jpg"></div><div id="female" onclick="gSpecific(female)"><img src="images/female-sign.jpg"></div>
-    
-<div class="speech" id="knowledge">
-<span class="profileH1"></span>
-<div class="yes" id="ido" onclick="knows(ido)">Yes</div><div class="no" id="idont" onclick="knows(idont)">No</div>
-</div>
-
-<div class="speech" id="isDiabetic">
-<span class="profileH1"></span>
-<div class="yes" id="yes" onclick="isDiabetic(yes)">Yes</div><div class="no" id="no" onclick="isDiabetic(no)">No</div>
-</div>
-
-<div class="speech" id="age">
-<span class="profileH1"></span>
-<input id="eyj" type="text" value="" placeholder="Enter your age here"><br>
-<div id="white" onclick="race(white)">White</div><div id="black" onclick="race(black)">Black</div><div id="asian" onclick="race(asian)">Asian</div><div id="other" onclick="race(other)">Other</div>
-</div>
-
-<div class="speech" id="pregnancy">
-<span class="profileH1"></span>
-<div class="yes" id="isPreg" onclick="isPregnant(isPreg)">Yes</div><div class="no" id="isNotPreg" onclick="isPregnant(isNotPreg)">No</div>
-</div>
-
-<div class="speech" id="history">
-<span class="profileH1"></span>
-<div class="yes" id="yess" onclick="hasHistory(yess)">Yes</div><div class="no" id="noo" onclick="hasHistory(noo)">No</div>
 </div>
 
 <div id="feedback"></div>

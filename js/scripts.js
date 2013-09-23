@@ -96,6 +96,10 @@ function revert()
 var isFemale = knowsDiabetes = hasDiabetes = false;
 
 function confirm() {
+    $.get('servlet', { command: "first" }, function (responseText) {
+        $('.profileH1').text(responseText);
+    });
+    /*
 	switch(count)
 	{
 	    case 6:
@@ -170,6 +174,7 @@ function confirm() {
 		count++;
 		break;
 	}
+    */
 }
 
 var gendertype = aGender ="";
