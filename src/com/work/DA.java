@@ -98,7 +98,7 @@
 			String text = request.getParameter("command");
 			Rete engine =(Rete)(getServletContext().getAttribute("engine"));	
 			if (text.equals("first")) {
-				System.out.println("(Ask-Question)");
+				//System.out.println("(Ask-Question)");
 				engine.assertString("(Ask-Question)");
 				} 
 			engine.run();
@@ -215,8 +215,6 @@
 		String gender = request.getParameter("gender");
 		if (gender.equals("Male")) {
 			engine.assertString("(Gender Male)");
-			
-			
 		}	else
 		{
 			engine.assertString("(Gender Female)");

@@ -134,12 +134,15 @@
      )
 (defrule askQuestion
     ?ask <- (Ask-Question)
-    ?question <- (Question (text ?questionText) (answerType ?answerType) (ask yes) (order ?*currentQuestion*))
+    ?question <- (Question (text ?questionText) (answerType ?answerType) (ask yes) (order ?current))
     =>
-    (bind ?*currentQuestion* (+ ?*currentQuestion* 1))
+    (if (eq ?current ?*currentQuestion*) then
+    (bind ?counter (+ ?*currentQuestion* 1))
+    (bind ?*currentQuestion* ?counter)
     (printout out ?questionText)
     ;(modify ?question (askNext no))
     (retract ?ask)
+        )
     )
 ;shows the explanation of the symptom in question
 (defrule showReason

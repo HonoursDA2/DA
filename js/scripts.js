@@ -96,8 +96,9 @@ function revert()
 var isFemale = knowsDiabetes = hasDiabetes = false;
 
 function confirm() {
-    $.get('servlet', { command: "first" }, function (responseText) {
+    $.get('servlet', { command: "first" }, function (responseText) { 
         $('.profileH1').text(responseText);
+        alert(responseText);
     });
     /*
 	switch(count)
