@@ -43,34 +43,36 @@
 <div id="profile">
 <div><h1>Welcome To DA2</h1>
 <div class="speech" id="intro">
+<span class="profileH1"></span>
 <input id="name" type="text" value="" placeholder="Enter your name here">
 </div>
+
 <div class="speech" id="gender"></div>
 <div id="male" onclick="gSpecific(male)"><img src="images/male-sign.jpg"></div><div id="female" onclick="gSpecific(female)"><img src="images/female-sign.jpg"></div>
     
 <div class="speech" id="knowledge">
-<span>Do you know about Diabetes?</span>
+<span class="profileH1"></span>
 <div class="yes" id="ido" onclick="knows(ido)">Yes</div><div class="no" id="idont" onclick="knows(idont)">No</div>
 </div>
 
 <div class="speech" id="isDiabetic">
-<span>Are you diabetic?</span>
+<span class="profileH1"></span>
 <div class="yes" id="yes" onclick="isDiabetic(yes)">Yes</div><div class="no" id="no" onclick="isDiabetic(no)">No</div>
 </div>
 
 <div class="speech" id="age">
-<span>What is your age and race ?</span>
+<span class="profileH1"></span>
 <input id="eyj" type="text" value="" placeholder="Enter your age here"><br>
 <div id="white" onclick="race(white)">White</div><div id="black" onclick="race(black)">Black</div><div id="asian" onclick="race(asian)">Asian</div><div id="other" onclick="race(other)">Other</div>
 </div>
 
 <div class="speech" id="pregnancy">
-<span>Are you pregnant?</span>
+<span class="profileH1"></span>
 <div class="yes" id="isPreg" onclick="isPregnant(isPreg)">Yes</div><div class="no" id="isNotPreg" onclick="isPregnant(isNotPreg)">No</div>
 </div>
 
 <div class="speech" id="history">
-<span>Do you have relatives who have diabetes?</span>
+<span class="profileH1"></span>
 <div class="yes" id="yess" onclick="hasHistory(yess)">Yes</div><div class="no" id="noo" onclick="hasHistory(noo)">No</div>
 </div>
 
