@@ -17,28 +17,29 @@
     (slot name)
     )
 (deftemplate Question
+    (slot type)
     (slot text)
     (slot answerType
         (default "YES-NO"))
+    (slot shouldAsk
+        (default yes))
+    (slot askNext
+        (default no))
+    (slot order)
     )
 (deffacts Questions
-    (Question (text "Hi, I am Doctor Mellitus, a Diabetes Advisor, what is your name?") (answerType "INPUT"))
-    (Question (text "Are you male or female?")(answerType "MALE-FEMALE"))
-    (Question (text "Do you know about Diabetes?") (answerType "YES-NO"))
-    (Question (text "Are you Diabetic?") (answerType "YES-NO"))
-    (Question (text "What is your race?"))
-    (Question (text "What is your age?") (answerType "INPUT"))
-    (Question (text "Do you have relatives who have Diabetes?")(answerType "YES-NO"))
-    (Question (text "Are you Pregnant?") (answerType "YES-NO"))
-    (Question (text "What is your weight (KG)")(answerType "INPUT"))
-    (Question (text "What is your height (M)") (answerType "INPUT"))
-    (Question (text "Do You smoke cigarettes?") (answerType "YES-NO"))
-    (Question (text "Do you drink alcohol regularly?") (answerType "YES-NO"))
-    (Question (text ""))
-    (Question (text ""))
-    (Question (text ""))
-    (Question (text ""))
-    (Question (text ""))
+    (Question (type "welcome")(text "Hi, I am Doctor Mellitus, a Diabetes Advisor, what is your name?") (answerType "INPUT") (askNext yes)(order 1))
+    (Question (type "gender")(text "Are you male or female?")(answerType "MALE-FEMALE") (order 2))
+    (Question (type "knowledge")(text "Do you know about Diabetes?") (answerType "YES-NO") (order 3))
+    (Question (type "diabetic")(text "Are you Diabetic?") (answerType "YES-NO") (order 4))
+    (Question (type "race")(text "What is your race?") (order 5))
+    (Question (type "age")(text "What is your age?") (answerType "INPUT") (order 6))
+    (Question (type "history")(text "Do you have relatives who have Diabetes?")(answerType "YES-NO") (order 7))
+    (Question (type "pregnant")(text "Are you Pregnant?") (answerType "YES-NO") (order 8))
+    (Question (type "weight")(text "What is your weight (KG)")(answerType "INPUT") (order 9))
+    (Question (type "height")(text "What is your height (M)") (answerType "INPUT") (order 10))
+    ;(Question (type "smoke")(text "Do You smoke cigarettes?") (answerType "YES-NO"))
+    ;(Question (type "alcohol")(text "Do you drink alcohol regularly?") (answerType "YES-NO"))
     )
 (deffacts symtpomDescription
    (Description(name Fatigue) (explanation "Do you feel tired a lot? A feeling of tiredness that can not be explained."))
@@ -130,6 +131,14 @@
     (Information (name Gestational) (explanation ""))    
     	
      )
+(defrule askQuestion
+    ?ask <- (Ask-Question)
+    ?question <- (Question (text ?questionText) (answerType ?answerType) (askNext yes))
+    =>
+    (printout out ?questionText)
+    (modify ?question (askNext no))
+    (retract ?ask)
+    )
 ;shows the explanation of the symptom in question
 (defrule showReason
     ?input <- (Input (name ?inputName))
