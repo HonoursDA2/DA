@@ -62,7 +62,16 @@ function submitSymptoms() {
 			counter++;
 		}
 
-	}
+}
+$("#advisor").animate({ "height": "95%" }, 1000, "easeInOutCirc", function () {
+    $("#symptom1,#symptom2").fadeIn();
+});
+$("#menu").fadeOut();
+$("#patient").animate({ "bottom": "-101%" },1000,"easeInOutCirc", function () {
+    $("#symptoms").fadeOut(0);
+    $("#lifestyle").fadeIn();
+});
+
 }
 
 var count = 0;
@@ -89,11 +98,13 @@ var isFemale = knowsDiabetes = hasDiabetes = false;
 function confirm() {
 	switch(count)
 	{
-	case 6:
-	    $("#profile").fadeOut();
-	    var oldness = $("#eyj").val();
-		$.get('servlet', {pregnant:pregnancy});
-		break;
+	    case 6:
+	        $("#profile").fadeOut();
+	        $("#choice").fadeOut(0);
+	        $("#symptoms").fadeIn();
+	        var oldness = $("#eyj").val();
+	        $.get('servlet', { pregnant: pregnancy });
+	        break;
 	case 5:   
 		if (isFemale) {
 	    	$.get('servlet', {familyH: history});

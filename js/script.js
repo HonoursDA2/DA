@@ -2,7 +2,7 @@
     splash();
 };
 
-$(function () { 
+$(function () {
 
     $("#symptom").hover(function () {
         document.getElementById("patientH1").innerHTML = "Symptoms";
@@ -13,8 +13,8 @@ $(function () {
     $("#life").hover(function () {
         document.getElementById("patientH1").innerHTML = "Lifestyle";
     });
-    
-    $("#symptom").click(function (){
+
+    $("#symptom").click(function () {
         $("#symptoms").delay(200).fadeIn();
         $("#choice").fadeOut();
     });
@@ -24,45 +24,53 @@ $(function () {
         $("#choice").fadeOut();
     });
 
-    $("#backbutton").click(function (){
+    $("#backbutton").click(function () {
         $("#symptoms, #factors, #lifestyle").delay(200).fadeOut();
         $("#choice").delay(200).fadeIn();
     });
 
     var clicked = clicked2 = false;
-    $("#nearest").click(function (){
-        if(!clicked){
-        $("#directions").fadeIn();
-        clicked = true;
+    $("#nearest").click(function () {
+        if (!clicked) {
+            $("#directions").fadeIn();
+            clicked = true;
         }
-        else{
-        $("#directions").fadeOut();
-        clicked = false;
+        else {
+            $("#directions").fadeOut();
+            clicked = false;
         }
     });
-    
-    $("#extra").click(function (){
-        if(!clicked2){
-        $("#definition").fadeIn();
-        clicked2 = true;
+
+    $("#extra").click(function () {
+        if (!clicked2) {
+            $("#definition").fadeIn();
+            clicked2 = true;
         }
-        else{
-        $("#definition").fadeOut();
-        clicked2 = false;
+        else {
+            $("#definition").fadeOut();
+            clicked2 = false;
         }
+    });
+
+    $("#symptom2").click(function () {
+        $(".symptomsresults").fadeOut();
+        $("#advisor").animate({ "height": "47%" }, 1000, "easeInOutCirc");
+        $("#menu").fadeIn();
+        $("#patient").animate({ "bottom": "2.55%" }, 1000, "easeInOutCirc");
     });
 
     window.oncontextmenu = function () {
         if (!clicked2) {
             $("#definition").fadeIn();
             clicked2 = true;
-           $.get('servlet',{symptom:"extra"}, function (responseText) {
-                    $('#definition').text(responseText);});
+            $.get('servlet', { symptom: "extra" }, function (responseText) {
+                $('#definition').text(responseText);
+            });
         }
         else {
             $("#definition").fadeOut();
             clicked2 = false;
         }
-    return false;
-}
+        return false;
+    }
 });

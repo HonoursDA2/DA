@@ -89,6 +89,15 @@
     
 <div id="definition"></div>
 <img id="extra" src="images/information.png">
+
+<div class="symptomsresults" id="symptom1">
+<img src="images/symptoms/nausea.jpg"><div><h1>Extra Info on Nausea</h1></div>
+</div>
+
+<div class="symptomsresults" id="symptom2">
+<img src="images/symptoms/headache.jpg"><div><h1>Extra Info on Headaches</h1></div>
+</div>
+
 </div>
     
 <div id="directions">
@@ -98,7 +107,6 @@
 <br /><h2><a target="_blank" href="https://maps.google.co.za/maps?f=q&amp;source=embed&amp;hl=en&amp;geocode=&amp;q=nearest+clinic&amp;aq=&amp;sll=-33.9398,18.568611&amp;sspn=0.114074,0.264187&amp;t=h&amp;ie=UTF8&amp;hq=clinic&amp;hnear=&amp;ll=-33.939942,18.568611&amp;spn=0.136718,0.219727&amp;z=12" style="text-align:left">View Larger Map</a></h2>
 </div>
 </div>
-
 
 </div>
 
@@ -134,7 +142,7 @@
 <div class="buttons" id="wounds" value="Slow-Healing-Wounds" onclick="clicked(wounds)">Slow Healing of Wounds</div>
 <div class="buttons" id="numbness" value="Numbness" onclick="clicked(numbness)">Numbness</div>
 <div class="buttons" id="teethandgum" value="Gum-Infection" onclick="clicked(teethandgum)">Teeth and gum problems</div>
-<div class="buttons" id="Div1" onclick="submitSymptoms()">Submit</div>
+<div class="buttons" id="submitB" onclick="submitSymptoms()">Submit</div>
 </div>
 
 <div id="lifestyle">
