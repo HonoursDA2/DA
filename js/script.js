@@ -1,10 +1,10 @@
 ﻿window.onload = function () {
     splash();
-    $.get('servlet', { command: "first" }, function (responseText) {
-        $('.profileH1').text(responseText);
-    });
-
-    $(".questions").html('<input id="name" value="" type="name" placeholder="Enter Your Name Here">');
+        $.get('DA', { command: "first", number: "-1" }, function (responseText) {
+                       $('.profileH1').text(responseText);
+                   });
+                   $(".questions").html('<input id="name" value="" type="name" placeholder="Enter Your Name Here">');
+    
 };
 
 $(function () {
@@ -64,7 +64,7 @@ $(function () {
         $("#patient").animate({ "bottom": "2.55%" }, 1000, "easeInOutCirc");
     });
 
-    window.oncontextmenu = function () {
+   /* window.oncontextmenu = function () {
         if (!clicked2) {
             $("#definition").fadeIn();
             clicked2 = true;
@@ -78,4 +78,5 @@ $(function () {
         }
         return false;
     }
+    */
 });

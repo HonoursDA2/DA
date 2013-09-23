@@ -12,7 +12,7 @@
 	</servlet>
 	<servlet-mapping>
 		<servlet-name>DA</servlet-name>
-		<url-pattern>/servlet</url-pattern>
+		<url-pattern>/DA</url-pattern>
 	</servlet-mapping>
 	<context-param>
 		<param-name>rulesfile</param-name>

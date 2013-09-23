@@ -22,14 +22,12 @@
     (slot text)
     (slot answerType
         (default "YES-NO"))
-    (slot shouldAsk
-        (default yes))
     (slot ask
         (default yes))
     (slot order)
     )
 (deffacts Questions
-    (Question (type "welcome")(text "Hi, I am Doctor Mellitus, a Diabetes Advisor, what is your name?") (answerType "INPUT") (order 1))
+    (Question (type "name")(text "Hi, I am Doctor Mellitus, a Diabetes Advisor, what is your name?") (answerType "INPUT") (order 1))
     (Question (type "gender")(text "Are you male or female?")(answerType "MALE-FEMALE") (order 2))
     (Question (type "knowledge")(text "Do you know about Diabetes?") (answerType "YES-NO") (order 3))
     (Question (type "diabetic")(text "Are you Diabetic?") (answerType "YES-NO") (order 4))
@@ -134,12 +132,17 @@
      )
 (defrule askQuestion
     ?ask <- (Ask-Question)
-    ?question <- (Question (text ?questionText) (answerType ?answerType) (ask yes) (order ?*currentQuestion*))
+    ?question <- (Question (type ?type)(text ?questionText) (answerType ?answerType) (ask yes) (order ?current))
     =>
-    (bind ?*currentQuestion* (+ ?*currentQuestion* 1))
+    (if (eq ?current ?*currentQuestion*) then
+    (bind ?counter (+ ?*currentQuestion* 1))
+    (bind ?*currentQuestion* ?counter)
     (printout out ?questionText)
+    (printout out2 ?answerType)    
+    (printout out3 ?type)
     ;(modify ?question (askNext no))
     (retract ?ask)
+        )
     )
 ;shows the explanation of the symptom in question
 (defrule showReason
