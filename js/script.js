@@ -1,5 +1,10 @@
 ﻿window.onload = function () {
     splash();
+    $.get('servlet', { command: "first" }, function (responseText) {
+        $('.profileH1').text(responseText);
+    });
+
+    $(".questions").html('<input id="name" value="" type="name" placeholder="Enter Your Name Here">');
 };
 
 $(function () {

@@ -23,7 +23,7 @@ body
     top:0;
     left:0;
     z-index:5;
-    display:block;
+    display:none;
 }
 
 #splash img
@@ -59,6 +59,7 @@ body
     z-index: 2;
     position: absolute;
     background-image: url('../images/bg.jpg');
+    
 }
 
 #profile div
@@ -82,12 +83,20 @@ body
     text-shadow:0px 1px 4px rgba(155,0,0,0.5);
 }
 
-#profile div.speech
+#profile div.speech, #profile .questions
 {
-    height:70%;
+    height:35%;
 	width:67.5%;
 	position:absolute;
 	left:1.25%;
+}
+
+.questions
+{
+    height:30%;
+    bottom:10%;
+    background:silver;
+    text-align:center;
 }
 
 div.speech
@@ -134,16 +143,6 @@ div.speech span
     top:5%;
 }
 
-div.speech input
-{
-    width:90%;
-    height:10%;
-    position:relative;
-    top:15%;
-    font-size:2em;
-    text-align:center;
-}
-
 input
 {
      border-bottom: 2px solid silver; 
@@ -164,7 +163,17 @@ input
     font-weight:bold;
     cursor:text;
     transition:500ms ease;
-} 
+}
+ 
+div.questions input
+{
+    width:90%;
+    height:50px;
+    position:relative;
+    top:15%;
+    font-size:2em;
+    text-align:center;
+}
 
 input:hover
 {
