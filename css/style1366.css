@@ -11,6 +11,7 @@ body
 {
     background: rgb(225,225,225);
     overflow: hidden;
+    background-image: url('../images/bg.jpg');
 }
 
 #splash, #splash img
@@ -57,7 +58,7 @@ body
     height: 100%;
     z-index: 2;
     position: absolute;
-    background-image: url('../images/bg2.jpg');
+    background-image: url('../images/bg.jpg');
 }
 
 #profile div
@@ -330,6 +331,7 @@ span#woman
 #advisor
 {
     top:2.5%;
+    overflow:auto;
 }
 
 #advisorH1
@@ -341,7 +343,6 @@ span#woman
     left:0;
     font-size:3em;
     height:100%;
-    overflow:auto;
 }
 
 #patient
@@ -604,6 +605,7 @@ span#woman
     margin:10px auto 10px auto;
     text-align:left;
     box-shadow:0px 2px 5px silver;
+    background:white;
 }
 
 .symptomsresults img
