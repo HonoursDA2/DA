@@ -160,6 +160,8 @@ input
     background: rgba(255,255,255,0.5);
     margin: 0 0 0px 0;
     color:rgba(255,0,0,0.7);
+    font-family:helvetica;
+    font-weight:bold;
     cursor:text;
     transition:500ms ease;
 } 
@@ -319,7 +321,7 @@ span#woman
 .section
 {
     position:fixed;
-    background:white;
+    background:rgba(255,255,255,0.9);
     box-shadow:0px 2px 7px grey;
     width:97%;
     height:47%;
@@ -468,11 +470,11 @@ span#woman
 #physician
 {
     border-radius:50%;
-    width:900px;
-    height:900px;
+    width:270px;
+    height:270px;
     position:fixed;
-    right:-500px;
-    top:-500px;
+    right:50px;
+    top:50px;
     box-shadow:0px 0px 15px 1px grey;
     background:white;
     overflow:hidden;
@@ -488,10 +490,10 @@ span#woman
 #physician img
 {
     position:absolute;
-    top:490px;
-    left:30px;
-    width:452px;
-    height:324px;
+    top:30px;
+    left:0px;
+    width:100%;
+    height:auto;
     cursor:pointer;
 }
 
@@ -511,6 +513,7 @@ span#woman
     display:inline-block;
     padding:5px 5px 0px 5px;
     vertical-align:top;
+    border-radius:5px;
 }
 
 .buttons:hover
