@@ -18,6 +18,7 @@
     (slot name)
     )
 (deftemplate Question
+    (slot section)  
     (slot type)
     (slot text)
     (slot answerType
@@ -27,16 +28,16 @@
     (slot order)
     )
 (deffacts Questions
-    (Question (type "name")(text "Hi, I am Doctor Mellitus, a Diabetes Advisor, what is your name?") (answerType "INPUT") (order 1))
-    (Question (type "gender")(text "Are you male or female?")(answerType "MALE-FEMALE") (order 2))
-    (Question (type "knowledge")(text "Do you know about Diabetes?") (answerType "YES-NO") (order 3))
-    (Question (type "diabetic")(text "Are you Diabetic?") (answerType "YES-NO") (order 4))
-    (Question (type "race")(text "What is your race?") (order 5))
-    (Question (type "age")(text "What is your age?") (answerType "INPUT") (order 6))
-    (Question (type "history")(text "Do you have relatives who have Diabetes?")(answerType "YES-NO") (order 7))
-    (Question (type "pregnant")(text "Are you Pregnant?") (answerType "YES-NO") (order 8))
-    (Question (type "weight")(text "What is your weight (KG)")(answerType "INPUT") (order 9))
-    (Question (type "height")(text "What is your height (M)") (answerType "INPUT") (order 10))
+    (Question (section Initial)(type "name")(text "Hi, I am Doctor Mellitus, a Diabetes Advisor, what is your name?") (answerType "INPUT") (order 1))
+    (Question (section Initial)(type "gender")(text "Are you male or female?")(answerType "MALE-FEMALE") (order 2))
+    (Question (section Initial)(type "diabetesK")(text "Do you know about Diabetes?") (answerType "YES-NO") (order 3))
+    (Question (section Initial)(type "diabetic")(text "Are you Diabetic?") (answerType "YES-NO") (order 4))
+    (Question (section Initial)(type "race")(text "What is your race?") (order 5))
+    (Question (section Initial)(type "age")(text "What is your age?") (answerType "INPUT") (order 6))
+    (Question (section Initial)(type "familyH")(text "Do you have relatives who have Diabetes?")(answerType "YES-NO") (order 7))
+    (Question (section Initial)(type "pregnant")(text "Are you Pregnant?") (answerType "YES-NO") (order 8))
+    (Question (section Initial)(type "weight")(text "What is your weight (KG)")(answerType "INPUT") (order 9))
+    (Question (section Initial)(type "height")(text "What is your height (M)") (answerType "INPUT") (order 10))
     ;(Question (type "smoke")(text "Do You smoke cigarettes?") (answerType "YES-NO"))
     ;(Question (type "alcohol")(text "Do you drink alcohol regularly?") (answerType "YES-NO"))
     )
@@ -71,7 +72,7 @@
             This causes a rise in sugar levels.
             The disease normally disappears after pregnancy." ))
     )
-;The list of symptoms and their explanations
+;The list of symp toms and their explanations
 (deffacts symptomReason
    (Reason (name Fatigue) (explanation "Fatigue- The glucose is not being converted into energy this weakens the cells and causes fatigue."))
    (Reason (name Frequent-Headache) (explanation "Frequent Headaches - This is due to the high level of glucose in the blood, this leads to frequent headaches experiecned for prolonged periods of time."))
@@ -130,9 +131,33 @@
     (Information (name Gestational) (explanation ""))    
     	
      )
-(defrule askQuestion
-    ?ask <- (Ask-Question)
-    ?question <- (Question (type ?type)(text ?questionText) (answerType ?answerType) (ask yes) (order ?current))
+(defrule askQuestionInitial
+    ?ask <- (Ask-Question-Initial)
+    ?question <- (Question (section Initial)(type ?type)(text ?questionText) (answerType ?answerType) (ask yes) (order ?current))
+    =>
+    (if (eq ?current ?*currentQuestion*) then
+    (bind ?counter (+ ?*currentQuestion* 1))
+    (bind ?*currentQuestion* ?counter)
+    (printout out ?questionText)
+    (printout out2 ?answerType)    
+    (printout out3 ?type)
+    (modify ?question (ask no))
+    (retract ?ask)
+        )
+    )
+(defrule changeQuestions
+    (delare salience 1)
+    (Ask-Question-Initial)
+    ?question <- (Question (section Initial)(type ?type)(text ?questionText) (answerType ?answerType) (ask no) (order ?current))
+    =>
+    (if (eq ?current ?*currentQuestion*) then
+    	(bind ?counter (+ ?*currentQuestion* 1))
+    	(bind ?*currentQuestion* ?counter)
+    )
+    )
+(defrule askQuestionLifestyle
+    ?ask <- (Ask-Question-Lifestyle)
+    ?question <- (Question (section Lifestyle)(type ?type)(text ?questionText) (answerType ?answerType) (ask yes) (order ?current))
     =>
     (if (eq ?current ?*currentQuestion*) then
     (bind ?counter (+ ?*currentQuestion* 1))

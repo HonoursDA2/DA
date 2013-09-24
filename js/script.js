@@ -2,11 +2,7 @@
 
 window.onload = function () {
     //splash();
-    $.get('DA', { command: "init" }, function (responseText) {
-                setSession(responseText);
-                ajaxCall("question", responseText);
-                });
-
+ initialize();
     };
 
 function rscroll() {
