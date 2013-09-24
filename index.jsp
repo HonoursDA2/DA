@@ -15,16 +15,11 @@
 <body>
 	<script>
 	    $(document).ready(function () {
-
 	        $('#button').click(function () {
-	            var nam = $("#name").val();
-	            $.get('servlet', { name: nam }, function (responseText) {
-	                $('#advisorH1').text(responseText);
-	            });
-
-	            $('.buttons').mouseover(function () {
+	        	var session = getSession();
+	    	$('.buttons').mouseover(function () {
 	                var symptomName = $(this).attr("value");
-	                $.get('servlet', { symptom: symptomName }, function (responseText) {
+	                $.get('DA', {symptom: symptomName, sessionID: session}, function (responseText) {
 	                    $('#advisorH1').text(responseText);
 	                });
 

@@ -1,7 +1,11 @@
 ﻿var question = type = id = "";
 
 window.onload = function () {
-    splash();
+    //splash();
+    $.get('DA', { command: "init" }, function (responseText) {
+                setSession(responseText);
+                ajaxCall("question", responseText);
+                });
 
     var first = "first";
     var dataString = "command=" + first;
@@ -26,6 +30,7 @@ window.onload = function () {
     });
 
 };
+    };
 
 $(function () {
 

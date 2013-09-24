@@ -92,18 +92,32 @@ function revert()
     }
 }
 
+var sessionID = 0;
 
 var isFemale = knowsDiabetes = hasDiabetes = false;
 
-function confirm() {
-    var first = "first";
-    var dataString = "command=" + first;
+	function setSession(ID)
+	{
+		sessionID = ID;
+	}
 
-    $.ajax({
+	function getSession()
+	{
+		return sessionID;
+	}
+
+
+function ajaxCall(command, sessionID)
+{
+
+	$.ajax({
         url: 'DA',
         type: 'GET',
         dataType: 'json',
-        data: dataString,
+        data: { 
+        	command: command,
+        	sessionID: sessionID
+        	}, 
         contentType: 'application/json',
         mimeType: 'application/json',
         success: function (data) {
@@ -120,10 +134,21 @@ function confirm() {
             }
             else if (type == "YES-NO") {
                 $(".questions").html('<div class="yes">Yes</div><div class="no">No</div>');
+            } else {
+            	$("#profile").fadeOut();
+            	$("#symptoms").fadeIn();	
             }
 
         }
     });
+
+}
+
+function confirm() {
+
+    ajaxCall("question", sessionID);
+
+	  
     /*
 	switch(count)
 	{
