@@ -44,11 +44,11 @@
 <div class="questions">
 
 </div>
+<div id="backb" onclick="revert()">Back</div><div id="button" onclick="confirm()">Continue</div>
 </div>
 
 <div id="feedback"></div>
 
-<div id="backb" onclick="revert()">Back</div><div id="button" onclick="confirm()">Continue</div>
 </div>
 </div>
 
