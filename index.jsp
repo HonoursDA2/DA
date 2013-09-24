@@ -17,14 +17,9 @@
 	    $(document).ready(function () {
 
 	        $('#button').click(function () {
-	            var nam = $("#name").val();
-	            $.get('servlet', { name: nam }, function (responseText) {
-	                $('#advisorH1').text(responseText);
-	            });
-
-	            $('.buttons').mouseover(function () {
+	          $('.buttons').mouseover(function () {
 	                var symptomName = $(this).attr("value");
-	                $.get('servlet', { symptom: symptomName }, function (responseText) {
+	                $.get('DA', {symptom: symptomName }, function (responseText) {
 	                    $('#advisorH1').text(responseText);
 	                });
 

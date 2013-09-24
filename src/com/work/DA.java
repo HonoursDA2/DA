@@ -70,7 +70,7 @@
 		throws IOException, JessException, JSONException
 		{
 
-			/*if (request.getParameterMap().containsKey("name")) {
+			if (request.getParameterMap().containsKey("name")) {
 					name();
 				}else 
 			if (request.getParameterMap().containsKey("symptom"))
@@ -80,33 +80,33 @@
 				symptomList();
 			}
 			else {
-*/
+
 				if (request.getParameterMap().containsKey("gender")) {
 					gender();
-				}
+				} else
 				if (request.getParameterMap().containsKey("diabetic")) {
 					diabetic();
-				} 
+				}  else
 				if (request.getParameterMap().containsKey("diabetesK")) {
 					diabetesKowledge();
-				}  
+				}  else
 				if (request.getParameterMap().containsKey("pregnant")) {
 					pregnant();
-				}  
+				}  else
 				if (request.getParameterMap().containsKey("familyH")) {
 					familyHistory();
-				}  
+				}  else
 				if (request.getParameterMap().containsKey("age")) {
 					age();
-				}  
+				}  else
 				if (request.getParameterMap().containsKey("race")) {
 					race();
-				}
+				}else
 				if (request.getParameterMap().containsKey("command")) {
 					System.out.println("question");
 					question();
 				}
-//			}	  
+			}	  
 		}
 
 		public void question() throws IOException, JessException, JSONException	{

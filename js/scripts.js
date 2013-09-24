@@ -120,6 +120,9 @@ function confirm() {
             }
             else if (type == "YES-NO") {
                 $(".questions").html('<div class="yes">Yes</div><div class="no">No</div>');
+            } else {
+            	$("#profile").fadeOut();
+            	$("#symptoms").fadeIn();	
             }
 
         }
