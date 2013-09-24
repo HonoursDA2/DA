@@ -95,6 +95,7 @@
 </div>
 
 <div id="symptoms">
+<div id="symptomsContainer"><div class="prev"></div><div class="next"></div>
 <div class="buttons" id="weightloss" value="Weightloss" onclick="clicked(weightloss)">Unusual Weightloss</div>
 <div class="buttons" id="thirst" value="Extreme-Thirst" onclick="clicked(thirst)">Thirst</div>
 <div class="buttons" id="drymouth" value="Dry-Mouth" onclick="clicked(drymouth)">Dry Mouth</div>
@@ -113,6 +114,7 @@
 <div class="buttons" id="numbness" value="Numbness" onclick="clicked(numbness)">Numbness</div>
 <div class="buttons" id="teethandgum" value="Gum-Infection" onclick="clicked(teethandgum)">Teeth and gum problems</div>
 <div class="buttons" id="submitB" onclick="submitSymptoms()">Submit</div>
+</div>
 </div>
 
 <div id="lifestyle">

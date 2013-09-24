@@ -31,6 +31,18 @@ window.onload = function () {
 
 };
 
+function rscroll() {
+    $('#symptoms').animate({
+        scrollLeft: '+=20'
+    }, 200, rscroll);
+}
+
+function lscroll() {
+    $('#symptoms').animate({
+        scrollLeft: '-=20'
+    }, 200, lscroll);
+}
+
 $(function () {
 
     $("#symptom").hover(function () {
@@ -88,7 +100,14 @@ $(function () {
         $("#patient").animate({ "bottom": "2.55%" }, 1000, "easeInOutCirc");
     });
 
-   /* window.oncontextmenu = function () {
+    $('.next').on('mouseenter', rscroll);
+    $('.prev').on('mouseenter', lscroll);
+    $('.next,.prev').on('mouseleave', function () {
+        $('#symptoms').stop();
+    });
+
+/*    window.oncontextmenu = function () {
+
         if (!clicked2) {
             $("#definition").fadeIn();
             clicked2 = true;
