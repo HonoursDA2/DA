@@ -1,8 +1,12 @@
 ﻿var question = type = id = "";
 
 window.onload = function () {
-    splash();
-    ajaxCall("first");
+    //splash();
+    $.get('DA', { command: "init" }, function (responseText) {
+                setSession(responseText);
+                ajaxCall("question", responseText);
+                });
+
     };
 
 $(function () {
