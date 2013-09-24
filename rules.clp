@@ -32,7 +32,7 @@
     (Question (type "knowledge")(text "Do you know about Diabetes?") (answerType "YES-NO") (order 3))
     (Question (type "diabetic")(text "Are you Diabetic?") (answerType "YES-NO") (order 4))
     (Question (type "race")(text "What is your race?") (order 5))
-    (Question (type "age")(text "What is your age?") (answerType "INPUT") (order 6))
+    (Question (type "Age")(text "What is your age?") (answerType "INPUT") (order 6))
     (Question (type "history")(text "Do you have relatives who have Diabetes?")(answerType "YES-NO") (order 7))
     (Question (type "pregnant")(text "Are you Pregnant?") (answerType "YES-NO") (order 8))
     (Question (type "weight")(text "What is your weight (KG)")(answerType "INPUT") (order 9))

@@ -110,33 +110,35 @@ var isFemale = knowsDiabetes = hasDiabetes = false;
 function ajaxCall(command, sessionID)
 {
 
-	$.ajax({
+    $.ajax({
         url: 'DA',
         type: 'GET',
         dataType: 'json',
-        data: { 
-        	command: command,
-        	sessionID: sessionID
-        	}, 
+        data: {
+            command: command,
+            sessionID: sessionID
+        },
         contentType: 'application/json',
         mimeType: 'application/json',
         success: function (data) {
             question = data.question;
             id = data.id;
             type = data.type;
+            
             $(".profileH1").html(question);
 
             if (type == "INPUT") {
                 $(".questions").html('<input id="' + id + '" value="" type="' + id + '" placeholder="Enter Your ' + id + ' Here">');
             }
             else if (type == "MALE-FEMALE") {
-                $(".questions").html('<div id="male"></div><div id="female"></div>');
+                $(".questions").html('<div id="male" onclick="gSpecific(male)"><img src="images/male-sign.jpg"></div><div id="female" onclick="gSpecific(female)"><img src="images/female-sign.jpg"></div>');
             }
             else if (type == "YES-NO") {
                 $(".questions").html('<div class="yes">Yes</div><div class="no">No</div>');
             } else {
-            	$("#profile").fadeOut();
-            	$("#symptoms").fadeIn();	
+                $("#profile").fadeOut();
+                $("#choice").fadeOut();
+                $("#symptoms").fadeIn();
             }
 
         }
@@ -145,7 +147,10 @@ function ajaxCall(command, sessionID)
 }
 
 function confirm() {
-
+    if (type == "INPUT") {
+        var answer = $("#" + id).val();
+        $.get('DA', { value: answer, answerID: id, sessionID: session });
+    }
     ajaxCall("question", sessionID);
 
 	  

@@ -6,29 +6,6 @@ window.onload = function () {
                 setSession(responseText);
                 ajaxCall("question", responseText);
                 });
-
-    var first = "first";
-    var dataString = "command=" + first;
-
-    $.ajax({
-        url: 'DA',
-        type: 'GET',
-        dataType: 'json',
-        data: dataString,
-        contentType: 'application/json',
-        mimeType: 'application/json',
-        success: function (data) {
-            question = data.question;
-            id = data.id;
-            type = data.type;
-            $(".profileH1").html(question);
-
-            if (type == "INPUT") {
-                $(".questions").html('<input id="' + id + '" value="" type="' + id + '" placeholder="Enter Your ' + id + ' Here">');
-            }
-        }
-    });
-
 };
 
 function rscroll() {

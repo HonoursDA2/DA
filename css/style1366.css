@@ -85,17 +85,16 @@ body
 
 #profile div.speech, #profile .questions
 {
-    height:35%;
+    height:40%;
 	width:67.5%;
 	position:absolute;
 	left:1.25%;
 }
 
-.questions
+#profile .questions
 {
     height:30%;
-    bottom:10%;
-    background:silver;
+    bottom:13%;
     text-align:center;
 }
 
@@ -119,8 +118,8 @@ div.speech:before
     height:0px;
     position:absolute;
     left:100%;
-    top:150px;
-    border:55px solid; 
+    top:151px;
+    border:34px solid; 
     border-color:rgb(215,215,215) transparent transparent rgb(215,215,215);
 }
 
@@ -131,8 +130,8 @@ div.speech:after
     height:0px;
     position:absolute;
     left:100%;
-    top:153.5px;
-    border:52px solid; 
+    top:152.5px;
+    border:32px solid; 
     border-color:white transparent transparent white;
 }
 
@@ -240,23 +239,22 @@ input:hover
 {
     position:absolute;
     width:430px;
-    height:245px;
+    height:100%;
     text-align:center;
     cursor:pointer;
-    display:none;
 }
 
 #profile #male img, #profile #female img
 {
     width:300px;
-    height:235px;
+    height:100%;
     cursor:pointer;
 }
 
 #profile .yes, #profile .no
 {
     width:430px;
-    font-size:15em;
+    font-size:10em;
     font-weight:100;
     background-image:radial-gradient(lime,green);
     border:5px darkgreen solid;
@@ -272,23 +270,21 @@ input:hover
 
 #male, #female, .yes, .no
 {
-    bottom:15%;
-    left:1.5%;
+    bottom:0;
     transition: 200ms ease;
 }
 
 #profile .yes,#profile .no
 {
-    position:fixed;
-    bottom:120px;
-    left:3%;
+    bottom:0;
+    height:100%;
     box-sizing:border-box;
     overflow:hidden;
 }
 
-#female, #profile .no
+#profile #female, #profile .no
 {
-    left:35.5%;
+    right:0%;
 }
 
 #male:hover
@@ -336,7 +332,6 @@ span#woman
     height:47%;
     left:1.5%;
     border-radius:5px;
-    overflow:auto;
 }
 
 #advisor
@@ -401,6 +396,7 @@ span#woman
     text-align:center;
     padding:5px;
     font-size:0.8em;
+    z-index:2;
 }
 
 #choice
@@ -493,11 +489,11 @@ span#woman
 #physician
 {
     border-radius:50%;
-    width:300px;
-    height:300px;
+    width:330px;
+    height:330px;
     position:fixed;
     right:40px;
-    top:30px;
+    top:20px;
     box-shadow:0px 0px 15px 1px grey;
     background:white;
     overflow:hidden;
