@@ -2,7 +2,8 @@
 
 window.onload = function () {
     //splash();
- initialize();
+    initialize();
+
     };
 
 function rscroll() {

@@ -157,7 +157,7 @@ function ajaxCall(command, sessionID)
 function confirm() {
     if (type == "INPUT") {
         var answer = $("#" + id).val();
-        $.get('DA', { value: answer, answerID: id, sessionID: session });
+        $.get('DA', { value: answer, answerID: id, sessionID: sessionID });
     }
     ajaxCall("question", sessionID);
 

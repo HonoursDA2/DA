@@ -28,7 +28,6 @@
     (slot order)
     )
 (deffacts Questions
-<<<<<<< HEAD
     (Question (section Initial)(type "name")(text "Hi, I am Doctor Mellitus, a Diabetes Advisor, what is your name?") (answerType "INPUT") (order 1))
     (Question (section Initial)(type "gender")(text "Are you male or female?")(answerType "MALE-FEMALE") (order 2))
     (Question (section Initial)(type "diabetesK")(text "Do you know about Diabetes?") (answerType "YES-NO") (order 3))
@@ -39,16 +38,6 @@
     (Question (section Initial)(type "pregnant")(text "Are you Pregnant?") (answerType "YES-NO") (order 8))
     (Question (section Initial)(type "weight")(text "What is your weight (KG)")(answerType "INPUT") (order 9))
     (Question (section Initial)(type "height")(text "What is your height (M)") (answerType "INPUT") (order 10))
-    (Question (type "name")(text "Hi, I am Doctor Mellitus, a Diabetes Advisor, what is your name?") (answerType "INPUT") (order 1))
-    (Question (type "gender")(text "Are you male or female?")(answerType "MALE-FEMALE") (order 2))
-    (Question (type "knowledge")(text "Do you know about Diabetes?") (answerType "YES-NO") (order 3))
-    (Question (type "diabetic")(text "Are you Diabetic?") (answerType "YES-NO") (order 4))
-    (Question (type "race")(text "What is your race?") (order 5))
-    (Question (type "Age")(text "What is your age?") (answerType "INPUT") (order 6))
-    (Question (type "history")(text "Do you have relatives who have Diabetes?")(answerType "YES-NO") (order 7))
-    (Question (type "pregnant")(text "Are you Pregnant?") (answerType "YES-NO") (order 8))
-    (Question (type "weight")(text "What is your weight (KG)")(answerType "INPUT") (order 9))
-    (Question (type "height")(text "What is your height (M)") (answerType "INPUT") (order 10))
     ;(Question (type "smoke")(text "Do You smoke cigarettes?") (answerType "YES-NO"))
     ;(Question (type "alcohol")(text "Do you drink alcohol regularly?") (answerType "YES-NO"))
     )
@@ -157,7 +146,7 @@
         )
     )
 (defrule changeQuestions
-    (delare salience 1)
+    (declare (salience 1))
     (Ask-Question-Initial)
     ?question <- (Question (section Initial)(type ?type)(text ?questionText) (answerType ?answerType) (ask no) (order ?current))
     =>

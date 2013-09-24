@@ -284,7 +284,7 @@
 
 							public void name(String sessionID)
 							throws JessException, IOException	{
-								String name = request.getParameter("name");
+								String name = request.getParameter("value");
 								getEngine(sessionID).assertString("(name "+name+" )");
 								response.getWriter().write("Hello "+ name + " welcome to the Diabetes Risk Assesment and Advisory Expert System \n Please select an option below.");
 							}
