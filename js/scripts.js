@@ -96,10 +96,33 @@ function revert()
 var isFemale = knowsDiabetes = hasDiabetes = false;
 
 function confirm() {
-    $.get('DA', { command: "first", number: count }, function (responseText) { 
-        $('.profileH1').text(responseText + count++);
-        //count++;
-        alert(count + responseText);
+    var first = "first";
+    var dataString = "command=" + first;
+
+    $.ajax({
+        url: 'DA',
+        type: 'GET',
+        dataType: 'json',
+        data: dataString,
+        contentType: 'application/json',
+        mimeType: 'application/json',
+        success: function (data) {
+            question = data.question;
+            id = data.id;
+            type = data.type;
+            $(".profileH1").html(question);
+
+            if (type == "INPUT") {
+                $(".questions").html('<input id="' + id + '" value="" type="' + id + '" placeholder="Enter Your ' + id + ' Here">');
+            }
+            else if (type == "MALE-FEMALE") {
+                $(".questions").html('<div id="male"></div><div id="female"></div>');
+            }
+            else if (type == "YES-NO") {
+                $(".questions").html('<div class="yes">Yes</div><div class="no">No</div>');
+            }
+
+        }
     });
     /*
 	switch(count)
