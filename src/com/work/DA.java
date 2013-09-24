@@ -5,7 +5,7 @@
 			import javax.servlet.*;
 			import jess.*;
 			import org.json.*;
-			
+
 			public class DA extends HttpServlet{
 
 				StringWriter sw = new StringWriter();
@@ -16,9 +16,11 @@
 				boolean symptomsChecked = false;
 				Rete engine = null;
 				boolean init = false;
+				static int objects = 0;
 				String jessText;			
 				String jessText2;
 				String jessText3;
+				String thisEngine;
 
 				public void doGet(HttpServletRequest request,
 					HttpServletResponse response) 
@@ -45,10 +47,16 @@
 		      throws ServletException, IOException {
 		     doGet(request, response);
 		 }
+
+		 public String engineCounter() {
+		 	thisEngine = objects +"";
+		 	return "engine"+ objects;
+		 }
+
 			//load the jess rulesfile. ccheck if the server is initialized
 				protected void checkInitialized()
 				throws ServletException {
-					if (getServletContext().getAttribute("engine") == null) {
+					if (getServletContext().getAttribute(engineCounter()) == null) {
 						ServletContext servletContext = getServletContext();
 					String rulesFile = servletContext.getInitParameter("rulesfile");
 						try {
@@ -58,9 +66,10 @@
 							engine.addOutputRouter("out3", sw3);
 							engine.batch(servletContext.getRealPath(rulesFile));
 							engine.reset();
-							System.out.println("creating jess object");
-							servletContext.setAttribute("engine", engine);
+							System.out.println("creating jess object" + engineCounter());
+							servletContext.setAttribute(engineCounter(), engine);
 							init = true;
+							objects++;
 						} catch (Exception jess) {
 							throw new ServletException(jess);
 						} 
@@ -119,7 +128,7 @@
 						question("question");
 					} else
 					if (text.equals("question")) {
-						System.out.println("(Ask-Question)");
+						System.out.println("(Ask-Question)" + thisEngine);
 						engine.assertString("(Ask-Question)");
 						engine.run();
 						jessText = engine.getOutputRouter("out").toString();
@@ -141,9 +150,7 @@
 
 				public void symptom()
 				throws IOException, JessException	{
-					String jessText;
-					String text = request.getParameter("symptom");
-					Rete engine =(Rete)(getServletContext().getAttribute("engine"));	
+					String text = request.getParameter("symptom");	
 					if (text.equals("extra")) {
 						engine.assertString("(Extra-Info)");
 

@@ -95,11 +95,11 @@ function revert()
 
 var isFemale = knowsDiabetes = hasDiabetes = false;
 
-function confirm() {
-    var first = "question";
-    var dataString = "command=" + first;
+function ajaxCall(command)
+{
+    var dataString = "command=" + command;
 
-    $.ajax({
+	$.ajax({
         url: 'DA',
         type: 'GET',
         dataType: 'json',
@@ -126,7 +126,13 @@ function confirm() {
             }
 
         }
-    });
+    });}
+
+function confirm() {
+
+    ajaxCall("question");
+
+	  
     /*
 	switch(count)
 	{
