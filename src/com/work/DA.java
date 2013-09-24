@@ -67,7 +67,7 @@
 		}
 
 		public void chooseFunction()
-		throws IOException, JessException, JSONException
+		throws IOException, JessException, JSONException, ServletException
 		{
 
 			if (request.getParameterMap().containsKey("name")) {
@@ -104,17 +104,20 @@
 				}else
 				if (request.getParameterMap().containsKey("command")) {
 					System.out.println("question");
-					question();
+					question(request.getParameter("command"));
 				}
 			}	  
 		}
 
-		public void question() throws IOException, JessException, JSONException	{
+		public void question(String value) throws IOException, JessException, JSONException, ServletException	{
 			String text ="DEFAULT"; 
-			text = request.getParameter("command");
-			System.out.println("getCommand");
-			System.out.println(text);		
+			text = value;		
 			if (text.equals("first")) {
+				getServletContext().setAttribute("engine", null);
+				checkInitialized();
+				question("question");
+			} else
+			if (text.equals("question")) {
 				System.out.println("(Ask-Question)");
 				engine.assertString("(Ask-Question)");
 			engine.run();

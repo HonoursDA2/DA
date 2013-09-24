@@ -96,7 +96,7 @@ function revert()
 var isFemale = knowsDiabetes = hasDiabetes = false;
 
 function confirm() {
-    var first = "first";
+    var first = "question";
     var dataString = "command=" + first;
 
     $.ajax({
