@@ -101,6 +101,12 @@ var isFemale = knowsDiabetes = hasDiabetes = false;
 		sessionID = ID;
 	}
 
+	function getSession()
+	{
+		return sessionID;
+	}
+
+
 function ajaxCall(command, sessionID)
 {
 
