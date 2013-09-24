@@ -30,7 +30,6 @@ window.onload = function () {
     });
 
 };
-    };
 
 $(function () {
 
