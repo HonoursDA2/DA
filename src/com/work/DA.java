@@ -21,7 +21,7 @@
 								String jessText2;
 								String jessText3;
 								Rete engine = null;
-								String lastQuestion
+								
 
 								public void doGet(HttpServletRequest request,
 									HttpServletResponse response) 
