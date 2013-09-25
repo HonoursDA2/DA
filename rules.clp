@@ -223,6 +223,13 @@
     (printout out (?name crlf ?explanation))
     )
 ;if the suer is male then they are not pregnant.
+(defrule getName
+    ?request <- (Get Name)
+    (name ?name)
+    =>
+    (printout out ?name)
+    (retract ?request)
+    )
 (defrule isMale
     (Gender Male)
     ?question <- (Question (type "pregnant") (text ?questionText) (answerType ?answerType) (ask yes) (order ?*currentQuestion*))

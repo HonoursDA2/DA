@@ -94,20 +94,19 @@
 										symptomList((request.getParameter("sessionID")));
 									}
 									else {
-
 									if (request.getParameterMap().containsKey("symptom"))
 									{
 										symptom((request.getParameter("sessionID")));
 									} else 
 									if (request.getParameterMap().containsKey("command")) {
-											System.out.println("First");		
 											if (request.getParameter("command").equals("question")) {
 												question((request.getParameter("sessionID")));
 											} else 
 												if (request.getParameter("command").equals("init"))
 												{
-													System.out.println("INIT");
 													initialize();
+												} else if ( request.getParameter("command").equals("profile")) {
+													profile(request.getParameter("sessionID"));
 												}
 										}else
 									{
@@ -266,7 +265,7 @@
 								if (FHanswer.equals("Yes")) {
 									getEngine(sessionID).assertString("(Family-History Yes)");
 								}	else{
-									getEngine(sessionID).assertString("(Family-History No)");
+						 			getEngine(sessionID).assertString("(Family-History No)");
 								}
 							}							
 							public void gender(String sessionID)
@@ -283,6 +282,17 @@
 							throws JessException, IOException	{
 								String name = request.getParameter("value");
 								getEngine(sessionID).assertString("(name "+name+" )");
-								response.getWriter().write("Hello "+ name + " welcome to the Diabetes Risk Assesment and Advisory Expert System \n Please select an option below.");
+								//response.getWriter().write("Hello "+ name + " welcome to the Diabetes Risk Assesment and Advisory Expert System \n Please select an option below.");
+							}
+
+							public void profile(String sessionID)
+							throws JessException, IOException	{
+									getEngine(sessionID).assertString("(Get Name)");
+									getEngine(sessionID).run();
+									jessText = getEngine(sessionID).getOutputRouter("out").toString();
+									((StringWriter)(getEngine(sessionID).getOutputRouter("out"))).getBuffer().setLength(0);
+									response.setContentType("text/plain");  
+									response.setCharacterEncoding("UTF-8");		
+									response.getWriter().write("Hello "+jessText+" I am Dr Mellitus! welcome to the Diabetes Advisory Expert System, please select the symptoms you are currently experiencing then click SUBMIT" );
 							}
 						}
