@@ -142,7 +142,7 @@ function ajaxCall(command, sessionID)
                 $(".questions").html('<div id="male" onclick="gSpecific(male)"><img src="images/male-sign.jpg"></div><div id="female" onclick="gSpecific(female)"><img src="images/female-sign.jpg"></div>');
             }
             else if (type == "YES-NO") {
-                $(".questions").html('<div class="yes" value"yes" onclick="yesno(yes)">Yes</div><div class="no" value"no" onclick="yesno(no)">No</div>');
+                $(".questions").html('<div class="yes" value"yes" onclick="yesno(Yes)">Yes</div><div class="no" value"no" onclick="yesno(No)">No</div>');
             } else {
                 $("#profile").fadeOut();
                 $("#choice").fadeOut();
