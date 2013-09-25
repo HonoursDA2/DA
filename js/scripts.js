@@ -142,7 +142,7 @@ function ajaxCall(command, sessionID)
                 $(".questions").html('<div id="male" onclick="gSpecific(male)"><img src="images/male-sign.jpg"></div><div id="female" onclick="gSpecific(female)"><img src="images/female-sign.jpg"></div>');
             }
             else if (type == "YES-NO") {
-                $(".questions").html('<div class="yes" value"yes" onclick="yesno(yes)">Yes</div><div class="no" value"no" onclick="yesno(no)">No</div>');
+                $(".questions").html('<div class="yes" value"yes" onclick="yesno(Yes)">Yes</div><div class="no" value"no" onclick="yesno(No)">No</div>');
             } else {
                 $("#profile").fadeOut();
                 $("#choice").fadeOut();
@@ -157,19 +157,16 @@ function ajaxCall(command, sessionID)
 function confirm() {
     if (type == "INPUT") {
         var answer = $("#" + id).val();
-        alert(answer);
         $("#feedback").fadeIn();
         $("#feedback").append("Your "+ id + " is : " + answer + "<br>");
         $.get('DA', { value: answer, answerID: id, sessionID: sessionID });
     }
     else if (type == "YES-NO") {
-        alert(yesOrno);
         $("#feedback").fadeIn();
         $("#feedback").append("Your " + id + ": " + yesOrno + "<br>");
         $.get('DA', { value: yesOrno, answerID: id, sessionID: sessionID });
     }
     else if (type == "MALE-FEMALE") {
-        alert(gendertype);
         $("#feedback").fadeIn();
         $("#feedback").append("Gender: " + gendertype + "<br>");
         $.get('DA', { value: gendertype, answerID: id, sessionID: sessionID });
@@ -256,18 +253,18 @@ function confirm() {
     */
 }
 
-var yes = "yes";
-var no = "no";
+var Yes = "Yes";
+var No = "No";
 var yesOrno = "";
 
 function yesno(theAnswer) {
     yesOrno = theAnswer;
 
-    if (theAnswer == "yes") {
+    if (theAnswer == "Yes") {
         $(".yes").css({ "color": "rgba(0,55,0,0.7)", "border-bottom": "5px solid rgba(0,255,0,0.7)" });
         $(".no").css({ "color": "white", "border-bottom": "0px solid rgba(255,0,0,0.7)" });
     }
-    if (theAnswer == "no") {
+    if (theAnswer == "No") {
         $(".no").css({ "color": "rgba(55,0,0,0.7)", "border-bottom": "5px solid rgba(255,0,0,0.7)" });
         $(".yes").css({ "color": "white", "border-bottom": "0px solid rgba(255,0,0,0.7)" });
     }
