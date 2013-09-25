@@ -26,13 +26,15 @@
     (slot ask
         (default yes))
     (slot order)
+    (slot options
+        (default ""))
     )
 (deffacts Questions
     (Question (section Initial)(type "name")(text "Hi, I am Doctor Mellitus, a Diabetes Advisor, what is your name?") (answerType "INPUT") (order 1))
     (Question (section Initial)(type "gender")(text "Are you male or female?")(answerType "MALE-FEMALE") (order 2))
     (Question (section Initial)(type "diabetesK")(text "Do you know about Diabetes?") (answerType "YES-NO") (order 3))
     (Question (section Initial)(type "diabetic")(text "Are you Diabetic?") (answerType "YES-NO") (order 4))
-    (Question (section Initial)(type "race")(text "What is your race?") (order 5))
+    (Question (section Initial)(type "Race")(text "What is your race?") (answerType "OPTIONAL")(order 5)(options "5-Black-White-Asian-Coloured-Other" ))
     (Question (section Initial)(type "Age")(text "What is your age?") (answerType "INPUT") (order 6))
     (Question (section Initial)(type "familyH")(text "Do you have relatives who have Diabetes?")(answerType "YES-NO") (order 7))
     (Question (section Initial)(type "pregnant")(text "Are you Pregnant?") (answerType "YES-NO") (order 8))
@@ -133,7 +135,7 @@
      )
 (defrule askQuestionInitial
     ?ask <- (Ask-Question-Initial)
-    ?question <- (Question (section Initial)(type ?type)(text ?questionText) (answerType ?answerType) (ask yes) (order ?current))
+    ?question <- (Question (section Initial)(type ?type)(text ?questionText) (answerType ?answerType) (ask yes) (order ?current) (options ?options))
     =>
     (if (eq ?current ?*currentQuestion*) then
     (bind ?counter (+ ?*currentQuestion* 1))
@@ -141,23 +143,24 @@
     (printout out ?questionText)
     (printout out2 ?answerType)    
     (printout out3 ?type)
+    (printout out4 ?options)      
     (modify ?question (ask no))
     (retract ?ask)
         )
     )
 (defrule changeQuestions
-    (declare (salience 1))
+    (declare (salience 10))
     (Ask-Question-Initial)
     ?question <- (Question (section Initial)(type ?type)(text ?questionText) (answerType ?answerType) (ask no) (order ?current))
     =>
     (if (eq ?current ?*currentQuestion*) then
-    	(bind ?counter (+ ?*currentQuestion* 1))
+    	(bind ?counter (+ ?*currentQuestion* 1))	
     	(bind ?*currentQuestion* ?counter)
     )
     )
 (defrule askQuestionLifestyle
     ?ask <- (Ask-Question-Lifestyle)
-    ?question <- (Question (section Lifestyle)(type ?type)(text ?questionText) (answerType ?answerType) (ask yes) (order ?current))
+    ?question <- (Question (section Lifestyle)(type ?type)(text ?questionText) (answerType ?answerType) (ask yes) (order ?current) (options ?options))
     =>
     (if (eq ?current ?*currentQuestion*) then
     (bind ?counter (+ ?*currentQuestion* 1))
@@ -165,7 +168,8 @@
     (printout out ?questionText)
     (printout out2 ?answerType)    
     (printout out3 ?type)
-    ;(modify ?question (askNext no))
+    (printout out4 ?options)
+    (modify ?question (ask no))
     (retract ?ask)
         )
     )

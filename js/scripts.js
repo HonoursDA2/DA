@@ -132,7 +132,8 @@ function ajaxCall(command, sessionID)
             question = data.question;
             id = data.id;
             type = data.type;
-            
+            options = data.options;
+
             $(".profileH1").html(question);
 
             if (type == "INPUT") {
@@ -143,7 +144,11 @@ function ajaxCall(command, sessionID)
             }
             else if (type == "YES-NO") {
                 $(".questions").html('<div id="yesbutton" class="yes" value="yes" onclick="yesno(yes)">Yes</div><div id="nobutton" class="no" value="no" onclick="yesno(no)">No</div>');
-            } else {
+            } else 
+            if (type == "OPTIONAL") {
+               $(".questions").html('<input id="' + id + '" value="" type="' + id + '" placeholder="Enter Your ' + id + ' Here">');
+            }
+             else {
                 $("#profile").fadeOut();
                 $("#choice").fadeOut();
                 $("#symptoms").fadeIn();
