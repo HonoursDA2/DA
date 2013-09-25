@@ -33,7 +33,7 @@
     (Question (section Initial)(type "diabetesK")(text "Do you know about Diabetes?") (answerType "YES-NO") (order 3))
     (Question (section Initial)(type "diabetic")(text "Are you Diabetic?") (answerType "YES-NO") (order 4))
     (Question (section Initial)(type "race")(text "What is your race?") (order 5))
-    (Question (section Initial)(type "age")(text "What is your age?") (answerType "INPUT") (order 6))
+    (Question (section Initial)(type "Age")(text "What is your age?") (answerType "INPUT") (order 6))
     (Question (section Initial)(type "familyH")(text "Do you have relatives who have Diabetes?")(answerType "YES-NO") (order 7))
     (Question (section Initial)(type "pregnant")(text "Are you Pregnant?") (answerType "YES-NO") (order 8))
     (Question (section Initial)(type "weight")(text "What is your weight (KG)")(answerType "INPUT") (order 9))

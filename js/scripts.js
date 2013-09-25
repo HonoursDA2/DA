@@ -142,7 +142,7 @@ function ajaxCall(command, sessionID)
                 $(".questions").html('<div id="male" onclick="gSpecific(male)"><img src="images/male-sign.jpg"></div><div id="female" onclick="gSpecific(female)"><img src="images/female-sign.jpg"></div>');
             }
             else if (type == "YES-NO") {
-                $(".questions").html('<div class="yes">Yes</div><div class="no">No</div>');
+                $(".questions").html('<div class="yes" value"yes" onclick="yesno(yes)">Yes</div><div class="no" value"no" onclick="yesno(no)">No</div>');
             } else {
                 $("#profile").fadeOut();
                 $("#choice").fadeOut();
@@ -157,8 +157,18 @@ function ajaxCall(command, sessionID)
 function confirm() {
     if (type == "INPUT") {
         var answer = $("#" + id).val();
+        alert(answer);
         $.get('DA', { value: answer, answerID: id, sessionID: sessionID });
     }
+    else if (type == "YES-NO") {
+        alert(yesOrno);
+        $.get('DA', { value: yesOrno, answerID: id, sessionID: sessionID });
+    }
+    else if (type == "MALE-FEMALE") {
+        alert(gendertype);
+        $.get('DA', { value: gendertype, answerID: id, sessionID: sessionID });
+    }
+
     ajaxCall("question", sessionID);
 
 	  
@@ -238,6 +248,14 @@ function confirm() {
 		break;
 	}
     */
+}
+
+var yes = "yes";
+var no = "no";
+var yesOrno = "";
+
+function yesno(theAnswer) {
+    yesOrno = theAnswer;
 }
 
 var gendertype = aGender ="";
