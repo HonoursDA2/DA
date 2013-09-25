@@ -114,7 +114,7 @@
 					return sessionID;
 				}
 
-
+			var theOptions = new Array();
 			function ajaxCall(command, sessionID)
 			{
 
@@ -144,16 +144,22 @@
 			            }
 			            else if (type == "YES-NO") {
 			                $(".questions").html('<div id="yesbutton" class="yes" value="yes" onclick="yesno(yes)">Yes</div><div id="nobutton" class="no" value="no" onclick="yesno(no)">No</div>');
-			            } else 
-			            if (type == "OPTIONAL") {
-			            	//INSERT CODE HERE
-			               $(".questions").html('<input id="' + id + '" value="" type="' + id + '" placeholder="Enter Your ' + id + ' Here">');
-			            }
-			             else {
-			                $("#profile").fadeOut();
-			                $("#choice").fadeOut();
-			                $("#symptoms").fadeIn();
-			            }
+			            } else
+			                if (type == "OPTIONAL") {
+			                    //INSERT CODE HERE
+			                    theOptions = options.split('-');
+			                    $(".questions").html("");
+			                    for (var i = 1; i < theOptions.length; i++) {
+
+			                        $(".questions").append('<div class="options" id="' + theOptions[i] + '">' + theOptions[i] + '</div>');
+			                    }
+
+			                }
+			                else {
+			                    $("#profile").fadeOut();
+			                    $("#choice").fadeOut();
+			                    $("#symptoms").fadeIn();
+			                }
 
 			        }
 			    });
@@ -187,8 +193,8 @@
 								alert("Please Enter a valid number in the " + id + " field");
 						}
 
-			        }  else
-			        {
+			        }  
+                    else{
 			        $("#feedback").fadeIn();
 			        $("#feedback").append("Your "+ id + " is : " + answer + "<br>");
 			        $.get('DA', { value: answer, answerID: id, sessionID: sessionID });
@@ -208,7 +214,10 @@
 			    	proceed = true;
 			    }
 			   else if (type == "OPTIONAL") {
-			        //insrt code here
+			       //insrt code here
+			       $("#feedback").fadeIn();
+			       $("#feedback").append(id + ": " + opt + "<br>");
+			       $.get('DA', { value: opt, answerID: id, sessionID: sessionID });
 			        proceed = true;
 			    } 	
 			    if (proceed) {
@@ -423,6 +432,21 @@
 			        $("#black,#white,#asian").css({ "color": "black", "border-bottom": "0px solid rgba(255,0,0,0.7)" });
 			    }
 			}
+
+			var opt = "";
+			$(function () {
+			    $(".questions").on('click', '.options', function () {
+			        opt = $(this).attr("id");
+
+			        $(this).css({ "color": "red", "border-bottom": "5px solid red" });
+			        var temp = opt;
+			        for (var i = 0; i < theOptions.length; i++) {
+			            if (temp != theOptions[i]) {
+			                $("#" + theOptions[i]).css({ "color": "black", "border-bottom": "0px solid rgba(255,0,0,0.7)" });
+			            }
+			        }
+			    });
+			});
 
 			function splash() {
 				$("#splash").delay(2000).effect("puff", 500);

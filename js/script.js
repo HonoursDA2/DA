@@ -85,20 +85,20 @@ $(function () {
         $('#symptoms').stop();
     });
 
-/*    window.oncontextmenu = function () {
+    /*    window.oncontextmenu = function () {
 
-        if (!clicked2) {
-            $("#definition").fadeIn();
-            clicked2 = true;
-            $.get('servlet', { symptom: "extra" }, function (responseText) {
-                $('#definition').text(responseText);
-            });
-        }
-        else {
-            $("#definition").fadeOut();
-            clicked2 = false;
-        }
-        return false;
+    if (!clicked2) {
+    $("#definition").fadeIn();
+    clicked2 = true;
+    $.get('servlet', { symptom: "extra" }, function (responseText) {
+    $('#definition').text(responseText);
+    });
+    }
+    else {
+    $("#definition").fadeOut();
+    clicked2 = false;
+    }
+    return false;
     }
     */
 });
