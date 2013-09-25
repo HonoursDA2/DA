@@ -131,10 +131,11 @@ function ajaxCall(command, sessionID)
             question = data.question;
             id = data.id;
             type = data.type;
-            
+
+            alert(question + " " + id + " " + type);
             $(".profileH1").html(question);
 
-            if (type == "INPUT") {
+            if (type == "INPUTT") {
                 $(".questions").html('<input id="' + id + '" value="" type="' + id + '" placeholder="Enter Your ' + id + ' Here">');
             }
             else if (type == "MALE-FEMALE") {
@@ -142,7 +143,11 @@ function ajaxCall(command, sessionID)
             }
             else if (type == "YES-NO") {
                 $(".questions").html('<div class="yes" value"yes" onclick="yesno(Yes)">Yes</div><div class="no" value"no" onclick="yesno(No)">No</div>');
-            } else {
+            }
+            else if (type == "OPTION") {
+                $(".questions").html('<div class="yes" value"yes" onclick="yesno(Yes)">Yes</div><div class="no" value"no" onclick="yesno(No)">No</div>');
+            }
+            else {
                 $("#profile").fadeOut();
                 $("#choice").fadeOut();
                 $("#symptoms").fadeIn();
