@@ -158,14 +158,20 @@ function confirm() {
     if (type == "INPUT") {
         var answer = $("#" + id).val();
         alert(answer);
+        $("#feedback").fadeIn();
+        $("#feedback").append("Your "+ id + " is : " + answer + "<br>");
         $.get('DA', { value: answer, answerID: id, sessionID: sessionID });
     }
     else if (type == "YES-NO") {
         alert(yesOrno);
+        $("#feedback").fadeIn();
+        $("#feedback").append("Your " + id + ": " + yesOrno + "<br>");
         $.get('DA', { value: yesOrno, answerID: id, sessionID: sessionID });
     }
     else if (type == "MALE-FEMALE") {
         alert(gendertype);
+        $("#feedback").fadeIn();
+        $("#feedback").append("Gender: " + gendertype + "<br>");
         $.get('DA', { value: gendertype, answerID: id, sessionID: sessionID });
     }
 
@@ -256,6 +262,15 @@ var yesOrno = "";
 
 function yesno(theAnswer) {
     yesOrno = theAnswer;
+
+    if (theAnswer == "yes") {
+        $(".yes").css({ "color": "rgba(0,55,0,0.7)", "border-bottom": "5px solid rgba(0,255,0,0.7)" });
+        $(".no").css({ "color": "white", "border-bottom": "0px solid rgba(255,0,0,0.7)" });
+    }
+    if (theAnswer == "no") {
+        $(".no").css({ "color": "rgba(55,0,0,0.7)", "border-bottom": "5px solid rgba(255,0,0,0.7)" });
+        $(".yes").css({ "color": "white", "border-bottom": "0px solid rgba(255,0,0,0.7)" });
+    }
 }
 
 var gendertype = aGender ="";
@@ -268,7 +283,7 @@ if (gender.id == "male") {
 	$("#yeast").fadeOut();
 	$("#dysfunction").fadeIn();
 	$("#" + gender.id).css({ "color": "rgba(255,0,0,0.7)", "border-bottom": "5px solid rgba(255,0,0,0.7)" });
-	$("#female").css({ "color": "grey", "border-bottom": "0px solid rgba(255,0,0,0.7)" });
+	$("#female").css({ "color": "white", "border-bottom": "0px solid rgba(255,0,0,0.7)" });
 }
 if (gender.id == "female") {
     gendertype = "Female";
