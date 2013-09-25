@@ -11,6 +11,7 @@
 								StringWriter sw = new StringWriter();
 								StringWriter sw2 = new StringWriter();
 								StringWriter sw3 = new StringWriter();
+								StringWriter sw4 = new StringWriter();
 								HttpServletRequest request = null;
 								HttpServletResponse response = null;
 								boolean symptomsChecked = false;
@@ -20,6 +21,7 @@
 								String jessText;			
 								String jessText2;
 								String jessText3;
+								String jessText4;	
 								Rete engine = null;
 								
 
@@ -67,6 +69,7 @@
 											tempEngine.addOutputRouter("out", sw);
 											tempEngine.addOutputRouter("out2", sw2);
 											tempEngine.addOutputRouter("out3", sw3);
+											tempEngine.addOutputRouter("out4", sw4);
 											tempEngine.batch(servletContext.getRealPath(rulesFile));
 											tempEngine.reset();
 											System.out.println("creating jess object" + engineCounter());
