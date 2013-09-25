@@ -6,6 +6,10 @@ window.onload = function () {
 
     };
 
+function splash() {
+    $("#splash").delay(2000).effect("puff", 500);
+}
+
 function rscroll() {
     $('#symptoms').animate({
         scrollLeft: '+=20'

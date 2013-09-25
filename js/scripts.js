@@ -15,7 +15,6 @@ numbness = { id: "#numbness", clicked: false };
 teethandgum = { id: "#teethandgum", clicked: false };
 hunger = { id: "#hunger", clicked: false };
 
-
 function clicked(symptom) {
 
 	if (!symptom.clicked) {
@@ -383,6 +382,3 @@ function race(answer) {
     }
 }
 
-function splash() {
-	$("#splash").delay(2000).effect("puff", 500);
-	 }
