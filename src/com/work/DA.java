@@ -242,7 +242,7 @@
 								if (DKanswer.equals("Yes")) {
 									getEngine(sessionID).assertString("(Diabetes-Kowledge Yes)");
 								}	else{
-									engine.assertString("(Diabetes-Kowledge No)");
+									getEngine(sessionID).assertString("(Diabetes-Kowledge No)");
 								}
 							}	
 							public void pregnant(String sessionID)
