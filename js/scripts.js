@@ -166,6 +166,8 @@
 					function profile() {
 								$.get('DA', { command: "profile", sessionID: sessionID }, function (responseText) {
 			                    	$('#advisorH1').text(responseText);
+			                    	});
+			                    $.get('DA', { command: "getSymptoms", sessionID: sessionID }, function (responseText) {
 			                	});
 					            $("#profile").fadeOut();
 					            $("#choice").fadeOut();

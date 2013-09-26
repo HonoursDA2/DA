@@ -1,6 +1,10 @@
 (defglobal ?*currentQuestion* = 1)
+
+
 (deftemplate Description
     (slot name)
+    (slot type)   
+    (slot id)
     (slot explanation)
     )
 (deftemplate Reason
@@ -43,24 +47,24 @@
     ;(Question (type "smoke")(text "Do You smoke cigarettes?") (answerType "YES-NO"))
     ;(Question (type "alcohol")(text "Do you drink alcohol regularly?") (answerType "YES-NO"))
     )
-(deffacts symtpomDescription
-   (Description(name Fatigue) (explanation "Do you feel tired a lot? A feeling of tiredness that can not be explained."))
-   (Description(name Frequent-Headache) (explanation "Do you have frequent headaches and do they sometimes last a long time (2-3 days)?"))
-   (Description(name Extreme-Thirst) (explanation "Do you feel thirsty often throughout the day?"))
-   (Description (name Excessive-Urination) (explanation "Do you make frequent trips to the toilet to urinate (pee)?"))
-   (Description (name Nausea) (explanation "Do you have an uneasy feeling in your stomach? A feeling that makes you feel like vomitting, especially after eating?"))
-   (Description (name Weightloss) (explanation "Have you lost weight over the recent months/years, even though you have not been trying to do so actively?"))
-   (Description (name Irritability) (explanation "Do you feel easily irritated and agitated, for no known reason?"))
-   (Description (name Yeast-Infection) (explanation "Do you experience itching, burning, soreness, pain during intercourse and urination?"))
-   (Description (name Blurred-Vision) (explanation "Do you have problems seeing at times? Is your eyesight problematic?"))
-   (Description(name Slow-Healing-Wounds) (explanation "Do your cuts and soars take a very long time to patch up and heal?"))
-   (Description (name Numbness) (explanation "Do you lose sensation and feeling in certain body parts? Do your hands and feet ever feel numb?"))
-   (Description(name Gum-Infection) (explanation "Have you been experiencing any teeth and gum related problems recently, like gum infection or loss of teeth?"))
-   (Description(name Extreme-Hunger) (explanation "Do you experience hunger that seems unnatural, like soon after a big meal?"))
-   (Description(name Erectile-Dysfunction) (explanation "Are you experiencing sexual difficulty with your woman, do you find it hard to get an erect penis?") )
-   (Description(name Gestational-Diabetes) (explanation "Have you ever been diagnosed with Gestational Diabetes during pregnancy?") )
-   (Description(name Dry-Mouth) (explanation "Does your mouth feel dry at  times, do you often find that you have little to no saliva in your mouth?"))
-   (Description(name Abdominal-Pain) (explanation "Does the area surrounding your stomach pain, especially after eating food and during digestion?"))
+(deffacts Description
+   (Description(name Fatigue)(type SYMPTOM) (id "fatigue")(explanation "Do you feel tired a lot? A feeling of tiredness that can not be explained."))
+   (Description(name Frequent-Headache)(type SYMPTOM)(id "headache") (explanation "Do you have frequent headaches and do they sometimes last a long time (2-3 days)?*"))
+   (Description(name Extreme-Thirst)(type SYMPTOM) (id "thirst") (explanation "Do you feel thirsty often throughout the day?*"))
+   (Description (name Excessive-Urination)(type SYMPTOM)(id "urinating") (explanation "Do you make frequent trips to the toilet to urinate (pee)?*"))
+   (Description (name Nausea)(id "nausea")(type SYMPTOM)(explanation "Do you have an uneasy feeling in your stomach? A feeling that makes you feel like vomitting, especially after eating?*"))
+   (Description (name Weightloss)(type SYMPTOM)(id "weightloss") (explanation "Have you lost weight over the recent months/years, even though you have not been trying to do so actively?*"))
+   (Description (name Irritability)(type SYMPTOM)(id "irritability")(explanation "Do you feel easily irritated and agitated, for no known reason?*"))
+   (Description (name Yeast-Infection)(type SYMPTOM)(id "yeast")(explanation "Do you experience itching, burning, soreness, pain during intercourse and urination?*"))
+   (Description (name Blurred-Vision) (type SYMPTOM)(id "blurvision")(explanation "Do you have problems seeing at times? Is your eyesight problematic?*"))
+   (Description(name Slow-Healing-Wounds) (type SYMPTOM)(id "wounds")(explanation "Do your cuts and soars take a very long time to patch up and heal?*"))
+   (Description (name Numbness)(id "numbness")(type SYMPTOM)(explanation "Do you lose sensation and feeling in certain body parts? Do your hands and feet ever feel numb?*"))
+   (Description(name Gum-Infection)(type SYMPTOM)(id "teethandgum")(explanation "Have you been experiencing any teeth and gum related problems recently, like gum infection or loss of teeth?*"))
+   (Description(name Extreme-Hunger)(type SYMPTOM)(id "hunger")(explanation "Do you experience hunger that seems unnatural, like soon after a big meal?*"))
+   (Description(name Erectile-Dysfunction)(type SYMPTOM)(id "dysfunction")(explanation "Are you experiencing sexual difficulty with your woman, do you find it hard to get an erect penis?*") )
+   (Description(name Gestational-Diabetes)(type SYMPTOM)(id "gestational")(explanation "Have you ever been diagnosed with Gestational Diabetes during pregnancy?*") )
+   (Description(name Dry-Mouth)(type SYMPTOM)(id "dryMouth")(explanation "Does your mouth feel dry at  times, do you often find that you have little to no saliva in your mouth?*"))
+   (Description(name Abdominal-Pain)(type SYMPTOM) (id "abdominal")(explanation "Does the area surrounding your stomach pain, especially after eating food and during digestion?*"))
    (Description(name Diabetes) (explanation "Diabetes Mellitus, more commonly known simply as Diabetes is a chronic medical condition where a person has 
             high blood sugar levels.This is either because the insulin production in the body is insufficient or because the body does not respond properly to insulin"))
    (Description(name Type-1) (explanation "Type 1 Diabetes occurs when the beta cells in the pancreas are damaged. 
@@ -230,6 +234,17 @@
     (printout out ?name)
     (retract ?request)
     )
+(defrule getSymptoms
+    ?command <- (Get Symptoms)
+    (Description(name ?name)(type SYMPTOM)(id ?id)(explanation ?explanation))
+   
+    =>
+    	(printout out ?name " ")
+    	(printout out2  ?id " ")
+    	(printout out3  ?explanation " ")
+    	;(retract ?command)
+    )
+
 (defrule isMale
     (Gender Male)
     ?question <- (Question (type "pregnant") (text ?questionText) (answerType ?answerType) (ask yes) (order ?*currentQuestion*))

@@ -5,7 +5,7 @@
 							import javax.servlet.*;
 							import jess.*;
 							import org.json.*;
-
+							import java.util.StringTokenizer;
 							public class DA extends HttpServlet{
 
 								StringWriter sw = new StringWriter();
@@ -92,7 +92,7 @@
 									
 									 if (request.getParameterMap().containsKey("symptoms")) {
 										symptomList((request.getParameter("sessionID")));
-									}
+									} 
 									else {
 									if (request.getParameterMap().containsKey("symptom"))
 									{
@@ -107,6 +107,8 @@
 													initialize();
 												} else if ( request.getParameter("command").equals("profile")) {
 													profile(request.getParameter("sessionID"));
+												} else if ( request.getParameter("command").equals("getSymptoms")) {
+													symptoms(request.getParameter("sessionID"));
 												}
 										}else
 									{
@@ -149,7 +151,7 @@
 								
 
 								public void initialize() 
-								throws ServletException, IOException {
+								throws ServletException, IOException, JessException {
 									System.out.println("CAALLING ME");
 									String session = "";
 									if (firstSession)	{ 
@@ -160,7 +162,8 @@
 									 	}
 									response.setContentType("text/plain");  
 									response.setCharacterEncoding("UTF-8");		
-									response.getWriter().write(session);;
+									response.getWriter().write(session);
+									//symptoms(session);
 									//response.getWriter().flush();
 								}
 
@@ -294,5 +297,37 @@
 									response.setContentType("text/plain");  
 									response.setCharacterEncoding("UTF-8");		
 									response.getWriter().write("Hello "+jessText+" I am Dr Mellitus! welcome to the Diabetes Advisory Expert System, please select the symptoms you are currently experiencing then click SUBMIT" );
+							}
+
+							public void symptoms(String sessionID)
+							throws JessException, JSONException, IOException {
+								getEngine(sessionID).assertString("(Get Symptoms)");
+								getEngine(sessionID).run();
+								jessText  = getEngine(sessionID).getOutputRouter("out").toString();
+								jessText2 = getEngine(sessionID).getOutputRouter("out2").toString();
+								jessText3 = getEngine(sessionID).getOutputRouter("out3").toString();
+								((StringWriter)(getEngine(sessionID).getOutputRouter("out"))).getBuffer().setLength(0);
+								((StringWriter)(getEngine(sessionID).getOutputRouter("out2"))).getBuffer().setLength(0);
+								((StringWriter)(getEngine(sessionID).getOutputRouter("out3"))).getBuffer().setLength(0);			
+								response.setContentType("application/json");  
+										PrintWriter out = response.getWriter();
+										JSONObject jsonObject = new JSONObject();
+										jsonObject.put("symptomNames", tokenizeString(jessText, " "));
+										jsonObject.put("symptomIDs", tokenizeString(jessText2, " "));
+										jsonObject.put("explanation", tokenizeString(jessText3, "*"));
+										out.print(jsonObject);
+										out.flush();
+
+							}
+
+							public String tokenizeString(String text, String delimeter) {
+								StringTokenizer tokenizer =  new StringTokenizer (text, delimeter);
+								String resultString="";
+								int number=0;
+								while (tokenizer.hasMoreElements()){
+										resultString += tokenizer.nextElement().toString()+"*";
+										number++;
+								}
+								return number + "" + resultString;
 							}
 						}
