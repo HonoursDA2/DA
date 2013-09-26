@@ -17,15 +17,18 @@
 	    $(document).ready(function () {
 	        $('#button').click(function () {
 	        	var session = getSession();
-	    	$('.buttons').mouseover(function () {
+	  
+
+	        });
+			/*
+			$('#symptomsContainer').on('mouseover','.buttons',function () {
+					alert("works");
 	                var symptomName = $(this).attr("value");
 	                $.get('DA', {symptom: symptomName, sessionID: session}, function (responseText) {
 	                    $('#advisorH1').text(responseText);
 	                });
 
-	            });
-
-	        });
+	            });*/
 	    });	
 	</script>
 
@@ -95,7 +98,8 @@
 </div>
 
 <div id="symptoms">
-<div id="symptomsContainer"><div class="prev"></div><div class="next"></div>
+<div class="prev"></div><div class="next"></div>
+<div id="symptomsContainer">
 <div class="buttons" id="weightloss" value="Weightloss" onclick="clicked(weightloss)">Unusual Weightloss</div>
 <div class="buttons" id="thirst" value="Extreme-Thirst" onclick="clicked(thirst)">Thirst</div>
 <div class="buttons" id="drymouth" value="Dry-Mouth" onclick="clicked(drymouth)">Dry Mouth</div>

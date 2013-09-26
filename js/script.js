@@ -13,13 +13,13 @@ function splash() {
 function rscroll() {
     $('#symptoms').animate({
         scrollLeft: '+=20'
-    }, 200, rscroll);
+    }, 50, rscroll);
 }
 
 function lscroll() {
     $('#symptoms').animate({
         scrollLeft: '-=20'
-    }, 200, lscroll);
+    }, 50, lscroll);
 }
 
 $(function () {
