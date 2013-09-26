@@ -173,9 +173,9 @@ function profile() {
 
             $("#symptomsContainer").html("");
             for (var i = 1; i < symptomName.length; i++) {
-                $("#symptomsContainer").append('<div class="buttons" id="' + symptomID[i] + '" onclick="clicked('+symptomID[i]+')">' + symptomName[i] + '</div>');
-                $("#" + symptomID[i]).attr("value", symptomExplanation[i]);
+                $("#symptomsContainer").append('<div class="buttons" id="' + symptomID[i] + '" onclick="clicked(' + symptomID[i] + ')">' + symptomName[i] + '</div>');
             }
+            $("#symptomsContainer").append('<div class="buttons" id="submitB" onclick="submitSymptoms()">Submit</div>');
         });
     });
 			                    
