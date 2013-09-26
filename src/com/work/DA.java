@@ -206,7 +206,7 @@
 									((StringWriter)(getEngine(sessionID).getOutputRouter("out"))).getBuffer().setLength(0);
 									response.setContentType("text/plain");  
 									response.setCharacterEncoding("UTF-8");		
-									response.getWriter().write(jessText);
+									response.getWriter().write(jessText.substring(0, jessText.length()-1));
 								}
 								public void symptomList(String sessionID) 
 								throws IOException, JessException {	
