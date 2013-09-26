@@ -164,11 +164,12 @@
 					}
 
 					function profile() {
-								$.get('DA', { command: "profile", sessionID: sessionID }, function (responseText) {
-			                    	$('#advisorH1').text(responseText);
+								$.get('DA', { command: "profile", sessionID: sessionID }, function (responseText1) {
+			                    	$('#advisorH1').text(responseText1);
+			                    	$.get('DA', { command: "getSymptoms", sessionID: sessionID }, function (responseText2) {
+			                		});
 			                    	});
-			                    $.get('DA', { command: "getSymptoms", sessionID: sessionID }, function (responseText) {
-			                	});
+			                    
 					            $("#profile").fadeOut();
 					            $("#choice").fadeOut();
 					            $("#symptoms").fadeIn(); 

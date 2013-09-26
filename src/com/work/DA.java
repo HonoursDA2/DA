@@ -292,11 +292,11 @@
 							throws JessException, IOException	{
 									getEngine(sessionID).assertString("(Get Name)");
 									getEngine(sessionID).run();
-									jessText = getEngine(sessionID).getOutputRouter("out").toString();
+									String name = getEngine(sessionID).getOutputRouter("out").toString();
 									((StringWriter)(getEngine(sessionID).getOutputRouter("out"))).getBuffer().setLength(0);
 									response.setContentType("text/plain");  
 									response.setCharacterEncoding("UTF-8");		
-									response.getWriter().write("Hello "+jessText+" I am Dr Mellitus! welcome to the Diabetes Advisory Expert System, please select the symptoms you are currently experiencing then click SUBMIT" );
+									response.getWriter().write("Hello "+name+" I am Dr Mellitus! welcome to the Diabetes Advisory Expert System, please select the symptoms you are currently experiencing then click SUBMIT" );
 							}
 
 							public void symptoms(String sessionID)
@@ -328,6 +328,6 @@
 										resultString += tokenizer.nextElement().toString()+"*";
 										number++;
 								}
-								return number + "" + resultString;
+								return number + "*" + resultString;
 							}
 						}
