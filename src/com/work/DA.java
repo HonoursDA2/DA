@@ -229,8 +229,10 @@
 								String Danswer = request.getParameter("value");;
 								if (Danswer.equals("Yes")) {
 									getEngine(sessionID).assertString("(Diabetic Yes)");
-								}	else{
+								}	else if (Danswer.equals("No")){
 									getEngine(sessionID).assertString("(Diabetic No)");
+								} else {
+									getEngine(sessionID).assertString("(Diabetic Uncertain)");
 								}
 							}
 
@@ -268,8 +270,10 @@
 								String FHanswer = request.getParameter("value");;
 								if (FHanswer.equals("Yes")) {
 									getEngine(sessionID).assertString("(Family-History Yes)");
-								}	else{
+								}	else if (FHanswer.equals("No")) {
 						 			getEngine(sessionID).assertString("(Family-History No)");
+								} else {
+									getEngine(sessionID).assertString("(Family-History Uncertain)");
 								}
 							}							
 							public void gender(String sessionID)
