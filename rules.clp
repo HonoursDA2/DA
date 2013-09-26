@@ -153,7 +153,7 @@
         )
     )
 (defrule changeQuestions
-    (declare (salience 10))
+    (declare (salience 5))
     (Ask-Question-Initial)
     ?question <- (Question (section Initial)(type ?type)(text ?questionText) (answerType ?answerType) (ask no) (order ?current))
     =>
@@ -246,11 +246,12 @@
     )
 
 (defrule isMale
+    (declare (salience 10))
     (Gender Male)
-    ?question <- (Question (type "pregnant") (text ?questionText) (answerType ?answerType) (ask yes) (order ?*currentQuestion*))
+    ?question <- (Question (section Initial) (type "pregnant") (text ?questionText) (answerType ?answerType) (ask yes))
     =>
     (assert (Pregnant No))
-    (?modify ?question (ask no))
+    (modify ?question (ask no))
     )
 ;This methods checks if there is any extra information, if not prints a generic message
 (deffunction filter (?text)

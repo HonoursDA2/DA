@@ -72,9 +72,10 @@
 											tempEngine.addOutputRouter("out4", sw4);
 											tempEngine.batch(servletContext.getRealPath(rulesFile));
 											tempEngine.reset();
+											tempEngine.eval("(watch all)");
 											System.out.println("creating jess object" + engineCounter());
 											servletContext.setAttribute(engineCounter(), tempEngine);
-											System.out.println("storing " + engineCounter());
+											//System.out.println("storing " + engineCounter());
 											init = true;
 											objects++;
 										} catch (Exception jess) {
@@ -144,7 +145,7 @@
 								}
 
 								public Rete getEngine (String IDNumber) {
-									System.out.println("trying to get " + IDNumber);
+									//System.out.println("trying to get " + IDNumber);
 								Rete currentEngine =(Rete)(getServletContext().getAttribute(IDNumber));
 								return currentEngine;
 								}
