@@ -13,24 +13,6 @@
     <script src="js/scripts.js" type="text/javascript"></script>
 </head>
 <body>
-	<script>
-	    $(document).ready(function () {
-	        $('#button').click(function () {
-	        	var session = getSession();
-	  
-
-	        });
-			/*
-			$('#symptomsContainer').on('mouseover','.buttons',function () {
-					alert("works");
-	                var symptomName = $(this).attr("value");
-	                $.get('DA', {symptom: symptomName, sessionID: session}, function (responseText) {
-	                    $('#advisorH1').text(responseText);
-	                });
-
-	            });*/
-	    });	
-	</script>
 
 <div id="splash">
 <img src="images/silver.jpg">
@@ -63,14 +45,6 @@
 <div id="definition"></div>
 <img id="extra" src="images/information.png">
 
-<div class="symptomsresults" id="symptom1">
-<img src="images/symptoms/nausea.jpg"><div><h1>Extra Info on Nausea</h1></div>
-</div>
-
-<div class="symptomsresults" id="symptom2">
-<img src="images/symptoms/headache.jpg"><div><h1>Extra Info on Headaches</h1></div>
-</div>
-
 </div>
     
 <div id="directions">
@@ -100,24 +74,6 @@
 <div id="symptoms">
 <div class="prev"></div><div class="next"></div>
 <div id="symptomsContainer">
-<div class="buttons" id="weightloss" value="Weightloss" onclick="clicked(weightloss)">Unusual Weightloss</div>
-<div class="buttons" id="thirst" value="Extreme-Thirst" onclick="clicked(thirst)">Thirst</div>
-<div class="buttons" id="drymouth" value="Dry-Mouth" onclick="clicked(drymouth)">Dry Mouth</div>
-<div class="buttons" id="hunger" value="Extreme-Hunger" onclick="clicked(hunger)">Extreme Hunger</div>
-<div class="buttons" id="urinating" value="Excessive-Urination" onclick="clicked(urinating)">Frequent Urination</div>
-<div class="buttons" id="nausea" value="Nausea" onclick="clicked(nausea)">Nausea</div>
-<div class="buttons" id="fatigue" value="Fatigue" onclick="clicked(fatigue)">Fatigue</div>
-<div class="buttons" id="headache" value="Frequent-Headache" onclick="clicked(headache)">Frequent Headaches</div>
-<div class="buttons" id="dysfunction" value="Erectile-Dysfunction" onclick="clicked(dysfunction)">Erectile Dysfunction</div>
-<div class="buttons" id="yeast" value="Yeast-Infection" onclick="clicked(yeast)">Vaginal Yeast Infection</div>
-<div class="buttons" id="gestational" value="Gestational-Diabetes" onclick="clicked(gestational)">Gestational Diabetes</div>
-<div class="buttons" id="blurvision" value="Blurred-Vision" onclick="clicked(blurvision)">Blury Vision</div>
-<div class="buttons" id="abdominalpain" value="Abdominal-Pain" onclick="clicked(abdominalpain)">Abdominal Pain</div>
-<div class="buttons" id="irritability" value="Irritability" onclick="clicked(irritability)">Irritability</div>
-<div class="buttons" id="wounds" value="Slow-Healing-Wounds" onclick="clicked(wounds)">Slow Healing of Wounds</div>
-<div class="buttons" id="numbness" value="Numbness" onclick="clicked(numbness)">Numbness</div>
-<div class="buttons" id="teethandgum" value="Gum-Infection" onclick="clicked(teethandgum)">Teeth and gum problems</div>
-<div class="buttons" id="submitB" onclick="submitSymptoms()">Submit</div>
 </div>
 </div>
 
