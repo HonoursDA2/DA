@@ -15,9 +15,17 @@ numbness = { id: "#numbness", clicked: false };
 teethandgum = { id: "#teethandgum", clicked: false };
 hunger = { id: "#hunger", clicked: false };
 
-
 function clicked(symptom) {
 
+    var id = symptom.id;
+
+    alert(id);
+    var results = $.grep(objArray, function (e) {
+        return e.id === id;
+    });
+
+    alert(id + " " +results[0].length);
+/*
 	if (!symptom.clicked) {
 		$(symptom.id).css({ "color": "rgba(255,0,0,0.7)", "border-bottom": "5px solid rgba(255,0,0,0.7)" });
 		symptom.clicked = true;
@@ -25,7 +33,7 @@ function clicked(symptom) {
 	else {
 		$(symptom.id).css({ "color": "grey", "border-bottom": "0px solid rgba(255,0,0,0.7)" });
 		symptom.clicked = false;
-	}
+	}*/
 }
 
 	function initialize()
@@ -162,6 +170,8 @@ function ajaxCall(command, sessionID)
 
 }
 
+var obj = new Object();
+var objArray = new Array();
 var symptomName = symptomID = symptomExplanation = new Array();
 function profile() {
     $.get('DA', { command: "profile", sessionID: sessionID }, function (responseText1) {
@@ -173,7 +183,10 @@ function profile() {
 
             $("#symptomsContainer").html("");
             for (var i = 1; i < symptomName.length; i++) {
-                $("#symptomsContainer").append('<div class="buttons" id="' + symptomID[i] + '" onclick="clicked(' + symptomID[i] + ')">' + symptomName[i] + '</div>');
+                $("#symptomsContainer").append('<div class="buttons" id="' + symptomID[i] + '" onclick="clicked(this)">' + symptomName[i] + '</div>');
+                obj = { id: "#" + symptomID[i], clicked: false };
+                objArray[i - 1] = obj;
+                //hunger = { id: "#hunger", clicked: false };
             }
             $("#symptomsContainer").append('<div class="buttons" id="submitB" onclick="submitSymptoms()">Submit</div>');
         });
