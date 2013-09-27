@@ -1,30 +1,12 @@
-thirst = { id: "#thirst", clicked: false };
-urinating = { id: "#urinating", clicked: false };
-itchiness = { id: "#vitchiness", clicked: false };
-dysfunction = { id: "#dysfunction", clicked: false };
-blurvision = { id: "#blurvision", clicked: false };
-fatigue = { id: "#fatigue", clicked: false };
-weightloss = { id: "#weightloss", clicked: false };
-drymouth = { id: "#drymouth", clicked: false };
-abdominalpain = { id: "#abdominalpain", clicked: false };
-nausea = { id: "#nausea", clicked: false };
-irritability = { id: "#irritability", clicked: false };
-yeast = { id: "#yeast", clicked: false };
-wounds = { id: "#wounds", clicked: false };
-numbness = { id: "#numbness", clicked: false };
-teethandgum = { id: "#teethandgum", clicked: false };
-hunger = { id: "#hunger", clicked: false };
-
-
-function clicked(symptom) {
-
-	if (!symptom.clicked) {
-		$(symptom.id).css({ "color": "rgba(255,0,0,0.7)", "border-bottom": "5px solid rgba(255,0,0,0.7)" });
-		symptom.clicked = true;
+function clicked(i) {
+var j = i -1 ;
+	if (!submitArray[j].clicked) {
+		$(submitArray[j].id).css({ "color": "rgba(255,0,0,0.7)", "border-bottom": "5px solid rgba(255,0,0,0.7)" });
+		submitArray[j].clicked = true;
 	}
 	else {
-		$(symptom.id).css({ "color": "grey", "border-bottom": "0px solid rgba(255,0,0,0.7)" });
-		symptom.clicked = false;
+		$(submitArray[j].id).css({ "color": "grey", "border-bottom": "0px solid rgba(255,0,0,0.7)" });
+		submitArray[j].clicked = false;
 	}
 }
 
@@ -36,16 +18,10 @@ function clicked(symptom) {
 				});
 	}
 
-function createArray() {
-	var submitArray = [thirst,urinating,itchiness,dysfunction,blurvision,fatigue,weightloss,drymouth,abdominalpain,nausea,irritability,yeast,wounds,numbness,teethandgum,hunger];
-	return submitArray;
-}
-
 function countClicks() {
 	var count = 0;
-	var array = createArray();
-	for (var x=0;x<array.length;x++) {
-		if (array[x].clicked) {
+	for (var x=0;x<submitArray.length;x++) {
+		if (submitArray[x].clicked) {
 			count++;
 		}
 	}
@@ -53,19 +29,20 @@ function countClicks() {
 }
 
 function submitSymptoms() {
-	var submitArray = createArray();
 	var counter = 0;
 	var count = countClicks();
+	var processText ="incomplete";
 	for (var x=0;x<submitArray.length;x++) {
 		if (submitArray[x].clicked) {
 			var symptomObject = submitArray[x];
 			var symptomName = $(symptomObject.id).attr('value'); 
+			alert(symptomName);
 			if (counter == (count - 1)) {
-				$.get('servlet',{symptoms:symptomName,process:"complete"});
-				x = submitArray.length;
-			} else {
-				$.get('servlet',{symptoms:symptomName,process:"incomplete"});
-			}
+				processText="complete";
+				 x = submitArray.length;
+			} 
+				$.get('DA',{symptoms:symptomName,process:processText, sessionID: sessionID});
+			
 
 			counter++;
 		}
@@ -161,9 +138,10 @@ function ajaxCall(command, sessionID)
 	});
 
 }
-
+var submitArray = new Array();
 var symptomName = symptomID = symptomExplanation = new Array();
 function profile() {
+	
     $.get('DA', { command: "profile", sessionID: sessionID }, function (responseText1) {
         $('#advisorH1').text(responseText1);
         $.get('DA', { command: "getSymptoms", sessionID: sessionID }, function (responseText2) {
@@ -172,8 +150,10 @@ function profile() {
             symptomExplanation = responseText2.explanation.split("*");
 
             $("#symptomsContainer").html("");
-            for (var i = 1; i < symptomName.length; i++) {
-                $("#symptomsContainer").append('<div class="buttons" id="' + symptomID[i] + '" onclick="clicked(' + symptomID[i] + ')">' + symptomName[i] + '</div>');
+            for (var i = 1; i < symptomName.length-1; i++) {
+                $("#symptomsContainer").append('<div class="buttons" id="' + symptomID[i] + '" value = "' +symptomName[i]+'" onclick="clicked('+i+')">' + symptomName[i].replace("-"," ") + '</div>');
+                buttonObject = { id: "#"+symptomID[i], clicked: false };
+                submitArray[i-1] = buttonObject;
             }
             $("#symptomsContainer").append('<div class="buttons" id="submitB" onclick="submitSymptoms()">Submit</div>');
         });

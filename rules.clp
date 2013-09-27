@@ -9,7 +9,11 @@
     )
 (deftemplate Reason
     (slot name)
+    (slot type)
     (slot explanation)
+    (slot id)
+    (slot url
+    (default "image.jpg"))
     )
 (deftemplate Information
     (slot name)
@@ -80,22 +84,23 @@
     )
 ;The list of symp toms and their explanations
 (deffacts symptomReason
-   (Reason (name Fatigue) (explanation "Fatigue- The glucose is not being converted into energy this weakens the cells and causes fatigue."))
-   (Reason (name Frequent-Headache) (explanation "Frequent Headaches - This is due to the high level of glucose in the blood, this leads to frequent headaches experiecned for prolonged periods of time."))
-   (Reason (name Extreme-Thirst) (explanation "Extreme Thirst - Dehydration is caused by excess urine, this prompts an increased desire for water consumption."))
-   (Reason (name Excessive-Urination) (explanation "Excessive Urination - There is a high loss of Glucose through the urine."))
-   (Reason (name Nausea) (explanation "Nausea - Nausea is caused by gastroparesis."))
-   (Reason (name Weightloss) (explanation "Weightloss - Insulin deficiency leads to loss of weight, as the sugar cannot be converted into energy, so the body seeks alternative sources like muscle tissue and fat."))
-   (Reason (name Irritability) (explanation "Irritability - Caused by a lack of energy. As the sugar is not being converted into energy to be used by the cells."))
-   (Reason (name Yeast-Infection) (explanation "Yeast Infection - Yeast organisms are present in most woman, but these organisms tend to overgrow in a sugar rich environment. A result of badly managed diabetes"))
-   (Reason (name Blurred-Vision) (explanation "Blurred Visison - The fluctuation in blood glucose levels leads to a light sensitivity. Also this can be caused by the tissue being pulled from the eye lenses tob e used for energy by the body."))
-   (Reason (name Slow-Healing-Wounds) (explanation " Slow Healing Wounds - Elevated blood sugar levels cause narrowing of blood vessels, leading to a decreased blood flow and oxygen to the wounds."))
-   (Reason (name Numbness) (explanation "Numbness - The nerves in the body get damaged over time, leading to a tingling sensation, pain and eventual loss of sensation"))
-   (Reason (name Gum-Infection) (explanation "Gum Infection - High glucose levels in saliva promotes growth of bacteria that cause gum disease."))
-   (Reason (name Extreme-Hunger) (explanation "Extreme Hunger - The dropping blood sugar levels lead to a desire for more food and energy."))
-   (Reason (name Erectile-Dysfunction) (explanation "Erectile Dysfunction - This is a result of the nerve damage in the body.") )
-   (Reason (name Dry-Mouth) (explanation "Dry Mouth - This is caused by dehydration in the body."))
-   (Reason (name Abdominal-Pain) (explanation "Abdominal Pain - Because of the gastroparesis, the stomach cannot empty its contents properly leading to stomach pain and cramping"))
+   (Reason (name Fatigue)(type SYMPTOM) (explanation "The glucose is not being converted into energy this weakens the cells and causes fatigue."))
+   (Reason (name Frequent-Headache)(type SYMPTOM)(explanation "This is due to the high level of glucose in the blood, this leads to frequent headaches experiecned for prolonged periods of time."))
+   (Reason (name Extreme-Thirst)(type SYMPTOM)(explanation "Dehydration is caused by excess urine, this prompts an increased desire for water consumption."))
+   (Reason (name Excessive-Urination)(type SYMPTOM)(explanation "There is a high loss of Glucose through the urine."))
+   (Reason (name Nausea)(type SYMPTOM)(explanation "Nausea is caused by gastroparesis."))
+   (Reason (name Weightloss)(type SYMPTOM)(explanation "Insulin deficiency leads to loss of weight, as the sugar cannot be converted into energy, so the body seeks alternative sources like muscle tissue and fat."))
+   (Reason (name Irritability)(type SYMPTOM)(explanation "Caused by a lack of energy. As the sugar is not being converted into energy to be used by the cells."))
+   (Reason (name Yeast-Infection)(type SYMPTOM)(explanation "Yeast organisms are present in most woman, but these organisms tend to overgrow in a sugar rich environment. A result of badly managed diabetes"))
+   (Reason (name Blurred-Vision)(type SYMPTOM)(explanation "The fluctuation in blood glucose levels leads to a light sensitivity. Also this can be caused by the tissue being pulled from the eye lenses tob e used for energy by the body."))
+   (Reason (name Slow-Healing-Wounds)(type SYMPTOM)(explanation "Elevated blood sugar levels cause narrowing of blood vessels, leading to a decreased blood flow and oxygen to the wounds."))
+   (Reason (name Numbness)(type SYMPTOM)(explanation "The nerves in the body get damaged over time, leading to a tingling sensation, pain and eventual loss of sensation"))
+   (Reason (name Gum-Infection)(type SYMPTOM)(explanation "High glucose levels in saliva promotes growth of bacteria that cause gum disease."))
+   (Reason (name Extreme-Hunger)(type SYMPTOM)(explanation "The dropping blood sugar levels lead to a desire for more food and energy."))
+   (Reason (name Erectile-Dysfunction)(type SYMPTOM)(explanation "This is a result of the nerve damage in the body.") )
+   (Reason (name Gestational-Diabetes)(type SYMPTOM)(explanation "During pregnancy there is a lot of hormonal activity within the body, this affects the functioning of the insulin and might alter/interfere with how the body responmds tot he insulin. This condition usually subsides after the pregnacny") )
+   (Reason (name Dry-Mouth)(type SYMPTOM)(explanation "Dry Mouth - This is caused by dehydration in the body."))
+   (Reason (name Abdominal-Pain)(type SYMPTOM)(explanation "Abdominal Pain - Because of the gastroparesis, the stomach cannot empty its contents properly leading to stomach pain and cramping"))
    (Reason (name Diabetes) (explanation "Diabetes Mellitus, more commonly known simply as Diabetes is a chronic medical condition where a person has 
             high blood sugar levels.This is either because the insulin production in the body is insufficient or because the body does not respond properly to insulin"))
    (Reason (name Type-1) (explanation "Type 1 Diabetes occurs when the beta cells in the pancreas are damaged. 
@@ -243,6 +248,17 @@
     	(printout out2  ?id " ")
     	(printout out3  ?explanation " ")
     	;(retract ?command)
+    )
+
+(defrule getSymptom
+    ?command <- (Symptom ?symptom)
+    (Reason (name ?symptom)(type SYMPTOM)(url ?url)(explanation ?explanation))
+    =>
+    	(printout out ?symptom)
+    	(printout out2  ?url)
+    	(printout out3  ?explanation)
+   	    (assert (Has-Symptom ?symptom)) 
+    	(retract ?command)
     )
 
 (defrule isMale

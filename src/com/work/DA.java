@@ -210,17 +210,32 @@
 									response.getWriter().write(jessText.substring(0, jessText.length()-1));
 								}
 								public void symptomList(String sessionID) 
-								throws IOException, JessException {	
-									String symptoms = request.getParameter("value");
+								throws IOException, JessException, JSONException {	
 									if (symptomsChecked==false) {
+										String symptoms = request.getParameter("symptoms");
 										System.out.println(request.getParameter("symptoms") +" " + request.getParameter("process"));
 										System.out.println("(addFact Symptom "+symptoms+")");	
-										getEngine(sessionID).assertString("(addFact Symptom "+symptoms+")");
+										getEngine(sessionID).eval("(addFact Symptom "+symptoms+")");
 										if (request.getParameter("process").equals("complete")) {
 											symptomsChecked=true;
-											System.out.println("checking facts");
-											getEngine(sessionID).eval("(facts)");
 										}
+										getEngine(sessionID).run();
+										jessText = getEngine(sessionID).getOutputRouter("out").toString();
+										jessText2 = getEngine(sessionID).getOutputRouter("out2").toString();
+										jessText3 = getEngine(sessionID).getOutputRouter("out3").toString();
+										((StringWriter)(getEngine(sessionID).getOutputRouter("out"))).getBuffer().setLength(0);
+										((StringWriter)(getEngine(sessionID).getOutputRouter("out2"))).getBuffer().setLength(0);	
+										((StringWriter)(getEngine(sessionID).getOutputRouter("out3"))).getBuffer().setLength(0);	
+										response.setContentType("application/json");  
+										PrintWriter out = response.getWriter();
+										JSONObject jsonObject = new JSONObject();
+										jsonObject.put("symptomName", jessText);
+										jsonObject.put("url", jessText2);
+										jsonObject.put("explanation", jessText3);
+										out.print(jsonObject);
+										out.flush();
+
+
 									} 	
 								}
 
