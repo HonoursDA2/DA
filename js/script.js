@@ -72,8 +72,8 @@ $(function () {
         }
     });
 
-    $("#symptom2").click(function () {
-        $(".symptomsresults").fadeOut();
+    $("#symptomsresultsC").on('click','#cont',function () {
+        $("#symptomsresultsC").fadeOut();
         $("#advisor").animate({ "height": "47%" }, 1000, "easeInOutCirc");
         $("#menu").fadeIn();
         $("#patient").animate({ "bottom": "2.55%" }, 1000, "easeInOutCirc");

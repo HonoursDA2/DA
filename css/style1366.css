@@ -197,7 +197,7 @@ input:hover
             0 0 16px red;
 }
 
-#profile #button, #profile #backb, #age div
+#profile #button, #profile #backb, #age div,#cont
 {
     position:absolute;
     width:150px;
@@ -222,7 +222,7 @@ input:hover
     margin-right:1.5%;
 }
 
-#profile #button:hover,#profile #backb:hover
+#profile #button:hover,#profile #backb:hover,#cont
 {
     border-bottom:5px solid rgba(255,0,0,0.7);
     color:rgba(255,0,0,0.7);
@@ -231,6 +231,12 @@ input:hover
 #profile #backb
 {
     display:none;
+}
+
+#cont
+{
+    background:white;
+    z-index:3;
 }
 
 #intro
@@ -643,6 +649,17 @@ span#woman
 {
 }
 
+#symptomsresultsC
+{
+    width:100%;
+    height:100%;
+    position:absolute;
+    overflow:auto;
+    z-index:1;
+    top:0;
+    display:none;
+}
+
 .symptomsresults
 {
     width:97.5%;
@@ -654,7 +671,6 @@ span#woman
     text-align:left;
     box-shadow:0px 2px 5px silver;
     background:white;
-    display:none;
 }
 
 .symptomsresults img

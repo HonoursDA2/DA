@@ -29,6 +29,7 @@ function countClicks() {
 
 var extraName = extraUrl = extraExp = extraAdd = "";
 function submitSymptoms() {
+    $("#advisorH1").html("");
     var counter = 0;
     var count = countClicks();
     var processText = "incomplete";
@@ -47,7 +48,8 @@ function submitSymptoms() {
                 extraExp = responseText.additional;
                 extraAdd = responseText.additional;
 
-                $(".speech").append('<div class="symptomsresults"><img src="images/symptoms/' + extraUrl + '.jpg"><div><h1>' + extraExp + '</h1></div></div>');
+                $("#symptomsresultsC").append('<div class="symptomsresults"><img src="images/symptoms/' + extraUrl + '.jpg" onError="this.src="images/symptoms/noImage.png";"><div><h1>' + extraExp + '</h1></div></div>');
+                $("#symptomsresultsC").append('<div id="cont">Continue</div>');
             });
 
 
@@ -56,7 +58,7 @@ function submitSymptoms() {
 
     }
     $("#advisor").animate({ "height": "95%" }, 1000, "easeInOutCirc", function () {
-        $(".symptomsresults").fadeIn();
+        $("#symptomsresultsC").fadeIn();
     });
     $("#menu").fadeOut();
     $("#patient").animate({ "bottom": "-101%" }, 1000, "easeInOutCirc", function () {

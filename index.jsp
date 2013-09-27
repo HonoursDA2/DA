@@ -44,7 +44,7 @@
     
 <div id="definition"></div>
 <img id="extra" src="images/information.png">
-
+<div id="symptomsresultsC"></div>
 </div>
     
 <div id="directions">
