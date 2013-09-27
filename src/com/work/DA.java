@@ -223,15 +223,18 @@
 										jessText = getEngine(sessionID).getOutputRouter("out").toString();
 										jessText2 = getEngine(sessionID).getOutputRouter("out2").toString();
 										jessText3 = getEngine(sessionID).getOutputRouter("out3").toString();
+										jessText4 = getEngine(sessionID).getOutputRouter("out4").toString();	
 										((StringWriter)(getEngine(sessionID).getOutputRouter("out"))).getBuffer().setLength(0);
 										((StringWriter)(getEngine(sessionID).getOutputRouter("out2"))).getBuffer().setLength(0);	
 										((StringWriter)(getEngine(sessionID).getOutputRouter("out3"))).getBuffer().setLength(0);	
+										((StringWriter)(getEngine(sessionID).getOutputRouter("out4"))).getBuffer().setLength(0);	
 										response.setContentType("application/json");  
 										PrintWriter out = response.getWriter();
 										JSONObject jsonObject = new JSONObject();
 										jsonObject.put("symptomName", jessText);
 										jsonObject.put("url", jessText2);
 										jsonObject.put("explanation", jessText3);
+										jsonObject.put("additional", jessText4);
 										out.print(jsonObject);
 										out.flush();
 
