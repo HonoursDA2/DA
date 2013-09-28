@@ -72,13 +72,6 @@
             }
         });
 
-        $("#symptomsresultsC").on('click','#cont',function () {
-            $("#symptomsresultsC").fadeOut();
-            $("#advisor").animate({ "height": "47%" }, 1000, "easeInOutCirc");
-            $("#menu").fadeIn();
-            $("#patient").animate({ "bottom": "2.55%" }, 1000, "easeInOutCirc");
-        });
-
         $('.next').on('mouseenter', rscroll);
         $('.prev').on('mouseenter', lscroll);
         $('.next,.prev').on('mouseleave', function () {
