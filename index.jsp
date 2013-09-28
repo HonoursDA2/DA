@@ -75,8 +75,10 @@
 	<div class="prev"></div><div class="next"></div>
 	<div id="symptomsContainer">
 	</div>
+	
 	</div>
 
+	<div id="contButton" onclick="confirmLifestyle()">Continue</div>
 	<div id="lifestyle">
 	   <h1>Lifestyle</h1>
 	</div>

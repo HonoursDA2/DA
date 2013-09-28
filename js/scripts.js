@@ -63,16 +63,10 @@
 		            		  $("#symptomsresultsC").append('<div class="symptomsresults"><img src="images/symptoms/' + symptomURLS[i]+ '"><div><h1>' + symptomExp[i] + '</h1></div></div>');
 		                    }
 		                    $("#symptomsresultsC").append('<div id="cont">Continue</div>');
-		            });
+		                });
 
-		              
-
-		               
-		            
-		            counter++;
-		        
-
-		    
+	            counter++;
+	
 		    $("#advisor").animate({ "height": "95%" }, 1000, "easeInOutCirc", function () {
 		        $("#symptomsresultsC").fadeIn();
 		    });
@@ -80,9 +74,7 @@
 		    $("#patient").animate({ "bottom": "-101%" }, 1000, "easeInOutCirc", function () {
 		        $("#symptoms").fadeOut(0);
 		        $("#lifestyle").fadeIn();
-		        $.get('DA', { command: "getInfo", sessionID:sessionID});
-				
-		       	 
+		        $.get('DA', { command: "getInfo", sessionID:sessionID}); 
 		    });
 
 		}
@@ -161,7 +153,54 @@
 		        }
 		    });
 
-		}
+		    }
+
+		    function ajaxCallLifestyle(command, sessionID) {
+
+		        $.ajax({
+		            url: 'DA',
+		            type: 'GET',
+		            dataType: 'json',
+		            data: {
+		                command: command,
+		                sessionID: sessionID
+		            },
+		            contentType: 'application/json',
+		            mimeType: 'application/json',
+		            success: function (data) {
+		                question = data.question;
+		                id = data.id;
+		                type = data.type;
+		                options = data.options;
+
+		                $("#advisorH1").html(question);
+
+		                if (type == "INPUTT" || type == "INPUTN" || type == "INPUTND") {
+		                    $("#lifestyle").html('<input id="' + id + '" value="" type="' + id + '" placeholder="Enter Your ' + id + ' Here">');
+		                }
+		                else if (type == "MALE-FEMALE") {
+		                    $("#lifestyle").html('<div id="male" onclick="gSpecific(male)"><img src="images/male-sign.jpg"></div><div id="female" onclick="gSpecific(female)"><img src="images/female-sign.jpg"></div>');
+		                }
+		                else if (type == "YES-NO") {
+		                    $("#lifestyle").html('<div id="yesbutton" class="yes" value="yes" onclick="yesno(yes)">Yes</div><div id="nobutton" class="no" value="no" onclick="yesno(no)">No</div>');
+		                } else
+		                    if (type == "OPTIONAL") {
+		                        theOptions = options.split('-');
+		                        $("#lifestyle").html("");
+		                        for (var i = 0; i < theOptions.length; i++) {
+		                            $("#lifestyle").append('<div class="options" id="' + theOptions[i] + '">' + theOptions[i] + '</div>');
+		                        }
+
+		                    }
+		                    else {
+		                        alert("Guess what, you have Diabetes :-O draft a bucket list and enjoy life while you still can, Goodbye");
+		                    }
+
+		            }
+		        });
+
+		        }
+
 		var submitArray = new Array();
 		var symptomName = symptomID = symptomExplanation = new Array();
 		function profile() {
@@ -247,84 +286,68 @@
 		        ajaxCall("question", sessionID);
 		    }
 
-		    /*
-		    switch(count)
-		    {
-		    case 6:
-		    $("#profile").fadeOut();
-		    $("#choice").fadeOut(0);
-		    $("#symptoms").fadeIn();
-		    var oldness = $("#eyj").val();
-		    $.get('servlet', { pregnant: pregnancy });
-		    break;
-		    case 5:   
-		    if (isFemale) {
-		    $.get('servlet', {familyH: history});
-		    $("#pregnancy").fadeIn(0);
-		    $("#feedback").append("Family History : " + aHistory + "<br>");
-		    $("#history").fadeOut(0);
-		    count++;
-		    }
-		    else {
-		    $("#history").fadeOut(0);
-		    count++;
-		    confirm();
-		    }
-		    break;
-		    case 4:
-		    var intRegex = /^\d+$/;
-		    if(intRegex.test($("#eyj").val())) {
-		    $.get('servlet', {age: oldness});
-		    $("#history").fadeIn(0);
-		    $("#feedback").append("Race : " + humanRace + "<br>");
-		    $("#feedback").append("Age : " + $("#eyj").val() + "<br>");
-		    $("#age").fadeOut(0);
-		    count++;
-		    } else {
-		    alert("Please Enter a valid number in the age field");
-		    }
-		    break;
-		    case 3:
-		    $.get('servlet', {diabetic: isADiabetic});
-		    if (!hasDiabetes) {
-		    $("#age").fadeIn(0);
-		    $("#feedback").append("Diabetic Status : " + dStatus + "<br>");
-		    $("#isDiabetic").fadeOut(0);
-		    count++;
-		    }
-		    else {
-		    $("#profile").fadeOut();
-		    $("#choice").fadeOut();
-		    $("#lifestyle").fadeIn();
-		    }
-		    break;
-		    case 2:
-		    $("#isDiabetic").fadeIn(0);
-		    $("#feedback").append("Familiarity : " + familiar + "<br>");
-		    $("#knowledge").fadeOut(0);
-		    $.get('servlet', {diabetesK: knowz});	
-		    count++;
-		    break;
-		    case 1:
-		    $("#knowledge").fadeIn(0);
-		    $("#gender,#profile #male, #profile #female").fadeOut(0);
-		    $("#feedback").append("Gender : " + aGender + "<br>");
-		    $.get('servlet', { gender: gendertype});	
-		    count++;
-		    break;
-		    case 0:
-		    $("#intro").fadeOut(0);
-		    $("#feedback").fadeIn();
-		    $("#feedback").append("Your Name is : " + $("#name").val() + "<br>");
-		    $("#gender,#profile #male, #profile #female").fadeIn(0);
-		    $("#button").css({"margin":"0 0 1.5% 250px"});
-		    $("#backb").fadeIn();
-		    count++;
-		    break;
-		    }
-		    */
+		    
 		}
 
+		function confirmLifestyle() {
+		    var proceed = false;
+		    if (type == "INPUTT" || type == "INPUTN" || type == "INPUTND") {
+		        var answer = $("#" + id).val();
+
+		        if (type == "INPUTN") {
+		            var intRegex = /^\d+$/;
+		            if (intRegex.test(answer)) {
+		                $("#feedback").fadeIn();
+		                $("#feedback").append("Your " + id + " is : " + answer + "<br>");
+		                $.get('DA', { value: answer, answerID: id, sessionID: sessionID });
+		                proceed = true;
+		            }
+		            else {
+		                alert("Please Enter a valid number in the " + id + " field");
+		            }
+		        } else if (type == "INPUTND") {
+		            var intRegex = /^(\d+\.?\d*|\.\d+)$/;
+		            if (intRegex.test(answer)) {
+		                $("#feedback").fadeIn();
+		                $("#feedback").append("Your " + id + " is : " + answer + "<br>");
+		                $.get('DA', { value: answer, answerID: id, sessionID: sessionID });
+		                proceed = true;
+		            } else {
+		                alert("Please Enter a valid number in the " + id + " field");
+		            }
+
+		        }
+		        else {
+		            $("#feedback").fadeIn();
+		            $("#feedback").append("Your " + id + " is : " + answer + "<br>");
+		            $.get('DA', { value: answer, answerID: id, sessionID: sessionID });
+		            proceed = true;
+		        }
+		    }
+		    else if (type == "YES-NO") {
+		        $("#feedback").fadeIn();
+		        $("#feedback").append("Your " + id + ": " + yesOrno + "<br>");
+		        $.get('DA', { value: yesOrno, answerID: id, sessionID: sessionID });
+		        proceed = true;
+		    }
+		    else if (type == "MALE-FEMALE") {
+		        $("#feedback").fadeIn();
+		        $("#feedback").append("Gender: " + gendertype + "<br>");
+		        $.get('DA', { value: gendertype, answerID: id, sessionID: sessionID });
+		        proceed = true;
+		    }
+		    else if (type == "OPTIONAL") {
+		        $("#feedback").fadeIn();
+		        $("#feedback").append(id + ": " + opt + "<br>");
+		        $.get('DA', { value: opt, answerID: id, sessionID: sessionID });
+		        proceed = true;
+		    }
+		    if (proceed) {
+		        ajaxCallLifestyle("question", sessionID);
+		    }
+
+
+		}
 		var yes = "Yes";
 		var no = "No";
 		var yesOrno = "";
@@ -368,94 +391,6 @@
 		    }
 		}
 
-		var knowz = familiar = "";
-		function knows(answer) {
-		    if (answer.id == "ido") {
-		        knowz = "Yes";
-		        familiar = "Familiar with Diabetes";
-		        $("#" + answer.id).css({ "color": "green", "border-bottom": "5px solid rgba(0,100,0,0.7)" });
-		        $("#idont").css({ "color": "white", "border-bottom": "0px solid rgba(255,0,0,0.7)" });
-		    }
-		    if (answer.id == "idont") {
-		        knowz = "No";
-		        familiar = "Not familiar with Diabetes";
-		        $("#" + answer.id).css({ "color": "red", "border-bottom": "5px solid rgba(255,0,0,0.7)" });
-		        $("#ido").css({ "color": "white", "border-bottom": "0px solid rgba(255,0,0,0.7)" });
-		    }
-		}
-
-		var isADiabetic = dStatus = "";
-		function isDiabetic(answer) {
-		    if (answer.id == "yes") {
-		        isADiabetic = "Yes";
-		        hasDiabetes = true;
-		        dStatus = "Is Diabetic";
-		        $("#" + answer.id).css({ "color": "green", "border-bottom": "5px solid rgba(0,100,0,0.7)" });
-		        $("#no").css({ "color": "white", "border-bottom": "0px solid rgba(255,0,0,0.7)" });
-		    }
-		    if (answer.id == "no") {
-		        isADiabetic = "No";
-		        hasDiabetes = false;
-		        dStatus = "Is not Diabetic";
-		        $("#" + answer.id).css({ "color": "red", "border-bottom": "5px solid rgba(255,0,0,0.7)" });
-		        $("#yes").css({ "color": "white", "border-bottom": "0px solid rgba(255,0,0,0.7)" });
-		    }
-		}
-
-		var history = aHistory = "";
-		function hasHistory(answer) {
-		    if (answer.id == "yess") {
-		        history = "Yes";
-		        aHistory = "Diabetes runs in the family";
-		        $("#" + answer.id).css({ "color": "green", "border-bottom": "5px solid rgba(0,100,0,0.7)" });
-		        $("#noo").css({ "color": "white", "border-bottom": "0px solid rgba(255,0,0,0.7)" });
-		    }
-		    if (answer.id == "noo") {
-		        history = "No";
-		        aHistory = "Diabetes does not run in the family";
-		        $("#" + answer.id).css({ "color": "red", "border-bottom": "5px solid rgba(255,0,0,0.7)" });
-		        $("#yess").css({ "color": "white", "border-bottom": "0px solid rgba(255,0,0,0.7)" });
-		    }
-		}
-
-		var pregnancy = "";
-		function isPregnant(answer) {
-		    if (answer.id == "isPreg") {
-		        pregnancy = "Yes";
-		        $("#" + answer.id).css({ "color": "green", "border-bottom": "5px solid rgba(0,100,0,0.7)" });
-		        $("#isNotPreg").css({ "color": "white", "border-bottom": "0px solid rgba(255,0,0,0.7)" });
-		    }
-		    if (answer.id == "isNotPreg") {
-		        pregnancy = "No";
-		        $("#" + answer.id).css({ "color": "red", "border-bottom": "5px solid rgba(255,0,0,0.7)" });
-		        $("#isPreg").css({ "color": "white", "border-bottom": "0px solid rgba(255,0,0,0.7)" });
-		    }
-		}
-
-		var humanRace = theAge = "";
-		function race(answer) {
-		    if (answer.id == "white") {
-		        humanRace = "White";
-		        $("#" + answer.id).css({ "color": "rgb(200,200,200)", "border-bottom": "5px solid rgba(200,200,200,0.7)" });
-		        $("#black,#asian,#other").css({ "color": "black", "border-bottom": "0px solid rgba(255,0,0,0.7)" });
-		    }
-		    if (answer.id == "black") {
-		        humanRace = "Black";
-		        $("#" + answer.id).css({ "color": "brown", "border-bottom": "5px solid brown" });
-		        $("#white,#asian,#other").css({ "color": "black", "border-bottom": "0px solid rgba(255,0,0,0.7)" });
-		    }
-		    if (answer.id == "asian") {
-		        humanRace = "Asian";
-		        $("#" + answer.id).css({ "color": "orange", "border-bottom": "5px solid orange" });
-		        $("#black,#white,#other").css({ "color": "black", "border-bottom": "0px solid rgba(255,0,0,0.7)" });
-		    }
-		    if (answer.id == "other") {
-		        humanRace = "Other";
-		        $("#" + answer.id).css({ "color": "black", "border-bottom": "5px solid black" });
-		        $("#black,#white,#asian").css({ "color": "black", "border-bottom": "0px solid rgba(255,0,0,0.7)" });
-		    }
-		}
-
 		var opt = "";
 		$(function () {
 		    $(".questions").on('click', '.options', function () {
@@ -476,6 +411,46 @@
 		        var index = symptomID.indexOf(symID);
 
 		        $("#advisorH1").html(symptomExplanation[index]);
+		    });
+
+		    $("#symptomsresultsC").on('click', '#cont', function () {
+		        $("#symptomsresultsC").fadeOut();
+		        $("#contButton").fadeIn();
+		        $("#advisor").animate({ "height": "47%" }, 1000, "easeInOutCirc");
+		        $("#menu").fadeIn();
+		        $("#patient").animate({ "bottom": "2.55%" }, 1000, "easeInOutCirc");
+
+		        $.get('DA', { command: "question", sessionID: sessionID }, function (data) {
+		            question = data.question;
+		            id = data.id;
+		            type = data.type;
+		            options = data.options;
+
+		            
+		            $("#advisorH1").html(question);
+
+		            if (type == "INPUTT" || type == "INPUTN" || type == "INPUTND") {
+		                $("#lifestyle").html('<input id="' + id + '" value="" type="' + id + '" placeholder="Enter Your ' + id + ' Here">');
+		            }
+		            else if (type == "MALE-FEMALE") {
+		                $("#lifestyle").html('<div id="male" onclick="gSpecific(male)"><img src="images/male-sign.jpg"></div><div id="female" onclick="gSpecific(female)"><img src="images/female-sign.jpg"></div>');
+		            }
+		            else if (type == "YES-NO") {
+		                $("#lifestyle").html('<div id="yesbutton" class="yes" value="yes" onclick="yesno(yes)">Yes</div><div id="nobutton" class="no" value="no" onclick="yesno(no)">No</div>');
+		            } else
+		                if (type == "OPTIONAL") {
+		                    theOptions = options.split('-');
+		                    $("#lifestyle").html("");
+		                    for (var i = 0; i < theOptions.length; i++) {
+		                        $("#lifestyle").append('<div class="options" id="' + theOptions[i] + '">' + theOptions[i] + '</div>');
+		                    }
+
+		                }
+		                else {
+		                    alert("Guess what, you have Diabetes :-O draft a bucket list and enjoy life while you still can, Goodbye")
+		                }
+
+		        });
 		    });
 		});
 
