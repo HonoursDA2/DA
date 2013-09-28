@@ -1,4 +1,4 @@
-(defglobal ?*currentQuestion* = 1)
+(defglobal ?*currentQuestion* = 11)
 
 
 (deftemplate Description
@@ -24,9 +24,9 @@
     (slot extraInfo
         (default "No Extra Information"))
     (slot questionType
-        (default SINGLE))
+        (default "SINGLE*"))
     (slot options
-        (default none))
+        (default "none*"))
     )
 (deftemplate advice
     (slot text)
@@ -114,34 +114,43 @@
     )
 ; Extra information that accompanies the symptoms
 (deffacts additional
-   (Information (question "What is Diabetes Mellitus") (explanation "Diabetes Mellitus, more commonly known simply as Diabetes is a chronic medical condition where a person has 
+   (Information (question "What is Diabetes Mellitus?*") (explanation "Diabetes Mellitus, more commonly known simply as Diabetes is a chronic medical condition where a person has 
             high blood sugar levels.This is either because the insulin production in the body is insufficient or because the body does not respond properly to insulin")
         (extraInfo "Insulin is a hormone produced by the Pancreas that is the main regulator of the glucose (sugar) in the blood.
             Insulin converts the glucose into energy to be used by the cells"))
-   (Information(question  "What are the types of Diabetes") (explanation "Type 1 Diabetes occurs when the beta cells in the pancreas are damaged. 
-            Therefore the pancreas does not produce insulin anymore. Type 1 normally occurs in people under the age of 30 (it used to be called Juvenile Diabetes).*Type 2 Diabetes occurs when the beta cells in the body are resistant to the effect of insulin. 
+   (Information(question  "What are the types of Diabetes?*") (explanation "Type 1 Diabetes occurs when the beta cells in the pancreas are damaged. 
+            Therefore the pancreas does not produce insulin anymore. Type 1 normally occurs in people under the age of 30 (it used to be called Juvenile Diabetes).-Type 2 Diabetes occurs when the beta cells in the body are resistant to the effect of insulin. 
             It develops gradually over a period of time.There is a high association with a family history of Diabetes and obesity. 
-            Type 2 normally occurs in people older than 40 years of age.*
+            Type 2 normally occurs in people older than 40 years of age-.
             This type of diabetes affects about 2%-10% of females during last months of pregnancy. 
             Pregnant women have enough insulin, but the effect of insulin is partially blocked by other hormones produced in the placenta during pregnancy.
             This causes a rise in sugar levels.
-            The disease normally disappears after pregnancy.*
+            The disease normally disappears after pregnancy.-
             Pre-diabetes is the pre-cursor of diabetes where the blood glucose levels 
             are higher than normal but not high enough to be considered as Diabetes. 
             However, if the condition is tackled at this stage through diet, 
-            exercise and other healthy lifestyle changes (weight management programme), the risk can be significantly reduced.")
+            exercise and other healthy lifestyle changes (weight management programme), the risk can be significantly reduced.*")
         (extraInfo "The Pancreas is a long soft organ that secrets insulin when the level of sugar in the blood rises in the body after a meal.
             Insulin is a hormone produced by the Pancreas that is the main regulator of the glucose (sugar) in the blood.")
-        (questionType MULTIPLE)
-        (options "TYPE 1-Type 2-Gestational-Prediabetes")
+        (questionType "MULTIPLE*")
+        (options "TYPE 1-Type 2-Gestational-Prediabetes*")
         )
-     (Information (question "What are the causes of Diabetes") (explanation "Fat fat fat fat fat is bad*Family History of diabetes*Pancreas not working")
-        (questionType MULTIPLE)
-        (options "Obesity-Family History-Pancreas")
+     (Information (question "What are the causes of Diabetes?*") (explanation "Fat fat fat fat fat is bad-Family History of diabetes-Pancreas not working*")
+        (questionType "MULTIPLE*")
+        (options "Obesity-Family History-Pancreas*")
        )
     
     	
      )
+(defrule getInfo
+    (Get Info)
+    (Information (question ?question) (explanation ?explanation)(questionType ?type) (options ?theOptions)) 
+    =>
+    	(printout out ?question)
+    	(printout out2 ?type)
+    	(printout out3 ?theOptions)
+    	(printout out4 ?explanation)
+    )
 (defrule askQuestionInitial
     ?ask <- (Ask-Question-Initial)
     ?question <- (Question (section Initial)(type ?type)(text ?questionText) (answerType ?answerType) (ask yes) (order ?current) (options ?options))
@@ -240,7 +249,6 @@
     	(printout out3  ?explanation " ")
     	;(retract ?command)
     )
-
 (defrule getSymptom
     ?command <- (Symptom ?symptom)
     (Reason (name ?symptom)(type SYMPTOM)(id ?id)(url ?url)(explanation ?explanation)(extraInfo ?additional))
@@ -252,7 +260,6 @@
     	(assert (Has-Symptom ?symptom)) 
     	(retract ?command)
     )
-
 (defrule isMale
     (declare (salience 10))
     (Gender Male)
