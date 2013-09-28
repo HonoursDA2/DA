@@ -1,6 +1,5 @@
 (defglobal ?*currentQuestion* = 11)
 
-
 (deftemplate Description
     (slot name)
     (slot type)   
@@ -47,18 +46,22 @@
         (default ""))
     )
 (deffacts Questions
+    ;Initial questions
     (Question (section Initial)(type "name")(text "Hi, I am Doctor Mellitus, a Diabetes Advisor, what is your name?") (answerType "INPUTT") (order 1))
     (Question (section Initial)(type "gender")(text "Are you male or female?")(answerType "MALE-FEMALE") (order 2))
     (Question (section Initial)(type "diabetesK")(text "Do you know about the disease called Diabetes?") (answerType "YES-NO") (order 3))
-    (Question (section Initial)(type "diabetic")(text "Are you a Diabetic?") (answerType "OPTIONAL") (order 4)(options "3-Yes-No-Uncertain" ))
-    (Question (section Initial)(type "Race")(text "What is your race?") (answerType "OPTIONAL")(order 5)(options "5-Black-White-Asian-Coloured-Other" ))
+    (Question (section Initial)(type "diabetic")(text "Are you a Diabetic?") (answerType "OPTIONAL") (order 4)(options "Yes-No-Uncertain" ))
+    (Question (section Initial)(type "Race")(text "What is your race?") (answerType "OPTIONAL")(order 5)(options "Black-White-Asian-Coloured-Other" ))
     (Question (section Initial)(type "Age")(text "What is your age?") (answerType "INPUTN") (order 6))
-    (Question (section Initial)(type "familyH")(text "Do you have relatives who have Diabetes?")(answerType "OPTIONAL")(options "3-Yes-No-Uncertain" ) (order 7))
+    (Question (section Initial)(type "familyH")(text "Do you have relatives who have Diabetes?")(answerType "OPTIONAL")(options "Yes-No-Uncertain" ) (order 7))
     (Question (section Initial)(type "pregnant")(text "Are you Pregnant?") (answerType "YES-NO") (order 8))
     (Question (section Initial)(type "weight")(text "What is your weight (KG)")(answerType "INPUTND") (order 9))
     (Question (section Initial)(type "height")(text "What is your height (M)") (answerType "INPUTND") (order 10))
-    ;(Question (type "smoke")(text "Do You smoke cigarettes?") (answerType "YES-NO"))
-    ;(Question (type "alcohol")(text "Do you drink alcohol regularly?") (answerType "YES-NO"))
+    ;Lifestyle questions
+    (Question (section Lifestyle)(type "smoke")(text "Do You smoke cigarettes?") (answerType "YES-NO")(order 11))
+    (Question (section Lifestyle)(type "smokeF")(text "How often do you smoke?") (answerType "OPTIONAL")(options "Not Often-On Occassion-Frequently" ) (order 12))
+    (Question (section Lifestyle)(type "alcohol")(text "Do you drink alcohol?") (answerType "YES-NO")(order 13))
+    (Question (section Lifestyle)(type "alcoholF")(text "How often do you drink alcohol?") (answerType "OPTIONAL")(options "Not often-On Occassion-Frequently" )(order 14))
     )
 (deffacts Description
    (Description(name Fatigue)(type SYMPTOM) (id "fatigue")(explanation "Do you feel tired a lot? A feeling of tiredness that can not be explained."))
@@ -139,9 +142,9 @@
         (questionType "MULTIPLE*")
         (options "Obesity-Family History-Pancreas*")
        )
-    
-    	
      )
+
+;Returns informationpertaining to the selected symptoms experienced by the user
 (defrule getInfo
     (Get Info)
     (Information (question ?question) (explanation ?explanation)(questionType ?type) (options ?theOptions)) 
@@ -151,6 +154,7 @@
     	(printout out3 ?theOptions)
     	(printout out4 ?explanation)
     )
+;Asks the initial set of questions
 (defrule askQuestionInitial
     ?ask <- (Ask-Question-Initial)
     ?question <- (Question (section Initial)(type ?type)(text ?questionText) (answerType ?answerType) (ask yes) (order ?current) (options ?options))
@@ -166,6 +170,7 @@
     (retract ?ask)
         )
     )
+;Changes the order of the questions to ask, if a question should not be asked anymore
 (defrule changeQuestions
     (declare (salience 5))
     (Ask-Question-Initial)
@@ -176,6 +181,7 @@
     	(bind ?*currentQuestion* ?counter)
     )
     )
+;Asks the questions relating to Lifestyle
 (defrule askQuestionLifestyle
     ?ask <- (Ask-Question-Lifestyle)
     ?question <- (Question (section Lifestyle)(type ?type)(text ?questionText) (answerType ?answerType) (ask yes) (order ?current) (options ?options))
@@ -191,7 +197,7 @@
     (retract ?ask)
         )
     )
-;shows the explanation of the symptom in question
+;Shows the explanation of the symptom in question
 (defrule showReason
     ?input <- (Input (name ?inputName))
     ?reason <- (Description (name ?name) (explanation ?explanation))
@@ -231,7 +237,7 @@
     =>
     (printout out (?name crlf ?explanation))
     )
-;if the suer is male then they are not pregnant.
+;Returns the name of the user
 (defrule getName
     ?request <- (Get Name)
     (name ?name)
@@ -239,6 +245,7 @@
     (printout out ?name)
     (retract ?request)
     )
+;Returns the list of symptoms
 (defrule getSymptoms
     ?command <- (Get Symptoms)
     (Description(name ?name)(type SYMPTOM)(id ?id)(explanation ?explanation))
@@ -249,6 +256,7 @@
     	(printout out3  ?explanation " ")
     	;(retract ?command)
     )
+;Returns the information for a particular symptom
 (defrule getSymptom
     ?command <- (Symptom ?symptom)
     (Reason (name ?symptom)(type SYMPTOM)(id ?id)(url ?url)(explanation ?explanation)(extraInfo ?additional))
@@ -260,6 +268,7 @@
     	(assert (Has-Symptom ?symptom)) 
     	(retract ?command)
     )
+;If the suer is male then they are not pregnant.
 (defrule isMale
     (declare (salience 10))
     (Gender Male)
@@ -268,21 +277,47 @@
     (assert (Pregnant No))
     (modify ?question (ask no))
     )
-;This methods checks if there is any extra information, if not prints a generic message
-(deffunction filter (?text)
-    (bind ?current ?text)
-    (if (eq ?current "") then
-        (bind ?current "No extra information is available"))
-    ?current 
-    )
-;adds a fact to the working memory
+;Adds a fact to the working memory
+
 (deffunction addFact(?factToAdd ?fact)
     (if (eq Symptom ?factToAdd) then
     	(assert (Symptom ?fact))else
-       				(if (eq Weight ?factToAdd) then
-    					(assert (Weight ?weight))else
-       						(if (eq Height ?factToAdd) then
-    							(assert (Height ?fact)))
+       				(if (eq weight ?factToAdd) then
+    					(assert (Weight ?fact))else
+       						(if (eq height ?factToAdd) then
+    							(assert (Height ?fact))else
+       								(if (eq Age ?factToAdd) then
+    									(assert (Age ?fact)) else
+                    						(if (eq smoke ?factToAdd) then
+    											(assert (Smoke ?fact))else
+                    								(if (eq alcohol ?factToAdd) then
+    													(assert (Alcohol ?fact))else
+                    										(if (eq gender ?factToAdd) then
+    															(assert (Gender ?fact))else
+                    												(if (eq name ?factToAdd) then
+    																	(assert (Name ?fact)) else
+                    														(if (eq diabetesK ?factToAdd) then
+    																			(assert (Diabetes-Knowledge ?fact)) else
+                    																(if (eq diabetic ?factToAdd) then
+    																					(assert (Diabetic ?fact)) else
+                    																		(if (eq familyH ?factToAdd) then
+    																							(assert (Family-History ?fact))  else
+                    																				(if (eq pregnant ?factToAdd) then
+    																									(assert (Pregnant ?fact)) else
+                    																						(if (eq Race ?factToAdd) then
+    																											(assert (Race ?fact))
+                                                        													)													
+                                                        											)
+                                                											)
+                                        											)
+                                        									)
+                                    								)
+                                
+                                							)
+                            						)
+                    						)
+                    				)
+                			)
                 	)            
      )
 )
