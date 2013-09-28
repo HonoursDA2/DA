@@ -23,6 +23,7 @@
 										String jessText3;
 										String jessText4;	
 										Rete engine = null;
+										boolean initialComplete=false;
 										
 
 										public void doGet(HttpServletRequest request,
@@ -146,8 +147,14 @@
 
 										public void question(String sessionID) throws IOException, JessException, JSONException, ServletException	{ 
 												String text ="DEFAULT"; 		
+												String section="";
 												System.out.println("(Ask-Question)");
-												getEngine(sessionID).assertString("(Ask-Question-Initial)");
+												if (!initialComplete) {
+													section ="(Ask-Question-Initial)"; 		
+												} else {
+													section ="(Ask-Question-Lifestyle)"; 			
+												}
+												getEngine(sessionID).assertString(section);
 												System.out.println(sessionID);
 												getEngine(sessionID).run();
 												jessText = getEngine(sessionID).getOutputRouter("out").toString();
@@ -167,6 +174,9 @@
 												jsonObject.put("options", jessText4);	
 												out.print(jsonObject);
 												out.flush();
+												if (jessText.equals("")) {
+													initialComplete=true;
+												}
 											}
 										public void symptom(String sessionID)
 										throws IOException, JessException	{

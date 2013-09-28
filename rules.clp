@@ -52,16 +52,22 @@
     (Question (section Initial)(type "diabetesK")(text "Do you know about the disease called Diabetes?") (answerType "YES-NO") (order 3))
     (Question (section Initial)(type "diabetic")(text "Are you a Diabetic?") (answerType "OPTIONAL") (order 4)(options "Yes-No-Uncertain" ))
     (Question (section Initial)(type "Race")(text "What is your race?") (answerType "OPTIONAL")(order 5)(options "Black-White-Asian-Coloured-Other" ))
-    (Question (section Initial)(type "Age")(text "What is your age?") (answerType "INPUTN") (order 6))
-    (Question (section Initial)(type "familyH")(text "Do you have relatives who have Diabetes?")(answerType "OPTIONAL")(options "Yes-No-Uncertain" ) (order 7))
+    (Question (section Initial)(type "Age")(text "How old are you?") (answerType "INPUTN") (order 6))
+    (Question (section Initial)(type "familyH")(text "Do you have relatives who have been diagnosed with Diabetes?")(answerType "OPTIONAL")(options "Yes-No-Uncertain" ) (order 7))
     (Question (section Initial)(type "pregnant")(text "Are you Pregnant?") (answerType "YES-NO") (order 8))
-    (Question (section Initial)(type "weight")(text "What is your weight (KG)")(answerType "INPUTND") (order 9))
-    (Question (section Initial)(type "height")(text "What is your height (M)") (answerType "INPUTND") (order 10))
+    (Question (section Initial)(type "weight")(text "What is your weight (Kilograms)")(answerType "INPUTND") (order 9))
+    (Question (section Initial)(type "height")(text "What is your height (Meters)") (answerType "INPUTND") (order 10))
     ;Lifestyle questions
     (Question (section Lifestyle)(type "smoke")(text "Do You smoke cigarettes?") (answerType "YES-NO")(order 11))
-    (Question (section Lifestyle)(type "smokeF")(text "How often do you smoke?") (answerType "OPTIONAL")(options "Not Often-On Occassion-Frequently" ) (order 12))
-    (Question (section Lifestyle)(type "alcohol")(text "Do you drink alcohol?") (answerType "YES-NO")(order 13))
-    (Question (section Lifestyle)(type "alcoholF")(text "How often do you drink alcohol?") (answerType "OPTIONAL")(options "Not often-On Occassion-Frequently" )(order 14))
+    (Question (section Lifestyle)(type "smokeF")(text "How often do you smoke, please be honest?") (answerType "OPTIONAL")(options "Hardly-Occassionaly-Frequently" ) (order 12))
+    (Question (section Lifestyle)(type "alcohol")(text "Do you consume any alcohol?") (answerType "YES-NO")(order 13))
+    (Question (section Lifestyle)(type "alcoholF")(text "Alcohol is advised..in moderation
+            How often do you drink alcohol?") (answerType "OPTIONAL")(options "Hardly-Occassionaly-Frequently" )(order 14))
+    (Question (section Lifestyle)(type "exercise")(text "Do you do any sort of explicit physical exercise?") (answerType "YES-NO")(order 15))
+    (Question (section Lifestyle)(type "exerciseF")(text "That's great, How often do you exercise?") (answerType "OPTIONAL")(options "Hardly-Occassionaly-Frequently" )(order 16))
+    (Question (section Lifestyle)(type "bp")(text "Have you checked your blood pressure recently?") (answerType "YES-NO")(order 17))
+    (Question (section Lifestyle)(type "bpLevel")(text "What level is your blood pressure?") (answerType "OPTIONAL")(options "Low-Average-High" )(order 18))
+    
     )
 (deffacts Description
    (Description(name Fatigue)(type SYMPTOM) (id "fatigue")(explanation "Do you feel tired a lot? A feeling of tiredness that can not be explained."))
@@ -143,7 +149,6 @@
         (options "Obesity-Family History-Pancreas*")
        )
      )
-
 ;Returns informationpertaining to the selected symptoms experienced by the user
 (defrule getInfo
     (Get Info)
@@ -171,10 +176,21 @@
         )
     )
 ;Changes the order of the questions to ask, if a question should not be asked anymore
-(defrule changeQuestions
+(defrule changeInitialQuestions
     (declare (salience 5))
     (Ask-Question-Initial)
-    ?question <- (Question (section Initial)(type ?type)(text ?questionText) (answerType ?answerType) (ask no) (order ?current))
+    ?question <- (Question (section Initial) (type ?type)(text ?questionText) (answerType ?answerType) (ask no) (order ?current))
+    =>
+    (if (eq ?current ?*currentQuestion*) then
+    	(bind ?counter (+ ?*currentQuestion* 1))	
+    	(bind ?*currentQuestion* ?counter)
+    )
+    )
+
+(defrule changeLifestyleQuestions
+    (declare (salience 5))
+    (Ask-Question-Lifestyle)
+    ?question <- (Question (section Lifestyle)(type ?type)(text ?questionText) (answerType ?answerType) (ask no) (order ?current))
     =>
     (if (eq ?current ?*currentQuestion*) then
     	(bind ?counter (+ ?*currentQuestion* 1))	
@@ -277,8 +293,47 @@
     (assert (Pregnant No))
     (modify ?question (ask no))
     )
+;If no knowledge of diabetes do not ask if diabetic
+(defrule diabetesKnowledge
+    (declare (salience 10))
+    (Diabetes-Knowledge No)
+    ?question <- (Question (section Initial) (type "diabetic") (text ?questionText) (answerType ?answerType) (ask yes))
+    =>
+    (modify ?question (ask no))
+    )
+;If no, dont ask how often
+(defrule smoke
+    (declare (salience 10))
+    (Smoke No)
+    ?question <- (Question (section Lifestyle) (type "smokeF") (text ?questionText) (answerType ?answerType) (ask yes))
+    =>
+    (modify ?question (ask no))
+    )
+;If no, dont ask how often
+(defrule alcohol
+    (declare (salience 10))
+    (Alcohol No)
+    ?question <- (Question (section Lifestyle) (type "alcoholF") (text ?questionText) (answerType ?answerType) (ask yes))
+    =>
+    (modify ?question (ask no))
+    )
+;If no dont ask how often
+(defrule exercise
+    (declare (salience 10))
+    (Exercise No)
+    ?question <- (Question (section Lifestyle) (type "exerciseF") (text ?questionText) (answerType ?answerType) (ask yes))
+    =>
+    (modify ?question (ask no))
+    )
+;If no dont ask what the rate is
+(defrule bloodPressure
+    (declare (salience 10))
+    (BP-Knowledge No)
+    ?question <- (Question (section Lifestyle) (type "bpLevel") (text ?questionText) (answerType ?answerType) (ask yes))
+    =>
+    (modify ?question (ask no))
+    )
 ;Adds a fact to the working memory
-
 (deffunction addFact(?factToAdd ?fact)
     (if (eq Symptom ?factToAdd) then
     	(assert (Symptom ?fact))else
@@ -297,15 +352,33 @@
                     												(if (eq name ?factToAdd) then
     																	(assert (Name ?fact)) else
                     														(if (eq diabetesK ?factToAdd) then
-    																			(assert (Diabetes-Knowledge ?fact)) else
+    																			(assert (Diabetes-Knowledge ?fact))else
                     																(if (eq diabetic ?factToAdd) then
-    																					(assert (Diabetic ?fact)) else
+    																					(assert (Diabetic ?fact))else
                     																		(if (eq familyH ?factToAdd) then
-    																							(assert (Family-History ?fact))  else
+    																							(assert (Family-History ?fact))else
                     																				(if (eq pregnant ?factToAdd) then
-    																									(assert (Pregnant ?fact)) else
+    																									(assert (Pregnant ?fact))else
                     																						(if (eq Race ?factToAdd) then
-    																											(assert (Race ?fact))
+    																											(assert (Race ?fact))else
+                    																								(if (eq exercise ?factToAdd) then
+    																													(assert (Exercise ?fact))else
+                    																										(if (eq bp ?factToAdd) then
+    																															(assert (BP-Knowledge ?fact))else
+                    																												(if (eq smokeF ?factToAdd) then
+    																																	(assert (Smoke-Frequency ?fact))else
+                    																														(if (eq alcoholF ?factToAdd) then
+    																																			(assert (Alcohol-Frequency ?fact))else
+                    																																(if (eq ExerciseF ?factToAdd) then
+    																																					(assert (Exercise-Frequency ?fact))else
+                    																																		(if (eq bpLevel ?factToAdd) then
+    																																							(assert (Blood-Pressure ?fact))
+                                                                                																			) 
+                                                                            																			)	        
+                                                                        																	)
+                                                                    																)
+                                                            																)
+                                                            															)
                                                         													)													
                                                         											)
                                                 											)
