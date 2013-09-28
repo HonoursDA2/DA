@@ -254,6 +254,8 @@
 											jsonObject.put("additional", jessText4);
 											out.print(jsonObject);
 											out.flush();
+											getEngine(sessionID).eval("(facts)");
+												
 
 
 										} 	

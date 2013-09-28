@@ -1,4 +1,4 @@
-(defglobal ?*currentQuestion* = 10)
+(defglobal ?*currentQuestion* = 1)
 
 
 (deftemplate Description

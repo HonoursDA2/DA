@@ -50,7 +50,6 @@
 		            }
 		        
 		            $.get('DA', { symptoms: clickedSymptoms, sessionID: sessionID }, function (responseText) {
-		                alert ("TRYING");
 		                extraName = responseText.symptomName;
 		                extraUrl = responseText.url;
 		                extraExp = responseText.explanation;
@@ -63,11 +62,12 @@
 		                for (var i = 0; i < symptomNames.length-1; i++) {
 		            		  $("#symptomsresultsC").append('<div class="symptomsresults"><img src="images/symptoms/' + symptomURLS[i]+ '"><div><h1>' + symptomExp[i] + '</h1></div></div>');
 		                    }
+		                    $("#symptomsresultsC").append('<div id="cont">Continue</div>');
 		            });
 
 		              
 
-		               $("#symptomsresultsC").append('<div id="cont">Continue</div>');
+		               
 		            
 		            counter++;
 		        
