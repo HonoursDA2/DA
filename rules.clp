@@ -19,8 +19,14 @@
     (default "noImage.png"))
     )
 (deftemplate Information
-    (slot name)
+    (slot question)
     (slot explanation)
+    (slot extraInfo
+        (default "No Extra Information"))
+    (slot questionType
+        (default SINGLE))
+    (slot options
+        (default none))
     )
 (deftemplate advice
     (slot text)
@@ -104,29 +110,36 @@
    (Reason (name Gestational-Diabetes)(type SYMPTOM)(url "gestational.jpg")(explanation "Gestational Diabetes - During pregnancy there is a lot of hormonal activity within the body, this affects the functioning of the insulin and might alter/interfere with how the body responmds tot he insulin. This condition usually subsides after the pregnacny") )
    (Reason (name Dry-Mouth)(type SYMPTOM)(url "drymouth.jpg")(explanation "Dry Mouth - This is caused by dehydration in the body.") (extraInfo "Dehydration is a result of the high demand for bodily fluids drawn from the tissues to help excrete the excess sugar from the body"))
    (Reason (name Abdominal-Pain)(type SYMPTOM)(url "abdominal.jpg")(explanation "Abdominal Pain - Because of the gastroparesis, the stomach cannot empty its contents properly leading to stomach pain and cramping") (extraInfo "Gastroparesis is a disease of the muscles of the stomach or the nerves controlling the muscles that causes the muscles to stop working, affecting the digestive process"))
-   (Reason (name Diabetes) (explanation "Diabetes Mellitus, more commonly known simply as Diabetes is a chronic medical condition where a person has 
-            high blood sugar levels.This is either because the insulin production in the body is insufficient or because the body does not respond properly to insulin"))
-   (Reason (name Type-1) (explanation "Type 1 Diabetes occurs when the beta cells in the pancreas are damaged. 
-            Therefore the pancreas does not produce insulin anymore. Type 1 normally occurs in people under the age of 30 (it used to be called Juvenile Diabetes)."))
-   (Reason (name Type-2) (explanation "Type 2 Diabetes occurs when the beta cells in the body are resistant to the effect of insulin. 
-            It develops gradually over a period of time.There is a high association with a family history of Diabetes and obesity. 
-            Type 2 normally occurs in people older than 40 years of age."))
-   (Reason (name Pre-Diabetes) (explanation "Pre-diabetes is the pre-cursor of diabetes where the blood glucose levels are higher than normal but not high enough to be considered as Diabetes. However, if the condition is tackled at this stage through diet, exercise and other healthy lifestyle changes (weight management programme), the risk can be significantly reduced."))    
-   (Reason (name Gestational) (explanation "This type of diabetes affects about 2%-10% of females during last months of pregnancy. 
-            Pregnant women have enough insulin, but the effect of insulin is partially blocked by other hormones produced in the placenta during pregnancy.
-            This causes a rise in sugar levels.
-            The disease normally disappears after pregnancy." )) 
+   
     )
 ; Extra information that accompanies the symptoms
 (deffacts additional
-    (Information (name Diabetes) (explanation "Insulin is a hormone produced by the Pancreas that is the main regulator of the glucose (sugar) in the blood.
+   (Information (question "What is Diabetes Mellitus") (explanation "Diabetes Mellitus, more commonly known simply as Diabetes is a chronic medical condition where a person has 
+            high blood sugar levels.This is either because the insulin production in the body is insufficient or because the body does not respond properly to insulin")
+        (extraInfo "Insulin is a hormone produced by the Pancreas that is the main regulator of the glucose (sugar) in the blood.
             Insulin converts the glucose into energy to be used by the cells"))
-   	(Information (name Type-1) (explanation "The Pancreas is a long soft organ that secrets insulin when the level of sugar in the blood rises in the body after a meal.
-            Insulin is a hormone produced by the Pancreas that is the main regulator of the glucose (sugar) in the blood."))
-   	(Information (name Type-2) (explanation "The Pancreas is a long soft organ that secrets insulin when the level of sugar in the blood rises in the body after a meal.
-            Insulin is a hormone produced by the Pancreas that is the main regulator of the glucose (sugar) in the blood."))
-    (Information (name Pre-Diabetes) (explanation ""))    
-    (Information (name Gestational) (explanation ""))    
+   (Information(question  "What are the types of Diabetes") (explanation "Type 1 Diabetes occurs when the beta cells in the pancreas are damaged. 
+            Therefore the pancreas does not produce insulin anymore. Type 1 normally occurs in people under the age of 30 (it used to be called Juvenile Diabetes).*Type 2 Diabetes occurs when the beta cells in the body are resistant to the effect of insulin. 
+            It develops gradually over a period of time.There is a high association with a family history of Diabetes and obesity. 
+            Type 2 normally occurs in people older than 40 years of age.*
+            This type of diabetes affects about 2%-10% of females during last months of pregnancy. 
+            Pregnant women have enough insulin, but the effect of insulin is partially blocked by other hormones produced in the placenta during pregnancy.
+            This causes a rise in sugar levels.
+            The disease normally disappears after pregnancy.*
+            Pre-diabetes is the pre-cursor of diabetes where the blood glucose levels 
+            are higher than normal but not high enough to be considered as Diabetes. 
+            However, if the condition is tackled at this stage through diet, 
+            exercise and other healthy lifestyle changes (weight management programme), the risk can be significantly reduced.")
+        (extraInfo "The Pancreas is a long soft organ that secrets insulin when the level of sugar in the blood rises in the body after a meal.
+            Insulin is a hormone produced by the Pancreas that is the main regulator of the glucose (sugar) in the blood.")
+        (questionType MULTIPLE)
+        (options "TYPE 1-Type 2-Gestational-Prediabetes")
+        )
+     (Information (question "What are the causes of Diabetes") (explanation "Fat fat fat fat fat is bad*Family History of diabetes*Pancreas not working")
+        (questionType MULTIPLE)
+        (options "Obesity-Family History-Pancreas")
+       )
+    
     	
      )
 (defrule askQuestionInitial
@@ -179,15 +192,6 @@
     (printout out ?explanation)
     (retract ?input) 
     )   
-    )
-;shows the extra information of the symptom in question
-(defrule showExtraInformation
-    ?extraInfo <- (Extra-Info)
-    (Information (name ?symptom)(explanation ?explanation))
-    =>
-    (if (eq ?symptom ?*currentSymptom*) then 
-    (printout out (filter ?explanation))
-    (retract ?extraInfo))
     )
 ;calculates the BMI with the provided weight and height of the user
 (defrule bmi
