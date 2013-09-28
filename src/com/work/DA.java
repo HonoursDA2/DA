@@ -110,6 +110,8 @@
 														profile(request.getParameter("sessionID"));
 													} else if ( request.getParameter("command").equals("getSymptoms")) {
 														symptoms(request.getParameter("sessionID"));
+													} else if ( request.getParameter("command").equals("getInfo")) {
+														diabetesInfo(request.getParameter("sessionID"));
 													}
 											}else
 										{
@@ -260,6 +262,29 @@
 
 										} 	
 									}
+
+									public void diabetesInfo(String sessionID) 
+									throws JessException, IOException, JSONException	{
+										getEngine(sessionID).assertString("(Get Info)");
+										getEngine(sessionID).run();
+										String questions = getEngine(sessionID).getOutputRouter("out").toString();
+										((StringWriter)(getEngine(sessionID).getOutputRouter("out"))).getBuffer().setLength(0);
+										String type = getEngine(sessionID).getOutputRouter("out2").toString();
+										((StringWriter)(getEngine(sessionID).getOutputRouter("out2"))).getBuffer().setLength(0);
+										response.setContentType("application/json");  
+										String options = getEngine(sessionID).getOutputRouter("out3").toString();
+										((StringWriter)(getEngine(sessionID).getOutputRouter("out3"))).getBuffer().setLength(0);
+										String explanations = getEngine(sessionID).getOutputRouter("out4").toString();
+										((StringWriter)(getEngine(sessionID).getOutputRouter("out4"))).getBuffer().setLength(0);										
+										PrintWriter out = response.getWriter();
+										JSONObject jsonObject = new JSONObject();
+										jsonObject.put("questions", questions);
+										jsonObject.put("type", type);
+										jsonObject.put("options", options);
+										jsonObject.put("explanations", explanations);
+										out.print(jsonObject);
+										out.flush();
+								}
 
 								public void diabetic(String sessionID)
 								throws JessException	{
