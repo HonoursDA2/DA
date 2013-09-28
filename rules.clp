@@ -1,4 +1,4 @@
-(defglobal ?*currentQuestion* = 11)
+(defglobal ?*currentQuestion* = 1)
 
 (deftemplate Description
     (slot name)
@@ -87,18 +87,6 @@
    (Description(name Gestational-Diabetes)(type SYMPTOM)(id "gestational")(explanation "Have you ever been diagnosed with Gestational Diabetes during pregnancy?*") )
    (Description(name Dry-Mouth)(type SYMPTOM)(id "dryMouth")(explanation "Does your mouth feel dry at  times, do you often find that you have little to no saliva in your mouth?*"))
    (Description(name Abdominal-Pain)(type SYMPTOM) (id "abdominal")(explanation "Does the area surrounding your stomach pain, especially after eating food and during digestion?*"))
-   (Description(name Diabetes) (explanation "Diabetes Mellitus, more commonly known simply as Diabetes is a chronic medical condition where a person has 
-            high blood sugar levels.This is either because the insulin production in the body is insufficient or because the body does not respond properly to insulin"))
-   (Description(name Type-1) (explanation "Type 1 Diabetes occurs when the beta cells in the pancreas are damaged. 
-            Therefore the pancreas does not produce insulin anymore. Type 1 normally occurs in people under the age of 30 (it used to be called Juvenile Diabetes)."))
-   (Description(name Type-2) (explanation "Type 2 Diabetes occurs when the beta cells in the body are resistant to the effect of insulin. 
-            It develops gradually over a period of time.There is a high association with a family history of Diabetes and obesity. 
-            Type 2 normally occurs in people older than 40 years of age."))
-   (Description(name Pre-Diabetes) (explanation "Pre-diabetes is the pre-cursor of diabetes where the blood glucose levels are higher than normal but not high enough to be considered as Diabetes. However, if the condition is tackled at this stage through diet, exercise and other healthy lifestyle changes (weight management programme), the risk can be significantly reduced."))    
-   (Description(name Gestational) (explanation "This type of diabetes affects about 2%-10% of females during last months of pregnancy. 
-            Pregnant women have enough insulin, but the effect of insulin is partially blocked by other hormones produced in the placenta during pregnancy.
-            This causes a rise in sugar levels.
-            The disease normally disappears after pregnancy." ))
     )
 ;The list of symp toms and their explanations
 (deffacts symptomReason
@@ -186,7 +174,6 @@
     	(bind ?*currentQuestion* ?counter)
     )
     )
-
 (defrule changeLifestyleQuestions
     (declare (salience 5))
     (Ask-Question-Lifestyle)
@@ -284,14 +271,25 @@
     	(assert (Has-Symptom ?symptom)) 
     	(retract ?command)
     )
-;If the suer is male then they are not pregnant.
+;If the suer is male then they are not pregnant and dont show yeast infection * gestational symtoms.
 (defrule isMale
     (declare (salience 10))
     (Gender Male)
-    ?question <- (Question (section Initial) (type "pregnant") (text ?questionText) (answerType ?answerType) (ask yes))
+    ?question <- (Question (section Initial) (type "pregnant")(ask yes))
+    ?femaleQ1 <- (Description(type SYMPTOM)(id "gestational"))
+    ?femaleQ2 <- (Description(type SYMPTOM)(id "yeast"))
     =>
     (assert (Pregnant No))
     (modify ?question (ask no))
+    (retract ?femaleQ1 ?femaleQ2)
+    )
+;If female don't show erectile dysfunction symptom
+(defrule isFemale
+    (declare (salience 10))
+    (Gender Female)
+    ?maleQ1 <- (Description(type SYMPTOM)(id "dysfunction"))
+    =>
+    (retract ?maleQ1)
     )
 ;If no knowledge of diabetes do not ask if diabetic
 (defrule diabetesKnowledge
