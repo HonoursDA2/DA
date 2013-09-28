@@ -149,7 +149,7 @@
 		                if (type == "OPTIONAL") {
 		                    theOptions = options.split('-');
 		                    $(".questions").html("");
-		                    for (var i = 1; i < theOptions.length; i++) {
+		                    for (var i = 0; i < theOptions.length; i++) {
 		                        $(".questions").append('<div class="options" id="' + theOptions[i] + '">' + theOptions[i] + '</div>');
 		                    }
 
