@@ -18,5 +18,15 @@
 		<param-name>rulesfile</param-name>
 		<param-value>/WEB-INF/rules.clp</param-value>
 	</context-param>
+	<context-param>
+		<param-name>initialized</param-name>
+		<param-value>false</param-value>
+	</context-param>
+	<context-param>
+		<param-name>first</param-name>
+		<param-value>false</param-value>
+	</context-param>
+
+
 </web-app>
 
