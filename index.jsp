@@ -50,7 +50,7 @@
 	<div id="backb" onclick="revert()">Back</div><div id="button" onclick="confirm()">Continue</div>
 	</div>
 
-	<div id="feedback"></div>
+	<div class="feedback"></div>
 
 	</div>
 	</div>
@@ -98,7 +98,8 @@
 
 	<div id="contButton" onclick="confirmLifestyle()">Continue</div>
 	<div id="lifestyle">
-	   <h1>Lifestyle</h1>
+	<div class="questions"></div>
+	<div class="feedback"></div>
 	</div>
 
 	</div>

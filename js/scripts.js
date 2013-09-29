@@ -176,19 +176,19 @@
 		                $("#advisorH1").html(question);
 
 		                if (type == "INPUTT" || type == "INPUTN" || type == "INPUTND") {
-		                    $("#lifestyle").html('<input id="' + id + '" value="" type="' + id + '" placeholder="Enter Your ' + id + ' Here">');
+		                    $("#lifestyle .questions").html('<input id="' + id + '" value="" type="' + id + '" placeholder="Enter Your ' + id + ' Here">');
 		                }
 		                else if (type == "MALE-FEMALE") {
-		                    $("#lifestyle").html('<div id="male" onclick="gSpecific(male)"><img src="images/male-sign.jpg"></div><div id="female" onclick="gSpecific(female)"><img src="images/female-sign.jpg"></div>');
+		                    $("#lifestyle .questions").html('<div id="male" onclick="gSpecific(male)"><img src="images/male-sign.jpg"></div><div id="female" onclick="gSpecific(female)"><img src="images/female-sign.jpg"></div>');
 		                }
 		                else if (type == "YES-NO") {
-		                    $("#lifestyle").html('<div id="yesbutton" class="yes" value="yes" onclick="yesno(yes)">Yes</div><div id="nobutton" class="no" value="no" onclick="yesno(no)">No</div>');
+		                    $("#lifestyle .questions").html('<div id="yesbutton" class="yes" value="yes" onclick="yesno(yes)">Yes</div><div id="nobutton" class="no" value="no" onclick="yesno(no)">No</div>');
 		                } else
 		                    if (type == "OPTIONAL") {
 		                        theOptions = options.split('-');
-		                        $("#lifestyle").html("");
+		                        $("#lifestyle .questions").html("");
 		                        for (var i = 0; i < theOptions.length; i++) {
-		                            $("#lifestyle").append('<div class="options" id="' + theOptions[i] + '">' + theOptions[i] + '</div>');
+		                            $("#lifestyle .questions").append('<div class="options" id="' + theOptions[i] + '">' + theOptions[i] + '</div>');
 		                        }
 
 		                    }
@@ -237,8 +237,8 @@
 		        if (type == "INPUTN") {
 		            var intRegex = /^\d+$/;
 		            if (intRegex.test(answer)) {
-		                $("#feedback").fadeIn();
-		                $("#feedback").append("Your " + id + " is : " + answer + "<br>");
+		                $(".feedback").fadeIn();
+		                $(".feedback").append("Your " + id + " is : " + answer + "<br>");
 		                $.get('DA', { value: answer, answerID: id, sessionID: sessionID });
 		                proceed = true;
 		            }
@@ -248,8 +248,8 @@
 		        } else if (type == "INPUTND") {
 		            var intRegex = /^(\d+\.?\d*|\.\d+)$/;
 		            if (intRegex.test(answer)) {
-		                $("#feedback").fadeIn();
-		                $("#feedback").append("Your " + id + " is : " + answer + "<br>");
+		                $(".feedback").fadeIn();
+		                $(".feedback").append("Your " + id + " is : " + answer + "<br>");
 		                $.get('DA', { value: answer, answerID: id, sessionID: sessionID });
 		                proceed = true;
 		            } else {
@@ -258,27 +258,27 @@
 
 		        }
 		        else {
-		            $("#feedback").fadeIn();
-		            $("#feedback").append("Your " + id + " is : " + answer + "<br>");
+		            $(".feedback").fadeIn();
+		            $(".feedback").append("Your " + id + " is : " + answer + "<br>");
 		            $.get('DA', { value: answer, answerID: id, sessionID: sessionID });
 		            proceed = true;
 		        }
 		    }
 		    else if (type == "YES-NO") {
-		        $("#feedback").fadeIn();
-		        $("#feedback").append("Your " + id + ": " + yesOrno + "<br>");
+		        $(".feedback").fadeIn();
+		        $(".feedback").append("Your " + id + ": " + yesOrno + "<br>");
 		        $.get('DA', { value: yesOrno, answerID: id, sessionID: sessionID });
 		        proceed = true;
 		    }
 		    else if (type == "MALE-FEMALE") {
-		        $("#feedback").fadeIn();
-		        $("#feedback").append("Gender: " + gendertype + "<br>");
+		        $(".feedback").fadeIn();
+		        $(".feedback").append("Gender: " + gendertype + "<br>");
 		        $.get('DA', { value: gendertype, answerID: id, sessionID: sessionID });
 		        proceed = true;
 		    }
 		    else if (type == "OPTIONAL") {
-		        $("#feedback").fadeIn();
-		        $("#feedback").append(id + ": " + opt + "<br>");
+		        $(".feedback").fadeIn();
+		        $(".feedback").append(id + ": " + opt + "<br>");
 		        $.get('DA', { value: opt, answerID: id, sessionID: sessionID });
 		        proceed = true;
 		    }
@@ -297,8 +297,8 @@
 		        if (type == "INPUTN") {
 		            var intRegex = /^\d+$/;
 		            if (intRegex.test(answer)) {
-		                $("#feedback").fadeIn();
-		                $("#feedback").append("Your " + id + " is : " + answer + "<br>");
+		                $(".feedback").fadeIn();
+		                $(".feedback").append("Your " + id + " is : " + answer + "<br>");
 		                $.get('DA', { value: answer, answerID: id, sessionID: sessionID });
 		                proceed = true;
 		            }
@@ -308,8 +308,8 @@
 		        } else if (type == "INPUTND") {
 		            var intRegex = /^(\d+\.?\d*|\.\d+)$/;
 		            if (intRegex.test(answer)) {
-		                $("#feedback").fadeIn();
-		                $("#feedback").append("Your " + id + " is : " + answer + "<br>");
+		                $(".feedback").fadeIn();
+		                $(".feedback").append("Your " + id + " is : " + answer + "<br>");
 		                $.get('DA', { value: answer, answerID: id, sessionID: sessionID });
 		                proceed = true;
 		            } else {
@@ -318,27 +318,27 @@
 
 		        }
 		        else {
-		            $("#feedback").fadeIn();
-		            $("#feedback").append("Your " + id + " is : " + answer + "<br>");
+		            $(".feedback").fadeIn();
+		            $(".feedback").append("Your " + id + " is : " + answer + "<br>");
 		            $.get('DA', { value: answer, answerID: id, sessionID: sessionID });
 		            proceed = true;
 		        }
 		    }
 		    else if (type == "YES-NO") {
-		        $("#feedback").fadeIn();
-		        $("#feedback").append("Your " + id + ": " + yesOrno + "<br>");
+		        $(".feedback").fadeIn();
+		        $(".feedback").append("Your " + id + ": " + yesOrno + "<br>");
 		        $.get('DA', { value: yesOrno, answerID: id, sessionID: sessionID });
 		        proceed = true;
 		    }
 		    else if (type == "MALE-FEMALE") {
-		        $("#feedback").fadeIn();
-		        $("#feedback").append("Gender: " + gendertype + "<br>");
+		        $(".feedback").fadeIn();
+		        $(".feedback").append("Gender: " + gendertype + "<br>");
 		        $.get('DA', { value: gendertype, answerID: id, sessionID: sessionID });
 		        proceed = true;
 		    }
 		    else if (type == "OPTIONAL") {
-		        $("#feedback").fadeIn();
-		        $("#feedback").append(id + ": " + opt + "<br>");
+		        $(".feedback").fadeIn();
+		        $(".feedback").append(id + ": " + opt + "<br>");
 		        $.get('DA', { value: opt, answerID: id, sessionID: sessionID });
 		        proceed = true;
 		    }
@@ -393,7 +393,7 @@
 
 		var opt = "";
 		$(function () {
-		    $(".questions").on('click', '.options', function () {
+		    $(".questions,#lifestyle").on('click', '.options', function () {
 		        opt = $(this).attr("id");
 
 		        $(this).css({ "color": "red", "border-bottom": "5px solid red" });
@@ -430,19 +430,19 @@
 		            $("#advisorH1").html(question);
 
 		            if (type == "INPUTT" || type == "INPUTN" || type == "INPUTND") {
-		                $("#lifestyle").html('<input id="' + id + '" value="" type="' + id + '" placeholder="Enter Your ' + id + ' Here">');
+		                $("#lifestyle .questions").html('<input id="' + id + '" value="" type="' + id + '" placeholder="Enter Your ' + id + ' Here">');
 		            }
 		            else if (type == "MALE-FEMALE") {
-		                $("#lifestyle").html('<div id="male" onclick="gSpecific(male)"><img src="images/male-sign.jpg"></div><div id="female" onclick="gSpecific(female)"><img src="images/female-sign.jpg"></div>');
+		                $("#lifestyle .questions").html('<div id="male" onclick="gSpecific(male)"><img src="images/male-sign.jpg"></div><div id="female" onclick="gSpecific(female)"><img src="images/female-sign.jpg"></div>');
 		            }
 		            else if (type == "YES-NO") {
-		                $("#lifestyle").html('<div id="yesbutton" class="yes" value="yes" onclick="yesno(yes)">Yes</div><div id="nobutton" class="no" value="no" onclick="yesno(no)">No</div>');
+		                $("#lifestyle .questions").html('<div id="yesbutton" class="yes" value="yes" onclick="yesno(yes)">Yes</div><div id="nobutton" class="no" value="no" onclick="yesno(no)">No</div>');
 		            } else
 		                if (type == "OPTIONAL") {
 		                    theOptions = options.split('-');
-		                    $("#lifestyle").html("");
+		                    $("#lifestyle .questions").html("");
 		                    for (var i = 0; i < theOptions.length; i++) {
-		                        $("#lifestyle").append('<div class="options" id="' + theOptions[i] + '">' + theOptions[i] + '</div>');
+		                        $("#lifestyle .questions").append('<div class="options" id="' + theOptions[i] + '">' + theOptions[i] + '</div>');
 		                    }
 
 		                }
