@@ -1,4 +1,4 @@
-(defglobal ?*currentQuestion* = 11)
+(defglobal ?*currentQuestion* = 1)
 (defglobal ?*points* = 0)
 (defglobal ?*total* = 0)
 
