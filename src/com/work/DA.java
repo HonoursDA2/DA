@@ -6,6 +6,8 @@
 									import jess.*;
 									import org.json.*;
 									import java.util.StringTokenizer;
+									import java.util.ArrayList;
+									
 									public class DA extends HttpServlet{
 
 										StringWriter sw = new StringWriter();
@@ -14,7 +16,6 @@
 										StringWriter sw4 = new StringWriter();
 										HttpServletRequest request = null;
 										HttpServletResponse response = null;
-										boolean symptomsChecked = false;
 										boolean init = false;
 										boolean firstSession = false;
 										static int objects = 0;
@@ -23,8 +24,47 @@
 										String jessText3;
 										String jessText4;	
 										Rete engine = null;
-										boolean initialComplete=false;
-										
+										ArrayList<sessionData> sessions = new ArrayList<sessionData>();
+																													
+										private class sessionData {
+											boolean symptomsChecked;
+											boolean initialComplete;
+											Rete engine;
+
+											public sessionData() {
+												symptomsChecked = false;
+												initialComplete = false;												
+												engine = null;
+											}
+
+											public void setEngine(Rete theEngine) {
+												engine = theEngine;
+											}
+
+											public Rete getEngine() {
+												return engine;
+											}											
+
+											public boolean getSymptomsChecked () {
+												return symptomsChecked;
+											}
+
+											public boolean getInitialComplete () {
+												return initialComplete;
+											}
+
+											public void setSymptomsChecked () {
+												symptomsChecked = true;
+											}
+
+											public void setInitialComplete () {
+												initialComplete = true;
+											}
+										}
+
+										public int getInt(String sessionID) {
+											return Integer.parseInt(sessionID.charAt(sessionID.length()-1)+"");
+										}
 
 										public void doGet(HttpServletRequest request,
 											HttpServletResponse response) 
@@ -46,7 +86,8 @@
 												
 												}
 										}
-										 public void doPost(HttpServletRequest request,
+									
+									public void doPost(HttpServletRequest request,
 								                     HttpServletResponse response)
 								      throws ServletException, IOException {
 								     doGet(request, response);
@@ -63,6 +104,7 @@
 											String sessionID = "";
 											if (getServletContext().getAttribute(engineCounter()) == null) {
 												sessionID = engineCounter();
+												sessions.add(new sessionData());
 												ServletContext servletContext = getServletContext();
 												String rulesFile = servletContext.getInitParameter("rulesfile");
 												try {
@@ -75,7 +117,8 @@
 													tempEngine.reset();
 													tempEngine.eval("(watch all)");
 													System.out.println("creating jess object" + engineCounter());
-													servletContext.setAttribute(engineCounter(), tempEngine);
+													sessions.get(getInt(sessionID)).setEngine(tempEngine);
+													servletContext.setAttribute(engineCounter(), sessions.get(getInt(sessionID)));
 													//System.out.println("storing " + engineCounter());
 													init = true;
 													objects++;
@@ -124,9 +167,10 @@
 											}	  
 										}
 
-										public Rete getEngine (String IDNumber) {
+										public Rete getEngine (String sessionID) {
 											//System.out.println("trying to get " + IDNumber);
-										Rete currentEngine =(Rete)(getServletContext().getAttribute(IDNumber));
+										sessionData data = (sessionData)(getServletContext().getAttribute(sessionID));
+										Rete currentEngine =(Rete)data.getEngine();
 										return currentEngine;
 										}
 										
@@ -149,7 +193,7 @@
 												String text ="DEFAULT"; 		
 												String section="";
 												System.out.println("(Ask-Question)");
-												if (!initialComplete) {
+												if (!(sessions.get(getInt(sessionID))).getInitialComplete()) {
 													section ="(Ask-Question-Initial)"; 		
 												} else {
 													section ="(Ask-Question-Lifestyle)"; 			
@@ -175,7 +219,7 @@
 												out.print(jsonObject);
 												out.flush();
 												if (jessText.equals("")) {
-													initialComplete=true;
+												sessions.get(getInt(sessionID)).setInitialComplete();
 												}
 											}
 										public void symptom(String sessionID)
@@ -197,7 +241,7 @@
 										}
 										public void symptomList(String sessionID) 
 										throws IOException, JessException, JSONException {	
-											if (symptomsChecked==false) {
+											if (!(sessions.get(getInt(sessionID))).getSymptomsChecked()) {
 												String theSymptoms = request.getParameter("symptoms");
 												StringTokenizer tokenizer = new StringTokenizer(theSymptoms, "*");
 												System.out.println(theSymptoms);	
@@ -222,7 +266,7 @@
 													((StringWriter)(getEngine(sessionID).getOutputRouter("out3"))).getBuffer().setLength(0);	
 													((StringWriter)(getEngine(sessionID).getOutputRouter("out4"))).getBuffer().setLength(0);
 													System.out.println(jessText);	
-													symptomsChecked = true;
+													sessions.get(getInt(sessionID)).setSymptomsChecked();
 												}
 													
 												response.setContentType("application/json");  
@@ -234,6 +278,7 @@
 												jsonObject.put("additional", jessText4);
 												out.print(jsonObject);
 												out.flush();
+												getEngine(sessionID).assertString("(Calculate totals)");
 												getEngine(sessionID).eval("(facts)");
 
 											} 	
