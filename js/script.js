@@ -1,4 +1,6 @@
 ﻿    var question = type = id = "";
+    var extraQ = extraT = extraO = extraE = extraObj = new Array();
+    var dOptions = dExplanations = new Array();
 
     window.onload = function () {
         //splash();
@@ -20,6 +22,31 @@
         $('#symptoms').animate({
             scrollLeft: '-=20'
         }, 50, lscroll);
+    }
+
+    function backtoSplash() {
+        $("#splash").show("puff", 500);
+        $("#splash #moreInfo,#splash #theAdvisor").css({ "opacity": "1","box-shadow":"0px 2px 5px -2px gray" });
+    }
+
+    function showInfo(index) {
+        if (extraT[index] == "MULTIPLE") {
+            dOptions = extraO[index].split("-");
+            dExplanations = extraE[index].split("-");
+
+            $("#dInfoOptions").html("");
+            for (var i = 0; i < dOptions.length; i++) {
+                extraObj[i] = { dOpt: dOptions[i], dExp: dExplanations[i] };
+
+                $("#dInfoOptions").append("<div onclick='displayInfo("+i+")'>"+extraObj[i].dOpt+"</div>");
+        }
+        }
+        else if (extraT[index] == "SINGLE")
+            $("#dInfo").html(extraE[index]);
+    }
+
+    function displayInfo(index) {
+        $("#dInfo").html(extraObj[index].dExp);
     }
 
     $(function () {
@@ -83,6 +110,17 @@
             $(this).css({ "box-shadow": "0 2px 15px -2px red" });
             $("#diabetesInfo").fadeIn();
             $("#splash").delay(2000).effect("puff", 1000);
+            $.get('DA', { command: "getInfo", sessionID: sessionID }, function (data) {
+
+                extraQ = data.questions.split("*");
+                extraT = data.type.split("*");
+                extraO = data.options.split("*");
+                extraE = data.explanations.split("*");
+
+                for (var i = 0; i < extraQ.length; i++) {
+                    $("#diabetesQues").append("<div onclick='showInfo("+i+")'>" + extraQ[i] + "</div>");
+                }
+            });
         });
 
         $('.next').on('mouseenter', rscroll);

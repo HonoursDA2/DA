@@ -74,7 +74,6 @@
 		    $("#patient").animate({ "bottom": "-101%" }, 1000, "easeInOutCirc", function () {
 		        $("#symptoms").fadeOut(0);
 		        $("#lifestyle").fadeIn();
-		        $.get('DA', { command: "getInfo", sessionID:sessionID}); 
 		    });
 
 		}

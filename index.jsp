@@ -21,20 +21,14 @@
 	</div>
 
 	<div id="diabetesInfo">
-		<h1>Diabetes Information</h1>
+		<div id="toolbar"><p>Diabetes Information</p> <img src="images/icons/back.png" onclick="backtoSplash()"></div>
 		<div class="speech">
-		<div id="dInfo"></div>
+		<div id="dInfoOptions"></div>
+		<div id="dInfo">yo</div>
 		</div>
 		
 		<div id="diabetesQues">
-		<div>Question1</div>
-		<div>Question2</div>
-		<div>Question3</div>
-		<div>Question4</div>
-		<div>Question5</div>
-		<div>Question6</div>
-		<div>Question7</div>
-		<div>Question8</div>
+		
 		</div>
 	</div>
 

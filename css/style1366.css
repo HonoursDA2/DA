@@ -127,6 +127,34 @@ body
     display:none;
 }
 
+#dInfo
+{
+    height:90%;
+    width:100%;
+    position:relative;
+    font-size:2em;
+    padding:10px;
+    overflow:auto;
+    box-sizing:border-box;
+}
+
+#dInfoOptions
+{
+    height:8%;
+    width:100%;
+    position:relative;
+    border-bottom:1px silver solid;
+}
+
+#dInfoOptions div
+{
+    width:20%;
+    height:100%;
+    margin:0px 5px 0px 5px;
+    box-shadow:0px 0px 2px 1px silver;
+    display:inline-block;
+}
+
 #diabetesQues
 {
     position:absolute;
@@ -231,7 +259,7 @@ body
     height:100%;
 }
 
-div.speech
+div.speech,#toolbar
 {
     width:65%;
     height:90%;
@@ -241,7 +269,36 @@ div.speech
     margin:1.25% 1.5%;
     position:absolute;
     text-align:center;
-    
+}
+
+#toolbar
+{
+    position:relative;
+    height:6%;
+    border-bottom:silver 1px solid;
+    margin:0;
+    margin-left:1.5%;
+    text-align:left;
+    box-shadow:none;
+}
+
+#toolbar p,#toolbar img
+{
+    display:inline-block;
+    position:relative;
+}
+
+#toolbar p
+{
+  font-size:2em;
+  top:-5px;
+}
+
+#toolbar img
+{
+    height:100%;
+    width:auto;
+    cursor:pointer;
 }
 
 div.speech:before
