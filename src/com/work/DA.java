@@ -16,6 +16,9 @@ public class DA extends HttpServlet{
 	HttpServletRequest request = null;
 	HttpServletResponse response = null;
 	static int objects = 0;
+	boolean init = false;
+	boolean firstSession = false;
+	
 	String jessText;			
 	String jessText2;
 	String jessText3;
@@ -69,7 +72,10 @@ public class DA extends HttpServlet{
 		this.request = request;
 		this.response = response;
 		try {
-			if (getServletContext().getInitParameter("initialized").equals("false")) {
+			if (
+				//getServletContext().getInitParameter("initialized").equals("false")) 
+			!init)
+			{
 				checkInitialized();
 			}
 			chooseFunction();
@@ -116,7 +122,8 @@ public class DA extends HttpServlet{
 				sessions.get(getInt(sessionID)).setEngine(tempEngine);
 				servletContext.setAttribute(engineCounter(), sessions.get(getInt(sessionID)));
 				//System.out.println("storing " + engineCounter());
-				servletContext.setInitParameter("initialized", "true");
+				init = true;
+				//servletContext.setInitParameter("initialized", "true");
 				objects++;
 			} catch (Exception jess) {
 				throw new ServletException(jess);
@@ -173,11 +180,15 @@ public class DA extends HttpServlet{
 		throws ServletException, IOException, JessException {
 		System.out.println("CAALLING ME");
 		String session = "";
-		if (getServletContext().getInitParameter("first").equals("false"))	{ 
+		if (
+			//getServletContext().getInitParameter("first").equals("false"))	
+			!firstSession)
+		{ 
 			session = checkInitialized();
 		} else{
 			session = "engine0";
-			getServletContext().setInitParameter("first", "true");
+			firstSession=true;
+			//getServletContext().setInitParameter("first", "true");
 		}
 		response.setContentType("text/plain");  
 		response.setCharacterEncoding("UTF-8");		
