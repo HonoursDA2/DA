@@ -15,9 +15,27 @@
 	<body>
 
 	<div id="splash">
-	<img src="images/silver.jpg">
-	<h1>DA2</h1>
-	<h2>Diabetes Advisor</h2>
+	<div id="logoC"><div id="logo"><img src="images/robo.jpg"></div></div>
+	<div id="theAdvisor"><p>Diabetes Advisor</p></div><div id="moreInfo"><p>Information on Diabetes</p></div>
+	<h3>Disclaimer****Use this system at your own risk, if you go decide to inject yourself with insulin that's your own problem :-/</h3>
+	</div>
+
+	<div id="diabetesInfo">
+		<h1>Diabetes Information</h1>
+		<div class="speech">
+		<div id="dInfo"></div>
+		</div>
+		
+		<div id="diabetesQues">
+		<div>Question1</div>
+		<div>Question2</div>
+		<div>Question3</div>
+		<div>Question4</div>
+		<div>Question5</div>
+		<div>Question6</div>
+		<div>Question7</div>
+		<div>Question8</div>
+		</div>
 	</div>
 
 	<div id="profile">
