@@ -1,4 +1,4 @@
-(defglobal ?*currentQuestion* = 11)
+(defglobal ?*currentQuestion* = 1)
 (defglobal ?*points* = 0)
 (defglobal ?*total* = 0)
 
@@ -119,31 +119,59 @@
     )
 ; Extra information that accompanies the symptoms
 (deffacts additional
-   (Information (question "What is Diabetes Mellitus?*") (explanation "Diabetes Mellitus, more commonly known simply as Diabetes is a chronic medical condition where a person has 
-            high blood sugar levels.This is either because the insulin production in the body is insufficient or because the body does not respond properly to insulin")
-        (extraInfo "Insulin is a hormone produced by the Pancreas that is the main regulator of the glucose (sugar) in the blood.
-            Insulin converts the glucose into energy to be used by the cells"))
-   (Information(question  "What are the types of Diabetes?*") (explanation "Type 1 Diabetes occurs when the beta cells in the pancreas are damaged. 
+    (Information (question "KEYWORDS") (explanation "Glucose is the most important simple sugar in a human metabolism, blood glucose is the level of glucose present in the blood stream-
+            Gastroparesis is a disease of the muscles of the stomach or the nerves controlling the muscles that causes the muscles to stop working, affecting the digestive process-
+             Insulin is a hormone produced by the Pancreas that is the main regulator of the glucose (sugar) in the blood.-
+             The Pancreas is long soft organ behind your stomach and infront of your spine, it produces insulin to help break down the food and hormones that halp control the blood sugar levels.-
+            Yeast is a type of fungus; yeast infection refers to the fungus scientifically known as Candida*")
+        (questionType "MULTIPLE*") 
+        (options "Blood Glucose-Gastroparesis-Insulin-Pancreas-Yeast*") )
+    (Information (question "What are the Symptoms of Diabetes*") (explanation "The glucose is not being converted into energy this weakens the cells and causes fatigue.-
+            There is a high loss of Glucose through the urine.-
+            This is caused by dehydration in the body.-
+            This is a result of the nerve damage in the body.-
+            Nausea is caused by gastroparesis.-
+            This is due to the high level of glucose in the blood, this leads to frequent headaches experiecned for prolonged periods of time.-
+            Elevated blood sugar levels cause narrowing of blood vessels, leading to a decreased blood flow and oxygen to the wounds.-
+            The fluctuation in blood glucose levels leads to a light sensitivity. Also this can be caused by the tissue being pulled from the eye lenses tob e used for energy by the body.-
+            Caused by a lack of energy. As the sugar is not being converted into energy to be used by the cells.-
+            Insulin deficiency leads to loss of weight, as the sugar cannot be converted into energy, so the body seeks alternative sources like muscle tissue and fat.-
+            Dehydration is caused by excess urine, this prompts an increased desire for water consumption.-
+            Yeast organisms are present in most woman, but these organisms tend to overgrow in a sugar rich environment. A result of badly managed diabetes.-
+            High glucose levels in saliva promotes growth of bacteria that cause gum disease.-
+            The dropping blood sugar levels lead to a desire for more food and energy.-
+            During pregnancy there is a lot of hormonal activity within the body, this affects the functioning of the insulin and might alter/interfere with how the body responmds tot he insulin. This condition usually subsides after the pregnacny-
+            The nerves in the body get damaged over time, leading to a tingling sensation, pain and eventual loss of sensation.*")
+        (questionType "MULTIPLE*")
+        (options "Fatigue-Exesive Urination-Dry Mouth-Erectile Dysfunction-Nausea-Frequent Headaches-Slow Healing Wounds-Blurred Vision-Irritability-Weightloss-Extreme Thirst-Yeast Infection-Gum Infection-Extreme Hunger-Gestational Diabetes-Numbness*"))
+    (Information(question  "What are the types of Diabetes?*") (explanation "Type 1 Diabetes occurs when the beta cells in the pancreas are damaged. 
             Therefore the pancreas does not produce insulin anymore. Type 1 normally occurs in people under the age of 30 (it used to be called Juvenile Diabetes).-Type 2 Diabetes occurs when the beta cells in the body are resistant to the effect of insulin. 
             It develops gradually over a period of time.There is a high association with a family history of Diabetes and obesity. 
             Type 2 normally occurs in people older than 40 years of age-.
-            This type of diabetes affects about 2%-10% of females during last months of pregnancy. 
+            This type of diabetes affects about 2% to 10% of females during last months of pregnancy. 
             Pregnant women have enough insulin, but the effect of insulin is partially blocked by other hormones produced in the placenta during pregnancy.
             This causes a rise in sugar levels.
             The disease normally disappears after pregnancy.-
-            Pre-diabetes is the pre-cursor of diabetes where the blood glucose levels 
+            Prediabetes is the precursor of diabetes where the blood glucose levels 
             are higher than normal but not high enough to be considered as Diabetes. 
             However, if the condition is tackled at this stage through diet, 
             exercise and other healthy lifestyle changes (weight management programme), the risk can be significantly reduced.*")
         (extraInfo "The Pancreas is a long soft organ that secrets insulin when the level of sugar in the blood rises in the body after a meal.
             Insulin is a hormone produced by the Pancreas that is the main regulator of the glucose (sugar) in the blood.")
         (questionType "MULTIPLE*")
-        (options "TYPE 1-Type 2-Gestational-Prediabetes*")
-        )
-     (Information (question "What are the causes of Diabetes?*") (explanation "Fat fat fat fat fat is bad-Family History of diabetes-Pancreas not working*")
+        (options "TYPE 1-Type 2-Gestational-Prediabetes*"))
+    (Information (question "What are the causes of Diabetes?*") 
+        (explanation "You must stop eating, you fat ass nigger!-
+            If your relatives have Diabetes...then its late-
+            Malfuncitoning pancreas is a cause for Type1 Diabetes*")
         (questionType "MULTIPLE*")
-        (options "Obesity-Family History-Pancreas*")
-       )
+        (options "Obesity-Family History-Pancreas*"))
+    (Information (question "What is Diabetes Mellitus?*") (explanation "Diabetes Mellitus, more commonly known simply as Diabetes is a chronic medical condition where a person has 
+            high blood sugar levels.This is either because the insulin production in the body is insufficient or because the body does not respond properly to insulin*")
+        (extraInfo "Insulin is a hormone produced by the Pancreas that is the main regulator of the glucose (sugar) in the blood.
+            Insulin converts the glucose into energy to be used by the cells"))
+       
+      
      )
 ;Returns informationpertaining to the selected symptoms experienced by the user
 (defrule getInfo
