@@ -72,6 +72,19 @@
             }
         });
 
+        $("#theAdvisor").click(function () {
+            $("#splash #moreInfo").css({ "opacity": "0.2" });
+            $(this).css({ "box-shadow": "0 2px 15px -2px red" });
+            $("#splash").delay(2000).effect("puff", 1000);
+        });
+
+        $("#moreInfo").click(function () {
+            $("#splash #theAdvisor").css({ "opacity": "0.2" });
+            $(this).css({ "box-shadow": "0 2px 15px -2px red" });
+            $("#diabetesInfo").fadeIn();
+            $("#splash").delay(2000).effect("puff", 1000);
+        });
+
         $('.next').on('mouseenter', rscroll);
         $('.prev').on('mouseenter', lscroll);
         $('.next,.prev').on('mouseleave', function () {
