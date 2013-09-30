@@ -30,6 +30,7 @@
         (default "SINGLE*"))
     (slot options
         (default "none*"))
+    	(slot caption)
     )
 (deftemplate advice
     (slot text)
@@ -129,6 +130,7 @@
             Gestational Diabetes is brought about by hormonal effects of the pregnancy, thus no supplementary insulin is required. 
             The patient needs to ensure they exercise appropriately and maintain a healthy diet throughout the pregnancy to avoid developing type 2 Diabetes in the long run.*"
             )
+        (caption "These are tips on how to manage a life after having being diagnosed with Diabetes*")
             (questionType "MULTIPLE*")
         	(options "General-Type 1-Type 2-Gestational*")	
         )
@@ -136,9 +138,16 @@
             Exercise often, try not to drink/smoke excessively this will not help the situation*")
             (questionType "MULTIPLE*")
         	(options "Diet-Lifestyle*")	
+        	(caption "Diabetes can be prevented, if the right precautions and mindset are incorporated into everyday life. There are certain things that
+            are not in ones control, like family history and age. But one can take full control of their weight, lifestlye habits and diet.
+            *")            
         )
     (Information (question "5. Diabetes complications*") (explanation "A lot of really bad stuff :/*")
             (questionType "SINGLE*")
+        	(caption "Diabetes has a lot of complications that can result if not managed appropriately, early diagnosis plays a large role in
+            preventing the complications from arising. Either because the body is insulin resistant or the pancreas is not 
+            producing enough insulin, this leads to a high blood glucose level througouht the body, which can cause infections and disease over a period of time. 
+            Badly managed Diabetes will eventally result in death.*")
         	)
     (Information (question "4. What are the Symptoms of Diabetes*") (explanation "The glucose is not being converted into energy this weakens the cells and causes fatigue.-
             There is a high loss of Glucose through the urine, this causes one to go to the toilet very often.-
@@ -157,7 +166,9 @@
             During pregnancy there is a lot of hormonal activity within the body, this affects the functioning of the insulin and might alter/interfere with how the body responmds tot he insulin. This condition usually subsides after the pregnacny-
             The nerves in the body get damaged over time, leading to a tingling sensation, pain and an eventual loss of sensation.*")
         (questionType "MULTIPLE*")
-        (options "Fatigue-Exesive Urination-Dry Mouth-Erectile Dysfunction-Nausea-Frequent Headaches-Slow Healing Wounds-Blurred Vision-Irritability-Weightloss-Extreme Thirst-Yeast Infection-Gum Infection-Extreme Hunger-Gestational Diabetes-Numbness*"))
+        (options "Fatigue-Exesive Urination-Dry Mouth-Erectile Dysfunction-Nausea-Frequent Headaches-Slow Healing Wounds-Blurred Vision-Irritability-Weightloss-Extreme Thirst-Yeast Infection-Gum Infection-Extreme Hunger-Gestational Diabetes-Numbness*")
+        (caption "Diabetes can be picked up through the symptoms that manifest over time. There are alot of symptoms that come with Diabetes. 
+            Although with Type 2 Diabetes, these signs of Diabetes might not be made visible through symptoms for a very long time, making it difficult for someone to know their Diabetes status*"))
     (Information(question  "3. What are the types of Diabetes?*") (explanation "Type 1 Diabetes occurs when the beta cells in the pancreas are damaged. 
             Therefore the pancreas does not produce insulin anymore. Type 1 normally occurs in people under the age of 30 (it used to be called Juvenile Diabetes).-Type 2 Diabetes occurs when the beta cells in the body are resistant to the effect of insulin. 
             It develops gradually over a period of time.There is a high association with a family history of Diabetes and obesity. 
@@ -171,7 +182,9 @@
             However, if the condition is tackled at this stage through diet, 
             exercise and other healthy lifestyle changes (weight management programme), the risk can be significantly reduced.*")
         (questionType "MULTIPLE*")
-        (options "Type 1-Type 2-Gestational-Prediabetes*"))
+        (options "Type 1-Type 2-Gestational-Prediabetes*")
+        (caption "There are three distinct types of Diabetes, along with prediabetes which is sort of the prelude to Diabetes that should raise many warning bells because of rising blood sugar levels in the body.*")
+        )
     (Information (question "2. What are the causes of Diabetes?*") 
         (explanation "Obesity is thought to be the primary cause of Type 2 Diabetes in people who already have a family history of the disease
             When a person is obese, the body has to deal with more nutrients than it can handle, 
@@ -183,27 +196,32 @@
             Famiily history is a great contributing factor that people often down play and take for granted.-
             If the pancreas is damaged and not working properly this leads to insufficient insulin secretion, the onset of Type 1 Diabetes*")
         (questionType "MULTIPLE*")
-        (options "Obesity-Family History-Pancreas malfunction*"))
+        (options "Obesity-Family History-Pancreas malfunction*")
+        (caption "There are a few causes of Diabetes that play a significant role in your chances of getting the Disease, these are obesity, family history of Diabetes and the 
+            malfunctioning of the Pancreas(~)*"))
     (Information (question "1. What is Diabetes Mellitus?*") (explanation "Diabetes Mellitus, more commonly known simply as Diabetes is a chronic medical condition where a person has 
-            high blood sugar levels.This is either because the insulin production in the body is insufficient or because the body does not respond properly to insulin*")  )
+            high blood sugar levels.This is either because the insulin production in the body is insufficient or because the body does not respond properly to insulin*"))
         (Information (question "0. KEYWORDS*") (explanation "Glucose is the most important simple sugar in a human metabolism, blood glucose is the level of glucose present in the blood stream-
             	Gastroparesis is a disease of the muscles of the stomach or the nerves controlling the muscles that causes the muscles to stop working, affecting the digestive process-
              Insulin is a hormone produced by the Pancreas that is the main regulator of the glucose (sugar) in the blood.-
              The Pancreas is long soft organ behind your stomach and infront of your spine, it produces insulin to help break down the food and hormones that halp control the blood sugar levels.-
             Yeast is a type of fungus; yeast infection refers to the fungus scientifically known as Candida*")
         (questionType "MULTIPLE*") 
-        (options "Blood Glucose-Gastroparesis-Insulin-Pancreas-Yeast*") )
-        
+        (options "Blood Glucose-Gastroparesis-Insulin-Pancreas-Yeast*")
+        (caption "Important keywords that will be needed to understand defintions*")
+        )      
     )
 ;Returns informationpertaining to the selected symptoms experienced by the user
 (defrule getInfo
     (Get Info)
-    (Information (question ?question) (explanation ?explanation)(questionType ?type) (options ?theOptions)) 
+    (Information (question ?question) (explanation ?explanation)(questionType ?type) (options ?theOptions) (caption ?theCaption)) 
     =>
     	(printout out ?question)
     	(printout out2 ?type)
     	(printout out3 ?theOptions)
     	(printout out4 ?explanation)
+    	(printout out5 ?theCaption)
+    
     )
 ;Asks the initial set of questions
 (defrule askQuestionInitial

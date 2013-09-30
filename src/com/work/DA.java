@@ -13,16 +13,18 @@ public class DA extends HttpServlet{
 	StringWriter sw2 = new StringWriter();
 	StringWriter sw3 = new StringWriter();
 	StringWriter sw4 = new StringWriter();
+	StringWriter sw5 = new StringWriter();
 	HttpServletRequest request = null;
 	HttpServletResponse response = null;
 	static int objects = 0;
 	boolean init = false;
 	boolean firstSession = false;
-	
 	String jessText;			
 	String jessText2;
 	String jessText3;
-	String jessText4;	
+	String jessText4;
+	String jessText5;
+
 	ArrayList<sessionData> sessions = new ArrayList<sessionData>();
 
 	private class sessionData {
@@ -115,6 +117,7 @@ public class DA extends HttpServlet{
 				tempEngine.addOutputRouter("out2", sw2);
 				tempEngine.addOutputRouter("out3", sw3);
 				tempEngine.addOutputRouter("out4", sw4);
+				tempEngine.addOutputRouter("out5", sw5);
 				tempEngine.batch(servletContext.getRealPath(rulesFile));
 				tempEngine.reset();
 				tempEngine.eval("(watch all)");
@@ -302,13 +305,16 @@ public class DA extends HttpServlet{
 		String options = getEngine(sessionID).getOutputRouter("out3").toString();
 		((StringWriter)(getEngine(sessionID).getOutputRouter("out3"))).getBuffer().setLength(0);
 		String explanations = getEngine(sessionID).getOutputRouter("out4").toString();
-		((StringWriter)(getEngine(sessionID).getOutputRouter("out4"))).getBuffer().setLength(0);										
+		((StringWriter)(getEngine(sessionID).getOutputRouter("out4"))).getBuffer().setLength(0);
+		String caption = getEngine(sessionID).getOutputRouter("out5").toString();
+		((StringWriter)(getEngine(sessionID).getOutputRouter("out5"))).getBuffer().setLength(0);										
 		PrintWriter out = response.getWriter();
 		JSONObject jsonObject = new JSONObject();
 		jsonObject.put("questions", questions);
 		jsonObject.put("type", type);
 		jsonObject.put("options", options);
 		jsonObject.put("explanations", explanations);
+		jsonObject.put("caption", caption);	
 		out.print(jsonObject);
 		out.flush();
 	}
