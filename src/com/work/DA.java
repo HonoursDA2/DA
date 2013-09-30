@@ -270,7 +270,10 @@ public class DA extends HttpServlet{
 			jsonObject.put("additional", jessText4);
 			out.print(jsonObject);
 			out.flush();
-			getEngine(sessionID).eval("(facts)");
+			getEngine(sessionID).assertString("(Calculate Totals)");
+			getEngine(sessionID).run();
+			
+			//getEngine(sessionID).eval("(facts)");
 
 		} 	
 	}

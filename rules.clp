@@ -1,4 +1,4 @@
-(defglobal ?*currentQuestion* = 11)
+(defglobal ?*currentQuestion* = 1)
 (defglobal ?*points* = 0)
 (defglobal ?*total* = 0)
 
@@ -497,10 +497,13 @@
     )
 ;Assert the total and points facts, for retrieval by the server and for calculation.
 (defrule totals
-    ?command <-(Calculate totals)
+    ?command <-(Calculate Totals)
     =>
     (printout out (* (/ ?*points* ?*total*) 100))
-    (retract ?command)
+    (retract ?command) 
+    
+    (assert (Total ?*total*))
+    (assert (Points ?*points*))
     )
 ;If female don't show erectile dysfunction symptom.
 (defrule isFemale
