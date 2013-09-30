@@ -24,7 +24,7 @@
 		<div id="toolbar"><p>Diabetes Information</p> <img src="images/icons/back.png" onclick="backtoSplash()"></div>
 		<div class="speech">
 		<div id="dInfoOptions"></div>
-		<div id="dInfo">yo</div>
+		<div id="dInfo"></div>
 		</div>
 		
 		<div id="diabetesQues">
@@ -33,6 +33,7 @@
 	</div>
 
 	<div id="profile">
+	<img class="imgBg" src="images/level/lime.jpg">
 	<div><h1>Welcome To DA2</h1>
 	<div class="speech">
 	<span class="profileH1"></span>
@@ -49,6 +50,7 @@
 	</div>
 	</div>
 
+	<img class="imgBg" src="images/level/lime.jpg">
 	<div class="section" id="advisor">
 	    
 

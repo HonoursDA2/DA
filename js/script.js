@@ -26,7 +26,8 @@
 
     function backtoSplash() {
         $("#splash").show("puff", 500);
-        $("#splash #moreInfo,#splash #theAdvisor").css({ "opacity": "1","box-shadow":"0px 2px 5px -2px gray" });
+        $("#splash #moreInfo,#splash #theAdvisor").css({ "opacity": "1", "box-shadow": "0px 2px 5px -2px gray" });
+        $("#diabetesInfo").fadeOut();
     }
 
     function showInfo(index) {
@@ -37,12 +38,14 @@
             $("#dInfoOptions").html("");
             for (var i = 0; i < dOptions.length; i++) {
                 extraObj[i] = { dOpt: dOptions[i], dExp: dExplanations[i] };
-
-                $("#dInfoOptions").append("<div onclick='displayInfo("+i+")'>"+extraObj[i].dOpt+"</div>");
+                $("#dInfo").html("");
+                $("#dInfoOptions").append("<div onclick='displayInfo(" + i + ")'>" + extraObj[i].dOpt + "</div>");
+            }
         }
-        }
-        else if (extraT[index] == "SINGLE")
+        else if (extraT[index] == "SINGLE") {
+            $("#dInfoOptions").html("");
             $("#dInfo").html(extraE[index]);
+        }
     }
 
     function displayInfo(index) {
@@ -102,14 +105,14 @@
         $("#theAdvisor").click(function () {
             $("#splash #moreInfo").css({ "opacity": "0.2" });
             $(this).css({ "box-shadow": "0 2px 15px -2px red" });
-            $("#splash").delay(2000).effect("puff", 1000);
+            $("#splash").delay(1500).effect("puff", 1000);
         });
 
         $("#moreInfo").click(function () {
             $("#splash #theAdvisor").css({ "opacity": "0.2" });
             $(this).css({ "box-shadow": "0 2px 15px -2px red" });
             $("#diabetesInfo").fadeIn();
-            $("#splash").delay(2000).effect("puff", 1000);
+            $("#splash").delay(1500).effect("puff", 1000);
             $.get('DA', { command: "getInfo", sessionID: sessionID }, function (data) {
 
                 extraQ = data.questions.split("*");

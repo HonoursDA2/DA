@@ -132,7 +132,7 @@
 		                $(".questions").html('<input id="' + id + '" value="" type="' + id + '" placeholder="Enter Your ' + id + ' Here">');
 		            }
 		            else if (type == "MALE-FEMALE") {
-		                $(".questions").html('<div id="male" onclick="gSpecific(male)"><img src="images/male-sign.jpg"></div><div id="female" onclick="gSpecific(female)"><img src="images/female-sign.jpg"></div>');
+		                $(".questions").html('<div id="male" onclick="gSpecific(this)"><img src="images/male-sign.jpg"></div><div id="female" onclick="gSpecific(this)"><img src="images/female-sign.jpg"></div>');
 		            }
 		            else if (type == "YES-NO") {
 		                $(".questions").html('<div id="yesbutton" class="yes" value="yes" onclick="yesno(yes)">Yes</div><div id="nobutton" class="no" value="no" onclick="yesno(no)">No</div>');
@@ -178,7 +178,7 @@
 		                    $("#lifestyle .questions").html('<input id="' + id + '" value="" type="' + id + '" placeholder="Enter Your ' + id + ' Here">');
 		                }
 		                else if (type == "MALE-FEMALE") {
-		                    $("#lifestyle .questions").html('<div id="male" onclick="gSpecific(male)"><img src="images/male-sign.jpg"></div><div id="female" onclick="gSpecific(female)"><img src="images/female-sign.jpg"></div>');
+		                    $("#lifestyle .questions").html('<div id="male" onclick="gSpecific(this)"><img src="images/male-sign.jpg"></div><div id="female" onclick="gSpecific(this)"><img src="images/female-sign.jpg"></div>');
 		                }
 		                else if (type == "YES-NO") {
 		                    $("#lifestyle .questions").html('<div id="yesbutton" class="yes" value="yes" onclick="yesno(yes)">Yes</div><div id="nobutton" class="no" value="no" onclick="yesno(no)">No</div>');
@@ -227,9 +227,42 @@
 
 		}
 
-
+		var meter = 0;
 		function confirm() {
 		    var proceed = false;
+		    meter += 5;
+
+		    if (meter == 20) {
+		        $('.imgBg').attr('src', function (i, e) {
+		            return e.replace("images/level/lime.jpg", "images/level/lime.jpg");
+		        });
+		    }
+		    else if (meter == 40) {
+		        $('.imgBg').attr('src', function (i, e) {
+		            return e.replace("images/level/lime.jpg", "images/level/green.jpg");
+		        });
+		    }
+		    else if (meter == 60) {
+		        $('.imgBg').attr('src', function (i, e) {
+		            return e.replace("images/level/green.jpg", "images/level/yellow.jpg");
+		        });
+		    }
+		    else if (meter == 80) {
+		        $('.imgBg').attr('src', function (i, e) {
+		            return e.replace("images/level/yellow.jpg", "images/level/orange.jpg");
+		        });
+		    }
+		    else if (meter == 100) {
+		        $('.imgBg').attr('src', function (i, e) {
+		            return e.replace("images/level/orange.jpg", "images/level/red.jpg");
+		        });
+		    }
+		    else if (meter == 120) {
+		        $('.imgBg').attr('src', function (i, e) {
+		            return e.replace("images/level/red.jpg", "images/level/orange.jpg");
+		        });
+		    }
+
 		    if (type == "INPUTT" || type == "INPUTN" || type == "INPUTND") {
 		        var answer = $("#" + id).val();
 
@@ -432,7 +465,7 @@
 		                $("#lifestyle .questions").html('<input id="' + id + '" value="" type="' + id + '" placeholder="Enter Your ' + id + ' Here">');
 		            }
 		            else if (type == "MALE-FEMALE") {
-		                $("#lifestyle .questions").html('<div id="male" onclick="gSpecific(male)"><img src="images/male-sign.jpg"></div><div id="female" onclick="gSpecific(female)"><img src="images/female-sign.jpg"></div>');
+		                $("#lifestyle .questions").html('<div id="male" onclick="gSpecific(this)"><img src="images/male-sign.jpg"></div><div id="female" onclick="gSpecific(this)"><img src="images/female-sign.jpg"></div>');
 		            }
 		            else if (type == "YES-NO") {
 		                $("#lifestyle .questions").html('<div id="yesbutton" class="yes" value="yes" onclick="yesno(yes)">Yes</div><div id="nobutton" class="no" value="no" onclick="yesno(no)">No</div>');

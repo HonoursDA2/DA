@@ -1,11 +1,11 @@
 @font-face
 {
-    font-family:essenceL;
-    src:url("../fonts/Essence Sans Light.ttf")
+    font-family:robo;
+    src:url("../fonts/Roboto-Light.ttf")
 }
 
 @font-face
 {
-    font-family:essenceB;
-    src:url("../fonts/Essence Sans old.ttf")
+    font-family:roboT;
+    src:url("../fonts/Roboto-Thin.ttf")
 }
