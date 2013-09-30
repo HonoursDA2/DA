@@ -118,33 +118,47 @@
    
     )
 ; Extra information that accompanies the symptoms
-(deffacts additional
-    (Information (question "KEYWORDS") (explanation "Glucose is the most important simple sugar in a human metabolism, blood glucose is the level of glucose present in the blood stream-
-            Gastroparesis is a disease of the muscles of the stomach or the nerves controlling the muscles that causes the muscles to stop working, affecting the digestive process-
-             Insulin is a hormone produced by the Pancreas that is the main regulator of the glucose (sugar) in the blood.-
-             The Pancreas is long soft organ behind your stomach and infront of your spine, it produces insulin to help break down the food and hormones that halp control the blood sugar levels.-
-            Yeast is a type of fungus; yeast infection refers to the fungus scientifically known as Candida*")
-        (questionType "MULTIPLE*") 
-        (options "Blood Glucose-Gastroparesis-Insulin-Pancreas-Yeast*") )
-    (Information (question "What are the Symptoms of Diabetes*") (explanation "The glucose is not being converted into energy this weakens the cells and causes fatigue.-
-            There is a high loss of Glucose through the urine.-
-            This is caused by dehydration in the body.-
-            This is a result of the nerve damage in the body.-
+(deffacts Information
+    (Information (question "7. Diabetes management*") (explanation "There is unfortunately no proven cure for Diabetes
+            Depending on the type of Diabetes you have been diagnosed with, the treatments differ slightly-
+            Type 1 Diabetes is difficult to control thus the treatment is a daily task.The strict regimen includes a carefully calculated diet, 
+            planned physical activity and multiple insulin injections (frequently). 
+            As well as a home blood glucose testing facility to check the levels throughout the day.-
+            Type 2 Diabetes treatment typically includes diet control, frequent exercise, a home blood glucose testing facility 
+            and in certain cases oral medication and insulin injections. The majority of Type 2 Diabetics do not require insulin injections.-
+            Gestational Diabetes is brought about by hormonal effects of the pregnancy, thus no supplementary insulin is required. 
+            The patient needs to ensure they exercise appropriately and maintain a healthy diet throughout the pregnancy to avoid developing type 2 Diabetes in the long run.*"
+            )
+            (questionType "MULTIPLE*")
+        	(options "General-Type 1-Type 2-Gestational*")	
+        )
+    (Information (question "6. Diabetes prevention*") (explanation "Eat well, cut down on sugary/fatty foods-
+            Exercise often, try not to drink/smoke excessively this will not help the situation*")
+            (questionType "MULTIPLE*")
+        	(options "Diet-Lifestyle*")	
+        )
+    (Information (question "5. Diabetes complications*") (explanation "A lot of really bad stuff :/*")
+            (questionType "SINGLE*")
+        	)
+    (Information (question "4. What are the Symptoms of Diabetes*") (explanation "The glucose is not being converted into energy this weakens the cells and causes fatigue.-
+            There is a high loss of Glucose through the urine, this causes one to go to the toilet very often.-
+            This is caused by dehydration in the body, the mouth tends to get dry because of the high loss of liquids through urination.-
+            This is a result of the nerve damage in the body, leading to males not being able to perform sexually. A lot of males experience erectile dysfuction-
             Nausea is caused by gastroparesis.-
-            This is due to the high level of glucose in the blood, this leads to frequent headaches experiecned for prolonged periods of time.-
-            Elevated blood sugar levels cause narrowing of blood vessels, leading to a decreased blood flow and oxygen to the wounds.-
-            The fluctuation in blood glucose levels leads to a light sensitivity. Also this can be caused by the tissue being pulled from the eye lenses tob e used for energy by the body.-
-            Caused by a lack of energy. As the sugar is not being converted into energy to be used by the cells.-
-            Insulin deficiency leads to loss of weight, as the sugar cannot be converted into energy, so the body seeks alternative sources like muscle tissue and fat.-
+            This is due to the high level of glucose(~) in the blood, this leads to frequent headaches experienced for prolonged periods of time.-
+            Elevated blood sugar levels are caused by the gradual narrowing of blood vessels, leading to a decreased blood flow and oxygen to the wounds.This increases the amount of time taken to heal. -
+            The fluctuation in blood glucose levels leads to a sensitivity to light. Also another reason is a result of the tissue being pulled from the eye lenses to be used for energy by the body.-
+            This is caused by a lack of energy. As the sugar is not being converted into energy to be used by the cells, leading to irritability.-
+            Insulin deficiency leads to loss of weight, as the sugar cannot be converted into energy, so the body seeks alternative sources like muscle tissue and fat, gradually eating away at the body.-
             Dehydration is caused by excess urine, this prompts an increased desire for water consumption.-
             Yeast organisms are present in most woman, but these organisms tend to overgrow in a sugar rich environment. A result of badly managed diabetes.-
-            High glucose levels in saliva promotes growth of bacteria that cause gum disease.-
-            The dropping blood sugar levels lead to a desire for more food and energy.-
+            High glucose levels in saliva promotes growth of bacteria that cause gum disease, because bacteria thrives in such an environment.-
+            The dropping blood sugar levels lead to a desire for more food and energy, causing a continuous feeling of hunger.-
             During pregnancy there is a lot of hormonal activity within the body, this affects the functioning of the insulin and might alter/interfere with how the body responmds tot he insulin. This condition usually subsides after the pregnacny-
-            The nerves in the body get damaged over time, leading to a tingling sensation, pain and eventual loss of sensation.*")
+            The nerves in the body get damaged over time, leading to a tingling sensation, pain and an eventual loss of sensation.*")
         (questionType "MULTIPLE*")
         (options "Fatigue-Exesive Urination-Dry Mouth-Erectile Dysfunction-Nausea-Frequent Headaches-Slow Healing Wounds-Blurred Vision-Irritability-Weightloss-Extreme Thirst-Yeast Infection-Gum Infection-Extreme Hunger-Gestational Diabetes-Numbness*"))
-    (Information(question  "What are the types of Diabetes?*") (explanation "Type 1 Diabetes occurs when the beta cells in the pancreas are damaged. 
+    (Information(question  "3. What are the types of Diabetes?*") (explanation "Type 1 Diabetes occurs when the beta cells in the pancreas are damaged. 
             Therefore the pancreas does not produce insulin anymore. Type 1 normally occurs in people under the age of 30 (it used to be called Juvenile Diabetes).-Type 2 Diabetes occurs when the beta cells in the body are resistant to the effect of insulin. 
             It develops gradually over a period of time.There is a high association with a family history of Diabetes and obesity. 
             Type 2 normally occurs in people older than 40 years of age-.
@@ -156,23 +170,31 @@
             are higher than normal but not high enough to be considered as Diabetes. 
             However, if the condition is tackled at this stage through diet, 
             exercise and other healthy lifestyle changes (weight management programme), the risk can be significantly reduced.*")
-        (extraInfo "The Pancreas is a long soft organ that secrets insulin when the level of sugar in the blood rises in the body after a meal.
-            Insulin is a hormone produced by the Pancreas that is the main regulator of the glucose (sugar) in the blood.")
         (questionType "MULTIPLE*")
-        (options "TYPE 1-Type 2-Gestational-Prediabetes*"))
-    (Information (question "What are the causes of Diabetes?*") 
-        (explanation "You must stop eating, you fat ass nigger!-
-            If your relatives have Diabetes...then its late-
-            Malfuncitoning pancreas is a cause for Type1 Diabetes*")
+        (options "Type 1-Type 2-Gestational-Prediabetes*"))
+    (Information (question "2. What are the causes of Diabetes?*") 
+        (explanation "Obesity is thought to be the primary cause of Type 2 Diabetes in people who already have a family history of the disease
+            When a person is obese, the body has to deal with more nutrients than it can handle, 
+            to counter this the cells stop reacting to insulin as long as the body is overweight. 
+            This leads to the whole body to eventually be resistant to insulin, the onset of Type 2 Diabetes-
+            If someone in your family has has Type 2 Diabetes, then you are at risk of developing the disease
+            The closer the realtive the greater the risk, with studies showing that people with one parent with Diabetes has double the risk,
+            while people with two diabtic parents have six times the risk of being diagnosed with Diabetes, with mothers presenting a greater risk than fathers.
+            Famiily history is a great contributing factor that people often down play and take for granted.-
+            If the pancreas is damaged and not working properly this leads to insufficient insulin secretion, the onset of Type 1 Diabetes*")
         (questionType "MULTIPLE*")
-        (options "Obesity-Family History-Pancreas*"))
-    (Information (question "What is Diabetes Mellitus?*") (explanation "Diabetes Mellitus, more commonly known simply as Diabetes is a chronic medical condition where a person has 
-            high blood sugar levels.This is either because the insulin production in the body is insufficient or because the body does not respond properly to insulin*")
-        (extraInfo "Insulin is a hormone produced by the Pancreas that is the main regulator of the glucose (sugar) in the blood.
-            Insulin converts the glucose into energy to be used by the cells"))
-       
-      
-     )
+        (options "Obesity-Family History-Pancreas malfunction*"))
+    (Information (question "1. What is Diabetes Mellitus?*") (explanation "Diabetes Mellitus, more commonly known simply as Diabetes is a chronic medical condition where a person has 
+            high blood sugar levels.This is either because the insulin production in the body is insufficient or because the body does not respond properly to insulin*")  )
+        (Information (question "0. KEYWORDS*") (explanation "Glucose is the most important simple sugar in a human metabolism, blood glucose is the level of glucose present in the blood stream-
+            	Gastroparesis is a disease of the muscles of the stomach or the nerves controlling the muscles that causes the muscles to stop working, affecting the digestive process-
+             Insulin is a hormone produced by the Pancreas that is the main regulator of the glucose (sugar) in the blood.-
+             The Pancreas is long soft organ behind your stomach and infront of your spine, it produces insulin to help break down the food and hormones that halp control the blood sugar levels.-
+            Yeast is a type of fungus; yeast infection refers to the fungus scientifically known as Candida*")
+        (questionType "MULTIPLE*") 
+        (options "Blood Glucose-Gastroparesis-Insulin-Pancreas-Yeast*") )
+        
+    )
 ;Returns informationpertaining to the selected symptoms experienced by the user
 (defrule getInfo
     (Get Info)
