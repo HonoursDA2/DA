@@ -3,7 +3,7 @@
     padding:0;
     margin:0;
     border:0;
-    font-family:essenceL;
+    font-family:robo;
     cursor:default;
 }
 
@@ -11,7 +11,15 @@ body
 {
     background: rgb(225,225,225);
     overflow: hidden;
-    background-image: url('../images/bg.jpg');
+}
+
+.imgBg
+{
+    position:absolute;
+    height:100%;
+    width:100%;
+    z-index:-1;
+    transition:500ms ease;
 }
 
 #splash
@@ -51,7 +59,7 @@ body
 #splash #logo:before,#splash #logo:after
 {
     content:"Diabetes";
-    font-size:5em;
+    font-size:4.2em;
     position:absolute;
     left:-80%;
     top:50%;
@@ -73,10 +81,26 @@ body
     height:300px;
     top:-75px;
     box-shadow:0px 2px 7px -2px silver;
-    transition:1s ease;
+    transition:500ms ease;
     opacity:1;
     background-image:linear-gradient(white,silver);
     border-radius:0px 0px 10px 0px;
+    font-family:roboT;
+    font-size:0.8em;
+    text-align:center;
+    vertical-align:top;
+}
+
+#splash #theAdvisor p,#splash #moreInfo p
+{
+    display:inline-block;
+    position:relative;
+    margin:auto;
+}
+
+#splash #theAdvisor p
+{
+    width:50%;
 }
 
 #splash #theAdvisor
@@ -129,30 +153,44 @@ body
 
 #dInfo
 {
-    height:90%;
-    width:100%;
-    position:relative;
+    height:100%;
+    width:80%;
+    position:absolute;
     font-size:2em;
     padding:10px;
     overflow:auto;
     box-sizing:border-box;
+    top:0;
+    right:0;
+    box-shadow:-4px 0px 10px -3px silver;
+    color:Gray;
 }
 
 #dInfoOptions
 {
-    height:8%;
-    width:100%;
-    position:relative;
-    border-bottom:1px silver solid;
+    height:100%;
+    width:20%;
+    position:absolute;
+    border-right:1px silver solid;
+    overflow:auto;
+    top:0;
+    left:0;
 }
 
 #dInfoOptions div
 {
-    width:20%;
-    height:100%;
-    margin:0px 5px 0px 5px;
-    box-shadow:0px 0px 2px 1px silver;
-    display:inline-block;
+    width:100%;
+    height:40px;
+    border-bottom:1px silver solid;
+    font-family:helvetica;
+    vertical-align:middle;
+    cursor:pointer;
+    padding:15px 5px 0px 5px;
+}
+
+#dInfoOptions div:hover
+{
+    background:rgba(255,0,0,0.7);
 }
 
 #diabetesQues
@@ -166,11 +204,22 @@ body
     overflow:auto;
 }
 
+#dInfoOptions,dInfo
+{
+    display:inline-block;
+}
+
 #diabetesQues div
 {
     background:linear-gradient(white,rgb(240,240,240));
     padding:10px;
     font-family:helvetica;
+    cursor:pointer;
+}
+
+#diabetesQues div:hover
+{
+   background:linear-gradient(white,rgba(255,0,0,0.7));
 }
 
 #profile .feedback,#lifestyle .feedback
@@ -184,6 +233,10 @@ body
     padding:10px;
     font-size:1.3em;
     display:none;
+    font-family:helvetica;
+    overflow:auto;
+    box-shadow:inset 0px -2px 5px lime;
+    transition:500ms ease;
 }
 
 #profile
@@ -193,7 +246,6 @@ body
     height: 100%;
     z-index: 2;
     position: absolute;
-    background-image: url('../images/bg.jpg');
 }
 
 #profile div
@@ -212,7 +264,6 @@ body
     top:1.5%;
     left:1.5%;
     font-size:4em;
-    font-family:essenceL;
     color:rgba(15,15,15,0.7);
     text-shadow:0px 1px 4px rgba(155,0,0,0.5);
 }
@@ -242,12 +293,12 @@ body
 
 #profile .questions .options,#lifestyle .questions .options
 {
-    width:18%;
+    max-width:18%;
     height:50%;
     margin-right:1.5%;
     position:relative;
     display:inline-block;
-    font-size:2.5em;
+    font-size:2.3em;
     cursor:pointer;
     background:white;
     box-shadow:0px 2px 5px silver;
@@ -407,6 +458,11 @@ input:hover
 {
     border-bottom:5px solid rgba(255,0,0,0.7);
     color:rgba(255,0,0,0.7);
+}
+
+#cont
+{
+    position:fixed;
 }
 
 #profile #backb,#contButton
