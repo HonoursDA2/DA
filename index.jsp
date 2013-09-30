@@ -101,6 +101,7 @@
 	</div>
 
 	<div id="physician">
+	<div id="percentage"><p>Your Chances of Diabetes are: <span id="pvalue"></span></p></div>
 	<img src="images/robo.jpg">
 	</div>
 
