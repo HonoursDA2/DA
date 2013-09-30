@@ -1,4 +1,4 @@
-(defglobal ?*currentQuestion* = 1)
+(defglobal ?*currentQuestion* = 11)
 (defglobal ?*points* = 0)
 (defglobal ?*total* = 0)
 
@@ -20,7 +20,6 @@
 	(slot points
     	(default 0))
     )
-
 (deftemplate Information
     (slot question)
     (slot explanation)
@@ -58,21 +57,21 @@
     (Question (section Initial)(type "diabetic")(text "Are you a Diabetic?") (answerType "OPTIONAL") (order 4)(options "Yes-No-Uncertain" ))
     (Question (section Initial)(type "Race")(text "What is your race?") (answerType "OPTIONAL")(order 5)(options "Black-White-Asian-Coloured-Other" ))
     (Question (section Initial)(type "Age")(text "How old are you?") (answerType "INPUTN") (order 6))
-    (Question (section Initial)(type "familyH")(text "Do you have relatives who have been diagnosed with Diabetes?")(answerType "OPTIONAL")(options "Yes-No-Uncertain" ) (order 7))
-    (Question (section Initial)(type "pregnant")(text "Are you Pregnant?") (answerType "YES-NO") (order 8))
-    (Question (section Initial)(type "weight")(text "What is your weight (Kilograms)")(answerType "INPUTND") (order 9))
-    (Question (section Initial)(type "height")(text "What is your height (Meters)") (answerType "INPUTND") (order 10))
+    (Question (section Initial)(type "familyH")(text "Do you have relatives who have been diagnosed with Diabetes?")(answerType "OPTIONAL")(options "Yes-No-Uncertain" )(order 7))
+    (Question (section Initial)(type "familyType")(text "Is this relative any of the following?")(answerType "OPTIONAL")(options "Parent-Sibling-Grandparent-Aunt/Uncle-Other" )(order 8))
+    (Question (section Initial)(type "pregnant")(text "Are you Pregnant?") (answerType "YES-NO") (order 9))
+    (Question (section Initial)(type "weight")(text "What is your weight (Kilograms)")(answerType "INPUTND") (order 10))
+    (Question (section Initial)(type "height")(text "What is your height (Meters)") (answerType "INPUTND") (order 11))
     ;Lifestyle questions
-    (Question (section Lifestyle)(type "smoke")(text "Do You smoke cigarettes?") (answerType "YES-NO")(order 11))
-    (Question (section Lifestyle)(type "smokeF")(text "How often do you smoke, please be honest?") (answerType "OPTIONAL")(options "Hardly-Occassionaly-Frequently" ) (order 12))
-    (Question (section Lifestyle)(type "alcohol")(text "Do you consume any alcohol?") (answerType "YES-NO")(order 13))
+    (Question (section Lifestyle)(type "smoke")(text "Do You smoke cigarettes?") (answerType "YES-NO")(order 12))
+    (Question (section Lifestyle)(type "smokeF")(text "How often do you smoke, please be honest?") (answerType "OPTIONAL")(options "Hardly-Occassionaly-Frequently" ) (order 13))
+    (Question (section Lifestyle)(type "alcohol")(text "Do you consume any alcohol?") (answerType "YES-NO")(order 14))
     (Question (section Lifestyle)(type "alcoholF")(text "Alcohol is advised..in moderation
-            How often do you drink alcohol?") (answerType "OPTIONAL")(options "Hardly-Occassionaly-Frequently" )(order 14))
-    (Question (section Lifestyle)(type "exercise")(text "Do you do any sort of explicit physical exercise?") (answerType "YES-NO")(order 15))
-    (Question (section Lifestyle)(type "exerciseF")(text "That's great, How often do you exercise?") (answerType "OPTIONAL")(options "Hardly-Occassionaly-Frequently" )(order 16))
-    (Question (section Lifestyle)(type "bp")(text "Have you checked your blood pressure recently?") (answerType "YES-NO")(order 17))
-    (Question (section Lifestyle)(type "bpLevel")(text "What level is your blood pressure?") (answerType "OPTIONAL")(options "Low-Average-High" )(order 18))
-    
+            How often do you drink alcohol?") (answerType "OPTIONAL")(options "Hardly-Occassionaly-Frequently" )(order 15))
+    (Question (section Lifestyle)(type "exercise")(text "Do you do any sort of explicit physical exercise?") (answerType "YES-NO")(order 16))
+    (Question (section Lifestyle)(type "exerciseF")(text "That's great, How often do you exercise?") (answerType "OPTIONAL")(options "Hardly-Occassionaly-Frequently" )(order 17))
+    (Question (section Lifestyle)(type "bp")(text "Have you checked your blood pressure recently?") (answerType "YES-NO")(order 18))
+    (Question (section Lifestyle)(type "bpLevel")(text "What level is your blood pressure?") (answerType "OPTIONAL")(options "Low-Average-High" )(order 19))
     )
 (deffacts Description
    (Description(name Fatigue)(type SYMPTOM) (id "fatigue")(explanation "Do you feel tired a lot? A feeling of tiredness that can not be explained."))
@@ -97,24 +96,24 @@
 (deffacts symptomReason
    (Reason (name Fatigue)(type SYMPTOM)(points 2)(explanation "Fatigue - The glucose is not being converted into energy this weakens the cells and causes fatigue."))
    (Reason (name Frequent-Headache)(type SYMPTOM)(points 4)(url "headache.jpg")(explanation "Frequnt Headaches - This is due to the high level of glucose in the blood, this leads to frequent headaches experiecned for prolonged periods of time."))
-   (Reason (name Extreme-Thirst)(type SYMPTOM)(points 5)(explanation "Extreme Thirst - Dehydration is caused by excess urine, this prompts an increased desire for water consumption."))
-   (Reason (name Excessive-Urination)(type SYMPTOM)(points 5)(explanation "Excessive Urination - There is a high loss of Glucose through the urine."))
+   (Reason (name Extreme-Thirst)(type SYMPTOM)(points 10)(explanation "Extreme Thirst - Dehydration is caused by excess urine, this prompts an increased desire for water consumption."))
+   (Reason (name Excessive-Urination)(type SYMPTOM)(points 10)(explanation "Excessive Urination - There is a high loss of Glucose through the urine."))
    (Reason (name Nausea)(type SYMPTOM)(url "nausea.jpg")(points 5)(explanation "Nausea - Nausea is caused by gastroparesis.")(extraInfo "Gastroparesis is a disease of the muscles of the stomach or the nerves controlling the muscles that causes the muscles to stop working, affecting the digestive process"))
-   (Reason (name Weightloss)(type SYMPTOM)(points 5)(explanation "Weightloss - Insulin deficiency leads to loss of weight, as the sugar cannot be converted into energy, so the body seeks alternative sources like muscle tissue and fat."))
+   (Reason (name Weightloss)(type SYMPTOM)(points 10)(explanation "Weightloss - Insulin deficiency leads to loss of weight, as the sugar cannot be converted into energy, so the body seeks alternative sources like muscle tissue and fat."))
    (Reason (name Irritability)(type SYMPTOM)(points 1)(explanation "Irritability - Caused by a lack of energy. As the sugar is not being converted into energy to be used by the cells."))
-   (Reason (name Yeast-Infection)(type SYMPTOM)(points 5)(explanation "Yeast Infection - Yeast organisms are present in most woman, but these organisms tend to overgrow in a sugar rich environment. A result of badly managed diabetes")
+   (Reason (name Yeast-Infection)(type SYMPTOM)(points 8)(explanation "Yeast Infection - Yeast organisms are present in most woman, but these organisms tend to overgrow in a sugar rich environment. A result of badly managed diabetes")
     	(extraInfo "Yeast is a type of fungus; yeast infection refers to the fungus scientifically known as Candida"))
    (Reason (name Blurred-Vision)(type SYMPTOM)(points 3)(explanation "Blurred Vision - The fluctuation in blood glucose levels leads to a light sensitivity. Also this can be caused by the tissue being pulled from the eye lenses tob e used for energy by the body."))
    (Reason (name Slow-Healing-Wounds)(type SYMPTOM)(points 5)(explanation "Slow Healing Wounds - Elevated blood sugar levels cause narrowing of blood vessels, leading to a decreased blood flow and oxygen to the wounds."))
    (Reason (name Numbness)(type SYMPTOM)(points 4)(explanation "Numbness - The nerves in the body get damaged over time, leading to a tingling sensation, pain and eventual loss of sensation"))
-   (Reason (name Gum-Infection)(type SYMPTOM)(points 4)(url "teethandgum.jpg")(explanation "Gum Infection - High glucose levels in saliva promotes growth of bacteria that cause gum disease.") 
+   (Reason (name Gum-Infection)(type SYMPTOM)(points 8)(url "teethandgum.jpg")(explanation "Gum Infection - High glucose levels in saliva promotes growth of bacteria that cause gum disease.") 
         (extraInfo "Diabetes reduces the body’s resistance to infection, which increases the probability of the gums becoming infected."))
-   (Reason (name Extreme-Hunger)(type SYMPTOM)(points 5)(url "hunger.jpg")(explanation "Extreme Hunger - The dropping blood sugar levels lead to a desire for more food and energy."))
-   (Reason (name Erectile-Dysfunction)(type SYMPTOM)(points 5)(url "dysfunction.jpg")(explanation " Erectile Dysfunction - This is a result of the nerve damage in the body.") )
-   (Reason (name Gestational-Diabetes)(type SYMPTOM)(points 5)(url "gestational.jpg")(explanation "Gestational Diabetes - During pregnancy there is a lot of hormonal activity within the body, this affects the functioning of the insulin and might alter/interfere with how the body responmds tot he insulin. This condition usually subsides after the pregnacny") )
-   (Reason (name Dry-Mouth)(type SYMPTOM)(url "drymouth.jpg")(points 5)(explanation "Dry Mouth - This is caused by dehydration in the body.") 
+   (Reason (name Extreme-Hunger)(type SYMPTOM)(points 8)(url "hunger.jpg")(explanation "Extreme Hunger - The dropping blood sugar levels lead to a desire for more food and energy."))
+   (Reason (name Erectile-Dysfunction)(type SYMPTOM)(points 10)(url "dysfunction.jpg")(explanation " Erectile Dysfunction - This is a result of the nerve damage in the body.") )
+   (Reason (name Gestational-Diabetes)(type SYMPTOM)(points 10)(url "gestational.jpg")(explanation "Gestational Diabetes - During pregnancy there is a lot of hormonal activity within the body, this affects the functioning of the insulin and might alter/interfere with how the body responmds tot he insulin. This condition usually subsides after the pregnacny") )
+   (Reason (name Dry-Mouth)(type SYMPTOM)(url "drymouth.jpg")(points 7)(explanation "Dry Mouth - This is caused by dehydration in the body.") 
         (extraInfo "Dehydration is a result of the high demand for bodily fluids drawn from the tissues to help excrete the excess sugar from the body"))
-   (Reason (name Abdominal-Pain)(type SYMPTOM)(points 5)(url "abdominal.jpg")(explanation "Abdominal Pain - Because of the gastroparesis, the stomach cannot empty its contents properly leading to stomach pain and cramping") 
+   (Reason (name Abdominal-Pain)(type SYMPTOM)(points 8)(url "abdominal.jpg")(explanation "Abdominal Pain - Because of the gastroparesis, the stomach cannot empty its contents properly leading to stomach pain and cramping") 
         (extraInfo "Gastroparesis is a disease of the muscles of the stomach or the nerves controlling the muscles that causes the muscles to stop working, affecting the digestive process"))
    
     )
@@ -221,7 +220,6 @@
     	(printout out3 ?theOptions)
     	(printout out4 ?explanation)
     	(printout out5 ?theCaption)
-    
     )
 ;Asks the initial set of questions
 (defrule askQuestionInitial
@@ -239,7 +237,7 @@
     (retract ?ask)
         )
     )
-;Changes the order of the questions to ask, if a question should not be asked anymore
+;Changes the order of the initial questions to ask, if a question should not be asked anymore.
 (defrule changeInitialQuestions
     (declare (salience 5))
     (Ask-Question-Initial)
@@ -250,6 +248,7 @@
     	(bind ?*currentQuestion* ?counter)
     )
     )
+;Changes the order of the lifestyle questions to ask, if a question should not be asked anymore.
 (defrule changeLifestyleQuestions
     (declare (salience 5))
     (Ask-Question-Lifestyle)
@@ -260,7 +259,7 @@
     	(bind ?*currentQuestion* ?counter)
     )
     )
-;Asks the questions relating to Lifestyle
+;Asks the questions relating to Lifestyle.
 (defrule askQuestionLifestyle
     ?ask <- (Ask-Question-Lifestyle)
     ?question <- (Question (section Lifestyle)(type ?type)(text ?questionText) (answerType ?answerType) (ask yes) (order ?current) (options ?options))
@@ -276,7 +275,7 @@
     (retract ?ask)
         )
     )
-;Shows the explanation of the symptom in question
+;Shows the explanation of the symptom in question.
 (defrule showReason
     ?input <- (Input (name ?inputName))
     ?reason <- (Description (name ?name) (explanation ?explanation))
@@ -287,7 +286,7 @@
     (retract ?input) 
     )   
     )
-;calculates the BMI with the provided weight and height of the user
+;calculates the BMI with the provided weight and height of the user.
 (defrule bmi
     (Height ?userHeight)
     (Weight ?userWeight)
@@ -297,9 +296,11 @@
     (bind ?bmi (/ ?userWeight (* ?userHeight ?userHeight)))
     (assert (BMI ?bmi))
     (if (> ?bmi 30) then 
-    	(assert (weight-classification Obese)) else
+    	(assert (weight-classification Obese)
+            (bind ?*points* 15)) else
         	(if (> ?bmi 25) then
-        		( assert (weight-classification Overweight)) else
+        		( assert (weight-classification Overweight)
+                (bind ?*points* 10)) else
             		(if (> ?bmi 18.5) then 
                 		(assert (weight-classification OptimalWeight)) else
                 			(if (< ?bmi 18.5 ) then
@@ -316,7 +317,7 @@
     =>
     (printout out (?name crlf ?explanation))
     )
-;Returns the name of the user
+;Returns the name of the user.
 (defrule getName
     ?request <- (Get Name)
     (name ?name)
@@ -324,7 +325,7 @@
     (printout out ?name)
     (retract ?request)
     )
-;Returns the list of symptoms
+;Returns the list of symptoms.
 (defrule getSymptoms
     ?command <- (Get Symptoms)
     (Description(name ?name)(type SYMPTOM)(id ?id)(explanation ?explanation))
@@ -335,7 +336,7 @@
     	(bind ?*total* (+ ?*total* 5))
     	;(retract ?command)
     )
-;Returns the information for a particular symptom
+;Returns the information for a particular symptom.
 (defrule getSymptom
     ?command <- (Symptom ?symptom)
     (Reason (name ?symptom)(type SYMPTOM)(points ?points)(url ?url)(explanation ?explanation)(extraInfo ?additional))
@@ -360,14 +361,148 @@
     (modify ?question (ask no))
     (retract ?femaleQ1 ?femaleQ2)
     )
-
-(defrule isMale
-    (Calculate totals)
+;Asserts the totals with the values.
+(defrule familyH
+    (declare (salience 10))
+    (Family-History No)
+    ?question <- (Question (section Initial) (type "familyType")(ask yes))
     =>
-    (assert (Total ?*total*))
-    (assert (Points ?*points*))
+    	(modify ?question (ask no))
     )
-;If female don't show erectile dysfunction symptom
+(defrule family
+    (Family-Type ?family)
+    =>
+    (bind ?*points* (+ ?*points* (family ?family)))
+    )
+;If family history is uncertain add an amount to points probability wise
+(deffunction uncertain(?value)
+    (bind ?point 0)
+    (if (eq Uncertain ?value) then
+        (bind ?point 2))
+    ?point
+    )
+(deffunction race (?race)
+    (bind ?point 0)
+     (if (neq White  ?race) then
+        (bind ?point 1) else
+        (bind ?point 3))
+    ?point
+    )
+;Adds points depending on the race
+(defrule all
+    (Age ?age)
+    (Race ?race)
+    (Family-History ?history)
+    =>
+    (bind ?*points* (+ ?*points* (age ?age)))
+    (bind ?*points* (+ ?*points* (race ?race)))
+    (bind ?*points* (+ ?*points* (uncertain ?history))) 
+    )
+(deffunction age (?age)
+    (bind ?value 0)
+    (if (> ?age 59) then
+        (bind ?value 10) else
+        (if (> ?age 45) then
+            (bind ?value 5))
+        )
+    ?value
+    )
+;if pregnant
+(defrule pregnancy
+    (Pregnant ?status)
+    =>
+    (bind ?*points* (+ ?*points* (pregnant ?status)))
+    )
+;if pregnant increase points because of the chances of gestational Diabetes
+(defrule smokeYes
+    (SmokeF ?frequency)
+    =>
+    (bind ?*points* (+ ?*points* SmokenAlcohol ?frequency))	
+    )
+(defrule alcoholYes
+    (AlcoholF ?frequency)
+    =>
+    (bind ?*points* (+ ?*points* SmokenAlcohol ?frequency))	
+    )
+(defrule alcoholYes
+    (Blood-Pressure ?frequency)
+    =>
+    (bind ?*points* (+ ?*points* SmokenAlcohol ?frequency))	
+    )
+(defrule exerciseNo
+    (Exercise No)
+        =>
+        (bind ?*points* (+ ?*points* 15))
+        )
+(defrule exerciseYes 
+    (Exercise-Frequency ?fact)
+    =>
+    	(bind ?*points* (+ ?exercise ?fact))	
+    )
+(deffunction exercise (?frequency)
+    (bind ?point 0)
+    (if (eq Frequently ?frequency) then
+        (bind ?point -15)else
+        (if (eq Occassionaly ?frequency) then
+            (bind ?point -5)
+            )
+        )
+    ?point 
+    )
+(deffunction pregnant (?status)
+    (bind ?value 0)
+    (if (eq ?status Yes) then
+        (bind ?value 5) else
+        (if (eq ?status No) then
+            (bind ?value 0))
+        )
+    ?value
+    )
+(deffunction family (?relative)
+    (bind ?points 0)
+    (if (eq Parent ?relative) then
+     (bind ?points 10) else
+        (if (eq Sibling ?relative) then
+     		(bind ?points 15) else
+            	(if (eq Aunt/Uncle ?relative) then
+     				(bind ?points 7) else 
+                		(if (eq Grandparent ?relative) then
+    	 					(bind ?points 6) else 
+                				(if (eq Other ?relative) then
+    	 							(bind ?points 5)
+             )
+            ))
+            ))
+    ?points
+    )
+(deffunction SmokenAlcohol(?smokenalcohol)
+    (bind ?point 0) 
+     (if (eq High ?smokenalcohol) then
+                (bind ?point 15)
+                )
+    ?point
+    )
+(deffunction bp(?smokenalcohol)
+    (bind ?point 0) 
+    (if (eq Hardly ?smokenalcohol) then
+        (bind ?point 2) else
+        (if (eq Occasionaly ?smokenalcohol) then
+            (bind ?point 5) else 
+            (if (eq Frequently ?smokenalcohol) then
+                (bind ?point 10)
+                )
+            )
+        )
+    ?point
+    )
+;Assert the total and points facts, for retrieval by the server and for calculation.
+(defrule totals
+    ?command <-(Calculate totals)
+    =>
+    (printout out (* (/ ?*points* ?*total*) 100))
+    (retract ?command)
+    )
+;If female don't show erectile dysfunction symptom.
 (defrule isFemale
     (declare (salience 10))
     (Gender Female)
@@ -375,7 +510,7 @@
     =>
     (retract ?maleQ1)
     )
-;If no knowledge of diabetes do not ask if diabetic
+;If no knowledge of diabetes do not ask if diabetic.
 (defrule diabetesKnowledge
     (declare (salience 10))
     (Diabetes-Knowledge No)
@@ -383,15 +518,15 @@
     =>
     (modify ?question (ask no))
     )
-;If no, dont ask how often
-(defrule smoke
+;If no, dont ask how often.
+(defrule smokeNo
     (declare (salience 10))
     (Smoke No)
     ?question <- (Question (section Lifestyle) (type "smokeF") (text ?questionText) (answerType ?answerType) (ask yes))
     =>
     (modify ?question (ask no))
     )
-;If no, dont ask how often
+;If no, dont ask how often.
 (defrule alcohol
     (declare (salience 10))
     (Alcohol No)
@@ -399,7 +534,7 @@
     =>
     (modify ?question (ask no))
     )
-;If no dont ask how often
+;If no dont ask how often.
 (defrule exercise
     (declare (salience 10))
     (Exercise No)
@@ -407,7 +542,7 @@
     =>
     (modify ?question (ask no))
     )
-;If no dont ask what the rate is
+;If no dont ask what the rate is.
 (defrule bloodPressure
     (declare (salience 10))
     (BP-Knowledge No)
@@ -415,7 +550,7 @@
     =>
     (modify ?question (ask no))
     )
-;Adds a fact to the working memory
+;Adds a fact to the working memory.
 (deffunction addFact(?factToAdd ?fact)
     (if (eq Symptom ?factToAdd) then
     	(assert (Symptom ?fact))else
@@ -454,8 +589,11 @@
                     																																(if (eq ExerciseF ?factToAdd) then
     																																					(assert (Exercise-Frequency ?fact))else
                     																																		(if (eq bpLevel ?factToAdd) then
-    																																							(assert (Blood-Pressure ?fact))
-                                                                                																			) 
+    																																							(assert (Blood-Pressure ?fact)) else
+                    																																				(if (eq familyType ?factToAdd) then
+    																																									(assert (Family-Type ?fact))
+                                                                                																						)
+                                                                                    																					) 
                                                                             																			)	        
                                                                         																	)
                                                                     																)

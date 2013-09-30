@@ -6,6 +6,7 @@ import jess.*;
 import org.json.*;
 import java.util.StringTokenizer;
 import java.util.ArrayList;
+import java.text.*;
 
 public class DA extends HttpServlet{
 
@@ -145,10 +146,6 @@ public class DA extends HttpServlet{
 			symptomList((request.getParameter("sessionID")));
 		} 
 		else {
-			if (request.getParameterMap().containsKey("symptom"))
-			{
-				symptom((request.getParameter("sessionID")));
-			} else 
 				if (request.getParameterMap().containsKey("command")) {
 					if (request.getParameter("command").equals("question")) {
 						question((request.getParameter("sessionID")));
@@ -162,6 +159,8 @@ public class DA extends HttpServlet{
 							symptoms(request.getParameter("sessionID"));
 						} else if ( request.getParameter("command").equals("getInfo")) {
 							diabetesInfo(request.getParameter("sessionID"));
+						} else if ( request.getParameter("command").equals("percentage")) {
+							assesmentPercentage(request.getParameter("sessionID"));
 						}
 				}else
 				{
@@ -231,23 +230,7 @@ public class DA extends HttpServlet{
 			sessions.get(getInt(sessionID)).setInitialComplete();
 		}
 	}
-	public void symptom(String sessionID)
-		throws IOException, JessException	{
-		String text = request.getParameter("symptom");	
-		if (text.equals("extra")) {
-			getEngine(sessionID).assertString("(Extra-Info)");
-		} else {
-			getEngine(sessionID).assertString("(Input (name "+text+"))");
-			System.out.println("(Input (name "+text+"))");
-		}
-		getEngine(sessionID).run();
-		System.out.println("done");
-		jessText = getEngine(sessionID).getOutputRouter("out").toString();
-		((StringWriter)(getEngine(sessionID).getOutputRouter("out"))).getBuffer().setLength(0);
-		response.setContentType("text/plain");  
-		response.setCharacterEncoding("UTF-8");		
-		response.getWriter().write(jessText.substring(0, jessText.length()-1));
-	}
+
 	public void symptomList(String sessionID) 
 		throws IOException, JessException, JSONException {	
 		if (!(sessions.get(getInt(sessionID))).getSymptomsChecked()) {
@@ -287,7 +270,6 @@ public class DA extends HttpServlet{
 			jsonObject.put("additional", jessText4);
 			out.print(jsonObject);
 			out.flush();
-			getEngine(sessionID).assertString("(Calculate totals)");
 			getEngine(sessionID).eval("(facts)");
 
 		} 	
@@ -329,6 +311,20 @@ public class DA extends HttpServlet{
 		response.setContentType("text/plain");  
 		response.setCharacterEncoding("UTF-8");		
 		response.getWriter().write("Hello "+name+" I am Dr Mellitus! welcome to the Diabetes Advisory Expert System, please select the symptoms you are currently experiencing then click SUBMIT" );
+	}
+
+	public void assesmentPercentage(String sessionID)
+		throws JessException, IOException	{
+		getEngine(sessionID).assertString("(Calculate Totals)");
+		getEngine(sessionID).run();
+		String percentage= getEngine(sessionID).getOutputRouter("out").toString();
+		((StringWriter)(getEngine(sessionID).getOutputRouter("out"))).getBuffer().setLength(0);
+		Double db = Double.parseDouble(percentage);
+		DecimalFormat df = new DecimalFormat("#.00");
+       	String newPercentage = df.format(db);
+		response.setContentType("text/plain");  
+		response.setCharacterEncoding("UTF-8");		
+		response.getWriter().write(newPercentage);
 	}
 
 	public void symptoms(String sessionID)
