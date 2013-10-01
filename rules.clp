@@ -368,7 +368,6 @@
     	(printout out3  ?explanation)
    		(printout out4  ?additional)    
     	(assert (Has-Symptom ?symptom))
-    	(bind ?*points* (+ ?*points* ?points))
     	(retract ?command)
     )
 ;If the suer is male then they are not pregnant and dont show yeast infection * gestational symtoms.

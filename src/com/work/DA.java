@@ -352,9 +352,9 @@ public class DA extends HttpServlet{
 		jsonObject.put("symptomNames", tokenizeString(jessText, " "));
 		jsonObject.put("symptomIDs", tokenizeString(jessText2, " "));
 		jsonObject.put("explanation", tokenizeString(jessText3, "*"));
-		getEngine(sessionID).eval("(Calculate Totals)");
+		getEngine(sessionID).assertString("(Calculate Totals)");
 		getEngine(sessionID).run();
-		percentage = getEngine(sessionID).getOutputRouter("out6").toString() +"*";	
+		percentage = getEngine(sessionID).getOutputRouter("out6").toString();	
 		((StringWriter)(getEngine(sessionID).getOutputRouter("out6"))).getBuffer().setLength(0);
 		jsonObject.put("percentage", percentage);
 		out.print(jsonObject);
