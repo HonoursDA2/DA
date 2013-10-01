@@ -29,7 +29,7 @@
     (slot options
         (default "none*"))
     	(slot caption
-        (default ""))
+        (default " *"))
     )
 (deftemplate advice
     (slot text)
