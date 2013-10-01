@@ -15,6 +15,7 @@ public class DA extends HttpServlet{
 	StringWriter sw3 = new StringWriter();
 	StringWriter sw4 = new StringWriter();
 	StringWriter sw5 = new StringWriter();
+	StringWriter sw6 = new StringWriter();
 	HttpServletRequest request = null;
 	HttpServletResponse response = null;
 	static int objects = 0;
@@ -25,6 +26,7 @@ public class DA extends HttpServlet{
 	String jessText3;
 	String jessText4;
 	String jessText5;
+	String percentage;
 
 	ArrayList<sessionData> sessions = new ArrayList<sessionData>();
 
@@ -119,6 +121,7 @@ public class DA extends HttpServlet{
 				tempEngine.addOutputRouter("out3", sw3);
 				tempEngine.addOutputRouter("out4", sw4);
 				tempEngine.addOutputRouter("out5", sw5);
+				tempEngine.addOutputRouter("out6", sw6);
 				tempEngine.batch(servletContext.getRealPath(rulesFile));
 				tempEngine.reset();
 				tempEngine.eval("(watch all)");
@@ -320,8 +323,8 @@ public class DA extends HttpServlet{
 		throws JessException, IOException	{
 		getEngine(sessionID).assertString("(Calculate Totals)");
 		getEngine(sessionID).run();
-		String percentage= getEngine(sessionID).getOutputRouter("out").toString();
-		((StringWriter)(getEngine(sessionID).getOutputRouter("out"))).getBuffer().setLength(0);
+		String percentage= getEngine(sessionID).getOutputRouter("out6").toString();
+		((StringWriter)(getEngine(sessionID).getOutputRouter("out6"))).getBuffer().setLength(0);
 		Double db = Double.parseDouble(percentage);
 		DecimalFormat df = new DecimalFormat("#");
        	String newPercentage = df.format(db);

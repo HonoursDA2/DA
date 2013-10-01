@@ -28,7 +28,8 @@
         (default "SINGLE*"))
     (slot options
         (default "none*"))
-    	(slot caption)
+    	(slot caption
+        (default " *"))
     )
 (deftemplate advice
     (slot text)
@@ -545,7 +546,7 @@
 (defrule totals
     ?command <-(Calculate Totals)
     =>
-    (printout out (* (/ ?*points* ?*total*) 100))
+    (printout out6 (* (/ ?*points* ?*total*) 100))
     (retract ?command) 
     
     (assert (Total ?*total*))
