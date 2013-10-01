@@ -30,7 +30,18 @@
         $("#diabetesInfo").fadeOut();
     }
 
-    function showInfo(index) {
+    function calctop(obje) {
+        return $(obje).offset().top - $("#dInfoOptions").offset().top
+    }
+    function calctops(obje) {
+        return $(obje).offset().top - $("#diabetesQues").offset().top
+    }
+
+    function showInfo(index,obj) {
+        $("#optPos").fadeOut();
+        $("#quePos").fadeIn();
+        var top = calctops(obj);
+        $("#optPos").css({ "top": top });
         if (extraT[index] == "MULTIPLE") {
             dOptions = extraO[index].split("-");
             dExplanations = extraE[index].split("-");
@@ -39,8 +50,9 @@
             for (var i = 0; i < dOptions.length; i++) {
                 extraObj[i] = { dOpt: dOptions[i], dExp: dExplanations[i] };
                 $("#dInfo").html("");
-                $("#dInfoOptions").append("<div onclick='displayInfo(" + i + ")'>" + extraObj[i].dOpt + "</div>");
+                $("#dInfoOptions").append("<div class='opts' onclick='displayInfo(" + i + ",this)'>" + extraObj[i].dOpt + "</div>");
             }
+            $("#dInfoOptions").append("<span id='optPos'></span>");
         }
         else if (extraT[index] == "SINGLE") {
             $("#dInfoOptions").html("");
@@ -48,7 +60,10 @@
         }
     }
 
-    function displayInfo(index) {
+    function displayInfo(index, obj) {
+        var top = calctop(obj);
+        $("#optPos").fadeIn();
+        $("#optPos").css({ "top": top });
         $("#dInfo").html(extraObj[index].dExp);
     }
 
@@ -121,8 +136,9 @@
                 extraE = data.explanations.split("*");
 
                 for (var i = 0; i < extraQ.length; i++) {
-                    $("#diabetesQues").append("<div onclick='showInfo("+i+")'>" + extraQ[i] + "</div>");
+                    $("#diabetesQues").append("<div onclick='showInfo("+i+",this)'>" + extraQ[i] + "</div>");
                 }
+                $("#diabetesQues").append("<span id='quePos'></span>");
             });
         });
 

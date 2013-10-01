@@ -229,6 +229,10 @@
 
 		var meter = 0;
 		function confirm() {
+		    $.get('DA', { command: "percentage", sessionID: sessionID }, function (responseText1) {
+		        
+		    });
+
 		    var proceed = false;
 		    meter += 10;
 
@@ -247,14 +251,14 @@
 		        });
 		    }
 		    else if (meter == 60) {
-		        $("#percentage").css({ "height": "210px", "background": "rgba(255,255,0,0.5)" });
+		        $("#percentage").css({ "height": "210px","color":"black", "background": "rgba(255,255,0,0.5)" });
 		        $("#pvalue").html(meter + "%");
 		        $('.imgBg').attr('src', function (i, e) {
 		            return e.replace("images/level/green.jpg", "images/level/yellow.jpg");
 		        });
 		    }
 		    else if (meter == 80) {
-		        $("#percentage").css({ "height": "280px", "background": "rgba(255,155,0,0.5)" });
+		        $("#percentage").css({ "height": "280px", "color": "white", "background": "rgba(255,155,0,0.5)" });
 		        $("#pvalue").html(meter + "%");
 		        $('.imgBg').attr('src', function (i, e) {
 		            return e.replace("images/level/yellow.jpg", "images/level/orange.jpg");

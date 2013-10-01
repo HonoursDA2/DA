@@ -96,6 +96,7 @@ body
     display:inline-block;
     position:relative;
     margin:auto;
+    cursor:pointer;
 }
 
 #splash #theAdvisor p
@@ -162,7 +163,7 @@ body
     box-sizing:border-box;
     top:0;
     right:0;
-    box-shadow:-4px 0px 10px -3px silver;
+    box-shadow:-4px 0px 10px -3px rgba(0,0,0,0.3);
     color:Gray;
 }
 
@@ -191,6 +192,25 @@ body
 #dInfoOptions div:hover
 {
     background:rgba(255,0,0,0.7);
+}
+
+#optPos,#quePos
+{
+    padding:15px 5px 0px 5px;
+    height:40px;
+    width:100%;
+    position:absolute;
+    top:0px;
+    left:0;
+    background:rgba(255,0,0,0.7);
+    z-index:2;
+    transition:500ms ease;
+    display:none;
+}
+
+#quePos
+{
+    height:30%;
 }
 
 #diabetesQues
@@ -306,8 +326,8 @@ body
 
 #lifestyle .questions .options
 {
-    width:30%;
-    height:100%;
+    width:35%;
+    height:50%;
 }
 
 div.speech,#toolbar
@@ -740,7 +760,7 @@ span#woman
 
 #symptomsContainer
 {
-    width:160%;
+    width:150%;
     height:100%;
 }
 
@@ -791,7 +811,7 @@ span#woman
 
 #percentage p
 {
-    top:50%;
+    top:20%;
     width:50%;
     position:relative;
     margin:auto;
