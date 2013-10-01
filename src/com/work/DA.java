@@ -276,7 +276,7 @@ public class DA extends HttpServlet{
 			jsonObject.put("symptomName", jessText);
 			jsonObject.put("url", jessText2);
 			jsonObject.put("explanation", jessText3);
-			jsonObject.put("additional", jessText4);
+			jsonObject.put("additional", jessText4);	
 			out.print(jsonObject);
 			out.flush();
 			
@@ -322,7 +322,7 @@ public class DA extends HttpServlet{
 		response.setCharacterEncoding("UTF-8");		
 		response.getWriter().write("Hello "+name+" I am Dr Mellitus! welcome to the Diabetes Advisory Expert System, please select the symptoms you are currently experiencing then click SUBMIT" );
 	}
-	
+
 	public void getFeedback(String sessionID)
 		throws JessException, IOException, JSONException	{
 		getEngine(sessionID).assertString("(Get Feedback)");
@@ -352,8 +352,14 @@ public class DA extends HttpServlet{
 		jsonObject.put("symptomNames", tokenizeString(jessText, " "));
 		jsonObject.put("symptomIDs", tokenizeString(jessText2, " "));
 		jsonObject.put("explanation", tokenizeString(jessText3, "*"));
+		getEngine(sessionID).eval("(Calculate Totals)");
+		getEngine(sessionID).run();
+		percentage = getEngine(sessionID).getOutputRouter("out6").toString() +"*";	
+		((StringWriter)(getEngine(sessionID).getOutputRouter("out6"))).getBuffer().setLength(0);
+		jsonObject.put("percentage", percentage);
 		out.print(jsonObject);
 		out.flush();
+
 
 	}
 
