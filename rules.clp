@@ -143,13 +143,22 @@
             are not in ones control, like family history and age. But one can take full control of their weight, lifestlye habits and diet.
             *")            
         )
-    (Information (question "5. Diabetes complications*") (explanation "A lot of really bad stuff :/*")
-            (questionType "SINGLE*")
+    (Information (question "5. Diabetes complications*") (explanation "Diabetes dramatically increases the risk of various cardiovascular problems, including coronary artery disease with chest pain (angina), heart attack, stroke and narrowing of arteries (atherosclerosis). If you have diabetes, you are more likely to have heart disease or stroke.-
+            Excess sugar can injure the walls of the tiny blood vessels (capillaries) that nourish your nerves, especially in the legs. This can cause tingling, numbness, burning or pain that usually begins at the tips of the toes or fingers and gradually spreads upward. Left untreated, you could lose all sense of feeling in the affected limbs. Damage to the nerves related to digestion can cause problems with nausea, vomiting, diarrhea or constipation. For men, it may lead to erectile dysfunction.-
+            The kidneys contain millions of tiny blood vessel clusters (glomeruli) that filter waste from your blood. Diabetes can damage this delicate filtering system. Severe damage can lead to kidney failure or irreversible endstage kidney disease, which may require dialysis or a kidney transplant-
+            Diabetes can damage the blood vessels of the retina (diabetic retinopathy), potentially leading to blindness. -
+            Nerve damage in the feet or poor blood flow to the feet increases the risk of various foot complications. Left untreated, cuts and blisters can become serious infections. Severe damage might require toe, foot or even leg amputation.-
+            Diabetes may leave you more susceptible to skin problems, including bacterial and fungal infections.With gum infections being a major concern-
+        	Diabetes may lead to lower than normal bone mineral density, increasing your risk of osteoporosis-
+            The bones of people with Osteoporosis become thin and weak and are much more likely to fracture, especially the hip, spine, and wrist.-
+            Type 2 diabetes may increase the risk of Alzheimer's disease. The poorer your blood sugar control, the greater the risk appears to be. One theory is that cardiovascular problems caused by diabetes could contribute to dementia by blocking blood flow to the brain or causing strokes. Other possibilities are that too much insulin in the blood leads to brain-damaging inflammation, or lack of insulin in the brain deprives brain cells of glucose*")
+            (questionType "MULTIPLE*")
         	(caption "Diabetes has a lot of complications that can result if not managed appropriately, early diagnosis plays a large role in
             preventing the complications from arising. Either because the body is insulin resistant or the pancreas is not 
             producing enough insulin, this leads to a high blood glucose level througouht the body, which can cause infections and disease over a period of time. 
             Badly managed Diabetes will eventally result in death.*")
-        	)
+        	(options "Cardiovascular Disease-Nerve damage-Kidney damage-Eye damage-Foot damage-Skin and mouth conditions-Osteoporosis-Alzheimer's disease.*")	
+        )
     (Information (question "4. What are the Symptoms of Diabetes*") (explanation "The glucose is not being converted into energy this weakens the cells and causes fatigue.-
             There is a high loss of Glucose through the urine, this causes one to go to the toilet very often.-
             This is caused by dehydration in the body, the mouth tends to get dry because of the high loss of liquids through urination.-

@@ -323,7 +323,7 @@ public class DA extends HttpServlet{
 		String percentage= getEngine(sessionID).getOutputRouter("out").toString();
 		((StringWriter)(getEngine(sessionID).getOutputRouter("out"))).getBuffer().setLength(0);
 		Double db = Double.parseDouble(percentage);
-		DecimalFormat df = new DecimalFormat("#.00");
+		DecimalFormat df = new DecimalFormat("#");
        	String newPercentage = df.format(db);
 		response.setContentType("text/plain");  
 		response.setCharacterEncoding("UTF-8");		
