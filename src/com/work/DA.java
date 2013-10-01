@@ -162,9 +162,7 @@ public class DA extends HttpServlet{
 							symptoms(request.getParameter("sessionID"));
 						} else if ( request.getParameter("command").equals("getInfo")) {
 							diabetesInfo(request.getParameter("sessionID"));
-						} else if ( request.getParameter("command").equals("percentage")) {
-							assesmentPercentage(request.getParameter("sessionID"));
-						} else if ( request.getParameter("command").equals("feedback")) {
+						}  else if ( request.getParameter("command").equals("feedback")) {
 							getFeedback(request.getParameter("sessionID"));
 						}
 				}else
@@ -235,6 +233,7 @@ public class DA extends HttpServlet{
 		jsonObject.put("percentage", percentage);	
 		out.print(jsonObject);
 		out.flush();
+		System.out.println("EHHHHHHHHHHHHHHHHHHHHh 0" + percentage);
 		if (jessText.equals("")) {
 			sessions.get(getInt(sessionID)).setInitialComplete();
 		}
@@ -323,19 +322,6 @@ public class DA extends HttpServlet{
 		response.getWriter().write("Hello "+name+" I am Dr Mellitus! welcome to the Diabetes Advisory Expert System, please select the symptoms you are currently experiencing then click SUBMIT" );
 	}
 
-	public void assesmentPercentage(String sessionID)
-		throws JessException, IOException	{
-		getEngine(sessionID).assertString("(Calculate Totals)");
-		getEngine(sessionID).run();
-		String percentage= getEngine(sessionID).getOutputRouter("out6").toString();
-		((StringWriter)(getEngine(sessionID).getOutputRouter("out6"))).getBuffer().setLength(0);
-		Double db = Double.parseDouble(percentage);
-		DecimalFormat df = new DecimalFormat("#");
-       	String newPercentage = df.format(db);
-		response.setContentType("text/plain");  
-		response.setCharacterEncoding("UTF-8");		
-		response.getWriter().write(newPercentage);
-	}
 
 	public void getFeedback(String sessionID)
 		throws JessException, IOException, JSONException	{
