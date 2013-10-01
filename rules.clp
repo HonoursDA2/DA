@@ -1,6 +1,6 @@
 (defglobal ?*currentQuestion* = 1)
-(defglobal ?*points* = 0)
-(defglobal ?*total* = 0)
+(defglobal ?*points* = 5)
+(defglobal ?*total* = 5)
 
 (deftemplate Description
     (slot name)
@@ -297,7 +297,7 @@
     (assert (BMI ?bmi))
     (if (> ?bmi 30) then 
     	(assert (weight-classification Obese)
-            (bind ?*points* 15)) else
+            (bind ?*points* 20)) else
         	(if (> ?bmi 25) then
         		( assert (weight-classification Overweight)
                 (bind ?*points* 10)) else
