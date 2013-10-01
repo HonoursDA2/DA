@@ -1,6 +1,6 @@
 (defglobal ?*currentQuestion* = 1)
-(defglobal ?*points* = 5)
-(defglobal ?*total* = 5)
+(defglobal ?*points* = 0)
+(defglobal ?*total* = 200)
 
 (deftemplate Description
     (slot name)
@@ -48,6 +48,9 @@
     (slot order)
     (slot options
         (default ""))
+    )
+(deftemplate Feedback
+    (slot explanation)
     )
 (deffacts Questions
     ;Initial questions
@@ -295,22 +298,31 @@
     (bind ?height ?userHeight)
     (bind ?bmi (/ ?userWeight (* ?userHeight ?userHeight)))
     (assert (BMI ?bmi))
+    
     (if (> ?bmi 30) then 
-    	(assert (weight-classification Obese)
-            (bind ?*points* 20)) else
+    	(assert (weight-classification Obese))
+        (assert (Feedback (explanation "Your BMI is above 30 kg/m^2, this classifies you as Obese,
+                        this is very concerning because Obesity is a cause of Type 2 Diabetes.
+                        You need to urgently try to manage your diet and incorporate some exercise into your daily/weekly routine.*"))) 
+        (bind ?*points* 20)
+          else
         	(if (> ?bmi 25) then
-        		( assert (weight-classification Overweight)
-                (bind ?*points* 10)) else
+        		( assert (weight-classification Overweight))
+                (assert (Feedback (explanation "Your BMI is above 25 kg/m^2, this classifies you as Overweight,
+                            this is slightly concerning if this is mostly body fat and not muscle.*")))
+                (bind ?*points* 10) else
             		(if (> ?bmi 18.5) then 
-                		(assert (weight-classification OptimalWeight)) else
+                		(assert (weight-classification OptimalWeight))
+                    	(assert (Feedback (explanation "Your BMI is between the range of 18kg/m^2 and 25 kg/m^2, this classifies you as having an Optimal weight, well done!
+                                Keep doing what your are doing :)*"))) else
                 			(if (< ?bmi 18.5 ) then
                     			(assert (weight-classification Underweight))
-                    		)
+                                (assert (Feedback (explanation "Your BMI is below, 18 kg/m^2, you are slightly underweight, a bit more body mass would be great.*")))
                 	)
-        	)
-    )  
-    )
-;(defrule weightAnalyzer)
+                    )
+                )
+            )
+        )
 (defrule printSymptoms
     (Symptoms)
     (Reason (name ?name) (explanation ?explanation))
@@ -389,14 +401,20 @@
     ?point
     )
 ;Adds points depending on the race
-(defrule all
+(defrule ageR
     (Age ?age)
-    (Race ?race)
-    (Family-History ?history)
     =>
     (bind ?*points* (+ ?*points* (age ?age)))
+    )
+(defrule raceR
+    (Race ?race)
+    =>
     (bind ?*points* (+ ?*points* (race ?race)))
-    (bind ?*points* (+ ?*points* (uncertain ?history))) 
+    )
+(defrule FH
+    (Family-History ?history)
+    =>
+     	(bind ?*points* (+ ?*points* (uncertain ?history)))
     )
 (deffunction age (?age)
     (bind ?value 0)
@@ -405,6 +423,8 @@
         (if (> ?age 45) then
             (bind ?value 5))
         )
+    (assert (Feedback (explanation "The older you get the more likely you are of getting Diabetes,
+                this is because you tend to exercise less, lose muscle mass and gain weight as you age.*")))
     ?value
     )
 ;if pregnant
@@ -424,7 +444,7 @@
     =>
     (bind ?*points* (+ ?*points* SmokenAlcohol ?frequency))	
     )
-(defrule alcoholYes
+(defrule bloodPressure
     (Blood-Pressure ?frequency)
     =>
     (bind ?*points* (+ ?*points* SmokenAlcohol ?frequency))	
@@ -433,6 +453,8 @@
     (Exercise No)
         =>
         (bind ?*points* (+ ?*points* 15))
+    	(assert (Feedback (explanation "No exercise...at all?? please try incorporate physical ectivity into you daily life, even if it means walking instead of driving
+                , exercise is important as it is essential to keep the body active and running.*")))
         )
 (defrule exerciseYes 
     (Exercise-Frequency ?fact)
@@ -442,9 +464,11 @@
 (deffunction exercise (?frequency)
     (bind ?point 0)
     (if (eq Frequently ?frequency) then
-        (bind ?point -15)else
+        (bind ?point -15)
+        (assert (Feedback (explanation "Frequent exercise, keep it up!*")))else
         (if (eq Occassionaly ?frequency) then
             (bind ?point -5)
+            (assert (Feedback (explanation "Occasional exercise is healthy, just try and maintain it, and maybe improve the frequency if possible.*")))
             )
         )
     ?point 
@@ -452,7 +476,10 @@
 (deffunction pregnant (?status)
     (bind ?value 0)
     (if (eq ?status Yes) then
-        (bind ?value 5) else
+        (bind ?value 5) 
+        (assert (Feedback (explanation "Because you are currently pregnant, you have a high chance of getting gestational Diabetes,
+                    this will most likely disappear after the pregnancy, but you should make sure
+                    you manage your diet aswell as your physical activity throughout yourn pregnancy.*")))else
         (if (eq ?status No) then
             (bind ?value 0))
         )
@@ -461,9 +488,11 @@
 (deffunction family (?relative)
     (bind ?points 0)
     (if (eq Parent ?relative) then
-     (bind ?points 10) else
+     	(assert (Feedback (explanation "Your sibling has/had Diabetes? this means the chances of you getting the disease are fairly high.")))
+        (bind ?points 10) else
         (if (eq Sibling ?relative) then
-     		(bind ?points 15) else
+     		(bind ?points 15)
+            (assert (Feedback  (explanation "Your sibling has/had Diabetes? this means the chances of you getting the disease are very high.*"))) else
             	(if (eq Aunt/Uncle ?relative) then
      				(bind ?points 7) else 
                 		(if (eq Grandparent ?relative) then
@@ -482,13 +511,15 @@
                 )
     ?point
     )
-(deffunction bp(?smokenalcohol)
+(deffunction bp(?bp)
     (bind ?point 0) 
-    (if (eq Hardly ?smokenalcohol) then
+    (if (eq Low ?bp) then
         (bind ?point 2) else
-        (if (eq Occasionaly ?smokenalcohol) then
+        (if (eq Average ?bp) then
             (bind ?point 5) else 
-            (if (eq Frequently ?smokenalcohol) then
+            (if (eq High ?bp) then
+                (assert (Feedback (explanation "A high blood pressure is very dangerous, this is one of the risk factors that can 
+                            increase your chance of getting heart disease, along with a stroke and other deadly comlications.*")))
                 (bind ?point 10)
                 )
             )
@@ -528,6 +559,7 @@
     ?question <- (Question (section Lifestyle) (type "smokeF") (text ?questionText) (answerType ?answerType) (ask yes))
     =>
     (modify ?question (ask no))
+    (assert (Feedback (explanation "No smoking, thats commendable, try not to get into this habit as it is quite hard to shake and has a lot of negative effects on the body in the long term.*")))
     )
 ;If no, dont ask how often.
 (defrule alcohol
@@ -536,6 +568,7 @@
     ?question <- (Question (section Lifestyle) (type "alcoholF") (text ?questionText) (answerType ?answerType) (ask yes))
     =>
     (modify ?question (ask no))
+    (assert (Feedback (explanation "No alcohol consumption, thats great, keep this up!*")))
     )
 ;If no dont ask how often.
 (defrule exercise
@@ -544,6 +577,14 @@
     ?question <- (Question (section Lifestyle) (type "exerciseF") (text ?questionText) (answerType ?answerType) (ask yes))
     =>
     (modify ?question (ask no))
+    (assert (Feedback (explanation "You dont seem to get any sort of physical activity, this is dangerous in the long term and can lead to a sedentary
+                lifestyle.It is essential to get some sort of physical activity at least once in a while*")))
+    )
+(defrule getFeedback
+    (Get Feedback)
+    (Feedback (explanation ?explanation))
+    =>
+    (printout out ?explanation )
     )
 ;If no dont ask what the rate is.
 (defrule bloodPressure
