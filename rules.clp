@@ -9,7 +9,6 @@
     (slot explanation)
     )
 (deftemplate Reason
-
     (slot name)
     (slot type)
     (slot explanation)
@@ -345,7 +344,6 @@
     	(printout out ?name " ")
     	(printout out2  ?id " ")
     	(printout out3  ?explanation " ")
-    	(bind ?*total* (+ ?*total* 5))
     	;(retract ?command)
     )
 ;Returns the information for a particular symptom.
@@ -371,7 +369,15 @@
     =>
     (assert (Pregnant No))
     (modify ?question (ask no))
+    (bind ?*total* (- ?*total* 10))
     (retract ?femaleQ1 ?femaleQ2)
+    )
+(defrule isFemale
+    (declare (salience 10))
+    (Gender Female)
+    ?femaleQ1 <- (Description(type SYMPTOM)(id "dysfunction"))
+    =>
+    (bind ?*total* (- ?*total* 5))
     )
 ;Asserts the totals with the values.
 (defrule familyH
