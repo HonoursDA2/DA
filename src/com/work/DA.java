@@ -161,6 +161,8 @@ public class DA extends HttpServlet{
 							diabetesInfo(request.getParameter("sessionID"));
 						} else if ( request.getParameter("command").equals("percentage")) {
 							assesmentPercentage(request.getParameter("sessionID"));
+						} else if ( request.getParameter("command").equals("feedback")) {
+							getFeedback(request.getParameter("sessionID"));
 						}
 				}else
 				{
@@ -270,8 +272,6 @@ public class DA extends HttpServlet{
 			jsonObject.put("additional", jessText4);
 			out.print(jsonObject);
 			out.flush();
-			getEngine(sessionID).assertString("(Calculate Totals)");
-			getEngine(sessionID).run();
 			
 			//getEngine(sessionID).eval("(facts)");
 
@@ -328,6 +328,19 @@ public class DA extends HttpServlet{
 		response.setContentType("text/plain");  
 		response.setCharacterEncoding("UTF-8");		
 		response.getWriter().write(newPercentage);
+	}
+
+	public void getFeedback(String sessionID)
+		throws JessException, IOException, JSONException	{
+		getEngine(sessionID).assertString("(Get Feedback)");
+		getEngine(sessionID).run();
+		String feedback= getEngine(sessionID).getOutputRouter("out").toString();
+		((StringWriter)(getEngine(sessionID).getOutputRouter("out"))).getBuffer().setLength(0);
+		PrintWriter out = response.getWriter();
+		JSONObject jsonObject = new JSONObject();
+		jsonObject.put("feedback", feedback);
+		out.print(jsonObject);
+		out.flush();
 	}
 
 	public void symptoms(String sessionID)
