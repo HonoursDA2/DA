@@ -1,5 +1,5 @@
 ﻿    var question = type = id = "";
-    var extraQ = extraT = extraO = extraE = extraObj = new Array();
+    var extraQ = extraT = extraO = extraE = extraC = extraObj = new Array();
     var dOptions = dExplanations = new Array();
 
     window.onload = function () {
@@ -41,15 +41,15 @@
         $("#optPos").fadeOut();
         $("#quePos").fadeIn();
         var top = calctops(obj);
-        $("#optPos").css({ "top": top });
+        $("#quePos").css({ "top": top });
         if (extraT[index] == "MULTIPLE") {
             dOptions = extraO[index].split("-");
             dExplanations = extraE[index].split("-");
-
+            $("#dInfo").html(extraC[index]);
             $("#dInfoOptions").html("");
             for (var i = 0; i < dOptions.length; i++) {
                 extraObj[i] = { dOpt: dOptions[i], dExp: dExplanations[i] };
-                $("#dInfo").html("");
+                $("#dInfo").html(extraC[index]);
                 $("#dInfoOptions").append("<div class='opts' onclick='displayInfo(" + i + ",this)'>" + extraObj[i].dOpt + "</div>");
             }
             $("#dInfoOptions").append("<span id='optPos'></span>");
@@ -121,6 +121,7 @@
             $("#splash #moreInfo").css({ "opacity": "0.2" });
             $(this).css({ "box-shadow": "0 2px 15px -2px red" });
             $("#splash").delay(1500).effect("puff", 1000);
+            $("#chances").delay(1500).fadeIn();
         });
 
         $("#moreInfo").click(function () {
@@ -134,9 +135,10 @@
                 extraT = data.type.split("*");
                 extraO = data.options.split("*");
                 extraE = data.explanations.split("*");
+                extraC = data.caption.split("*");
 
                 for (var i = 0; i < extraQ.length; i++) {
-                    $("#diabetesQues").append("<div onclick='showInfo("+i+",this)'>" + extraQ[i] + "</div>");
+                    $("#diabetesQues").append("<div onclick='showInfo(" + i + ",this)'>" + extraQ[i] + "</div>");
                 }
                 $("#diabetesQues").append("<span id='quePos'></span>");
             });
