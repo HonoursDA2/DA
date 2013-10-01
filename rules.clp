@@ -51,6 +51,7 @@
     )
 (deftemplate Feedback
     (slot explanation)
+    (slot stage)
     )
 (deffacts Questions
     ;Initial questions
@@ -329,23 +330,23 @@
     
    (if (> ?bmi 30) then 
     	(assert (weight-classification Obese))
-        (assert (Feedback (explanation "Your BMI is above 30 kg/m^2, this classifies you as Obese,
+        (assert (stage INITIAL)(Feedback (explanation "Your BMI is above 30 kg/m^2, this classifies you as Obese,
                         this is very concerning because Obesity is a cause of Type 2 Diabetes.
                         You need to urgently try to manage your diet and incorporate some exercise into your daily/weekly routine.*"))) 
        (bind ?*points* (+ ?*points* 20))
           else
         	(if (> ?bmi 25) then
        		( assert (weight-classification Overweight))
-                (assert (Feedback (explanation "Your BMI is above 25 kg/m^2, this classifies you as Overweight,
+                (assert (stage INITIAL)(Feedback (explanation "Your BMI is above 25 kg/m^2, this classifies you as Overweight,
                             this is slightly concerning if this is mostly body fat and not muscle.*")))
                (bind ?*points* (+ ?*points* 10)) else
            		(if (> ?bmi 18.5) then 
                 		(assert (weight-classification OptimalWeight))
-                    	(assert (Feedback (explanation "Your BMI is between the range of 18kg/m^2 and 25 kg/m^2, this classifies you as having an Optimal weight, well done!
+                    	(assert (Feedback (stage INITIAL) (explanation "Your BMI is between the range of 18kg/m^2 and 25 kg/m^2, this classifies you as having an Optimal weight, well done!
                                 Keep doing what your are doing :)*"))) else
                 			(if (< ?bmi 18.5 ) then
                    			(assert (weight-classification Underweight))
-                              (assert (Feedback (explanation "Your BMI is below, 18 kg/m^2, you are slightly underweight, a bit more body mass would be great.*")))
+                              (assert (Feedback (stage INITIAL) (explanation "Your BMI is below, 18 kg/m^2, you are slightly underweight, a bit more body mass would be great.*")))
                 	)
                    )
                )
@@ -458,7 +459,7 @@
         (if (> ?age 45) then
             (bind ?value 5))
         )
-    (assert (Feedback (explanation "The older you get the more likely you are of getting Diabetes,
+    (assert (Feedback (stage INITIAL)(explanation "The older you get the more likely you are of getting Diabetes,
                 this is because you tend to exercise less, lose muscle mass and gain weight as you age.*")))
     ?value
     )
@@ -512,7 +513,7 @@
     (bind ?value 0)
     (if (eq ?status Yes) then
         (bind ?value 5) 
-        (assert (Feedback (explanation "Because you are currently pregnant, you have a high chance of getting gestational Diabetes,
+        (assert (Feedback (stage INITIAL)(explanation "Because you are currently pregnant, you have a high chance of getting gestational Diabetes,
                     this will most likely disappear after the pregnancy, but you should make sure
                     you manage your diet aswell as your physical activity throughout yourn pregnancy.*")))else
         (if (eq ?status No) then
@@ -523,16 +524,18 @@
 (deffunction family (?relative)
     (bind ?points 0)
     (if (eq Parent ?relative) then
-     	(assert (Feedback (explanation "Your sibling has/had Diabetes? this means the chances of you getting the disease are fairly high.")))
+     	(assert (Feedback (stage INITIAL)(explanation "Your parent has/had Diabetes, a person whos parent is diabetic is 2x more likely to get the disease then the average person.")))
         (bind ?points 10) else
         (if (eq Sibling ?relative) then
      		(bind ?points 15)
-            (assert (Feedback  (explanation "Your sibling has/had Diabetes? this means the chances of you getting the disease are very high.*"))) else
+            (assert (Feedback  (stage INITIAL)(explanation "Your sibling has/had Diabetes, this means the chances of you getting the disease are very high, because you share a lot of the same genes.*"))) else
             	(if (eq Aunt/Uncle ?relative) then
      				(bind ?points 7) else 
                 		(if (eq Grandparent ?relative) then
-    	 					(bind ?points 6) else 
+    	 					(assert (Feedback  (stage INITIAL)(explanation "Your grandparent had/has Diabetes, this means you are more likely than the average person to contract this disease, please tale the necessary precautions*")))
+                    		(bind ?points 6) else 
                 				(if (eq Other ?relative) then
+                        			(assert (Feedback  (stage INITIAL)(explanation "Your relative had/has Diabetes, this means you are more likely than the average person to contract this disease, please tale the necessary precautions*")))
     	 							(bind ?points 5)
              )
             ))
@@ -617,7 +620,7 @@
     )
 (defrule getFeedback
     (Get Feedback)
-    (Feedback (explanation ?explanation))
+    (Feedback (stage INITIAL) (explanation ?explanation))
     =>
     (printout out ?explanation )
     )
