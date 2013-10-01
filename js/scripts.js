@@ -229,50 +229,8 @@
 
 		var meter = height = 0;
 		function confirm() {
-		    $.get('DA', { command: "percentage", sessionID: sessionID }, function (responseText1) {
-		        meter = responseText1;
-		    });
 
 		    var proceed = false;
-		    
-
-            height:330 * (meter / 100);
-		    if (meter >= 0) {
-		        $("#percentage").css({ "height": height +"px" });
-		        $("#pvalue").html(meter + "%");
-		        $('.imgBg').attr('src', function (i, e) {
-		            return e.replace("images/level/lime.jpg", "images/level/lime.jpg");
-		        });
-		    }
-		    else if (meter == 20) {
-		        $("#percentage").css({ "height": height+"px", "background": "rgba(0,200,0,0.5)" });
-		        $("#pvalue").html(meter + "%");
-		        $('.imgBg').attr('src', function (i, e) {
-		            return e.replace("images/level/lime.jpg", "images/level/green.jpg");
-		        });
-		    }
-		    else if (meter == 40) {
-		        $("#percentage").css({ "height": height + "px", "color": "black", "background": "rgba(255,255,0,0.5)" });
-		        $("#pvalue").html(meter + "%");
-		        $('.imgBg').attr('src', function (i, e) {
-		            return e.replace("images/level/green.jpg", "images/level/yellow.jpg");
-		        });
-		    }
-		    else if (meter == 60) {
-		        $("#percentage").css({ "height": height + "px", "color": "white", "background": "rgba(255,155,0,0.5)" });
-		        $("#pvalue").html(meter + "%");
-		        $('.imgBg').attr('src', function (i, e) {
-		            return e.replace("images/level/yellow.jpg", "images/level/orange.jpg");
-		        });
-		    }
-		    else if (meter == 80) {
-		        $("#percentage").css({ "height": height + "px", "background": "rgba(255,0,0,0.5)" });
-		        $("#pvalue").html(meter + "%");
-		        $('.imgBg').attr('src', function (i, e) {
-		            return e.replace("images/level/orange.jpg", "images/level/red.jpg");
-		        });
-		    }
-		    
 
 		    if (type == "INPUTT" || type == "INPUTN" || type == "INPUTND") {
 		        var answer = $("#" + id).val();
@@ -327,6 +285,7 @@
 		    }
 		    if (proceed) {
 		        ajaxCall("question", sessionID);
+		        updateP();
 		    }
 
 		    
@@ -496,6 +455,50 @@
 		        });
 		    });
 		});
+
+		    function updateP() {
+		        $.get('DA', { command: "percentage", sessionID: sessionID }, function (responseText1) {
+		            meter = responseText1;
+		        });
+		        height = 3300 * (meter / 100);
+
+		        
+		    if (meter >= 0) {
+		        $("#percentage").css({ "height": height + "px" });
+		        $("#pvalue").html(meter + "%");
+		        $('.imgBg').attr('src', function (i, e) {
+		            return e.replace("images/level/lime.jpg", "images/level/lime.jpg");
+		        });
+		    }
+		    else if (meter == 20) {
+		        $("#percentage").css({ "height": height + "px", "background": "rgba(0,200,0,0.5)" });
+		        $("#pvalue").html(meter + "%");
+		        $('.imgBg').attr('src', function (i, e) {
+		            return e.replace("images/level/lime.jpg", "images/level/green.jpg");
+		        });
+		    }
+		    else if (meter == 40) {
+		        $("#percentage").css({ "height": height + "px", "color": "black", "background": "rgba(255,255,0,0.5)" });
+		        $("#pvalue").html(meter + "%");
+		        $('.imgBg').attr('src', function (i, e) {
+		            return e.replace("images/level/green.jpg", "images/level/yellow.jpg");
+		        });
+		    }
+		    else if (meter == 60) {
+		        $("#percentage").css({ "height": height + "px", "color": "white", "background": "rgba(255,155,0,0.5)" });
+		        $("#pvalue").html(meter + "%");
+		        $('.imgBg').attr('src', function (i, e) {
+		            return e.replace("images/level/yellow.jpg", "images/level/orange.jpg");
+		        });
+		    }
+		    else if (meter == 80) {
+		        $("#percentage").css({ "height": height + "px", "background": "rgba(255,0,0,0.5)" });
+		        $("#pvalue").html(meter + "%");
+		        $('.imgBg').attr('src', function (i, e) {
+		            return e.replace("images/level/orange.jpg", "images/level/red.jpg");
+		        });
+		    }
+		}
 
 		function splash() {
 		    $("#splash").delay(2000).effect("puff", 500);

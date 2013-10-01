@@ -331,6 +331,7 @@ public class DA extends HttpServlet{
 		response.setContentType("text/plain");  
 		response.setCharacterEncoding("UTF-8");		
 		response.getWriter().write(newPercentage);
+		System.out.println("EHHHHHH "+ percentage);
 	}
 
 	public void getFeedback(String sessionID)

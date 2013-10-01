@@ -131,11 +131,14 @@
             $("#splash").delay(1500).effect("puff", 1000);
             $.get('DA', { command: "getInfo", sessionID: sessionID }, function (data) {
 
+                alert(data.caption);
                 extraQ = data.questions.split("*");
                 extraT = data.type.split("*");
                 extraO = data.options.split("*");
                 extraE = data.explanations.split("*");
                 extraC = data.caption.split("*");
+
+                alert(extraC.length);
 
                 for (var i = 0; i < extraQ.length; i++) {
                     $("#diabetesQues").append("<div onclick='showInfo(" + i + ",this)'>" + extraQ[i] + "</div>");
