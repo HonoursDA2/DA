@@ -315,13 +315,13 @@
         (assert (Feedback (explanation "Your BMI is above 30 kg/m^2, this classifies you as Obese,
                         this is very concerning because Obesity is a cause of Type 2 Diabetes.
                         You need to urgently try to manage your diet and incorporate some exercise into your daily/weekly routine.*"))) 
-        (bind ?*points* (+ ?*points* 20))
+        ;(bind ?*points* (+ ?*points* 20))
           else
         	(if (> ?bmi 25) then
         		( assert (weight-classification Overweight))
                 (assert (Feedback (explanation "Your BMI is above 25 kg/m^2, this classifies you as Overweight,
                             this is slightly concerning if this is mostly body fat and not muscle.*")))
-                (bind ?*points* (+ ?*points* 10)) else
+                ;(bind ?*points* (+ ?*points* 10)) else
             		(if (> ?bmi 18.5) then 
                 		(assert (weight-classification OptimalWeight))
                     	(assert (Feedback (explanation "Your BMI is between the range of 18kg/m^2 and 25 kg/m^2, this classifies you as having an Optimal weight, well done!

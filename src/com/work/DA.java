@@ -235,6 +235,7 @@ public class DA extends HttpServlet{
 		jsonObject.put("percentage", percentage);	
 		out.print(jsonObject);
 		out.flush();
+		System.out.println("EHHHHHH "+ percentage);
 		if (jessText.equals("")) {
 			sessions.get(getInt(sessionID)).setInitialComplete();
 		}

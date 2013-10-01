@@ -54,7 +54,8 @@
 		                extraUrl = responseText.url;
 		                extraExp = responseText.explanation;
 		                extraAdd = responseText.additional;
-		                 symptomNames = extraName.split('*');
+
+		               symptomNames = extraName.split('*');
 		               symptomURLS = extraUrl.split('*');
 		               symptomExp = extraExp.split('*');
 		               symptomAdditional = extraAdd.split('*');
@@ -125,7 +126,11 @@
 		            id = data.id;
 		            type = data.type;
 		            options = data.options;
+		            meter = data.percentage;
 
+		            alert(meter);
+
+		            updateP();
 		            $(".profileH1").html(question);
 
 		            if (type == "INPUTT" || type == "INPUTN" || type == "INPUTND") {
@@ -171,7 +176,10 @@
 		                id = data.id;
 		                type = data.type;
 		                options = data.options;
+		                meter = data.percentage;
 
+		                alert(meter);
+		                updateP();
 		                $("#advisorH1").html(question);
 
 		                if (type == "INPUTT" || type == "INPUTN" || type == "INPUTND") {
@@ -285,7 +293,6 @@
 		    }
 		    if (proceed) {
 		        ajaxCall("question", sessionID);
-		        updateP();
 		    }
 
 		    
@@ -457,9 +464,7 @@
 		});
 
 		    function updateP() {
-		        $.get('DA', { command: "percentage", sessionID: sessionID }, function (responseText1) {
-		            meter = responseText1;
-		        });
+		        
 		        height = 3300 * (meter / 100);
 
 		        
