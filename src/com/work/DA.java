@@ -269,14 +269,18 @@ public class DA extends HttpServlet{
 				System.out.println(jessText);	
 				sessions.get(getInt(sessionID)).setSymptomsChecked();
 			}
-
 			response.setContentType("application/json");  
 			PrintWriter out = response.getWriter();
 			JSONObject jsonObject = new JSONObject();
+			getEngine(sessionID).assertString("(Calculate Totals)");
+			getEngine(sessionID).run();
+			percentage = getEngine(sessionID).getOutputRouter("out6").toString();
+			((StringWriter)(getEngine(sessionID).getOutputRouter("out6"))).getBuffer().setLength(0);	
 			jsonObject.put("symptomName", jessText);
 			jsonObject.put("url", jessText2);
 			jsonObject.put("explanation", jessText3);
 			jsonObject.put("additional", jessText4);	
+			jsonObject.put("percentage", percentage);	
 			out.print(jsonObject);
 			out.flush();
 			

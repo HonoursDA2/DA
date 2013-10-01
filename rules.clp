@@ -367,6 +367,7 @@
     	(printout out2  ?url)
     	(printout out3  ?explanation)
    		(printout out4  ?additional)    
+    	(bind ?*points* (+ ?*points* ?points))
     	(assert (Has-Symptom ?symptom))
     	(retract ?command)
     )
@@ -452,19 +453,19 @@
     )
 ;if pregnant increase points because of the chances of gestational Diabetes
 (defrule smokeYes
-    (SmokeF ?frequency)
+    (Smoke-Frequency ?frequency)
     =>
-    (bind ?*points* (+ ?*points* SmokenAlcohol ?frequency))	
+    (bind ?*points* (+ ?*points* (SmokenAlcohol ?frequency)))	
     )
 (defrule alcoholYes
-    (AlcoholF ?frequency)
+    (Alcohol-Frequency ?frequency)
     =>
-    (bind ?*points* (+ ?*points* SmokenAlcohol ?frequency))	
+    (bind ?*points* (+ ?*points* (SmokenAlcohol ?frequency)))	
     )
 (defrule bloodPressure
     (Blood-Pressure ?frequency)
     =>
-    (bind ?*points* (+ ?*points* SmokenAlcohol ?frequency))	
+    (bind ?*points* (+ ?*points* bp ?frequency))	
     )
 (defrule exerciseNo
     (Exercise No)
@@ -476,7 +477,7 @@
 (defrule exerciseYes 
     (Exercise-Frequency ?fact)
     =>
-    	(bind ?*points* (+ ?exercise ?fact))	
+    	(bind ?*points* (+ exercise ?fact))	
     )
 (deffunction exercise (?frequency)
     (bind ?point 0)
@@ -523,7 +524,7 @@
     )
 (deffunction SmokenAlcohol(?smokenalcohol)
     (bind ?point 0) 
-     (if (eq High ?smokenalcohol) then
+     (if (eq Frequently ?smokenalcohol) then
                 (bind ?point 15)
                 )
     ?point
