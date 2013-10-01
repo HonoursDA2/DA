@@ -122,27 +122,43 @@
     )
 ; Extra information that accompanies the symptoms
 (deffacts Information
-    (Information (question "7. Diabetes management*") (explanation "There is unfortunately no proven cure for Diabetes
-            Depending on the type of Diabetes you have been diagnosed with, the treatments differ slightly-
-            Type 1 Diabetes is difficult to control thus the treatment is a daily task.The strict regimen includes a carefully calculated diet, 
+    (Information (question "7. Diabetes management*") (explanation "Type 1 Diabetes is difficult to control thus the treatment is a daily task.The strict regimen includes a carefully calculated diet, 
             planned physical activity and multiple insulin injections (frequently). 
             As well as a home blood glucose testing facility to check the levels throughout the day.-
             Type 2 Diabetes treatment typically includes diet control, frequent exercise, a home blood glucose testing facility 
             and in certain cases oral medication and insulin injections. The majority of Type 2 Diabetics do not require insulin injections.-
             Gestational Diabetes is brought about by hormonal effects of the pregnancy, thus no supplementary insulin is required. 
-            The patient needs to ensure they exercise appropriately and maintain a healthy diet throughout the pregnancy to avoid developing type 2 Diabetes in the long run.*"
+            The patient needs to ensure they exercise appropriately and maintain a healthy diet throughout the pregnancy to avoid developing type 2 Diabetes in the long run.-
+            As a diabetic, your body cannot make proper use of insulin, leading to a high blood glucose level throughout the body.
+			One needs to eat healthy to to keep the blood sugar levels within range, this is a very critical aspect of living with Diabetes.
+            A dietitian can help cater a diet specific for you as this depends on your BMI(Body Mass Index), medicine, lifestyle and any health problems that one might have.            
+            A healthy diebetic should do the following:
+            Limit foods that are high in sugar.
+            Eat small portions spread throughout the day.
+            Watch the carbohydrate intake.
+            Eat a variety of whole grains.
+            Eat less fat .
+            Limit the intake of alcohol.
+            Use less salt.-
+            Exercise is essential for a diabetic, it will not just help with weightloss, but it will also help the body
+            use insulin better, so it can convert glucose into energy for cells.It does not even have to be very strenuous, 
+            even just walking reguarly will help.
+            Stress should be managed, because stress hormones, may alter blood glucose levels directly.
+            Meditaion could be utilized as a very useful tool to manage stress.-
+            Diabetics should take good care of their feet, skin, eyes and teeth and gum.
+            Diabetics have a higher risk of blindness, cataracs and gum problems.So basic dental hygiene like brushing teeth  and flossing along with regular dentist vists will help tremendously.
+            Because of the loss of sensation, this could mean not noticing a wound or infection for a prolonged period of time, so it is advised to check your feet regularly.*"
             )
-        (caption "These are tips on how to manage a life after having being diagnosed with Diabetes*")
+        (caption "These are tips on how to manage a life after having being diagnosed with Diabetes.
+            There is unfortunately no proven cure for Diabetes
+            Depending on the type of Diabetes you have been diagnosed with, the treatments differ slightly*")
             (questionType "MULTIPLE*")
-        	(options "General-Type 1-Type 2-Gestational*")	
+        	(options "Type 1-Type 2-Gestational-Diet-Lifestyle-Body Maintenance*")	
         )
-    (Information (question "6. Diabetes prevention*") (explanation "Eat well, cut down on sugary/fatty foods-
-            Exercise often, try not to drink/smoke excessively this will not help the situation*")
-            (questionType "MULTIPLE*")
-        	(options "Diet-Lifestyle*")	
-        	(caption "Diabetes can be prevented, if the right precautions and mindset are incorporated into everyday life. There are certain things that
-            are not in ones control, like family history and age. But one can take full control of their weight, lifestlye habits and diet.
-            *")            
+    (Information (question "6. Diabetes prevention*") (explanation "Diabetes can be prevented, if the right precautions and mindset are incorporated into everyday life. There are certain things that
+            are not in ones control, like family history and age. But one can take full control of their weight, lifestlye, habits and diet. Please refer to the response to question 7 for the appropriate
+            measures to prevent the onset of Diabetes.Managing Diabetes is the same as preventing it,as it encourages a healthy diet and lifestyle.
+           *")	         
         )
     (Information (question "5. Diabetes complications*") (explanation "Diabetes dramatically increases the risk of various cardiovascular problems, including coronary artery disease with chest pain (angina), heart attack, stroke and narrowing of arteries (atherosclerosis). If you have diabetes, you are more likely to have heart disease or stroke.-
             Excess sugar can injure the walls of the tiny blood vessels (capillaries) that nourish your nerves, especially in the legs. This can cause tingling, numbness, burning or pain that usually begins at the tips of the toes or fingers and gradually spreads upward. Left untreated, you could lose all sense of feeling in the affected limbs. Damage to the nerves related to digestion can cause problems with nausea, vomiting, diarrhea or constipation. For men, it may lead to erectile dysfunction.-
@@ -160,7 +176,7 @@
             Badly managed Diabetes will eventally result in death.*")
         	(options "Cardiovascular Disease-Nerve damage-Kidney damage-Eye damage-Foot damage-Skin and mouth conditions-Osteoporosis-Alzheimer's disease.*")	
         )
-    (Information (question "4. What are the Symptoms of Diabetes*") (explanation "The glucose is not being converted into energy this weakens the cells and causes fatigue.-
+    (Information (question "4. What are the symptoms of Diabetes*") (explanation "The glucose is not being converted into energy this weakens the cells and causes fatigue.-
             There is a high loss of Glucose through the urine, this causes one to go to the toilet very often.-
             This is caused by dehydration in the body, the mouth tends to get dry because of the high loss of liquids through urination.-
             This is a result of the nerve damage in the body, leading to males not being able to perform sexually. A lot of males experience erectile dysfuction-
