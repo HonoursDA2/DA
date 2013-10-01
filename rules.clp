@@ -28,7 +28,8 @@
         (default "SINGLE*"))
     (slot options
         (default "none*"))
-    	(slot caption)
+    	(slot caption
+        (default ""))
     )
 (deftemplate advice
     (slot text)
