@@ -218,10 +218,13 @@ public class DA extends HttpServlet{
 		jessText2 = getEngine(sessionID).getOutputRouter("out2").toString();
 		jessText3 = getEngine(sessionID).getOutputRouter("out3").toString();
 		jessText4 = getEngine(sessionID).getOutputRouter("out4").toString();
+		percentage = getEngine(sessionID).getOutputRouter("out6").toString();
 		((StringWriter)(getEngine(sessionID).getOutputRouter("out"))).getBuffer().setLength(0);
 		((StringWriter)(getEngine(sessionID).getOutputRouter("out2"))).getBuffer().setLength(0);	
 		((StringWriter)(getEngine(sessionID).getOutputRouter("out3"))).getBuffer().setLength(0);	
-		((StringWriter)(getEngine(sessionID).getOutputRouter("out4"))).getBuffer().setLength(0);	
+		((StringWriter)(getEngine(sessionID).getOutputRouter("out4"))).getBuffer().setLength(0);
+		((StringWriter)(getEngine(sessionID).getOutputRouter("out4"))).getBuffer().setLength(0);
+		((StringWriter)(getEngine(sessionID).getOutputRouter("out6"))).getBuffer().setLength(0);	
 		response.setContentType("application/json");  
 		PrintWriter out = response.getWriter();
 		JSONObject jsonObject = new JSONObject();
@@ -229,6 +232,7 @@ public class DA extends HttpServlet{
 		jsonObject.put("type", jessText2);
 		jsonObject.put("id", jessText3);
 		jsonObject.put("options", jessText4);	
+		jsonObject.put("percentage", percentage);	
 		out.print(jsonObject);
 		out.flush();
 		if (jessText.equals("")) {
