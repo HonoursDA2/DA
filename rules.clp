@@ -1,6 +1,6 @@
 (defglobal ?*currentQuestion* = 1)
-(defglobal ?*points* = 5)
-(defglobal ?*total* = 5)
+(defglobal ?*points* = 0)
+(defglobal ?*total* = 1)
 
 (deftemplate Description
     (slot name)
