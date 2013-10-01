@@ -160,40 +160,41 @@
             measures to prevent the onset of Diabetes.Managing Diabetes is the same as preventing it,as it encourages a healthy diet and lifestyle.
            *")	         
         )
-    (Information (question "5. Diabetes complications*") (explanation "Diabetes dramatically increases the risk of various cardiovascular problems, including coronary artery disease with chest pain (angina), heart attack, stroke and narrowing of arteries (atherosclerosis). If you have diabetes, you are more likely to have heart disease or stroke.-
-            Excess sugar can injure the walls of the tiny blood vessels (capillaries) that nourish your nerves, especially in the legs. This can cause tingling, numbness, burning or pain that usually begins at the tips of the toes or fingers and gradually spreads upward. Left untreated, you could lose all sense of feeling in the affected limbs. Damage to the nerves related to digestion can cause problems with nausea, vomiting, diarrhea or constipation. For men, it may lead to erectile dysfunction.-
-            The kidneys contain millions of tiny blood vessel clusters (glomeruli) that filter waste from your blood. Diabetes can damage this delicate filtering system. Severe damage can lead to kidney failure or irreversible endstage kidney disease, which may require dialysis or a kidney transplant-
+    (Information (question "5. Diabetes complications*") (explanation "Type 2 diabetes may increase the risk of Alzheimer's disease. The poorer your blood sugar control, the greater the risk appears to be. One theory is that cardiovascular problems caused by diabetes could contribute to dementia by blocking blood flow to the brain or causing strokes. Other possibilities are that too much insulin in the blood leads to brain-damaging inflammation, or lack of insulin in the brain deprives brain cells of glucose.-
+            Diabetes dramatically increases the risk of various cardiovascular problems, including coronary artery disease with chest pain (angina), heart attack, stroke and narrowing of arteries (atherosclerosis). If you have diabetes, you are more likely to have heart disease or stroke.-
             Diabetes can damage the blood vessels of the retina (diabetic retinopathy), potentially leading to blindness. -
+            The kidneys contain millions of tiny blood vessel clusters (glomeruli) that filter waste from your blood. Diabetes can damage this delicate filtering system. Severe damage can lead to kidney failure or irreversible endstage kidney disease, which may require dialysis or a kidney transplant-
+            Excess sugar can injure the walls of the tiny blood vessels (capillaries) that nourish your nerves, especially in the legs. This can cause tingling, numbness, burning or pain that usually begins at the tips of the toes or fingers and gradually spreads upward. Left untreated, you could lose all sense of feeling in the affected limbs. Damage to the nerves related to digestion can cause problems with nausea, vomiting, diarrhea or constipation. For men, it may lead to erectile dysfunction.-
             Nerve damage in the feet or poor blood flow to the feet increases the risk of various foot complications. Left untreated, cuts and blisters can become serious infections. Severe damage might require toe, foot or even leg amputation.-
-            Diabetes may leave you more susceptible to skin problems, including bacterial and fungal infections.With gum infections being a major concern-
-        	Diabetes may lead to lower than normal bone mineral density, increasing your risk of osteoporosis-
             The bones of people with Osteoporosis become thin and weak and are much more likely to fracture, especially the hip, spine, and wrist.-
-            Type 2 diabetes may increase the risk of Alzheimer's disease. The poorer your blood sugar control, the greater the risk appears to be. One theory is that cardiovascular problems caused by diabetes could contribute to dementia by blocking blood flow to the brain or causing strokes. Other possibilities are that too much insulin in the blood leads to brain-damaging inflammation, or lack of insulin in the brain deprives brain cells of glucose*")
+            Diabetes may leave you more susceptible to skin problems, including bacterial and fungal infections.With gum infections being a major concern
+            *")
             (questionType "MULTIPLE*")
         	(caption "Diabetes has a lot of complications that can result if not managed appropriately, early diagnosis plays a large role in
             preventing the complications from arising. Either because the body is insulin resistant or the pancreas is not 
             producing enough insulin, this leads to a high blood glucose level througouht the body, which can cause infections and disease over a period of time. 
             Badly managed Diabetes will eventally result in death.*")
-        	(options "Cardiovascular Disease-Nerve damage-Kidney damage-Eye damage-Foot damage-Skin and mouth conditions-Osteoporosis-Alzheimer's disease.*")	
+        	(options "Alzheimer's disease-Cardiovascular Disease-Eye damage-Kidney damage-Nerve damage-Foot damage-Osteoporosis-Skin and mouth conditions.*")	
         )
-    (Information (question "4. What are the symptoms of Diabetes*") (explanation "The glucose is not being converted into energy this weakens the cells and causes fatigue.-
-            There is a high loss of Glucose through the urine, this causes one to go to the toilet very often.-
+    (Information (question "4. What are the symptoms of Diabetes*") (explanation "The fluctuation in blood glucose levels leads to a sensitivity to light. Also another reason is a result of the tissue being pulled from the eye lenses to be used for energy by the body.-
             This is caused by dehydration in the body, the mouth tends to get dry because of the high loss of liquids through urination.-
-            This is a result of the nerve damage in the body, leading to males not being able to perform sexually. A lot of males experience erectile dysfuction-
-            Nausea is caused by gastroparesis.-
-            This is due to the high level of glucose(~) in the blood, this leads to frequent headaches experienced for prolonged periods of time.-
-            Elevated blood sugar levels are caused by the gradual narrowing of blood vessels, leading to a decreased blood flow and oxygen to the wounds.This increases the amount of time taken to heal. -
-            The fluctuation in blood glucose levels leads to a sensitivity to light. Also another reason is a result of the tissue being pulled from the eye lenses to be used for energy by the body.-
-            This is caused by a lack of energy. As the sugar is not being converted into energy to be used by the cells, leading to irritability.-
-            Insulin deficiency leads to loss of weight, as the sugar cannot be converted into energy, so the body seeks alternative sources like muscle tissue and fat, gradually eating away at the body.-
-            Dehydration is caused by excess urine, this prompts an increased desire for water consumption.-
-            Yeast organisms are present in most woman, but these organisms tend to overgrow in a sugar rich environment. A result of badly managed diabetes.-
-            High glucose levels in saliva promotes growth of bacteria that cause gum disease, because bacteria thrives in such an environment.-
+            This is a result of the nerve damage in the body, leading to males not being able to perform sexually. A lot of males experience erectile dysfuction-            
+            There is a high loss of Glucose through the urine, this causes one to go to the toilet very often.-
             The dropping blood sugar levels lead to a desire for more food and energy, causing a continuous feeling of hunger.-
+            Dehydration is caused by excess urine, this prompts an increased desire for water consumption.-  
+            The glucose is not being converted into energy this weakens the cells and causes fatigue.-
+            This is due to the high level of glucose(~) in the blood, this leads to frequent headaches experienced for prolonged periods of time.-
             During pregnancy there is a lot of hormonal activity within the body, this affects the functioning of the insulin and might alter/interfere with how the body responmds tot he insulin. This condition usually subsides after the pregnacny-
-            The nerves in the body get damaged over time, leading to a tingling sensation, pain and an eventual loss of sensation.*")
+            High glucose levels in saliva promotes growth of bacteria that cause gum disease, because bacteria thrives in such an environment.-
+            This is caused by a lack of energy. As the sugar is not being converted into energy to be used by the cells, leading to irritability.-
+            Nausea is caused by gastroparesis.-
+            The nerves in the body get damaged over time, leading to a tingling sensation, pain and an eventual loss of sensation.-
+            Elevated blood sugar levels are caused by the gradual narrowing of blood vessels, leading to a decreased blood flow and oxygen to the wounds.This increases the amount of time taken to heal. -
+            Insulin deficiency leads to loss of weight, as the sugar cannot be converted into energy, so the body seeks alternative sources like muscle tissue and fat, gradually eating away at the body.-
+            Yeast organisms are present in most woman, but these organisms tend to overgrow in a sugar rich environment. A result of badly managed diabetes.
+            *")
         (questionType "MULTIPLE*")
-        (options "Fatigue-Exesive Urination-Dry Mouth-Erectile Dysfunction-Nausea-Frequent Headaches-Slow Healing Wounds-Blurred Vision-Irritability-Weightloss-Extreme Thirst-Yeast Infection-Gum Infection-Extreme Hunger-Gestational Diabetes-Numbness*")
+        (options "Blurred Vision-Dry Mouth-Erectile Dysfunction-Exesive Urination-Extreme Hunger-Extreme Thirst-Fatigue-Frequent Headaches-Gestational Diabetes-Gum Infection-Irritability-Nausea-Numbness-Slow Healing Wounds-Weightloss-Yeast Infection*")
         (caption "Diabetes can be picked up through the symptoms that manifest over time. There are alot of symptoms that come with Diabetes. 
             Although with Type 2 Diabetes, these signs of Diabetes might not be made visible through symptoms for a very long time, making it difficult for someone to know their Diabetes status*"))
     (Information(question  "3. What are the types of Diabetes?*") (explanation "Type 1 Diabetes occurs when the beta cells in the pancreas are damaged. 
