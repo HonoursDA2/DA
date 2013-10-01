@@ -255,7 +255,7 @@ body
     display:none;
     font-family:helvetica;
     overflow:auto;
-    box-shadow:inset 0px -2px 5px lime;
+    box-shadow:inset 0px -2px 5px silver;
     transition:500ms ease;
 }
 

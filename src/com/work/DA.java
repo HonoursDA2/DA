@@ -233,7 +233,8 @@ public class DA extends HttpServlet{
 		jsonObject.put("percentage", percentage);	
 		out.print(jsonObject);
 		out.flush();
-		System.out.println("EHHHHHHHHHHHHHHHHHHHHh 0" + percentage);
+
+		System.out.println("EHHHHHH "+ percentage);
 		if (jessText.equals("")) {
 			sessions.get(getInt(sessionID)).setInitialComplete();
 		}
@@ -321,8 +322,7 @@ public class DA extends HttpServlet{
 		response.setCharacterEncoding("UTF-8");		
 		response.getWriter().write("Hello "+name+" I am Dr Mellitus! welcome to the Diabetes Advisory Expert System, please select the symptoms you are currently experiencing then click SUBMIT" );
 	}
-
-
+	
 	public void getFeedback(String sessionID)
 		throws JessException, IOException, JSONException	{
 		getEngine(sessionID).assertString("(Get Feedback)");
