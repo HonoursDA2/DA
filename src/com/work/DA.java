@@ -345,6 +345,10 @@ public class DA extends HttpServlet{
 				if (stage.equals("stage2")) {
 					getEngine(sessionID).assertString("(Get FeedbackL)");
 				}
+				 else 
+				if (stage.equals("stage3")) {
+					getEngine(sessionID).assertString("(Get FeedbackF)");
+				}
 		getEngine(sessionID).run();
 		String feedback= getEngine(sessionID).getOutputRouter("out").toString();
 		((StringWriter)(getEngine(sessionID).getOutputRouter("out"))).getBuffer().setLength(0);
