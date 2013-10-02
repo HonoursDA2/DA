@@ -1,7 +1,9 @@
 (defglobal ?*currentQuestion* = 1)
 (defglobal ?*points* = 0)
 (defglobal ?*total* = 200)
-
+(deftemplate Order
+    (slot counter)
+    )
 (deftemplate Description
     (slot name)
     (slot type)   
@@ -76,6 +78,7 @@
     (Question (section Lifestyle)(type "exerciseF")(text "That's great, How often do you exercise?") (answerType "OPTIONAL")(options "Hardly-Occassionaly-Frequently" )(order 17))
     (Question (section Lifestyle)(type "bp")(text "Have you checked your blood pressure recently?") (answerType "YES-NO")(order 18))
     (Question (section Lifestyle)(type "bpLevel")(text "What level is your blood pressure?") (answerType "OPTIONAL")(options "Low-Average-High" )(order 19))
+    (Order (counter 12))
     )
 (deffacts Description
    (Description(name Fatigue)(type SYMPTOM) (id "fatigue")(explanation "Do you feel tired a lot? A feeling of tiredness that can not be explained."))
@@ -283,17 +286,21 @@
 (defrule changeLifestyleQuestions
     (declare (salience 5))
     (Ask-Question-Lifestyle)
+    ?order <- (Order (counter ?counter))
     ?question <- (Question (section Lifestyle)(type ?type)(text ?questionText) (answerType ?answerType) (ask no) (order ?current))
     =>
     (if (eq ?current ?*currentQuestion*) then
     	(bind ?counter (+ ?*currentQuestion* 1))	
     	(bind ?*currentQuestion* ?counter)
-    )
+    	(bind ?var (+ ?counter 1))
+        (modify ?order (counter ?var))
+        )
     )
 ;Asks the questions relating to Lifestyle.
 (defrule askQuestionLifestyle
     ?ask <- (Ask-Question-Lifestyle)
     ?question <- (Question (section Lifestyle)(type ?type)(text ?questionText) (answerType ?answerType) (ask yes) (order ?current) (options ?options))
+    ?order <- (Order (counter ?counter))
     =>
     (if (eq ?current ?*currentQuestion*) then
     (bind ?counter (+ ?*currentQuestion* 1))
@@ -303,9 +310,15 @@
     (printout out3 ?type)
     (printout out4 ?options)
 	(printout out6 (* (/ ?*points* ?*total*) 100))  
+    (modify ?order (counter ?current))
     (modify ?question (ask no))
     (retract ?ask)
-        )
+     )
+    )
+(defrule finished
+    (Order (counter 19))
+    =>
+    
     )
 ;Shows the explanation of the symptom in question.
 (defrule showReason
@@ -454,7 +467,7 @@
     =>
      	(bind ?*points* (+ ?*points* (uncertain ?history)))
     )
-  (deffunction age (?age)
+(deffunction age (?age)
     (bind ?value 0)
     (if (> ?age 59) then
         (bind ?value 10) else
@@ -599,7 +612,7 @@
     ?question <- (Question (section Lifestyle) (type "smokeF") (text ?questionText) (answerType ?answerType) (ask yes))
     =>
     (modify ?question (ask no))
-    (assert (Feedback (explanation "No smoking, thats commendable, try not to get into this habit as it is quite hard to shake and has a lot of negative effects on the body in the long term.*")))
+    (assert (Feedback (explanation "No smoking you say..? Thats quite commendable, try not to get into this habit as it is quite hard to shake and has a lot of negative effects on the body in the long term.*")))
     )
 ;If no, dont ask how often.
 (defrule alcohol
@@ -637,7 +650,7 @@
 (defrule bloodPressure
     (declare (salience 10))
     (BP-Knowledge No)
-    ?question <- (Question (section Lifestyle) (type "bpLevel") (text ?questionText) (answerType ?answerType) (ask yes))
+    ?question <- (Question (section Lifestyle) (type "bpLevel"))
     =>
     (modify ?question (ask no))
     )

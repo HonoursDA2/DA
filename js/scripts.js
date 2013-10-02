@@ -127,9 +127,6 @@
 		            type = data.type;
 		            options = data.options;
 		            meter = data.percentage;
-
-		            alert(meter);
-
 		            updateP();
 		            $(".profileH1").html(question);
 
@@ -177,8 +174,6 @@
 		                type = data.type;
 		                options = data.options;
 		                meter = data.percentage;
-
-		                alert(meter);
 		                updateP();
 		                $("#advisorH1").html(question);
 
@@ -226,13 +221,13 @@
 		                submitArray[i - 1] = buttonObject;
 		            }
 		            $("#symptomsContainer").append('<div class="buttons" id="submitB" onclick="submitSymptoms()">Submit</div>');
-		        });
+		        }); 
+
 		    });
 
 		    $("#profile").fadeOut();
 		    $("#choice").fadeOut();
 		    $("#symptoms").fadeIn();
-
 		}
 
 		var meter = height = 0;

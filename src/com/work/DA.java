@@ -241,9 +241,13 @@ public class DA extends HttpServlet{
 	}
 
 	public String decimal(String decimalString) {
+		if (decimalString.length()>0){
 		double d = Double.parseDouble(decimalString);
         DecimalFormat f = new DecimalFormat("#");  // this will helps you to always keeps in two decimal places
         return f.format(d) +""; 
+    }
+    return decimalString;
+
 	}
 
 	public void symptomList(String sessionID) 
