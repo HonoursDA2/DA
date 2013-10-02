@@ -162,13 +162,10 @@ public class DA extends HttpServlet{
 							symptoms(request.getParameter("sessionID"));
 						} else if ( request.getParameter("command").equals("getInfo")) {
 							diabetesInfo(request.getParameter("sessionID"));
-<<<<<<< HEAD
+
 						}  else if ( request.getParameter("command").equals("getFeedback")) {
-							getFeedback(request.getParameter("sessionID"));
-=======
-						}  else if ( request.getParameter("command").equals("feedback")) {
 							getFeedback(request.getParameter("stage"), request.getParameter("sessionID"));
->>>>>>> 3e511cf69a2f31f93506f9c5882998275311e842
+
 						}
 				}else
 				{
