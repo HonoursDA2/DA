@@ -15,9 +15,8 @@
 	<body>
 
 	<div id="splash">
-	<div id="logoC"><div id="logo"><img src="images/robo.jpg"></div></div>
-	<div id="theAdvisor"><p>Diabetes Advisor</p></div><div id="moreInfo"><p>Information on Diabetes</p></div>
-	<div id="newUser">Are you using this system for the first time? <div>Yes</div><div>No</div></div>
+	<div id="logoC" title="Hi, I'm Doctor Mellitus, a Diabetes Advisor"><div id="logo"><img src="images/robo.jpg"></div></div>
+	<div id="theAdvisor" title="Check your chance of having diabetes"><p>Diabetes Advisor</p></div><div id="moreInfo" title="Learn about Diabetes Mellitus"><p>Information on Diabetes</p></div>
 	<h3>Disclaimer****Use this system at your own risk, if you go decide to inject yourself with insulin that's your own problem :-/</h3>
 	</div>
 
@@ -41,7 +40,7 @@
 	<div class="questions">
 
 	</div>
-	<div id="backb" onclick="revert()">Back</div><div id="button" onclick="confirm()">Continue</div>
+	<div id="backb" onclick="revert()">Restart</div><div id="button" onclick="confirm()" title="">Continue</div>
 	</div>
 
 	<div class="feedback"></div>
@@ -91,7 +90,7 @@
 	
 	</div>
 
-	<div id="contButton" onclick="confirmLifestyle()">Continue</div>
+	<div id="backbL" onclick="revert()">Restart</div><div id="contButton" onclick="confirmLifestyle()">Continue</div>
 	<div id="lifestyle">
 	<div class="questions"></div>
 	<div class="feedback"></div>
