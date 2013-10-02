@@ -66,7 +66,7 @@ function displayInfo(index, obj) {
     $("#optPos").css({ "top": top });
     $("#dInfo").html(extraObj[index].dExp);
 }
-
+ 
 $(function () {
 
     $("#symptom").hover(function () {

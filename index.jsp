@@ -51,12 +51,12 @@
 	<img class="imgBg" src="images/level/lime.jpg">
 	<div class="section" id="advisor">
 	    
-
 	<div class="speech"><span id="advisorH1">Hello</span>
 	    
 	<div id="definition"></div>
 	<img id="extra" src="images/information.png">
 	<div id="symptomsresultsC"></div>
+	<div id="lifesummary"></div>
 	</div>
 	    
 	<div id="directions">
@@ -92,7 +92,6 @@
 
 	<div id="contButton" onclick="confirmLifestyle()">Continue</div>
 	<div id="lifestyle">
-	<div id="lifesummary"></div>
 	<div class="questions"></div>
 	<div class="feedback"></div>
 	</div>
