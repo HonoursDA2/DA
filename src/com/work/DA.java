@@ -207,7 +207,6 @@ public class DA extends HttpServlet{
 
 	public void restart(String stage, String sessionID) throws JessException {
 		getEngine(sessionID).eval("(restart "+ stage+")");
-			getEngine(sessionID).run();
 
 	}
 

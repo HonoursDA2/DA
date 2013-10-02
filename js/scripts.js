@@ -82,18 +82,10 @@ function submitSymptoms() {
 var count = 0;
 
 function revert() {
-	if (count == 1) {
-		$("#intro").fadeIn(0);
-		count--;
-		$("#gender,#profile #male, #profile #female").fadeOut(0);
-		$("#button").css({ "margin": "0 0 1.5% 1.5%" });
-		$("#backb").fadeOut();
-	}
-	if (count == 2) {
-		count--;
-		$("#isDiabetic").fadeOut(0);
-		$("#gender,#profile #male, #profile #female").fadeIn(0);
-	}
+
+    $.get('DA', { command: "restart",stage:"stage1", sessionID: sessionID }, function(responseText){
+	    ajaxCall("question", sessionID);    	
+    });
 }
 
 var sessionID = 0;

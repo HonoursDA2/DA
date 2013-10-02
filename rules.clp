@@ -254,11 +254,11 @@
     )
 (defrule restart
     (Restart ?section)
-    
     =>
     (restart ?section)
     )
 (defrule removeRestart
+    (declare (salience 3))
     ?restart <- (Restart INITIAL)
     =>
     (retract ?restart)
@@ -267,23 +267,23 @@
 (defrule restartInitialQ
     (declare (salience 5))  
     (Restart INITIAL)
-    ?question <-(Question (section Initial) (ask ?yesno) (order ?order))
+    ?question1 <-(Question (section Initial) (ask no) (order ?order))
+    ?question2 <-(Question (section Initial) (ask yes) (order ?order1 ))  
     =>
-    (if (eq ?order (- ?*currentQuestion* 1)) then
-    (modify ?question (ask yes)
-     (bind ?*currentQuestion* ?order)       
-            )
-            )
+    (if (eq ?order (- ?order1 1)) then
+      (modify ?question1 (ask yes))   
+      )
     )
 (defrule restartInitialF
-    (declare (salience 5))   
+    (declare (salience 10))   
     (Restart INITIAL)
-    ?fact<-(sectionFact (stage Initial))
+    ?fact<-(sectionFact (stage INITIAL))
     =>
     (retract ?fact)
     )
+
 (defrule restartInitialFb
-    (declare (salience 5))
+    (declare (salience 8))
     (Restart INITIAL)
     ?feedback <-(Feedback (stage INITIAL))
     =>
@@ -293,6 +293,7 @@
 (deffunction restart (?section)
     (if (eq ?section stage1) then
         (bind ?*points* 0)        
+        (bind ?*currentQuestion* 1)
         (assert (Restart INITIAL))
          else
             (if (eq ?section stage2) then
@@ -329,7 +330,7 @@
     )
 ;Changes the order of the initial questions to ask, if a question should not be asked anymore.
 (defrule changeInitialQuestions
-    (declare (salience 5))
+    (declare (salience 1))
     (Ask-Question-Initial)
     ?question <- (Question (section Initial) (type ?type)(text ?questionText) (answerType ?answerType) (ask no) (order ?current))
     =>
