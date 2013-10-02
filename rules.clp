@@ -1,6 +1,8 @@
 (defglobal ?*currentQuestion* = 1)
 (defglobal ?*points* = 0)
 (defglobal ?*total* = 200)
+(defglobal ?*questionNumber* = 19)
+
 (deftemplate Order
     (slot counter)
     )
@@ -290,8 +292,8 @@
     ?question <- (Question (section Lifestyle)(type ?type)(text ?questionText) (answerType ?answerType) (ask no) (order ?current))
     =>
     (if (eq ?current ?*currentQuestion*) then
-    	(bind ?counter (+ ?*currentQuestion* 1))	
-    	(bind ?*currentQuestion* ?counter)
+    	(bind ?theCounter (+ ?*currentQuestion* 1))	
+    	(bind ?*currentQuestion* ?theCounter)
     	(bind ?var (+ ?counter 1))
         (modify ?order (counter ?var))
         )
@@ -316,11 +318,18 @@
      )
     )
 (defrule finished
-    (Order (counter 19))
+    (Order (counter ?number))
     =>
-    	(assert (Assesment Complete))
+    (if (eq ?number ?*questionNumber*)then 
+    	(assert (Assessment Complete))
+        )
     )
 ;Shows the explanation of the symptom in question.
+(defrule finalFeedback
+    (Assessment Complete)
+    =>
+    (assessPercentage())
+    )
 (defrule showReason
     ?input <- (Input (name ?inputName))
     ?reason <- (Description (name ?name) (explanation ?explanation))
@@ -467,21 +476,22 @@
     =>
      	(bind ?*points* (+ ?*points* (uncertain ?history)))
     )
-(deffunction assesPercentage()
+(deffunction assessPercentage()
     (bind ?percentage (* (/ ?*points* ?*total*) 100))
     (if (> ?percentage  85) then
-       (assert (Feedback (stage FINAL) (explanation " You have a very high risk od Diabetes, this is a great concern and should be dealt with immediately
+       (assert (Feedback (stage FINAL) (explanation " You have a very high risk of Diabetes, this is a great concern and should be dealt with immediately
                     you should go to the nearest hospital and seek professional medical attention a soon as possible. Only after blood glucose tests, can you be oficially diagnosed with Diabetes*"))) else
         (if (> ?percentage 60) then
-            ((assert (Feedback (stage FINAL) (explanation " You have quite a high risk of Diabetes, this should be checked with a medical professional.*")))) else
+            (assert (Feedback (stage FINAL) (explanation " You have quite a high risk of Diabetes, this should be checked with a medical professional.*"))) else
             (if (> ?percentage 40) then
-                ((assert (Feedback (stage FINAL) (explanation " You stand an almost 50% risk of Diabetes, this should be seen as a concern and should be taken as a warning sign,
-                                be sure to check why you are experiencing the symptoms you are experiencing*")))) else 
+                (assert (Feedback (stage FINAL) (explanation " You stand an almost 50% risk of Diabetes, this should be seen as a concern and should be taken as a warning sign,
+                                be sure to check why you are experiencing the symptoms you are experiencing*"))) else 
                 (if ( > ?percentage 20) then
-                    ((assert (Feedback (stage FINAL) (explanation " You have a low risk of Diabetes, it should not be anything to worry about, provided you continue to eat well
-                                    and live a healthy lifestyle.*")))) else 
-                    ((assert (Feedback (stage FINAL) (explanation "You have a very low risk of Diabetes, this is because of your lack of threatening risk factors
-                                    and decent lifestyle habits, please do continue and remember to eat healthy and keep active!*")))))
+                    (assert (Feedback (stage FINAL) (explanation " You have a low risk of Diabetes, it should not be anything to worry about, provided you continue to eat well
+                                    and live a healthy lifestyle.*"))) else 
+                    (assert (Feedback (stage FINAL) (explanation "You have a very low risk of Diabetes, this is because of your lack of threatening risk factors
+                                    and decent lifestyle habits, please do continue and remember to eat healthy and keep active!*")))
+                    )
                 ) 
          	)
         )
@@ -658,14 +668,12 @@
     =>
     (printout out ?explanation )
     )
-
 (defrule getFeedbackL
     (Get FeedbackL)
     (Feedback (stage LIFESTYLE) (explanation ?explanation))
     =>
     (printout out ?explanation )
     )
-
 (defrule getFeedbackF
     (Get FeedbackF)
     (Feedback (stage FINAL) (explanation ?explanation))
