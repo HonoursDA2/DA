@@ -26,10 +26,7 @@
 		<div id="dInfoOptions"></div>
 		<div id="dInfo"></div>
 		</div>
-		
-		<div id="diabetesQues">
-		
-		</div>
+		<div id="diabetesQues"></div>
 	</div>
 
 	<div id="profile">
@@ -37,6 +34,7 @@
 	<div><h1>Welcome To DA2</h1>
 	<div class="speech">
 	<span class="profileH1"></span>
+	<div class="summary"></div>
 	</div>
 
 	<div class="questions">
@@ -94,6 +92,7 @@
 
 	<div id="contButton" onclick="confirmLifestyle()">Continue</div>
 	<div id="lifestyle">
+	<div id="lifesummary"></div>
 	<div class="questions"></div>
 	<div class="feedback"></div>
 	</div>

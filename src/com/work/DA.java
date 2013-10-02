@@ -162,7 +162,7 @@ public class DA extends HttpServlet{
 							symptoms(request.getParameter("sessionID"));
 						} else if ( request.getParameter("command").equals("getInfo")) {
 							diabetesInfo(request.getParameter("sessionID"));
-						}  else if ( request.getParameter("command").equals("feedback")) {
+						}  else if ( request.getParameter("command").equals("getFeedback")) {
 							getFeedback(request.getParameter("sessionID"));
 						}
 				}else
@@ -334,10 +334,12 @@ public class DA extends HttpServlet{
 		String feedback= getEngine(sessionID).getOutputRouter("out").toString();
 		((StringWriter)(getEngine(sessionID).getOutputRouter("out"))).getBuffer().setLength(0);
 		PrintWriter out = response.getWriter();
+		response.setContentType("application/json"); 
 		JSONObject jsonObject = new JSONObject();
 		jsonObject.put("feedback", feedback);
 		out.print(jsonObject);
 		out.flush();
+		System.out.println(feedback);
 	}
 
 	public void symptoms(String sessionID)
