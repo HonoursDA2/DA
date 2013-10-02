@@ -2,7 +2,11 @@
 (defglobal ?*points* = 0)
 (defglobal ?*total* = 200)
 (defglobal ?*questionNumber* = 19)
-
+(deftemplate sectionFact
+    (slot stage)
+    (slot name)
+    (slot value)
+    )
 (deftemplate Order
     (slot counter)
     )
@@ -59,38 +63,38 @@
     )
 (deffacts Questions
     ;Initial questions
-    (Question (section Initial)(type "name")(text "Hi, I am Doctor Mellitus, a Diabetes Advisor, what is your name?") (answerType "INPUTT") (order 1))
-    (Question (section Initial)(type "gender")(text "Are you male or female?")(answerType "MALE-FEMALE") (order 2))
-    (Question (section Initial)(type "diabetesK")(text "Do you know about the disease called Diabetes?") (answerType "YES-NO") (order 3))
-    (Question (section Initial)(type "diabetic")(text "Are you a Diabetic?") (answerType "OPTIONAL") (order 4)(options "Yes-No-Uncertain" ))
+    (Question (section Initial)(type "Name")(text "Hi, I am Doctor Mellitus, a Diabetes Advisor, what is your name?") (answerType "INPUTT") (order 1))
+    (Question (section Initial)(type "Gender")(text "Are you male or female?")(answerType "MALE-FEMALE") (order 2))
+    (Question (section Initial)(type "Diabetes-Knowledge")(text "Do you know about the disease called Diabetes?") (answerType "YES-NO") (order 3))
+    (Question (section Initial)(type "Diabetic")(text "Are you a Diabetic?") (answerType "OPTIONAL") (order 4)(options "Yes-No-Uncertain" ))
     (Question (section Initial)(type "Race")(text "What is your race?") (answerType "OPTIONAL")(order 5)(options "Black-White-Asian-Coloured-Other" ))
     (Question (section Initial)(type "Age")(text "How old are you?") (answerType "INPUTN") (order 6))
-    (Question (section Initial)(type "familyH")(text "Do you have relatives who have been diagnosed with Diabetes?")(answerType "OPTIONAL")(options "Yes-No-Uncertain" )(order 7))
-    (Question (section Initial)(type "familyType")(text "Is this relative any of the following?")(answerType "OPTIONAL")(options "Parent-Sibling-Grandparent-Aunt/Uncle-Other" )(order 8))
-    (Question (section Initial)(type "pregnant")(text "Are you Pregnant?") (answerType "YES-NO") (order 9))
-    (Question (section Initial)(type "weight")(text "What is your weight (Kilograms)")(answerType "INPUTND") (order 10))
-    (Question (section Initial)(type "height")(text "What is your height (Meters)") (answerType "INPUTND") (order 11))
+    (Question (section Initial)(type "Family-History")(text "Do you have relatives who have been diagnosed with Diabetes?")(answerType "OPTIONAL")(options "Yes-No-Uncertain" )(order 7))
+    (Question (section Initial)(type "Family-Type")(text "Is this relative any of the following?")(answerType "OPTIONAL")(options "Parent-Sibling-Grandparent-Aunt/Uncle-Other" )(order 8))
+    (Question (section Initial)(type "Pregnant")(text "Are you Pregnant?") (answerType "YES-NO") (order 9))
+    (Question (section Initial)(type "Weight")(text "What is your weight (Kilograms)")(answerType "INPUTND") (order 10))
+    (Question (section Initial)(type "Height")(text "What is your height (Meters)") (answerType "INPUTND") (order 11))
     ;Lifestyle questions
-    (Question (section Lifestyle)(type "smoke")(text "Do You smoke cigarettes?") (answerType "YES-NO")(order 12))
-    (Question (section Lifestyle)(type "smokeF")(text "How often do you smoke, please be honest?") (answerType "OPTIONAL")(options "Hardly-Occassionaly-Frequently" ) (order 13))
-    (Question (section Lifestyle)(type "alcohol")(text "Do you consume any alcohol?") (answerType "YES-NO")(order 14))
-    (Question (section Lifestyle)(type "alcoholF")(text "Alcohol is advised..in moderation
+    (Question (section Lifestyle)(type "Smoke")(text "Do You smoke cigarettes?") (answerType "YES-NO")(order 12))
+    (Question (section Lifestyle)(type "Smoke-Frequency")(text "How often do you smoke, please be honest?") (answerType "OPTIONAL")(options "Hardly-Occassionaly-Frequently" ) (order 13))
+    (Question (section Lifestyle)(type "Alcohol")(text "Do you consume any alcohol?") (answerType "YES-NO")(order 14))
+    (Question (section Lifestyle)(type "Alcohol-Frequency")(text "Yes some people may say that alcohol is healthy.. but remember, ONLY in moderation!
             How often do you drink alcohol?") (answerType "OPTIONAL")(options "Hardly-Occassionaly-Frequently" )(order 15))
-    (Question (section Lifestyle)(type "exercise")(text "Do you do any sort of explicit physical exercise?") (answerType "YES-NO")(order 16))
-    (Question (section Lifestyle)(type "exerciseF")(text "That's great, How often do you exercise?") (answerType "OPTIONAL")(options "Hardly-Occassionaly-Frequently" )(order 17))
-    (Question (section Lifestyle)(type "bp")(text "Have you checked your blood pressure recently?") (answerType "YES-NO")(order 18))
-    (Question (section Lifestyle)(type "bpLevel")(text "What level is your blood pressure?") (answerType "OPTIONAL")(options "Low-Average-High" )(order 19))
+    (Question (section Lifestyle)(type "Exercise")(text "Do you do any sort of explicit physical exercise?") (answerType "YES-NO")(order 16))
+    (Question (section Lifestyle)(type "Exercise-Frequency")(text "That's great, How often do you exercise?") (answerType "OPTIONAL")(options "Hardly-Occassionaly-Frequently" )(order 17))
+    (Question (section Lifestyle)(type "Blood-Pressure-Knowledge")(text "Have you checked your blood pressure recently?") (answerType "YES-NO")(order 18))
+    (Question (section Lifestyle)(type "Blood-Pressure")(text "What level is your blood pressure?") (answerType "OPTIONAL")(options "Low-Average-High" )(order 19))
     (Order (counter 12))
     )
 (deffacts Description
-   (Description(name Fatigue)(type SYMPTOM) (id "fatigue")(explanation "Do you feel tired a lot? A feeling of tiredness that can not be explained."))
+   (Description(name Fatigue)(type SYMPTOM) (id "fatigue")(explanation "Do you feel tired a lot? An overwhelming feeling of tiredness that can not be explained."))
    (Description(name Frequent-Headache)(type SYMPTOM)(id "headache") (explanation "Do you have frequent headaches and do they sometimes last a long time (2-3 days)?*"))
    (Description(name Extreme-Thirst)(type SYMPTOM) (id "thirst") (explanation "Do you feel thirsty often throughout the day?*"))
    (Description (name Excessive-Urination)(type SYMPTOM)(id "urinating") (explanation "Do you make frequent trips to the toilet to urinate (pee)?*"))
    (Description (name Nausea)(id "nausea")(type SYMPTOM)(explanation "Do you have an uneasy feeling in your stomach? A feeling that makes you feel like vomitting, especially after eating?*"))
    (Description (name Weightloss)(type SYMPTOM)(id "weightloss") (explanation "Have you lost weight over the recent months/years, even though you have not been trying to do so actively?*"))
    (Description (name Irritability)(type SYMPTOM)(id "irritability")(explanation "Do you feel easily irritated and agitated, for no known reason?*"))
-   (Description (name Yeast-Infection)(type SYMPTOM)(id "yeast")(explanation "Do you experience itching, burning, soreness, pain during intercourse and urination?*"))
+   (Description (name Yeast-Infection)(type SYMPTOM)(id "yeast")(explanation "Do you experience itching, burning, soreness, pain during sexual intercourse and urination?*"))
    (Description (name Blurred-Vision) (type SYMPTOM)(id "blurvision")(explanation "Do you have problems seeing at times? Is your eyesight problematic?*"))
    (Description(name Slow-Healing-Wounds) (type SYMPTOM)(id "wounds")(explanation "Do your cuts and soars take a very long time to patch up and heal?*"))
    (Description (name Numbness)(id "numbness")(type SYMPTOM)(explanation "Do you lose sensation and feeling in certain body parts? Do your hands and feet ever feel numb?*"))
@@ -245,6 +249,52 @@
         (caption "Important keywords that will be needed to understand defintions*")
         )      
     )
+(defrule restart
+    (Restart ?section)
+    
+    =>
+    (restart ?section)
+    )
+(defrule removeRestart
+    ?restart <- (Restart INITIAL)
+    =>
+    (retract ?restart)
+    )
+
+(defrule restartInitialQ
+    (declare (salience 5))  
+    (Restart INITIAL)
+    ?question <-(Question (section Initial) (ask ?yesno))
+    =>
+    (modify ?question (ask yes))
+    )
+(defrule restartInitialF
+    (declare (salience 5))   
+    (Restart INITIAL)
+    ?fact<-(sectionFact (stage Initial))
+    =>
+    (retract ?fact)
+    )
+(defrule restartInitialFb
+    (declare (salience 5))
+    (Restart INITIAL)
+    ?feedback <-(Feedback (stage INITIAL))
+    =>
+    (retract ?feedback)
+    )
+
+(deffunction restart (?section)
+    (if (eq ?section stage1) then
+        (bind ?*currentQuestion* 1)
+        (assert (Restart INITIAL))
+         else
+            (if (eq ?section stage2) then
+            (bind ?*currentQuestion* 12)    
+            (assert (Restart LIFESTYLE)
+                    
+                )
+                ))
+    )
 ;Returns informationpertaining to the selected symptoms experienced by the user
 (defrule getInfo
     (Get Info)
@@ -330,21 +380,12 @@
     =>
     (assessPercentage())
     )
-(defrule showReason
-    ?input <- (Input (name ?inputName))
-    ?reason <- (Description (name ?name) (explanation ?explanation))
-    =>
-    (bind ?*currentSymptom* ?inputName)
-    (if (eq ?inputName ?name) then 
-    (printout out ?explanation)
-    (retract ?input) 
-    )   
-    )
+
 ;calculates the BMI with the provided weight and height of the user.
 (defrule bmi
-    (Height ?userHeight)
-    (Weight ?userWeight)
-    =>
+    (sectionFact (name Height) (value ?userHeight))
+  	(sectionFact (name Weight) (value ?userWeight))
+  =>
     (bind ?weight ?userWeight)
     (bind ?height ?userHeight)
     (bind ?bmi (/ ?userWeight (* ?userHeight ?userHeight)))
@@ -383,8 +424,8 @@
 ;Returns the name of the user.
 (defrule getName
     ?request <- (Get Name)
-    (name ?name)
-    =>
+    (sectionFact (name Name) (value ?name))
+  	=>
     (printout out ?name)
     (retract ?request)
     )
@@ -414,34 +455,36 @@
 ;If the suer is male then they are not pregnant and dont show yeast infection * gestational symtoms.
 (defrule isMale
     (declare (salience 10))
-    (Gender Male)
-    ?question <- (Question (section Initial) (type "pregnant")(ask yes))
+    (sectionFact (name Gender) (value Male))
+  	?question <- (Question (section Initial) (type "Pregnant")(ask yes))
     ?femaleQ1 <- (Description(type SYMPTOM)(id "gestational"))
     ?femaleQ2 <- (Description(type SYMPTOM)(id "yeast"))
     =>
-    (assert (Pregnant No))
+    (assert (sectionFact (name Pregnant) (value No)))
     (modify ?question (ask no))
     (bind ?*total* (- ?*total* 10))
     (retract ?femaleQ1 ?femaleQ2)
     )
 (defrule isFemale
     (declare (salience 10))
-    (Gender Female)
-    ?femaleQ1 <- (Description(type SYMPTOM)(id "dysfunction"))
+    (sectionFact (name Gender) (value Female))
+  	?femaleQ1 <- (Description(type SYMPTOM)(id "dysfunction"))
     =>
     (bind ?*total* (- ?*total* 5))
     )
 ;Asserts the totals with the values.
 (defrule familyH
     (declare (salience 10))
-    (Family-History No)
-    ?question <- (Question (section Initial) (type "familyType")(ask yes))
+    (sectionFact (name Family-History) (value ?yesno))
+  	?question <- (Question (section Initial) (type "Family-Type")(ask yes))
     =>
+    (if(neq ?yesno Yes) then 
     	(modify ?question (ask no))
-    )
+ 		)
+     )
 (defrule family
-    (Family-Type ?family)
-    =>
+    (sectionFact (name Family-Type) (value ?family))
+  	=>
     (bind ?*points* (+ ?*points* (family ?family)))
     )
 ;If family history is uncertain add an amount to points probability wise
@@ -462,18 +505,18 @@
     )
 ;Adds points depending on the race
 (defrule ageR
-    (Age ?age)
-    =>
+    (sectionFact (name Age) (value ?age))
+  	=>
     (bind ?*points* (+ ?*points* (age ?age)))
     )
 (defrule raceR
-    (Race ?race)
-    =>
+    (sectionFact (name Race) (value ?race))
+  	=>
     (bind ?*points* (+ ?*points* (race ?race)))
      )
 (defrule FH
-    (Family-History ?history)
-    =>
+    (sectionFact (name Family-History) (value ?history))
+  	=>
      	(bind ?*points* (+ ?*points* (uncertain ?history)))
     )
 (deffunction assessPercentage()
@@ -507,39 +550,62 @@
                 this is because you tend to exercise less, lose muscle mass and gain weight as you age.*")))
     ?value
     )
+(defrule teachDiabetes
+    (sectionFact (name Diabetes-Knowledge) (value No))
+  	=>
+    (assert (Feedback (stage INITAL) (explanation "Diabetes is the most common chronic disease, currently estimated to affect about 330 Million people worldwide.
+                The biggest issues surrounding diabetes are a lack of awareness and education on the Disease*)")))
+    )
 ;if pregnant
 (defrule pregnancy
-    (Pregnant ?status)
-    =>
+    (sectionFact (name Pregnancy) (value ?status))
+  	=>
     (bind ?*points* (+ ?*points* (pregnant ?status)))
     )
 ;if pregnant increase points because of the chances of gestational Diabetes
 (defrule smokeYes
-    (Smoke-Frequency ?frequency)
-    =>
+    (sectionFact (name Smoke-Frequency) (value ?frequency))
+  	=>
     (bind ?*points* (+ ?*points* (SmokenAlcohol ?frequency)))	
     )
 (defrule alcoholYes
-    (Alcohol-Frequency ?frequency)
-    =>
+    (sectionFact (name Alcohol-Frequency) (value ?frequency))
+  	=>
     (bind ?*points* (+ ?*points* (SmokenAlcohol ?frequency)))	
     )
+(defrule smoker
+    (sectionFact (name Smoke-Frequency) (value ?frequency))
+  	(sectionFact (name Diabetic) (value ?yesno))
+  	=>
+    (smoker ?yesno ?frequency)
+    )
+(deffunction smoker(?yesno ?frequency)
+    (if (eq ?yesno No) then
+         (if (neq ?frequency Hardly) then 
+          (assert (Feedback (stage LIFESTYLE) (explanation "As a smoker and a non Diabetic, your chances of developing Diabetes is much higher.Ths is because smoking increases your blood sugar levels, and can lead to Diabetes along with its many complications over time.*")))
+          )
+     else 
+    	(if (eq ?yesno Yes) then
+         	(assert (Feedback (stage LIFESTYLE) (explanation "Smoking increases your blood sugar levels, this will make the disease much harder to control aswell as increasing the chances of developing many Diabetes related complications over time.*")))
+        ) 
+     )
+ )
 (defrule bloodPressure
-    (Blood-Pressure ?frequency)
+    (sectionFact (name Blood-Pressure) (value ?ferquency))
     =>
     (bind ?*points* (+ ?*points* bp ?frequency))	
     )
 (defrule exerciseNo
-    (Exercise No)
-        =>
+    (sectionFact (name Exercise) (value No))
+  	=>
         (bind ?*points* (+ ?*points* 15))
     	(assert (Feedback (stage LIFESTYLE) (explanation "No exercise...at all?? please try incorporate physical ectivity into you daily life, even if it means walking instead of driving
                 , exercise is important as it is essential to keep the body active and running.*")))
         )
 (defrule exerciseYes 
-    (Exercise-Frequency ?fact)
-    =>
-    	(bind ?*points* (+ exercise ?fact))	
+    (sectionFact (name Exercise-Frequency) (value ?fact))
+	 =>
+    	(bind ?*points* (+  ?*points* (exercise ?fact)))	
     )
 (deffunction exercise (?frequency)
     (bind ?point 0)
@@ -559,7 +625,7 @@
         (bind ?value 5) 
         (assert (Feedback (stage INITIAL)(explanation "Because you are currently pregnant, you have a high chance of getting gestational Diabetes,
                     this will most likely disappear after the pregnancy, but you should make sure
-                    you manage your diet aswell as your physical activity throughout yourn pregnancy.*")))else
+                    you manage your diet aswell as your physical activity throughout your pregnancy.*")))else
         (if (eq ?status No) then
             (bind ?value 0))
         )
@@ -621,7 +687,7 @@
 ;If female don't show erectile dysfunction symptom.
 (defrule isFemale
     (declare (salience 10))
-    (Gender Female)
+    (sectionFact (name Gender) (value Female))	
     ?maleQ1 <- (Description(type SYMPTOM)(id "dysfunction"))
     =>
     (retract ?maleQ1)
@@ -629,25 +695,25 @@
 ;If no knowledge of diabetes do not ask if diabetic.
 (defrule diabetesKnowledge
     (declare (salience 10))
-    (Diabetes-Knowledge No)
-    ?question <- (Question (section Initial) (type "diabetic") (text ?questionText) (answerType ?answerType) (ask yes))
+    (sectionFact (name Diabetes-Knowledge) (value No))
+    ?question <- (Question (section Initial) (type "Diabetic") (text ?questionText) (answerType ?answerType) (ask yes))
     =>
     (modify ?question (ask no))
     )
 ;If no, dont ask how often.
 (defrule smokeNo
     (declare (salience 10))
-    (Smoke No)
-    ?question <- (Question (section Lifestyle) (type "smokeF") (text ?questionText) (answerType ?answerType) (ask yes))
+    (sectionFact (name Smoke) (value No))  	
+    ?question <- (Question (section Lifestyle) (type "Smoke-Frequency") (text ?questionText) (answerType ?answerType) (ask yes))
     =>
     (modify ?question (ask no))
-    (assert (Feedback (explanation "No smoking you say..? Thats quite commendable, try not to get into this habit as it is quite hard to shake and has a lot of negative effects on the body in the long term.*")))
+    (assert (Feedback (stage LIFESTYLE)(explanation "No smoking you say..? Thats quite commendable, try not to get into this habit as it is quite hard to shake and has a lot of negative effects on the body in the long term.*")))
     )
 ;If no, dont ask how often.
 (defrule alcohol
     (declare (salience 10))
-    (Alcohol No)
-    ?question <- (Question (section Lifestyle) (type "alcoholF") (text ?questionText) (answerType ?answerType) (ask yes))
+    (sectionFact (name Alcohol) (value No))
+  	?question <- (Question (section Lifestyle) (type "Alcohol-Frequency") (text ?questionText) (answerType ?answerType) (ask yes))
     =>
     (modify ?question (ask no))
     (assert (Feedback (stage LIFESTYLE) (explanation "No alcohol consumption, thats great, keep this up!*")))
@@ -655,8 +721,8 @@
 ;If no dont ask how often.
 (defrule exercise
     (declare (salience 10))
-    (Exercise No)
-    ?question <- (Question (section Lifestyle) (type "exerciseF") (text ?questionText) (answerType ?answerType) (ask yes))
+    (sectionFact (name Exercise) (value No))
+    ?question <- (Question (section Lifestyle) (type "Exercise-Frequency") (text ?questionText) (answerType ?answerType) (ask yes))
     =>
     (modify ?question (ask no))
     (assert (Feedback (stage LIFESTYLE) (explanation "You dont seem to get any sort of physical activity, this is dangerous in the long term and can lead to a sedentary
@@ -683,53 +749,92 @@
 ;If no dont ask what the rate is.
 (defrule bloodPressure
     (declare (salience 10))
-    (BP-Knowledge No)
-    ?question <- (Question (section Lifestyle) (type "bpLevel"))
+    (sectionFact (name Blood-Pressure-Knowledge)(value No))
+    ?question <- (Question (section Lifestyle) (type "Blood-Pressure"))
     =>
     (modify ?question (ask no))
     )
+(defrule fatnExcercise
+    (sectionFact (name Exercise)(value No))
+    (sectionFact (name weight-classification)(value Obese))
+        =>
+    (assert (Feedback (stage FINAL) (explanation "Your BMI is above 30kg/m^2 and you mentioned that you do not exercise, this is a major problem that will only increase your
+            chances of getting Diabetes, it is strongly advised that you start to exercise more regularly in order to reduce your chances of Diabetes. Obesity is amajor contributing fact to Diabetes.")))
+        
+    )
+(deffunction weightExercise (?yesno ?classification)
+    (if (eq ?yesno No ) then
+    (if (eq ?classification Obese) then
+        (assert (Feedback (stage FINAL) (explanation "Your BMI is above 30kg/m^2 (Obese) and you mentioned that you do not exercise, this is a major problem that will only increase your
+            chances of getting Diabetes, it is strongly advised that you start to exercise more regularly in order to reduce your chances of Diabetes. Obesity is amajor contributing fact to Diabetes.")))
+        else
+        	(if (eq ?classification Overweight) then
+            	  (assert (Feedback (stage FINAL) (explanation "Your BMI is above 25kg/m^2 (Overweight) and you mentioned that you do not exercise, this is a major problem that will only increase your
+            		chances of getting Diabetes, it is strongly advised that you start to exercise more regularly in order to reduce your chances of Diabetes. This could lead to obesity.")))
+       			)
+           )
+       )  
+ )
 ;Adds a fact to the working memory.
 (deffunction addFact(?factToAdd ?fact)
     (if (eq Symptom ?factToAdd) then
     	(assert (Symptom ?fact))else
-       				(if (eq weight ?factToAdd) then
-    					(assert (Weight ?fact))else
-       						(if (eq height ?factToAdd) then
-    							(assert (Height ?fact))else
+       				(if (eq Weight ?factToAdd) then
+    					(assert (sectionFact (stage INITIAL)(name Weight)(value ?fact)))
+            else
+       						(if (eq Height ?factToAdd) then
+                    (assert (sectionFact (stage INITIAL)(name Height)(value ?fact)))
+    							else
        								(if (eq Age ?factToAdd) then
-    									(assert (Age ?fact)) else
-                    						(if (eq smoke ?factToAdd) then
-    											(assert (Smoke ?fact))else
-                    								(if (eq alcohol ?factToAdd) then
-    													(assert (Alcohol ?fact))else
-                    										(if (eq gender ?factToAdd) then
-    															(assert (Gender ?fact))else
-                    												(if (eq name ?factToAdd) then
-    																	(assert (Name ?fact)) else
-                    														(if (eq diabetesK ?factToAdd) then
-    																			(assert (Diabetes-Knowledge ?fact))else
-                    																(if (eq diabetic ?factToAdd) then
-    																					(assert (Diabetic ?fact))else
-                    																		(if (eq familyH ?factToAdd) then
-    																							(assert (Family-History ?fact))else
-                    																				(if (eq pregnant ?factToAdd) then
-    																									(assert (Pregnant ?fact))else
+    						(assert (sectionFact (stage INITIAL)(name Age)(value ?fact)))			
+                           		 else
+                    						(if (eq Smoke ?factToAdd) then
+    									(assert (sectionFact (stage LIFESTYLE)(name Smoke)(value ?fact)))			
+                                    	else
+                    								(if (eq Alcohol ?factToAdd) then
+    										(assert (sectionFact (stage LIFESTYLE)(name Alcohol)(value ?fact)))			
+                                            else
+                    										(if (eq Gender ?factToAdd) then
+    												(assert (sectionFact (stage INITIAL)(name Gender)(value ?fact))	)		
+                                                    else
+                    												(if (eq Name ?factToAdd) then
+    														(assert (sectionFact (stage INITIAL)(name Name)(value ?fact)))			
+                                                             else
+                    														(if (eq Diabetes-Knowledge ?factToAdd) then
+                                                                    (assert (sectionFact (stage INITIAL)(name Diabetes-Knowledge)(value ?fact)))
+    																			else
+                    																(if (eq Diabetic ?factToAdd) then
+    																		(assert (sectionFact (stage INITIAL)(name Diabetic)(value ?fact)))	
+                                                                            else
+                    																		(if (eq Family-History ?factToAdd) then
+                                                                                    (assert (sectionFact (stage INITIAL)(name Family-History)(value ?fact)))
+    																							else
+                    																				(if (eq Pregnant ?factToAdd) then
+                                                                                            (assert (sectionFact (stage INITIAL)(name Pregnant)(value ?fact)))
+    																									else
                     																						(if (eq Race ?factToAdd) then
-    																											(assert (Race ?fact))else
-                    																								(if (eq exercise ?factToAdd) then
-    																													(assert (Exercise ?fact))else
-                    																										(if (eq bp ?factToAdd) then
-    																															(assert (BP-Knowledge ?fact))else
-                    																												(if (eq smokeF ?factToAdd) then
-    																																	(assert (Smoke-Frequency ?fact))else
-                    																														(if (eq alcoholF ?factToAdd) then
-    																																			(assert (Alcohol-Frequency ?fact))else
-                    																																(if (eq ExerciseF ?factToAdd) then
-    																																					(assert (Exercise-Frequency ?fact))else
-                    																																		(if (eq bpLevel ?factToAdd) then
+                                                                                                    (assert (sectionFact (stage INITIAL)(name Race)(value ?fact)))
+    																											else
+                    																								(if (eq Exercise ?factToAdd) then
+                                                                                                            (assert (sectionFact (stage LIFESTYLE)(name Exercise)(value ?fact)))
+    																													else
+                    																										(if (eq Blood-Pressure-Knowledge ?factToAdd) then
+                                                                                                                    (assert (sectionFact (stage INITIAL)(name Blood-Pressure-Knowledge)(value ?fact)))
+    																															else
+                    																												(if (eq Smoke-Frequency ?factToAdd) then
+                                                                  																	(assert (sectionFact (stage LIFESTYLE)(name Smoke-Frequency)(value ?fact)))
+    																																	else
+                    																														(if (eq Alcohol-Frequency ?factToAdd) then
+                                                                           																	 (assert (sectionFact (stage LIFESTYLE)(name Alcohol-Frequency)(value ?fact)))
+    																																			else
+                    																																(if (eq Exercise-Frequency ?factToAdd) then
+                                                                                (assert (sectionFact (stage LIFESTYLE)(name Exercise-Frequency)(value ?fact)))
+    																																					else
+                    																																		(if (eq Blood-Pressure ?factToAdd) then
+                                                                                        (assert (sectionFact (stage LIFESTYLE)(name Blood-Pressure)(value ?fact)))
     																																							(assert (Blood-Pressure ?fact)) else
-                    																																				(if (eq familyType ?factToAdd) then
-    																																									(assert (Family-Type ?fact))
+                    																																				(if (eq Family-Type ?factToAdd) then
+    																																									(assert (sectionFact (stage INITIAL)(name Family-Type)(value ?fact)))
                                                                                 																						)
                                                                                     																					) 
                                                                             																			)	        

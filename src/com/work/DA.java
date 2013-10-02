@@ -166,6 +166,9 @@ public class DA extends HttpServlet{
 						}  else if ( request.getParameter("command").equals("getFeedback")) {
 							getFeedback(request.getParameter("stage"), request.getParameter("sessionID"));
 
+						} else if ( request.getParameter("command").equals("restart")) {
+							restart(request.getParameter("stage"), request.getParameter("sessionID"));
+
 						}
 				}else
 				{
@@ -200,6 +203,12 @@ public class DA extends HttpServlet{
 		response.setContentType("text/plain");  
 		response.setCharacterEncoding("UTF-8");		
 		response.getWriter().write(session);
+	}
+
+	public void restart(String stage, String sessionID) throws JessException {
+		getEngine(sessionID).eval("(restart "+ stage+")");
+			getEngine(sessionID).run();
+
 	}
 
 	public void question(String sessionID) throws IOException, JessException, JSONException, ServletException	{ 

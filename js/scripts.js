@@ -273,7 +273,7 @@ function confirm() {
 		    var intRegex = /^\d+$/;
 		    if (intRegex.test(answer)) {
 		        $(".feedback").fadeIn();
-		        $(".feedback").append("Your " + id + " is : " + answer + "<br>");
+		        $(".feedback").append(id + ": " + answer + "<br>");
 		        $.get('DA', { value: answer, answerID: id, sessionID: sessionID });
 		        proceed = true;
 		    }
@@ -284,7 +284,7 @@ function confirm() {
 		    var intRegex = /^(\d+\.?\d*|\.\d+)$/;
 		    if (intRegex.test(answer)) {
 		        $(".feedback").fadeIn();
-		        $(".feedback").append("Your " + id + " is : " + answer + "<br>");
+		        $(".feedback").append(id + " : " + answer + "<br>");
 		        $.get('DA', { value: answer, answerID: id, sessionID: sessionID });
 		        proceed = true;
 		    } else {
@@ -294,20 +294,20 @@ function confirm() {
 		}
 		else {
 		    $(".feedback").fadeIn();
-		    $(".feedback").append("Your " + id + " is : " + answer + "<br>");
+		    $(".feedback").append(id + ": " + answer + "<br>");
 		    $.get('DA', { value: answer, answerID: id, sessionID: sessionID });
 		    proceed = true;
 		}
 	}
 	else if (type == "YES-NO") {
 		$(".feedback").fadeIn();
-		$(".feedback").append("Your " + id + ": " + yesOrno + "<br>");
+		$(".feedback").append(id + ": " + yesOrno + "<br>");
 		$.get('DA', { value: yesOrno, answerID: id, sessionID: sessionID });
 		proceed = true;
 	}
 	else if (type == "MALE-FEMALE") {
 		$(".feedback").fadeIn();
-		$(".feedback").append("Gender: " + gendertype + "<br>");
+		$(".feedback").append(id + ": " + gendertype + "<br>");
 		$.get('DA', { value: gendertype, answerID: id, sessionID: sessionID });
 		proceed = true;
 	}
@@ -335,7 +335,7 @@ function confirmLifestyle() {
 		    var intRegex = /^\d+$/;
 		    if (intRegex.test(answer)) {
 		        $(".feedback").fadeIn();
-		        $(".feedback").append("Your " + id + " is : " + answer + "<br>");
+		        $(".feedback").append(id + ": " + answer + "<br>");
 		        $.get('DA', { value: answer, answerID: id, sessionID: sessionID });
 		        proceed = true;
 		    }
@@ -346,7 +346,7 @@ function confirmLifestyle() {
 		    var intRegex = /^(\d+\.?\d*|\.\d+)$/;
 		    if (intRegex.test(answer)) {
 		        $(".feedback").fadeIn();
-		        $(".feedback").append("Your " + id + " is : " + answer + "<br>");
+		        $(".feedback").append(id + ": " + answer + "<br>");
 		        $.get('DA', { value: answer, answerID: id, sessionID: sessionID });
 		        proceed = true;
 		    } else {
@@ -356,20 +356,20 @@ function confirmLifestyle() {
 		}
 		else {
 		    $(".feedback").fadeIn();
-		    $(".feedback").append("Your " + id + " is : " + answer + "<br>");
+		    $(".feedback").append(id + ": " + answer + "<br>");
 		    $.get('DA', { value: answer, answerID: id, sessionID: sessionID });
 		    proceed = true;
 		}
 	}
 	else if (type == "YES-NO") {
 		$(".feedback").fadeIn();
-		$(".feedback").append("Your " + id + ": " + yesOrno + "<br>");
+		$(".feedback").append(id + ": " + yesOrno + "<br>");
 		$.get('DA', { value: yesOrno, answerID: id, sessionID: sessionID });
 		proceed = true;
 	}
 	else if (type == "MALE-FEMALE") {
 		$(".feedback").fadeIn();
-		$(".feedback").append("Gender: " + gendertype + "<br>");
+		$(".feedback").append(id + ": " + gendertype + "<br>");
 		$.get('DA', { value: gendertype, answerID: id, sessionID: sessionID });
 		proceed = true;
 	}
