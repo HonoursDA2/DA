@@ -176,7 +176,7 @@ function ajaxCall(command, sessionID) {
 	            options = data.options;
 	            meter = data.percentage;
 
-	            alert(meter);
+	            
 	            updateP();
 	            $("#advisorH1").html(question);
 
@@ -207,8 +207,8 @@ function ajaxCall(command, sessionID) {
 	                    $.get('DA', { command: "getFeedback", sessionID: sessionID, stage: "stage2" }, function (responseText) {
 	                        alert(responseText.feedback);
 	                        feedbackArray = responseText.feedback.split("*");
-	                        for (var i = 0; i < feedbackArray.length - 1; i++) {
-	                            $("#lifesummary").append('<div class="symptomsresults"><img src="images/symptoms/' + symptomURLS[i] + '"><div><h1>' + symptomExp[i] + '</h1></div></div>');
+	                        for (var i = 0; i < feedbackArray.length-1; i++) {
+	                            $("#lifesummary").append('<div class="symptomsresults"><img src="images/symptoms/noImage.png"><div><h3>' + feedbackArray[i] + '</h3></div></div>');
 	                        }
 	                    });
 	                }
