@@ -17,6 +17,7 @@
 	<div id="splash">
 	<div id="logoC"><div id="logo"><img src="images/robo.jpg"></div></div>
 	<div id="theAdvisor"><p>Diabetes Advisor</p></div><div id="moreInfo"><p>Information on Diabetes</p></div>
+	<div id="newUser">Are you using this system for the first time? <div>Yes</div><div>No</div></div>
 	<h3>Disclaimer****Use this system at your own risk, if you go decide to inject yourself with insulin that's your own problem :-/</h3>
 	</div>
 

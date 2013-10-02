@@ -131,7 +131,6 @@ $(function () {
         $("#splash").delay(1500).effect("puff", 1000);
         $.get('DA', { command: "getInfo", sessionID: sessionID }, function (data) {
 
-            alert(data.caption);
             extraQ = data.questions.split("*");
             extraT = data.type.split("*");
             extraO = data.options.split("*");

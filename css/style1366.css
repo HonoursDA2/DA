@@ -68,7 +68,7 @@ body
 
 #splash #logo:after
 {
-    content:"Advisor";
+    content:"Advisor 2";
     left:100%;
 }
 
@@ -89,6 +89,30 @@ body
     font-size:0.8em;
     text-align:center;
     vertical-align:top;
+}
+
+#newUser
+{
+    width:900px;
+    background-image:linear-gradient(silver,white);
+    position:relative;
+    margin:auto;
+    bottom:100px;
+    font-family:helvetica;
+}
+
+#newUser div
+{
+    margin:0px 5px;
+    display:inline-block;
+    border-radius:5px;
+    border:1px silver solid;
+    font-family:helvetica;
+}
+
+#newUser div:hover
+{
+    background:rgba(255,0,0,0.5);
 }
 
 #splash #theAdvisor p,#splash #moreInfo p

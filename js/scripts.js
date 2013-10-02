@@ -263,7 +263,8 @@ function profile() {
 
 var meter = height = 0;
 function confirm() {
-
+    $("#backb").fadeIn();
+    $("#backb").css({"left":"150px"});
 	var proceed = false;
 
 	if (type == "INPUTT" || type == "INPUTN" || type == "INPUTND") {
@@ -490,6 +491,14 @@ $(function () {
                 }
 
         });
+    });
+
+    $("body").keyup(function (e) {
+        if (e.which == 13 || e.keycode == 13) {
+            confirm();
+            return false;
+        }
+        return true;
     });
 });
 
