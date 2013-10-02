@@ -1,7 +1,9 @@
 (defglobal ?*currentQuestion* = 1)
 (defglobal ?*points* = 0)
 (defglobal ?*total* = 200)
-
+(deftemplate Order
+    (slot counter)
+    )
 (deftemplate Description
     (slot name)
     (slot type)   
@@ -76,6 +78,7 @@
     (Question (section Lifestyle)(type "exerciseF")(text "That's great, How often do you exercise?") (answerType "OPTIONAL")(options "Hardly-Occassionaly-Frequently" )(order 17))
     (Question (section Lifestyle)(type "bp")(text "Have you checked your blood pressure recently?") (answerType "YES-NO")(order 18))
     (Question (section Lifestyle)(type "bpLevel")(text "What level is your blood pressure?") (answerType "OPTIONAL")(options "Low-Average-High" )(order 19))
+    (Order (counter 12))
     )
 (deffacts Description
    (Description(name Fatigue)(type SYMPTOM) (id "fatigue")(explanation "Do you feel tired a lot? A feeling of tiredness that can not be explained."))
@@ -283,17 +286,21 @@
 (defrule changeLifestyleQuestions
     (declare (salience 5))
     (Ask-Question-Lifestyle)
+    ?order <- (Order (counter ?counter))
     ?question <- (Question (section Lifestyle)(type ?type)(text ?questionText) (answerType ?answerType) (ask no) (order ?current))
     =>
     (if (eq ?current ?*currentQuestion*) then
     	(bind ?counter (+ ?*currentQuestion* 1))	
     	(bind ?*currentQuestion* ?counter)
-    )
+    	(bind ?var (+ ?counter 1))
+        (modify ?order (counter ?var))
+        )
     )
 ;Asks the questions relating to Lifestyle.
 (defrule askQuestionLifestyle
     ?ask <- (Ask-Question-Lifestyle)
     ?question <- (Question (section Lifestyle)(type ?type)(text ?questionText) (answerType ?answerType) (ask yes) (order ?current) (options ?options))
+    ?order <- (Order (counter ?counter))
     =>
     (if (eq ?current ?*currentQuestion*) then
     (bind ?counter (+ ?*currentQuestion* 1))
@@ -303,9 +310,15 @@
     (printout out3 ?type)
     (printout out4 ?options)
 	(printout out6 (* (/ ?*points* ?*total*) 100))  
+    (modify ?order (counter ?current))
     (modify ?question (ask no))
     (retract ?ask)
-        )
+     )
+    )
+(defrule finished
+    (Order (counter 19))
+    =>
+    
     )
 ;Shows the explanation of the symptom in question.
 (defrule showReason
@@ -431,8 +444,10 @@
     )
 (deffunction race (?race)
     (bind ?point 0)
-     (if (neq White  ?race) then
-        (bind ?point 1) else
+     (if (neq White ?race) then
+        (bind ?point 1)
+        (assert (Feedback (stage INITIAL)(explanation "Non white ethnic groups have a higher prevalence of diabetes, with certain ethnic groups having a higher rate of diabetes-related complications and deaths caused by Diabetes.*")))
+         else
         (bind ?point 3))
     ?point
     )
@@ -446,7 +461,7 @@
     (Race ?race)
     =>
     (bind ?*points* (+ ?*points* (race ?race)))
-    )
+     )
 (defrule FH
     (Family-History ?history)
     =>
@@ -489,7 +504,7 @@
     (Exercise No)
         =>
         (bind ?*points* (+ ?*points* 15))
-    	(assert (Feedback (explanation "No exercise...at all?? please try incorporate physical ectivity into you daily life, even if it means walking instead of driving
+    	(assert (Feedback (stage LIFESTYLE) (explanation "No exercise...at all?? please try incorporate physical ectivity into you daily life, even if it means walking instead of driving
                 , exercise is important as it is essential to keep the body active and running.*")))
         )
 (defrule exerciseYes 
@@ -501,10 +516,10 @@
     (bind ?point 0)
     (if (eq Frequently ?frequency) then
         (bind ?point -15)
-        (assert (Feedback (explanation "Frequent exercise, keep it up!*")))else
+        (assert (Feedback (stage LIFESTYLE)(explanation "Frequent exercise, keep it up!*")))else
         (if (eq Occassionaly ?frequency) then
             (bind ?point -5)
-            (assert (Feedback (explanation "Occasional exercise is healthy, just try and maintain it, and maybe improve the frequency if possible.*")))
+            (assert (Feedback (stage LIFESTYLE)(explanation "Occasional exercise is healthy, just try and maintain it, and maybe improve the frequency if possible.*")))
             )
         )
     ?point 
@@ -524,7 +539,7 @@
 (deffunction family (?relative)
     (bind ?points 0)
     (if (eq Parent ?relative) then
-     	(assert (Feedback (stage INITIAL)(explanation "Your parent has/had Diabetes, a person whos parent is diabetic is 2x more likely to get the disease then the average person.")))
+     	(assert (Feedback (stage INITIAL)(explanation "Your parent has/had Diabetes, a person whos parent is diabetic is 2x more likely to get the disease then the average person.*")))
         (bind ?points 10) else
         (if (eq Sibling ?relative) then
      		(bind ?points 15)
@@ -556,7 +571,7 @@
         (if (eq Average ?bp) then
             (bind ?point 5) else 
             (if (eq High ?bp) then
-                (assert (Feedback (explanation "A high blood pressure is very dangerous, this is one of the risk factors that can 
+                (assert (Feedback (stage LIFESTYLE)(explanation "A high blood pressure is very dangerous, this is one of the risk factors that can 
                             increase your chance of getting heart disease, along with a stroke and other deadly comlications.*")))
                 (bind ?point 10)
                 )
@@ -597,7 +612,7 @@
     ?question <- (Question (section Lifestyle) (type "smokeF") (text ?questionText) (answerType ?answerType) (ask yes))
     =>
     (modify ?question (ask no))
-    (assert (Feedback (explanation "No smoking, thats commendable, try not to get into this habit as it is quite hard to shake and has a lot of negative effects on the body in the long term.*")))
+    (assert (Feedback (explanation "No smoking you say..? Thats quite commendable, try not to get into this habit as it is quite hard to shake and has a lot of negative effects on the body in the long term.*")))
     )
 ;If no, dont ask how often.
 (defrule alcohol
@@ -606,7 +621,7 @@
     ?question <- (Question (section Lifestyle) (type "alcoholF") (text ?questionText) (answerType ?answerType) (ask yes))
     =>
     (modify ?question (ask no))
-    (assert (Feedback (explanation "No alcohol consumption, thats great, keep this up!*")))
+    (assert (Feedback (stage LIFESTYLE) (explanation "No alcohol consumption, thats great, keep this up!*")))
     )
 ;If no dont ask how often.
 (defrule exercise
@@ -615,12 +630,19 @@
     ?question <- (Question (section Lifestyle) (type "exerciseF") (text ?questionText) (answerType ?answerType) (ask yes))
     =>
     (modify ?question (ask no))
-    (assert (Feedback (explanation "You dont seem to get any sort of physical activity, this is dangerous in the long term and can lead to a sedentary
+    (assert (Feedback (stage LIFESTYLE) (explanation "You dont seem to get any sort of physical activity, this is dangerous in the long term and can lead to a sedentary
                 lifestyle.It is essential to get some sort of physical activity at least once in a while*")))
     )
-(defrule getFeedback
-    (Get Feedback)
+(defrule getFeedbackI
+    (Get FeedbackI)
     (Feedback (stage INITIAL) (explanation ?explanation))
+    =>
+    (printout out ?explanation )
+    )
+
+(defrule getFeedbackL
+    (Get FeedbackL)
+    (Feedback (stage LIFESTYLE) (explanation ?explanation))
     =>
     (printout out ?explanation )
     )
@@ -628,7 +650,7 @@
 (defrule bloodPressure
     (declare (salience 10))
     (BP-Knowledge No)
-    ?question <- (Question (section Lifestyle) (type "bpLevel") (text ?questionText) (answerType ?answerType) (ask yes))
+    ?question <- (Question (section Lifestyle) (type "bpLevel"))
     =>
     (modify ?question (ask no))
     )

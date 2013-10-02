@@ -162,8 +162,13 @@ public class DA extends HttpServlet{
 							symptoms(request.getParameter("sessionID"));
 						} else if ( request.getParameter("command").equals("getInfo")) {
 							diabetesInfo(request.getParameter("sessionID"));
+<<<<<<< HEAD
 						}  else if ( request.getParameter("command").equals("getFeedback")) {
 							getFeedback(request.getParameter("sessionID"));
+=======
+						}  else if ( request.getParameter("command").equals("feedback")) {
+							getFeedback(request.getParameter("stage"), request.getParameter("sessionID"));
+>>>>>>> 3e511cf69a2f31f93506f9c5882998275311e842
 						}
 				}else
 				{
@@ -230,7 +235,7 @@ public class DA extends HttpServlet{
 		jsonObject.put("type", jessText2);
 		jsonObject.put("id", jessText3);
 		jsonObject.put("options", jessText4);	
-		jsonObject.put("percentage", percentage);	
+		jsonObject.put("percentage", decimal (percentage));	
 		out.print(jsonObject);
 		out.flush();
 
@@ -238,6 +243,16 @@ public class DA extends HttpServlet{
 		if (jessText.equals("")) {
 			sessions.get(getInt(sessionID)).setInitialComplete();
 		}
+	}
+
+	public String decimal(String decimalString) {
+		if (decimalString.length()>0){
+		double d = Double.parseDouble(decimalString);
+        DecimalFormat f = new DecimalFormat("#");  // this will helps you to always keeps in two decimal places
+        return f.format(d) +""; 
+    }
+    return decimalString;
+
 	}
 
 	public void symptomList(String sessionID) 
@@ -280,7 +295,7 @@ public class DA extends HttpServlet{
 			jsonObject.put("url", jessText2);
 			jsonObject.put("explanation", jessText3);
 			jsonObject.put("additional", jessText4);	
-			jsonObject.put("percentage", percentage);	
+			jsonObject.put("percentage", decimal (percentage));	
 			out.print(jsonObject);
 			out.flush();
 			
@@ -327,9 +342,14 @@ public class DA extends HttpServlet{
 		response.getWriter().write("Hello "+name+" I am Dr Mellitus! welcome to the Diabetes Advisory Expert System, please select the symptoms you are currently experiencing then click SUBMIT" );
 	}
 
-	public void getFeedback(String sessionID)
+	public void getFeedback(String stage,String sessionID)
 		throws JessException, IOException, JSONException	{
-		getEngine(sessionID).assertString("(Get Feedback)");
+			if (stage.equals("stage1")) {
+				getEngine(sessionID).assertString("(Get FeedbackI)");		
+			} else 
+				if (stage.equals("stage2")) {
+					getEngine(sessionID).assertString("(Get FeedbackL)");
+				}
 		getEngine(sessionID).run();
 		String feedback= getEngine(sessionID).getOutputRouter("out").toString();
 		((StringWriter)(getEngine(sessionID).getOutputRouter("out"))).getBuffer().setLength(0);
@@ -362,11 +382,9 @@ public class DA extends HttpServlet{
 		getEngine(sessionID).run();
 		percentage = getEngine(sessionID).getOutputRouter("out6").toString();	
 		((StringWriter)(getEngine(sessionID).getOutputRouter("out6"))).getBuffer().setLength(0);
-		jsonObject.put("percentage", percentage);
+		jsonObject.put("percentage", decimal(percentage));
 		out.print(jsonObject);
 		out.flush();
-
-
 	}
 
 	public String tokenizeString(String text, String delimeter) {
