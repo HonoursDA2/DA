@@ -1,7 +1,10 @@
 (defglobal ?*currentQuestion* = 1)
 (defglobal ?*points* = 0)
-(defglobal ?*total* = 200)
+(defglobal ?*total* = 160)
 (defglobal ?*questionNumber* = 19)
+(defglobal ?*stage1* = 1)
+(defglobal ?*stage2* = 12)
+
 (deftemplate sectionFact
     (slot stage)
     (slot name)
@@ -264,9 +267,13 @@
 (defrule restartInitialQ
     (declare (salience 5))  
     (Restart INITIAL)
-    ?question <-(Question (section Initial) (ask ?yesno))
+    ?question <-(Question (section Initial) (ask ?yesno) (order ?order))
     =>
-    (modify ?question (ask yes))
+    (if (eq ?order (- ?*currentQuestion* 1)) then
+    (modify ?question (ask yes)
+     (bind ?*currentQuestion* ?order)       
+            )
+            )
     )
 (defrule restartInitialF
     (declare (salience 5))   
@@ -285,14 +292,11 @@
 
 (deffunction restart (?section)
     (if (eq ?section stage1) then
-        (bind ?*currentQuestion* 1)
+        (bind ?*points* 0)        
         (assert (Restart INITIAL))
          else
             (if (eq ?section stage2) then
-            (bind ?*currentQuestion* 12)    
-            (assert (Restart LIFESTYLE)
-                    
-                )
+            (assert (Restart LIFESTYLE))
                 ))
     )
 ;Returns informationpertaining to the selected symptoms experienced by the user
