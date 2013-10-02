@@ -431,8 +431,10 @@
     )
 (deffunction race (?race)
     (bind ?point 0)
-     (if (neq White  ?race) then
-        (bind ?point 1) else
+     (if (neq White ?race) then
+        (bind ?point 1)
+        (assert (Feedback (stage INITIAL)(explanation "Non white ethnic groups have a higher prevalence of diabetes, with certain ethnic groups having a higher rate of diabetes-related complications and deaths caused by Diabetes.*")))
+         else
         (bind ?point 3))
     ?point
     )
@@ -446,13 +448,13 @@
     (Race ?race)
     =>
     (bind ?*points* (+ ?*points* (race ?race)))
-    )
+     )
 (defrule FH
     (Family-History ?history)
     =>
      	(bind ?*points* (+ ?*points* (uncertain ?history)))
     )
-(deffunction age (?age)
+  (deffunction age (?age)
     (bind ?value 0)
     (if (> ?age 59) then
         (bind ?value 10) else
@@ -489,7 +491,7 @@
     (Exercise No)
         =>
         (bind ?*points* (+ ?*points* 15))
-    	(assert (Feedback (explanation "No exercise...at all?? please try incorporate physical ectivity into you daily life, even if it means walking instead of driving
+    	(assert (Feedback (stage LIFESTYLE) (explanation "No exercise...at all?? please try incorporate physical ectivity into you daily life, even if it means walking instead of driving
                 , exercise is important as it is essential to keep the body active and running.*")))
         )
 (defrule exerciseYes 
@@ -501,10 +503,10 @@
     (bind ?point 0)
     (if (eq Frequently ?frequency) then
         (bind ?point -15)
-        (assert (Feedback (explanation "Frequent exercise, keep it up!*")))else
+        (assert (Feedback (stage LIFESTYLE)(explanation "Frequent exercise, keep it up!*")))else
         (if (eq Occassionaly ?frequency) then
             (bind ?point -5)
-            (assert (Feedback (explanation "Occasional exercise is healthy, just try and maintain it, and maybe improve the frequency if possible.*")))
+            (assert (Feedback (stage LIFESTYLE)(explanation "Occasional exercise is healthy, just try and maintain it, and maybe improve the frequency if possible.*")))
             )
         )
     ?point 
@@ -524,7 +526,7 @@
 (deffunction family (?relative)
     (bind ?points 0)
     (if (eq Parent ?relative) then
-     	(assert (Feedback (stage INITIAL)(explanation "Your parent has/had Diabetes, a person whos parent is diabetic is 2x more likely to get the disease then the average person.")))
+     	(assert (Feedback (stage INITIAL)(explanation "Your parent has/had Diabetes, a person whos parent is diabetic is 2x more likely to get the disease then the average person.*")))
         (bind ?points 10) else
         (if (eq Sibling ?relative) then
      		(bind ?points 15)
@@ -556,7 +558,7 @@
         (if (eq Average ?bp) then
             (bind ?point 5) else 
             (if (eq High ?bp) then
-                (assert (Feedback (explanation "A high blood pressure is very dangerous, this is one of the risk factors that can 
+                (assert (Feedback (stage LIFESTYLE)(explanation "A high blood pressure is very dangerous, this is one of the risk factors that can 
                             increase your chance of getting heart disease, along with a stroke and other deadly comlications.*")))
                 (bind ?point 10)
                 )
@@ -606,7 +608,7 @@
     ?question <- (Question (section Lifestyle) (type "alcoholF") (text ?questionText) (answerType ?answerType) (ask yes))
     =>
     (modify ?question (ask no))
-    (assert (Feedback (explanation "No alcohol consumption, thats great, keep this up!*")))
+    (assert (Feedback (stage LIFESTYLE) (explanation "No alcohol consumption, thats great, keep this up!*")))
     )
 ;If no dont ask how often.
 (defrule exercise
@@ -615,12 +617,19 @@
     ?question <- (Question (section Lifestyle) (type "exerciseF") (text ?questionText) (answerType ?answerType) (ask yes))
     =>
     (modify ?question (ask no))
-    (assert (Feedback (explanation "You dont seem to get any sort of physical activity, this is dangerous in the long term and can lead to a sedentary
+    (assert (Feedback (stage LIFESTYLE) (explanation "You dont seem to get any sort of physical activity, this is dangerous in the long term and can lead to a sedentary
                 lifestyle.It is essential to get some sort of physical activity at least once in a while*")))
     )
-(defrule getFeedback
-    (Get Feedback)
+(defrule getFeedbackI
+    (Get FeedbackI)
     (Feedback (stage INITIAL) (explanation ?explanation))
+    =>
+    (printout out ?explanation )
+    )
+
+(defrule getFeedbackL
+    (Get FeedbackL)
+    (Feedback (stage LIFESTYLE) (explanation ?explanation))
     =>
     (printout out ?explanation )
     )
