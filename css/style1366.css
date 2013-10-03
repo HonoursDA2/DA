@@ -68,7 +68,7 @@ body
 
 #splash #logo:after
 {
-    content:"Advisor 2";
+    content:"Advisor2";
     left:100%;
 }
 
@@ -89,6 +89,7 @@ body
     font-size:0.8em;
     text-align:center;
     vertical-align:top;
+    transform:scale(1);
 }
 
 #newUser
@@ -97,7 +98,7 @@ body
     background-image:linear-gradient(silver,white);
     position:relative;
     margin:auto;
-    bottom:100px;
+    bottom:90px;
     font-family:helvetica;
 }
 
@@ -480,7 +481,7 @@ input:hover
             0 0 16px red;
 }
 
-#profile #button, #profile #backb, #age div,#cont,#contButton
+#profile #button, #profile #backb, #age div,#cont,#contButton,#backbL
 {
     position:absolute;
     width:150px;
@@ -506,7 +507,7 @@ input:hover
     margin-right:1.5%;
 }
 
-#profile #button:hover,#profile #backb:hover,#cont:hover,#contButton:hover
+#profile #button:hover,#profile #backb:hover,#cont:hover,#contButton:hover,#backbL:hover
 {
     border-bottom:5px solid rgba(255,0,0,0.7);
     color:rgba(255,0,0,0.7);
@@ -517,18 +518,18 @@ input:hover
     position:fixed;
 }
 
-#profile #backb,#contButton
+#profile #backb,#contButton,#backbL
 {
     display:none;
 }
 
-#cont,#contButton
+#cont,#contButton,#backbL
 {
     background:white;
     z-index:3;
 }
 
-#contButton
+#contButton,#backbL
 {
     position:fixed;
 }

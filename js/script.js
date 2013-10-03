@@ -5,8 +5,16 @@ var dOptions = dExplanations = new Array();
 window.onload = function () {
     //splash();
     initialize();
+    titles();
+}
 
-    };
+
+function titles() {
+    $("#backb").attr('title', 'Made a mistake ? Click this button to start over');
+    $("#button").attr('title', 'Click to Continue with the assessment/Alternatively, press enter to continue');
+    $(".button").attr('title', 'Click to select symptom');
+    $("#submitB").attr('title', 'Click to submit list of symptoms');
+}
 
 function splash() {
     $("#splash").delay(2000).effect("puff", 500);
@@ -66,7 +74,7 @@ function displayInfo(index, obj) {
     $("#optPos").css({ "top": top });
     $("#dInfo").html(extraObj[index].dExp);
 }
- 
+
 $(function () {
 
     $("#symptom").hover(function () {
@@ -150,6 +158,9 @@ $(function () {
         $('#symptoms').stop();
     });
 
+    $('document').tooltip({
+        track: true
+    });
     /*    window.oncontextmenu = function () {
 
     if (!clicked2) {
