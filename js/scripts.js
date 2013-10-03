@@ -89,6 +89,14 @@ function revert() {
 	$(".feedback").html("");
 }
 
+function revertL() {
+
+    $.get('DA', { command: "restart", stage: "stage2", sessionID: sessionID }, function (responseText) {
+        ajaxCall("question", sessionID);
+    });
+    $(".feedback").html("");
+}
+
 var sessionID = 0;
 
 var isFemale = knowsDiabetes = hasDiabetes = false;
@@ -151,7 +159,7 @@ function ajaxCall(command, sessionID) {
 	}
 
 	function ajaxCallLifestyle(command, sessionID) {
-
+	    
 	    $.ajax({
 	        url: 'DA',
 	        type: 'GET',
@@ -169,7 +177,7 @@ function ajaxCall(command, sessionID) {
 	            options = data.options;
 	            meter = data.percentage;
 
-	            
+
 	            updateP();
 	            $("#advisorH1").html(question);
 
@@ -198,12 +206,13 @@ function ajaxCall(command, sessionID) {
 	                    $("#patient").animate({ "bottom": "-101%" }, 1000, "easeInOutCirc");
 
 	                    $.get('DA', { command: "getFeedback", sessionID: sessionID, stage: "stage2" }, function (responseText) {
-	                        alert(responseText.feedback);
+	                        
 	                        feedbackArray = responseText.feedback.split("*");
-	                        for (var i = 0; i < feedbackArray.length-1; i++) {
+	                        for (var i = 0; i < feedbackArray.length - 1; i++) {
 	                            $("#lifesummary").append('<div class="symptomsresults"><img src="images/symptoms/noImage.png"><div><h3>' + feedbackArray[i] + '</h3></div></div>');
 	                        }
 	                    });
+	                    done = true;
 	                }
 
 	        }
@@ -211,6 +220,7 @@ function ajaxCall(command, sessionID) {
 
 		}
 
+		var done = false;
 var submitArray = new Array();
 var symptomName = symptomID = symptomExplanation = new Array();
 var feedbackArray = new Array();
@@ -378,8 +388,12 @@ function confirmLifestyle() {
 	if (proceed) {
 		ajaxCallLifestyle("question", sessionID);
 	}
-    if (contclicked) {
-        $("#profile").fadeOut();
+    if (done) {
+        $("#ffeedbackC").fadeIn();
+
+        $.get('DA', { command: "getFeedback", sessionID: sessionID, stage: "stage3" }, function (responseText) {
+            $("#ffeedback").html(responseText.feedback);
+        });
 	}
 
 }
