@@ -290,13 +290,47 @@
     (retract ?feedback)
     )
 
+(defrule removeRestartL
+    (declare (salience 3))
+    ?restart <- (Restart LIFESTYLE)
+    =>
+    (retract ?restart)
+    )
+
+(defrule restartInitialL
+    (declare (salience 5))  
+    (Restart LIFESTYLE)
+    ?question1 <-(Question (section Lifestyle) (ask no) (order ?order))
+    ?question2 <-(Question (section Lifestyle) (ask yes) (order ?order1 ))  
+    =>
+    (if (eq ?order (- ?order1 1)) then
+      (modify ?question1 (ask yes))   
+      )
+    )
+(defrule restartInitialFL
+    (declare (salience 10))   
+    (Restart LIFESTYLE)
+    ?fact<-(sectionFact (stage LIFESTYLE))
+    =>
+    (retract ?fact)
+    )
+
+(defrule restartInitialFbL
+    (declare (salience 8))
+    (Restart LIFESTYLE)
+    ?feedback <-(Feedback (stage LIFESTYLE))
+    =>
+    (retract ?feedback)
+    )
+
 (deffunction restart (?section)
     (if (eq ?section stage1) then
         (bind ?*points* 0)        
-        (bind ?*currentQuestion* 1)
+        (bind ?*currentQuestion* ?*stage1*)
         (assert (Restart INITIAL))
          else
             (if (eq ?section stage2) then
+            (bind ?*currentQuestion* ?*stage2*)    
             (assert (Restart LIFESTYLE))
                 ))
     )
