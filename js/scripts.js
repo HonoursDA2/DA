@@ -55,6 +55,10 @@ function submitSymptoms() {
 		        extraUrl = responseText.url;
 		        extraExp = responseText.explanation;
 		        extraAdd = responseText.additional;
+		        meter = responseText.percentage;
+
+			    updateP();
+
 
 		        symptomNames = extraName.split('*');
 		        symptomURLS = extraUrl.split('*');
@@ -93,9 +97,10 @@ function revert() {
 function revertL() {
 
     $.get('DA', { command: "restart", stage: "stage2", sessionID: sessionID }, function (responseText) {
-        ajaxCall("question", sessionID);
+        ajaxCallLifestyle("question", sessionID);
     });
     $(".feedback").html("");
+    restartFeedback();
 }
 
 var sessionID = 0;
@@ -129,9 +134,9 @@ function ajaxCall(command, sessionID) {
 		    type = data.type;
 		    options = data.options;
 		    meter = data.percentage;
-
-		    updateP();
-		    $(".profileH1").html(question);
+	  		if (meter.length>0) {
+	            	updateP();
+	        }	    $(".profileH1").html(question);
 
 		    if (type == "INPUTT" || type == "INPUTN" || type == "INPUTND") {
 		        $(".questions").html('<input id="' + id + '" value="" type="' + id + '" placeholder="Enter Your ' + id + ' Here">');
@@ -177,9 +182,10 @@ function ajaxCall(command, sessionID) {
 	            type = data.type;
 	            options = data.options;
 	            meter = data.percentage;
-
-
-	            updateP();
+	            if (meter.length>0) {
+	            	updateP();
+	            }
+	            
 	            $("#advisorH1").html(question);
 
 	            if (type == "INPUTT" || type == "INPUTN" || type == "INPUTND") {
@@ -203,7 +209,6 @@ function ajaxCall(command, sessionID) {
 	                    $("#advisor").animate({ "height": "95%" }, 1000, "easeInOutCirc", function () {
 	                        $("#lifesummary").fadeIn();
 	                    });
-	                    update();
 	                    $("#menu").fadeOut();
 	                    $("#patient").animate({ "bottom": "-101%" }, 1000, "easeInOutCirc");
 
@@ -213,6 +218,8 @@ function ajaxCall(command, sessionID) {
 	                        for (var i = 0; i < feedbackArray.length - 1; i++) {
 	                            $("#lifesummary").append('<div class="symptomsresults"><img src="images/symptoms/noImage.png"><div><h3>' + feedbackArray[i] + '</h3></div></div>');
 	                        }
+	                        meter= responseText.percentage;
+	                        updateP;
 	                    });
 	                    done = true;
 	                }
@@ -270,15 +277,26 @@ function profile() {
 
 }
 
+function restartFeedback() {
+	for (var x=0;x<idArray.length-1;x++) {
+		$(".feedback").append(idArray[x] + " : " + answerArray[x] + "<br>");
+	}
+}
+
 var meter = height = 0;
+var idArray = new Array();
+var answerArray= new Array();
+var counter=0;
 function confirm() {
     $("#backb").fadeIn();
     $("#backb").css({"left":"150px"});
 	var proceed = false;
+	idArray.push(id);
+	
 
 	if (type == "INPUTT" || type == "INPUTN" || type == "INPUTND") {
 		var answer = $("#" + id).val();
-
+		answerArray.push(answer);
 		if (type == "INPUTN") {
 		    var intRegex = /^\d+$/;
 		    if (intRegex.test(answer)) {
@@ -314,18 +332,21 @@ function confirm() {
 		$(".feedback").append(id + ": " + yesOrno + "<br>");
 		$.get('DA', { value: yesOrno, answerID: id, sessionID: sessionID });
 		proceed = true;
+		answerArray.push(yesOrno);
 	}
 	else if (type == "MALE-FEMALE") {
 		$(".feedback").fadeIn();
 		$(".feedback").append(id + ": " + gendertype + "<br>");
 		$.get('DA', { value: gendertype, answerID: id, sessionID: sessionID });
 		proceed = true;
+		answerArray.push(gendertype);
 	}
 	else if (type == "OPTIONAL") {
 		$(".feedback").fadeIn();
 		$(".feedback").append(id + ": " + opt + "<br>");
 		$.get('DA', { value: opt, answerID: id, sessionID: sessionID });
 		proceed = true;
+		answerArray.push(opt);
 	}
 	if (proceed) {
 		ajaxCall("question", sessionID);

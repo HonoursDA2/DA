@@ -290,8 +290,10 @@
 (defrule removeRestartL
     (declare (salience 3))
     ?restart <- (Restart LIFESTYLE)
+    ?order <- (Order (counter ?number))
     =>
     (retract ?restart)
+    (modify ?order (counter ?*stage2*))
     )
 (defrule restartInitialL
     (declare (salience 5))  
@@ -356,6 +358,24 @@
     (retract ?ask)
         )
     )
+(defrule askQuestionLifestyle
+    ?ask <- (Ask-Question-Lifestyle)
+    ?question <- (Question (section Lifestyle)(type ?type)(text ?questionText) (answerType ?answerType) (ask yes) (order ?current) (options ?options))
+    ?order <- (Order (counter ?counter))
+    =>
+    (if (eq ?current ?*currentQuestion*) then
+    (bind ?counter (+ ?*currentQuestion* 1))
+    (bind ?*currentQuestion* ?counter)
+    (printout out ?questionText)
+    (printout out2 ?answerType)    
+    (printout out3 ?type)
+    (printout out4 ?options)
+	(printout out6 (* (/ ?*points* ?*total*) 100))  
+    (modify ?order (counter ?current))
+    (modify ?question (ask no))
+    (retract ?ask)
+     )
+    )
 ;Changes the order of the initial questions to ask, if a question should not be asked anymore.
 (defrule changeInitialQuestions
     (declare (salience 1))
@@ -382,24 +402,6 @@
         )
     )
 ;Asks the questions relating to Lifestyle.
-(defrule askQuestionLifestyle
-    ?ask <- (Ask-Question-Lifestyle)
-    ?question <- (Question (section Lifestyle)(type ?type)(text ?questionText) (answerType ?answerType) (ask yes) (order ?current) (options ?options))
-    ?order <- (Order (counter ?counter))
-    =>
-    (if (eq ?current ?*currentQuestion*) then
-    (bind ?counter (+ ?*currentQuestion* 1))
-    (bind ?*currentQuestion* ?counter)
-    (printout out ?questionText)
-    (printout out2 ?answerType)    
-    (printout out3 ?type)
-    (printout out4 ?options)
-	(printout out6 (* (/ ?*points* ?*total*) 100))  
-    (modify ?order (counter ?current))
-    (modify ?question (ask no))
-    (retract ?ask)
-     )
-    )
 (defrule finished
     (Order (counter ?number))
     =>
@@ -496,6 +498,21 @@
     (modify ?question (ask no))
     (bind ?*total* (- ?*total* 10))
     (retract ?femaleQ1 ?femaleQ2)
+    )
+
+(defrule isDiabetic
+    (declare (salience 10))
+    (sectionFact (name Gender) (value Male))
+  	?question1 <- (Question (section Initial) (type "Race")(ask yes))
+    ?question2 <- (Question (section Initial) (type "Age")(ask yes))
+    ?question3 <- (Question (section Initial) (type "Family-History")(ask yes))
+    ?question4 <- (Question (section Initial) (type "Family-Type")(ask yes))
+  =>
+    (assert (sectionFact (name Pregnant) (value No)))
+    (modify ?question1 (ask no))
+    (modify ?question2 (ask no))
+    (modify ?question3 (ask no))
+    (modify ?question4 (ask no))  
     )
 (defrule isFemale
     (declare (salience 10))

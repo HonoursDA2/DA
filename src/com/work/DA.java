@@ -176,6 +176,7 @@ public class DA extends HttpServlet{
 					String answerID = request.getParameter("answerID");
 					String theAnswer = request.getParameter("value");
 					getEngine(request.getParameter("sessionID")).eval("( addFact "+answerID +" " +theAnswer+ ")");
+					getEngine(request.getParameter("sessionID")).run();
 				}
 		}	  
 	}
@@ -210,6 +211,7 @@ public class DA extends HttpServlet{
 		sessions.get(getInt(sessionID)).setInitialComplete(true);
 		}
 		getEngine(sessionID).eval("(restart "+ stage+")");
+		getEngine(sessionID).run();
 
 	}
 
