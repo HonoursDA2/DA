@@ -90,7 +90,7 @@
 	
 	</div>
 
-	<div id="backbL" onclick="revert()">Restart</div><div id="contButton" onclick="confirmLifestyle()">Continue</div>
+	<div id="backbL" onclick="revertL()">Restart</div><div id="contButton" onclick="confirmLifestyle()">Continue</div>
 	<div id="lifestyle">
 	<div class="questions"></div>
 	<div class="feedback"></div>
@@ -102,6 +102,11 @@
 	<div id="physician">
 	<div id="percentage"></div>
 	<img src="images/robo.jpg">
+	</div>
+
+	<div id="ffeedbackC">
+	<h1>Congratulations, you have completed the Assessment</h1>
+	<div id="ffeedback">feedback here</div>
 	</div>
 
 	</body>
