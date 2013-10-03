@@ -263,7 +263,6 @@
     =>
     (retract ?restart)
     )
-
 (defrule restartInitialQ
     (declare (salience 5))  
     (Restart INITIAL)
@@ -281,7 +280,6 @@
     =>
     (retract ?fact)
     )
-
 (defrule restartInitialFb
     (declare (salience 8))
     (Restart INITIAL)
@@ -289,14 +287,12 @@
     =>
     (retract ?feedback)
     )
-
 (defrule removeRestartL
     (declare (salience 3))
     ?restart <- (Restart LIFESTYLE)
     =>
     (retract ?restart)
     )
-
 (defrule restartInitialL
     (declare (salience 5))  
     (Restart LIFESTYLE)
@@ -314,7 +310,6 @@
     =>
     (retract ?fact)
     )
-
 (defrule restartInitialFbL
     (declare (salience 8))
     (Restart LIFESTYLE)
@@ -322,7 +317,6 @@
     =>
     (retract ?feedback)
     )
-
 (deffunction restart (?section)
     (if (eq ?section stage1) then
         (bind ?*points* 0)        
@@ -419,7 +413,6 @@
     =>
     (assessPercentage())
     )
-
 ;calculates the BMI with the provided weight and height of the user.
 (defrule bmi
     (sectionFact (name Height) (value ?userHeight))
@@ -432,14 +425,14 @@
     
    (if (> ?bmi 30) then 
     	(assert (weight-classification Obese))
-        (assert (stage INITIAL)(Feedback (explanation "Your BMI is above 30 kg/m^2, this classifies you as Obese,
+        (assert (Feedback (stage INITIAL) (explanation "Your BMI is above 30 kg/m^2, this classifies you as Obese,
                         this is very concerning because Obesity is a cause of Type 2 Diabetes.
                         You need to urgently try to manage your diet and incorporate some exercise into your daily/weekly routine.*"))) 
        (bind ?*points* (+ ?*points* 20))
           else
         	(if (> ?bmi 25) then
        		( assert (weight-classification Overweight))
-                (assert (stage INITIAL)(Feedback (explanation "Your BMI is above 25 kg/m^2, this classifies you as Overweight,
+                (assert (Feedback (stage INITIAL) (explanation "Your BMI is above 25 kg/m^2, this classifies you as Overweight,
                             this is slightly concerning if this is mostly body fat and not muscle.*")))
                (bind ?*points* (+ ?*points* 10)) else
            		(if (> ?bmi 18.5) then 
@@ -560,15 +553,15 @@
     )
 (deffunction assessPercentage()
     (bind ?percentage (* (/ ?*points* ?*total*) 100))
-    (if (> ?percentage  85) then
+    (if (> ?percentage  75) then
        (assert (Feedback (stage FINAL) (explanation " You have a very high risk of Diabetes, this is a great concern and should be dealt with immediately
                     you should go to the nearest hospital and seek professional medical attention a soon as possible. Only after blood glucose tests, can you be oficially diagnosed with Diabetes*"))) else
-        (if (> ?percentage 60) then
-            (assert (Feedback (stage FINAL) (explanation " You have quite a high risk of Diabetes, this should be checked with a medical professional.*"))) else
-            (if (> ?percentage 40) then
-                (assert (Feedback (stage FINAL) (explanation " You stand an almost 50% risk of Diabetes, this should be seen as a concern and should be taken as a warning sign,
-                                be sure to check why you are experiencing the symptoms you are experiencing*"))) else 
-                (if ( > ?percentage 20) then
+        (if (> ?percentage 50) then
+            (assert (Feedback (stage FINAL) (explanation " Your chances of getting diabetes is greater than 50 percent, this is higher than usual  and should be checked with a medical professional.*"))) else
+            (if (> ?percentage 35) then
+                (assert (Feedback (stage FINAL) (explanation "Your risk of Diabetes is around the 50% region, this should be seen as a concern and should be taken as a warning sign.
+                                *"))) else 
+                (if ( > ?percentage 25) then
                     (assert (Feedback (stage FINAL) (explanation " You have a low risk of Diabetes, it should not be anything to worry about, provided you continue to eat well
                                     and live a healthy lifestyle.*"))) else 
                     (assert (Feedback (stage FINAL) (explanation "You have a very low risk of Diabetes, this is because of your lack of threatening risk factors
@@ -577,10 +570,17 @@
                 ) 
          	)
         )
+
+        (bind ?percentage (* (/ ?*points* ?*total*) 100))
+        (bind ?number (format nil %3.0f ?percentage))    
+    	(bind ?text (str-cat "You have a " (str-cat ?number "% Risk of Diabetes*")))
+        (assert (Feedback (stage FINAL) (explanation ?text)))
     )
 (deffunction age (?age)
     (bind ?value 0)
     (if (> ?age 59) then
+        (assert (Feedback (stage INITIAL)(explanation "Being older than 60, it means is less likely that you can manage a rigorous physical 
+                    workout, I strongly recommend that you watch your diet.*")))
         (bind ?value 10) else
         (if (> ?age 45) then
             (bind ?value 5))
@@ -597,20 +597,17 @@
     )
 ;if pregnant
 (defrule pregnancy
-    (sectionFact (name Pregnancy) (value ?status))
+    (sectionFact (name Gender) (value Female))
+    (sectionFact (name Pregnant) (value ?status))
   	=>
     (bind ?*points* (+ ?*points* (pregnant ?status)))
     )
+
 ;if pregnant increase points because of the chances of gestational Diabetes
-(defrule smokeYes
-    (sectionFact (name Smoke-Frequency) (value ?frequency))
+(defrule SmokenAlcoholYes
+    (sectionFact (name ?name) (value ?frequency))
   	=>
-    (bind ?*points* (+ ?*points* (SmokenAlcohol ?frequency)))	
-    )
-(defrule alcoholYes
-    (sectionFact (name Alcohol-Frequency) (value ?frequency))
-  	=>
-    (bind ?*points* (+ ?*points* (SmokenAlcohol ?frequency)))	
+    (bind ?*points* (+ ?*points* (SmokenAlcohol ?name ?frequency)))	
     )
 (defrule smoker
     (sectionFact (name Smoke-Frequency) (value ?frequency))
@@ -629,16 +626,16 @@
         ) 
      )
  )
-(defrule bloodPressure
-    (sectionFact (name Blood-Pressure) (value ?ferquency))
+(defrule bloodPressure2
+    (sectionFact (name Blood-Pressure) (value ?frequency))
     =>
-    (bind ?*points* (+ ?*points* bp ?frequency))	
+    (bind ?*points* (+ ?*points* (bp ?frequency) ))
     )
 (defrule exerciseNo
     (sectionFact (name Exercise) (value No))
   	=>
         (bind ?*points* (+ ?*points* 15))
-    	(assert (Feedback (stage LIFESTYLE) (explanation "No exercise...at all?? please try incorporate physical ectivity into you daily life, even if it means walking instead of driving
+    	(assert (Feedback (stage LIFESTYLE) (explanation "No exercise at all? please try incorporate physical ectivity into you daily life, even if it means walking instead of driving
                 , exercise is important as it is essential to keep the body active and running.*")))
         )
 (defrule exerciseYes 
@@ -666,6 +663,8 @@
                     this will most likely disappear after the pregnancy, but you should make sure
                     you manage your diet aswell as your physical activity throughout your pregnancy.*")))else
         (if (eq ?status No) then
+            (assert (Feedback (stage INITIAL) (explanation "If you plan on getting pregnant, be sure to check on your blood sugar levels with your doctor during the pregnancy.
+            Gestatioal Diabetes occurs in about 2% to 5% of all pregnacies, making it one of the most common health problems associated with pregnancy.*")))
             (bind ?value 0))
         )
     ?value
@@ -691,11 +690,18 @@
             ))
     ?points
     )
-(deffunction SmokenAlcohol(?smokenalcohol)
+(deffunction SmokenAlcohol(?name ?frequency)
     (bind ?point 0) 
-     (if (eq Frequently ?smokenalcohol) then
-                (bind ?point 15)
-                )
+    (if (eq Smoke-Frequency ?name) then 
+    	(if (eq Frequently ?frequency) then
+        	(bind ?point 10)
+                ) else
+ 					(if (eq Alcohol-Frequency ?name) then
+    					(if (eq Frequently ?frequency) then
+                			(bind ?point 15)
+                	)
+            )        
+        )
     ?point
     )
 (deffunction bp(?bp)
@@ -706,7 +712,7 @@
             (bind ?point 5) else 
             (if (eq High ?bp) then
                 (assert (Feedback (stage LIFESTYLE)(explanation "A high blood pressure is very dangerous, this is one of the risk factors that can 
-                            increase your chance of getting heart disease, along with a stroke and other deadly comlications.*")))
+                            increase your chance of getting heart disease, along with a stroke and other deadly complications.*")))
                 (bind ?point 10)
                 )
             )
@@ -764,9 +770,7 @@
     ?question <- (Question (section Lifestyle) (type "Exercise-Frequency") (text ?questionText) (answerType ?answerType) (ask yes))
     =>
     (modify ?question (ask no))
-    (assert (Feedback (stage LIFESTYLE) (explanation "You dont seem to get any sort of physical activity, this is dangerous in the long term and can lead to a sedentary
-                lifestyle.It is essential to get some sort of physical activity at least once in a while*")))
-    )
+   )
 (defrule getFeedbackI
     (Get FeedbackI)
     (Feedback (stage INITIAL) (explanation ?explanation))
@@ -786,7 +790,7 @@
     (printout out ?explanation )
     )
 ;If no dont ask what the rate is.
-(defrule bloodPressure
+(defrule bloodPressure1
     (declare (salience 10))
     (sectionFact (name Blood-Pressure-Knowledge)(value No))
     ?question <- (Question (section Lifestyle) (type "Blood-Pressure"))
@@ -870,8 +874,8 @@
                                                                                 (assert (sectionFact (stage LIFESTYLE)(name Exercise-Frequency)(value ?fact)))
     																																					else
                     																																		(if (eq Blood-Pressure ?factToAdd) then
-                                                                                        (assert (sectionFact (stage LIFESTYLE)(name Blood-Pressure)(value ?fact)))
-    																																							(assert (Blood-Pressure ?fact)) else
+                                                                                        																(assert (sectionFact (stage LIFESTYLE)(name Blood-Pressure)(value ?fact)))
+    																																							 else
                     																																				(if (eq Family-Type ?factToAdd) then
     																																									(assert (sectionFact (stage INITIAL)(name Family-Type)(value ?fact)))
                                                                                 																						)

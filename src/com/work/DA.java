@@ -61,8 +61,8 @@ public class DA extends HttpServlet{
 			symptomsChecked = true;
 		}
 
-		public void setInitialComplete () {
-			initialComplete = true;
+		public void setInitialComplete (boolean value) {
+			initialComplete = value;
 		}
 	}
 
@@ -206,6 +206,9 @@ public class DA extends HttpServlet{
 	}
 
 	public void restart(String stage, String sessionID) throws JessException {
+		if (stage.equals("stage2")){
+		sessions.get(getInt(sessionID)).setInitialComplete(true);
+		}
 		getEngine(sessionID).eval("(restart "+ stage+")");
 
 	}
@@ -246,7 +249,7 @@ public class DA extends HttpServlet{
 
 		System.out.println("EHHHHHH "+ percentage);
 		if (jessText.equals("")) {
-			sessions.get(getInt(sessionID)).setInitialComplete();
+			sessions.get(getInt(sessionID)).setInitialComplete(true);
 		}
 	}
 
