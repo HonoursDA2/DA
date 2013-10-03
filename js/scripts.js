@@ -29,6 +29,7 @@ function countClicks() {
 
 var extraName = extraUrl = extraExp = extraAdd = "";
 function submitSymptoms() {
+    stage = 2.5;
 	$("#advisorH1").html("");
 	var counter = 0;
 	var count = countClicks();
@@ -159,7 +160,7 @@ function ajaxCall(command, sessionID) {
 	}
 
 	function ajaxCallLifestyle(command, sessionID) {
-	    
+
 	    $.ajax({
 	        url: 'DA',
 	        type: 'GET',
@@ -202,11 +203,12 @@ function ajaxCall(command, sessionID) {
 	                    $("#advisor").animate({ "height": "95%" }, 1000, "easeInOutCirc", function () {
 	                        $("#lifesummary").fadeIn();
 	                    });
+	                    update();
 	                    $("#menu").fadeOut();
 	                    $("#patient").animate({ "bottom": "-101%" }, 1000, "easeInOutCirc");
 
 	                    $.get('DA', { command: "getFeedback", sessionID: sessionID, stage: "stage2" }, function (responseText) {
-	                        
+
 	                        feedbackArray = responseText.feedback.split("*");
 	                        for (var i = 0; i < feedbackArray.length - 1; i++) {
 	                            $("#lifesummary").append('<div class="symptomsresults"><img src="images/symptoms/noImage.png"><div><h3>' + feedbackArray[i] + '</h3></div></div>');
@@ -226,7 +228,6 @@ var symptomName = symptomID = symptomExplanation = new Array();
 var feedbackArray = new Array();
 var contclicked = false;
 function profile() {
-
     $.get('DA', { command: "profile", sessionID: sessionID }, function (responseText1) {
         $('#advisorH1').text(responseText1);
         $.get('DA', { command: "getSymptoms", sessionID: sessionID }, function (responseText2) {
@@ -243,6 +244,11 @@ function profile() {
                 submitArray[i - 1] = buttonObject;
             }
             $("#symptomsContainer").append('<div class="buttons" id="submitB" onclick="submitSymptoms()">Submit</div>');
+
+            $(".button").attr('title', 'Click to select symptom');
+            $("#submitB").attr('title', 'Click to submit list of symptoms');
+
+            $(".questions").fadeOut(0);
 
             $("#profile div.speech").animate({ "height": "72%" });
             $.get('DA', { command: "getFeedback", sessionID: sessionID, stage: "stage1" }, function (responseText3) {
@@ -326,6 +332,7 @@ function confirm() {
 	}
     if (contclicked) {
         $("#profile").fadeOut();
+        stage = 2;
     }
 		    
 }
@@ -511,9 +518,43 @@ $(function () {
         $("#advisorH1").html(symptomExplanation[index]);
     });
 
-    $("#symptomsresultsC").on('click', '#cont', function () {
+    $("#symptomsresultsC").on('click', '#cont', ontoLifestyle);
+
+    $("body").keyup(function (e) {
+        if (e.which == 13 || e.keycode == 13) {
+            if (stage == 1) {
+                confirm();
+            }
+            else if (stage == 2) {
+                submitSymptoms();
+            }
+            else if (stage == 2.5) {
+                ontoLifestyle();
+            }
+            else if (stage == 3) {
+                confirmLifestyle();
+            }
+            else {
+                return false;
+            }
+            return false;
+        }
+        return true;
+    });
+
+
+});
+
+var stage = 1;
+function splash() {
+	$("#splash").delay(2000).effect("puff", 500);
+}
+
+var ontoLifestyle = function () {
+        stage = 3;
         $("#symptomsresultsC").fadeOut();
         $("#contButton").fadeIn();
+        $(".questions").fadeIn();
         $("#advisor").animate({ "height": "47%" }, 1000, "easeInOutCirc");
         $("#menu").fadeIn();
         $("#patient").animate({ "bottom": "2.55%" }, 1000, "easeInOutCirc");
@@ -549,19 +590,4 @@ $(function () {
                 }
 
         });
-    });
-
-    $("body").keyup(function (e) {
-        if (e.which == 13 || e.keycode == 13) {
-            confirm();
-            return false;
-        }
-        return true;
-    });
-
-    
-});
-
-function splash() {
-	$("#splash").delay(2000).effect("puff", 500);
-}
+    }

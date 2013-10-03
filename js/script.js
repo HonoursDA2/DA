@@ -12,8 +12,6 @@ window.onload = function () {
 function titles() {
     $("#backb").attr('title', 'Made a mistake ? Click this button to start over');
     $("#button").attr('title', 'Click to Continue with the assessment/Alternatively, press enter to continue');
-    $(".button").attr('title', 'Click to select symptom');
-    $("#submitB").attr('title', 'Click to submit list of symptoms');
     $("input").attr('title', 'click to enter details');
 }
 
