@@ -499,21 +499,19 @@
     (bind ?*total* (- ?*total* 10))
     (retract ?femaleQ1 ?femaleQ2)
     )
-
-(defrule isDiabetic
-    (declare (salience 10))
-    (sectionFact (name Gender) (value Male))
-  	?question1 <- (Question (section Initial) (type "Race")(ask yes))
-    ?question2 <- (Question (section Initial) (type "Age")(ask yes))
-    ?question3 <- (Question (section Initial) (type "Family-History")(ask yes))
-    ?question4 <- (Question (section Initial) (type "Family-Type")(ask yes))
-  =>
-    (assert (sectionFact (name Pregnant) (value No)))
-    (modify ?question1 (ask no))
-    (modify ?question2 (ask no))
-    (modify ?question3 (ask no))
-    (modify ?question4 (ask no))  
-    )
+;(defrule isDiabetic
+ ;   (declare (salience 10))
+  ;  (sectionFact (name Diabetic) (value Yes))
+  	;?question1 <- (Question (section Initial) (type "Race")(ask yes))
+    ;?question2 <- (Question (section Initial) (type "Age")(ask yes))
+    ;?question3 <- (Question (section Initial) (type "Family-History")(ask yes))
+    ;?question4 <- (Question (section Initial) (type "Family-Type")(ask yes))
+  ;=>
+  ;  (modify ?question1 (ask no))
+    ;(modify ?question2 (ask no))
+    ;(modify ?question3 (ask no))
+    ;(modify ?question4 (ask no))  
+   ; )
 (defrule isFemale
     (declare (salience 10))
     (sectionFact (name Gender) (value Female))
