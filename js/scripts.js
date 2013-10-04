@@ -229,7 +229,8 @@ function ajaxCall(command, sessionID) {
 
 		}
 
-		var done = false;
+var done = false;
+var advisor = "";
 var submitArray = new Array();
 var symptomName = symptomID = symptomExplanation = new Array();
 var feedbackArray = new Array();
@@ -237,6 +238,7 @@ var contclicked = false;
 function profile() {
     $.get('DA', { command: "profile", sessionID: sessionID }, function (responseText1) {
         $('#advisorH1').text(responseText1);
+        advisor = responseText1;
         $.get('DA', { command: "getSymptoms", sessionID: sessionID }, function (responseText2) {
             symptomName = responseText2.symptomNames.split("*");
             symptomID = responseText2.symptomIDs.split("*");
@@ -420,13 +422,13 @@ function confirmLifestyle() {
         $("#ffeedbackC").fadeIn();
 
         $.get('DA', { command: "getFeedback", sessionID: sessionID, stage: "stage3" }, function (responseText) {
-            var backfeed = responseText.feedback.split();
+            var backfeed = responseText.feedback.split("*");
 
+            $(".ffeedback").html("");
             for (var i = 0; i < backfeed.length; i++) {
-                alert(backfeed[i]);
-                $(".ffeedback").append('<div>'+backfeed[i] +'</div>');
+                $(".ffeedback").append('<div>' + backfeed[i] + '</div>');
             }
-            
+
         });
 	}
 
@@ -543,6 +545,10 @@ $(function () {
         var index = symptomID.indexOf(symID);
 
         $("#advisorH1").html(symptomExplanation[index]);
+    });
+
+    $("#symptomsContainer").on('mouseleave', '.buttons', function () {
+        $('#advisorH1').text(advisor);
     });
 
     $("#symptomsresultsC").on('click', '#cont', ontoLifestyle);
