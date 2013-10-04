@@ -420,7 +420,13 @@ function confirmLifestyle() {
         $("#ffeedbackC").fadeIn();
 
         $.get('DA', { command: "getFeedback", sessionID: sessionID, stage: "stage3" }, function (responseText) {
-            $("#ffeedback").html(responseText.feedback);
+            var backfeed = responseText.feedback.split();
+
+            for (var i = 0; i < backfeed.length; i++) {
+                alert(backfeed[i]);
+                $(".ffeedback").append('<div>'+backfeed[i] +'</div>');
+            }
+            
         });
 	}
 

@@ -1162,8 +1162,7 @@ span#woman
     top:0;left:0;
     z-index:6;
     background:white;
- 
-    
+    display:none;
 }
 
 #ffeedbackC h1
@@ -1185,4 +1184,9 @@ span#woman
     padding:10px;
     font-family:robo;
     font-size:2em;
+}
+
+.ffeedback div
+{
+    margin:10px;
 }
