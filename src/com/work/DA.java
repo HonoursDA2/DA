@@ -147,7 +147,15 @@ public class DA extends HttpServlet{
 		throws IOException, JessException, JSONException, ServletException
 	{
 
-		if (params.containsKey("symptoms")) {
+try {
+		if ( params.containsKey("answerID") && params.containsKey("value")) {
+							String answerID = request.getParameter("answerID");
+							String theAnswer = request.getParameter("value");
+							getEngine(request.getParameter("sessionID")).eval("( addFact "+answerID +" " +theAnswer+ ")");
+							getEngine(request.getParameter("sessionID")).run();
+				}
+			  
+		else if (params.containsKey("symptoms")) {
 			symptomList((request.getParameter("sessionID")));
 		} 
 		else {
@@ -172,13 +180,12 @@ public class DA extends HttpServlet{
 							restart(request.getParameter("stage"), request.getParameter("sessionID"));
 
 						}
-				}else if ( params.containsKey("answerID") && params.containsKey("value")) {
-							String answerID = request.getParameter("answerID");
-							String theAnswer = request.getParameter("value");
-							getEngine(request.getParameter("sessionID")).eval("( addFact "+answerID +" " +theAnswer+ ")");
-							getEngine(request.getParameter("sessionID")).run();
 				}
-		}	  
+				} 
+			}
+			catch (NullPointerException e) {
+				System.out.println(e.getMessage());
+			}
 	}
 
 	public Rete getEngine (String sessionID) {
