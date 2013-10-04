@@ -288,7 +288,7 @@ body
 {
     right:150px;
     width:250px;
-    height:45%;
+    height:42%;
     bottom:2.5%;
 }
 
@@ -346,8 +346,8 @@ body
 
 #profile .questions .options,#lifestyle .questions .options
 {
-    max-width:18%;
-    height:50%;
+    width:30%;
+    height:40%;
     margin-right:1.5%;
     position:relative;
     display:inline-block;
@@ -359,8 +359,8 @@ body
 
 #lifestyle .questions .options
 {
-    width:35%;
-    height:50%;
+    width:40%;
+    height:40%;
 }
 
 div.speech,#toolbar
@@ -1003,6 +1003,11 @@ span#woman
     display:none;
 }
 
+#symptomsresultsC .symptomsresults
+{
+    font-size:0.7em;
+}
+
 #profile .summary
 {
     width:100%;
@@ -1049,6 +1054,11 @@ span#woman
     right:0;
     width:70%;
     overflow:auto;
+}
+
+.symptomsresults div h1
+{
+    font-size:2em;
 }
 
 #profile .symptomsresults
@@ -1152,7 +1162,7 @@ span#woman
     top:0;left:0;
     z-index:6;
     background:white;
-    display:none;
+ 
     
 }
 
@@ -1167,7 +1177,7 @@ span#woman
     color:gray
 }
 
-#ffeedback
+.ffeedback
 {
     width:100%;height:100%;
     position:relative;
