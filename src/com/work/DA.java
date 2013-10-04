@@ -5,9 +5,7 @@ import javax.servlet.*;
 import jess.*;
 import org.json.*;
 import java.util.StringTokenizer;
-import java.util.ArrayList;
 import java.util.*;
-
 import java.text.*;
 
 public class DA extends HttpServlet{
@@ -31,6 +29,7 @@ public class DA extends HttpServlet{
 	String percentage;
 	Map<String, String[]> params = null;
 	ArrayList<sessionData> sessions = new ArrayList<sessionData>();
+	ServletContext servletContext = null;
 
 	private class sessionData {
 		boolean symptomsChecked;
@@ -79,6 +78,7 @@ public class DA extends HttpServlet{
 		this.request = request;
 		this.response = response;
 		params = new HashMap<String, String[]>(request.getParameterMap());
+		servletContext = getServletContext();
 		try {
 			if (
 				//getServletContext().getInitParameter("initialized").equals("false")) 
@@ -112,10 +112,9 @@ public class DA extends HttpServlet{
 		throws ServletException {
 		Rete tempEngine = null;
 		String sessionID = "";
-		if (getServletContext().getAttribute(engineCounter()) == null) {
+		if (servletContext.getAttribute(engineCounter()) == null) {
 			sessionID = engineCounter();
 			sessions.add(new sessionData());
-			ServletContext servletContext = getServletContext();
 			String rulesFile = servletContext.getInitParameter("rulesfile");
 			try {
 				tempEngine = new Rete (this);
@@ -173,20 +172,25 @@ public class DA extends HttpServlet{
 							restart(request.getParameter("stage"), request.getParameter("sessionID"));
 
 						}
-				}else
-				{
-
-					String answerID = request.getParameter("answerID");
-					String theAnswer = request.getParameter("value");
-					getEngine(request.getParameter("sessionID")).eval("( addFact "+answerID +" " +theAnswer+ ")");
-					getEngine(request.getParameter("sessionID")).run();
+				}else if ( params.containsKey("answerID") && params.containsKey("value")) {
+							String answerID = request.getParameter("answerID");
+							String theAnswer = request.getParameter("value");
+							getEngine(request.getParameter("sessionID")).eval("( addFact "+answerID +" " +theAnswer+ ")");
+							getEngine(request.getParameter("sessionID")).run();
 				}
 		}	  
 	}
 
 	public Rete getEngine (String sessionID) {
-		sessionData data = (sessionData)(getServletContext().getAttribute(sessionID));
-		Rete currentEngine =(Rete)data.getEngine();
+		Rete currentEngine = null;
+		try {
+		sessionData data = (sessionData)(servletContext.getAttribute(sessionID));
+		currentEngine = (Rete)data.getEngine();
+
+	}
+		catch (NullPointerException e) {
+			System.out.println(e.getMessage());
+		}
 		return currentEngine;
 	}
 
