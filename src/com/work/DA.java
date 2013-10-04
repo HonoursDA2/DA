@@ -6,6 +6,8 @@ import jess.*;
 import org.json.*;
 import java.util.StringTokenizer;
 import java.util.ArrayList;
+import java.util.*;
+
 import java.text.*;
 
 public class DA extends HttpServlet{
@@ -27,7 +29,7 @@ public class DA extends HttpServlet{
 	String jessText4;
 	String jessText5;
 	String percentage;
-
+	Map<String, String[]> params = null;
 	ArrayList<sessionData> sessions = new ArrayList<sessionData>();
 
 	private class sessionData {
@@ -76,6 +78,7 @@ public class DA extends HttpServlet{
 	{
 		this.request = request;
 		this.response = response;
+		params = new HashMap<String, String[]>(request.getParameterMap());
 		try {
 			if (
 				//getServletContext().getInitParameter("initialized").equals("false")) 
@@ -145,11 +148,11 @@ public class DA extends HttpServlet{
 		throws IOException, JessException, JSONException, ServletException
 	{
 
-		if (request.getParameterMap().containsKey("symptoms")) {
+		if (params.containsKey("symptoms")) {
 			symptomList((request.getParameter("sessionID")));
 		} 
 		else {
-				if (request.getParameterMap().containsKey("command")) {
+				if (params.containsKey("command")) {
 					if (request.getParameter("command").equals("question")) {
 						question((request.getParameter("sessionID")));
 					} else 
