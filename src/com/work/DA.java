@@ -127,6 +127,7 @@ public class DA extends HttpServlet{
 				tempEngine.batch(servletContext.getRealPath(rulesFile));
 				tempEngine.reset();
 				tempEngine.eval("(watch all)");
+				tempEngine.eval("(start)");
 				System.out.println("creating jess object" + engineCounter());
 				sessions.get(getInt(sessionID)).setEngine(tempEngine);
 				servletContext.setAttribute(engineCounter(), sessions.get(getInt(sessionID)));

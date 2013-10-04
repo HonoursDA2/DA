@@ -73,7 +73,7 @@
     (Question (section Initial)(type "Race")(text "What is your race?") (answerType "OPTIONAL")(order 5)(options "Black-White-Asian-Coloured-Other" ))
     (Question (section Initial)(type "Age")(text "How old are you?") (answerType "INPUTN") (order 6))
     (Question (section Initial)(type "Family-History")(text "Do you have relatives who have been diagnosed with Diabetes?")(answerType "OPTIONAL")(options "Yes-No-Uncertain" )(order 7))
-    (Question (section Initial)(type "Family-Type")(text "Is this relative any of the following?")(answerType "OPTIONAL")(options "Parent-Sibling-Grandparent-Aunt/Uncle-Other" )(order 8))
+    (Question (section Initial)(type "Family-Type")(text "Is this relative any of the following?")(answerType "OPTIONAL")(options "Parent-Child-Sibling-Grandparent-AuntOrUncle-Other" )(order 8))
     (Question (section Initial)(type "Pregnant")(text "Are you Pregnant?") (answerType "YES-NO") (order 9))
     (Question (section Initial)(type "Weight")(text "What is your weight (Kilograms)")(answerType "INPUTND") (order 10))
     (Question (section Initial)(type "Height")(text "What is your height (Meters)") (answerType "INPUTND") (order 11))
@@ -607,8 +607,10 @@
 (defrule teachDiabetes
     (sectionFact (name Diabetes-Knowledge) (value No))
   	=>
-    (assert (Feedback (stage INITAL) (explanation "Diabetes is the most common chronic disease, currently estimated to affect about 330 Million people worldwide.
-                The biggest issues surrounding diabetes are a lack of awareness and education on the Disease*)")))
+    (assert (Feedback (stage INITIAL) (explanation "Diabetes is the most common chronic disease, currently estimated to affect about 330 Million people worldwide.
+                The biggest issues surrounding diabetes are a lack of awareness and education on the Disease*")))
+    (assert (Feedback (stage INITIAL) (explanation "The only way to test for Diabetes is to do a blood glucose test at a hospital and receive an official diagnosis from a qualified Doctor. This system only provides a risk assesment.*")))
+    (assert (Feedback (stage FINAL) (explanation "Please remember that the only way to test for Diabetes is to do a blood glucose test at a hospital and receive an official diagnosis from a qualified Doctor. This system only provides a risk assesment toraise awareness and education on the Disease.*")))
     )
 ;if pregnant
 (defrule pregnancy
@@ -617,6 +619,13 @@
   	=>
     (bind ?*points* (+ ?*points* (pregnant ?status)))
     )
+(defrule diabeticNo
+    (sectionFact (name Diabetic) (value No))
+    =>
+    (assert (Feedback (stage INITIAL) (explanation "The only way to test for Diabetes is to do a blood glucose test at a hospital and receive an official diagnosis from a qualified Doctor. This system only provides a risk assesment.*")))
+     (assert (Feedback (stage FINAL) (explanation "Please remember that the only way to test for Diabetes is to do a blood glucose test at a hospital and receive an official diagnosis from a qualified Doctor. This system only provides a risk assesment toraise awareness and education on the Disease.*")))
+    
+     )
 
 ;if pregnant increase points because of the chances of gestational Diabetes
 (defrule SmokenAlcoholYes
@@ -692,17 +701,21 @@
         (if (eq Sibling ?relative) then
      		(bind ?points 15)
             (assert (Feedback  (stage INITIAL)(explanation "Your sibling has/had Diabetes, this means the chances of you getting the disease are very high, because you share a lot of the same genes.*"))) else
-            	(if (eq Aunt/Uncle ?relative) then
+            	(if (eq AuntOrUncle ?relative) then
      				(bind ?points 7) else 
                 		(if (eq Grandparent ?relative) then
     	 					(assert (Feedback  (stage INITIAL)(explanation "Your grandparent had/has Diabetes, this means you are more likely than the average person to contract this disease, please tale the necessary precautions*")))
                     		(bind ?points 6) else 
                 				(if (eq Other ?relative) then
                         			(assert (Feedback  (stage INITIAL)(explanation "Your relative had/has Diabetes, this means you are more likely than the average person to contract this disease, please tale the necessary precautions*")))
-    	 							(bind ?points 5)
-             )
+    	 							(bind ?points 5) else
+                        (if (eq Child ?relative) then
+                            (assert (Feedback (stage INITIAL) (explanation "Your child has Diabetes, then it is most likely that you also have Diabetes, or someone else in your family has it.")))
+             				(bind ?points 20)
+                            ))
             ))
             ))
+    (assert (Feedback (stage INTITIAL) (explanation "Diabetes often runs in families, its is not a guarentee, but the chances are always migh higher provided trhere is a family history of the disease.")))
     ?points
     )
 (deffunction SmokenAlcohol(?name ?frequency)
@@ -915,3 +928,7 @@
                 	)            
      )
 )
+(deffunction start ()
+    (bind ?url (str-cat "*   Please check the following site for the questionnaire: " "http://bit.ly/159vbwa *")) 
+    (assert (Feedback (stage FINAL) (explanation ?url)))
+    )
