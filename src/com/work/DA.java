@@ -16,6 +16,7 @@ public class DA extends HttpServlet{
 	StringWriter sw4 = new StringWriter();
 	StringWriter sw5 = new StringWriter();
 	StringWriter sw6 = new StringWriter();
+	StringWriter sw7 = new StringWriter();
 	HttpServletRequest request = null;
 	HttpServletResponse response = null;
 	static int objects = 0;
@@ -26,6 +27,7 @@ public class DA extends HttpServlet{
 	String jessText3;
 	String jessText4;
 	String jessText5;
+	String questionNumber;	
 	String percentage;
 	Map<String, String[]> params = null;
 	ArrayList<sessionData> sessions = new ArrayList<sessionData>();
@@ -124,6 +126,7 @@ public class DA extends HttpServlet{
 				tempEngine.addOutputRouter("out4", sw4);
 				tempEngine.addOutputRouter("out5", sw5);
 				tempEngine.addOutputRouter("out6", sw6);
+				tempEngine.addOutputRouter("out7", sw7);
 				tempEngine.batch(servletContext.getRealPath(rulesFile));
 				tempEngine.reset();
 				tempEngine.eval("(watch all)");
@@ -152,7 +155,8 @@ try {
 		if ( params.containsKey("answerID") && params.containsKey("value")) {
 							String answerID = request.getParameter("answerID");
 							String theAnswer = request.getParameter("value");
-							getEngine(request.getParameter("sessionID")).eval("( addFact "+answerID +" " +theAnswer+ ")");
+							String last = request.getParameter("last");
+							getEngine(request.getParameter("sessionID")).eval("( addFact "+answerID +" " +theAnswer+ " "+ last +")");
 							getEngine(request.getParameter("sessionID")).run();
 				}
 			  
@@ -225,7 +229,7 @@ try {
 		if (stage.equals("stage2")){
 		sessions.get(getInt(sessionID)).setInitialComplete(true);
 		}
-		getEngine(sessionID).eval("(restart "+ stage+")");
+		getEngine(sessionID).assertString("(Go-Back)");
 		getEngine(sessionID).run();
 
 	}
@@ -253,6 +257,8 @@ try {
 		((StringWriter)(getEngine(sessionID).getOutputRouter("out4"))).getBuffer().setLength(0);
 		((StringWriter)(getEngine(sessionID).getOutputRouter("out4"))).getBuffer().setLength(0);
 		((StringWriter)(getEngine(sessionID).getOutputRouter("out6"))).getBuffer().setLength(0);	
+		questionNumber = getEngine(sessionID).getOutputRouter("out7").toString();	
+		((StringWriter)(getEngine(sessionID).getOutputRouter("out7"))).getBuffer().setLength(0);
 		response.setContentType("application/json");  
 		PrintWriter out = response.getWriter();
 		JSONObject jsonObject = new JSONObject();
@@ -260,7 +266,8 @@ try {
 		jsonObject.put("type", jessText2);
 		jsonObject.put("id", jessText3);
 		jsonObject.put("options", jessText4);	
-		jsonObject.put("percentage", decimal (percentage));	
+		jsonObject.put("percentage", decimal (percentage));
+		jsonObject.put("qNumber", questionNumber);
 		out.print(jsonObject);
 		out.flush();
 
@@ -294,10 +301,8 @@ try {
 			while (tokenizer.hasMoreElements()) {
 				String symptoms = tokenizer.nextElement().toString();
 				System.out.println("(addFact Symptom "+symptoms+")");	
-				getEngine(sessionID).eval("(addFact Symptom "+symptoms+")");
+				getEngine(sessionID).eval("(addSymptom " +symptoms+")");
 				getEngine(sessionID).run();
-
-
 				jessText += getEngine(sessionID).getOutputRouter("out").toString() +"*";
 				jessText2 += getEngine(sessionID).getOutputRouter("out2").toString() +"*";
 				jessText3 += getEngine(sessionID).getOutputRouter("out3").toString() +"*";

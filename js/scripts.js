@@ -31,6 +31,8 @@ var extraName = extraUrl = extraExp = extraAdd = "";
 function submitSymptoms() {
     stage = 2.5;
 	$("#advisorH1").html("");
+	//$("#advisorH1").fadeOut();
+	
 	var counter = 0;
 	var count = countClicks();
 	var processText = "incomplete";
@@ -116,6 +118,7 @@ function getSession() {
 }
 
 var theOptions = new Array();
+var lastNumber = 0;
 function ajaxCall(command, sessionID) {
 
 	$.ajax({
@@ -134,6 +137,7 @@ function ajaxCall(command, sessionID) {
 		    type = data.type;
 		    options = data.options;
 		    meter = data.percentage;
+		    lastNumber = data.qNumber;
 	  		if (meter.length>0) {
 	            	updateP();
 	        }	    $(".profileH1").html(question);
@@ -304,7 +308,7 @@ function confirm() {
 		    if (intRegex.test(answer)) {
 		        $(".feedback").fadeIn();
 		        $(".feedback").append(id + ": " + answer + "<br>");
-		        $.get('DA', { value: answer, answerID: id, sessionID: sessionID });
+		        $.get('DA', { value: answer, answerID: id, sessionID: sessionID, last:lastNumber});
 		        proceed = true;
 		    }
 		    else {
@@ -315,7 +319,7 @@ function confirm() {
 		    if (intRegex.test(answer)) {
 		        $(".feedback").fadeIn();
 		        $(".feedback").append(id + " : " + answer + "<br>");
-		        $.get('DA', { value: answer, answerID: id, sessionID: sessionID });
+		        $.get('DA', { value: answer, answerID: id, sessionID: sessionID, last:lastNumber});
 		        proceed = true;
 		    } else {
 		        alert("Please Enter a valid number in the " + id + " field");
@@ -325,28 +329,28 @@ function confirm() {
 		else {
 		    $(".feedback").fadeIn();
 		    $(".feedback").append(id + ": " + answer + "<br>");
-		    $.get('DA', { value: answer, answerID: id, sessionID: sessionID });
+		    $.get('DA', { value: answer, answerID: id, sessionID: sessionID, last:lastNumber });
 		    proceed = true;
 		}
 	}
 	else if (type == "YES-NO") {
 		$(".feedback").fadeIn();
 		$(".feedback").append(id + ": " + yesOrno + "<br>");
-		$.get('DA', { value: yesOrno, answerID: id, sessionID: sessionID });
+		$.get('DA', { value: yesOrno, answerID: id, sessionID: sessionID, last:lastNumber });
 		proceed = true;
 		answerArray.push(yesOrno);
 	}
 	else if (type == "MALE-FEMALE") {
 		$(".feedback").fadeIn();
 		$(".feedback").append(id + ": " + gendertype + "<br>");
-		$.get('DA', { value: gendertype, answerID: id, sessionID: sessionID });
+		$.get('DA', { value: gendertype, answerID: id, sessionID: sessionID, last:lastNumber });
 		proceed = true;
 		answerArray.push(gendertype);
 	}
 	else if (type == "OPTIONAL") {
 		$(".feedback").fadeIn();
 		$(".feedback").append(id + ": " + opt + "<br>");
-		$.get('DA', { value: opt, answerID: id, sessionID: sessionID });
+		$.get('DA', { value: opt, answerID: id, sessionID: sessionID, last:lastNumber});
 		proceed = true;
 		answerArray.push(opt);
 	}
@@ -562,7 +566,10 @@ $(function () {
                 submitSymptoms();
             }
             else if (stage == 2.5) {
+                $("#advisorH1").fadeIn();
                 ontoLifestyle();
+                
+	
             }
             else if (stage == 3) {
                 confirmLifestyle();
