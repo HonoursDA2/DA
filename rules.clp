@@ -830,7 +830,7 @@
 (defrule alcohol
     (declare (salience 10))
     (sectionFact (name Alcohol) (value ?yesno))
-  	?question <- (Question (section Lifestyle) (type "Alcohol-Frequency") (text ?questionText) (answerType ?answerType) (ask yes))
+  	?question <- (Question (section Lifestyle) (type "Alcohol-Frequency") (text ?questionText) (answerType ?answerType))
     =>
     (if (eq ?yesno No) then
     (modify ?question (ask no))
@@ -844,7 +844,7 @@
 (defrule exercise
     (declare (salience 10))
     (sectionFact (name Exercise) (value ?yesno))
-    ?question <- (Question (section Lifestyle) (type "Exercise-Frequency") (text ?questionText) (answerType ?answerType) (ask yes))
+    ?question <- (Question (section Lifestyle) (type "Exercise-Frequency") (text ?questionText) (answerType ?answerType))
     =>
     (if (eq ?yesno No) then
     (modify ?question (ask no))
