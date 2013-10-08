@@ -89,7 +89,8 @@ function submitSymptoms() {
 var count = 0;
 
 function revert() {
-
+	$("#backb").fadeOut();
+	$("#backb").css({"right":"150px"});
     $.get('DA', { command: "restart",stage:"stage1", sessionID: sessionID }, function(responseText){
 	    ajaxCall("question", sessionID);
 	});
