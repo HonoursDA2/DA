@@ -91,7 +91,7 @@ public class DA extends HttpServlet{
 			chooseFunction();
 		}
 		catch (JessException e) {
-			System.out.println("PROBLEM with jess");
+			System.out.println(e.getMessage());
 		}
 		catch (JSONException e) {
 			System.out.println("PROBLEM with json");

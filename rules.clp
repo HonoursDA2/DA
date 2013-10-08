@@ -301,12 +301,12 @@
     ?fact <- (sectionFact (order ?order))
     ?feedback <- (Feedback (order ?number))
     ?theOrder <- (Order (counter ?order1)(lastAsked ?last)(current ?current) (points ?points))
-    ?question <- (Question (section Initial) (ask no) (order ?order))
-    ?question1 <- (Question (section Initial) (ask no) (order ?currentOrder))
+    ?question <- (Question (ask no) (order ?order))
+    ?question1 <- (Question (ask no) (order ?currentOrder))
     =>
     (if (eq ?last ?order) then
     (retract ?fact )
-    (modify ?theOrder (counter ?last))
+    
     (bind ?*points* ?points)
     (bind ?*nextQuestion* ?last)
     (modify ?question (ask yes))
@@ -325,7 +325,9 @@
 
 (defrule removeBack
     ?back <- (Go-Back)
+    ?theOrder <- (Order (counter ?order1)(lastAsked ?last)(current ?current) (points ?points))
     =>
+    (modify ?theOrder (counter ?last))
     (retract ?back)
     )
 (defrule removeRestartL
@@ -383,6 +385,14 @@
     	(printout out5 ?theCaption)
     )
 ;Asks the initial set of questions
+
+(defrule removeInitial
+    (declare (salience 5))
+    (Ask-Question-Lifestyle)
+    ?question <- (Question (section Initial))
+    =>
+    (retract ?question)
+    )
 (defrule askQuestionInitial
     ?ask <- (Ask-Question-Initial)
     ?question <- (Question (section Initial)(type ?type)(text ?questionText) (answerType ?answerType) (ask yes) (order ?current) (options ?options))
@@ -415,7 +425,8 @@
     (printout out3 ?type)
     (printout out4 ?options)
 	(printout out6 (* (/ ?*points* ?*total*) 100))  
-    (modify ?order (counter ?current))
+    (printout out7 ?current)
+    (modify ?order (counter ?counter)(current ?current)) 
     (modify ?question (ask no))
     (retract ?ask)
      )
@@ -435,14 +446,11 @@
 (defrule changeLifestyleQuestions
     (declare (salience 5))
     (Ask-Question-Lifestyle)
-    ?order <- (Order (counter ?counter))
     ?question <- (Question (section Lifestyle)(type ?type)(text ?questionText) (answerType ?answerType) (ask no) (order ?current))
     =>
     (if (eq ?current ?*nextQuestion*) then
     	(bind ?theCounter (+ ?*nextQuestion* 1))	
     	(bind ?*nextQuestion* ?theCounter)
-    	(bind ?var (+ ?counter 1))
-        (modify ?order (counter ?var))
         )
     )
 ;Asks the questions relating to Lifestyle.
@@ -473,7 +481,7 @@
    	(assert (weight-classification Obese))
         ( assert (Feedback (order ?*currentQuestion*) (stage INITIAL) (explanation "Your BMI is above 30 kg/m^2, this classifies you as Obese,
                         this is very concerning because Obesity is a cause of Type 2 Diabetes.
-                        You need to urgently try to manage your diet and incorporate some exercise into your daily/weekly routine.*")) 
+                        You need to urgently try to manage your diet and incorporate some exercise into your daily/weekly routine.*"))) 
        (bind ?*points* (+ ?*points* 20))
           else
         	(if (> ?bmi 25) then
@@ -488,11 +496,12 @@
                 			(if (< ?bmi 18.5 ) then
                    			(assert (weight-classification Underweight))
                               ( assert (Feedback (order ?*currentQuestion*) (stage INITIAL) (explanation "Your BMI is below, 18 kg/m^2, you are slightly underweight, a bit more body mass would be great.*")))
-            )    	)
+            				)    		
+                   )
                    )
                )
             )
-       )
+       
        
 (defrule printSymptoms
     (Symptoms)
@@ -807,29 +816,42 @@
 ;If no, dont ask how often.
 (defrule smokeNo
     (declare (salience 10))
-    (sectionFact (name Smoke) (value No))  	
-    ?question <- (Question (section Lifestyle) (type "Smoke-Frequency") (text ?questionText) (answerType ?answerType) (ask yes))
+    (sectionFact (name Smoke) (value ?yesno))  	
+    ?question <- (Question (section Lifestyle) (type "Smoke-Frequency"))
     =>
+    (if (eq ?yesno No) then
     (modify ?question (ask no))
     ( assert (Feedback (order ?*currentQuestion*) (stage LIFESTYLE)(explanation "No smoking you say..? Thats quite commendable, try not to get into this habit as it is quite hard to shake and has a lot of negative effects on the body in the long term.*")))
+    else
+    (modify ?question (ask yes))
+    )
     )
 ;If no, dont ask how often.
 (defrule alcohol
     (declare (salience 10))
-    (sectionFact (name Alcohol) (value No))
+    (sectionFact (name Alcohol) (value ?yesno))
   	?question <- (Question (section Lifestyle) (type "Alcohol-Frequency") (text ?questionText) (answerType ?answerType) (ask yes))
     =>
+    (if (eq ?yesno No) then
     (modify ?question (ask no))
-    ( assert (Feedback (order ?*currentQuestion*) (stage LIFESTYLE) (explanation "No alcohol consumption, thats great, keep this up!*")))
-    )
+    ( assert (Feedback (order ?*currentQuestion*) (stage LIFESTYLE) (explanation "No alcohol consumption, thats great, keep this up!Alcohol has a high sugar content, this raises the blood sugar levels in the body, forcing the pancreas to work harder. Frequent alcohol consumption 
+                    is not advised in order to maintain a healthy pancreas.*")))
+    else
+     (modify ?question (ask yes)) 
+           )
+        )
 ;If no dont ask how often.
 (defrule exercise
     (declare (salience 10))
-    (sectionFact (name Exercise) (value No))
+    (sectionFact (name Exercise) (value ?yesno))
     ?question <- (Question (section Lifestyle) (type "Exercise-Frequency") (text ?questionText) (answerType ?answerType) (ask yes))
     =>
+    (if (eq ?yesno No) then
     (modify ?question (ask no))
-   )
+    else
+    (modify ?question (ask yes))
+    )
+    )
 (defrule getFeedbackI
     (Get FeedbackI)
     (Feedback (stage INITIAL) (explanation ?explanation))
@@ -851,10 +873,14 @@
 ;If no dont ask what the rate is.
 (defrule bloodPressure1
     (declare (salience 10))
-    (sectionFact (name Blood-Pressure-Knowledge)(value No))
+    (sectionFact (name Blood-Pressure-Knowledge)(value ?yesno))
     ?question <- (Question (section Lifestyle) (type "Blood-Pressure"))
     =>
+    (if (eq ?yesno No) then
     (modify ?question (ask no))
+        else
+        (modify ?question (ask yes))   
+        )
     )
 (defrule fatnExcercise
     (sectionFact (name Exercise)(value No))
@@ -902,7 +928,7 @@
     						(assert (sectionFact (stage INITIAL)(name Age)(value ?fact) (order ?last)))			
                            		 else
                     						(if (eq Smoke ?factToAdd) then
-    									(assert (sectionFact (stage LIFESTYLE)(name Smoke)(value ?fact) (order ?current) (order ?last)))			
+    									(assert (sectionFact (stage LIFESTYLE)(name Smoke)(value ?fact)(order ?last)))			
                                     	else
                     								(if (eq Alcohol ?factToAdd) then
     										(assert (sectionFact (stage LIFESTYLE)(name Alcohol)(value ?fact) (order ?last)))			

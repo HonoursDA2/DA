@@ -91,21 +91,20 @@ var count = 0;
 function changeArray(array1, array2) {
 	var newArray = new Array();
 	var newidArray = new Array();
-	alert(array1.length);
 		
 	for (var x=0;x<array1.length -1;x++) {
 		newArray.push(array1[x]);
 		newidArray.push(array2[x]);
 	}
-
-	restartFeedback (newArray,newidArray);
 	answerArray = new Array();
 	idArray = new Array();
 	for (var x=0;x<newArray.length;x++) {
 		answerArray.push(newArray[x]);
-		idArray.push(idArray[x]);
+		idArray.push(newidArray[x]);
 	}
+	restartFeedback (answerArray,idArray);
 }
+
 
 function revert() {
 	$(".feedback").html("");	
@@ -119,12 +118,11 @@ function revert() {
 }
 
 function revertL() {
-
+	$(".feedback").html("");	
+	changeArray(answerArray,idArray);
     $.get('DA', { command: "restart", stage: "stage2", sessionID: sessionID }, function (responseText) {
         ajaxCallLifestyle("question", sessionID);
     });
-    $(".feedback").html("");
-    restartFeedback();
 }
 
 var sessionID = 0;
@@ -208,6 +206,7 @@ function ajaxCall(command, sessionID) {
 	            type = data.type;
 	            options = data.options;
 	            meter = data.percentage;
+	            lastNumber = data.qNumber;
 	            if (meter.length>0) {
 	            	updateP();
 	            }
@@ -306,7 +305,7 @@ function profile() {
 }
 
 function restartFeedback(array1, array2) {
-	for (var x=0;x<idArray.length-1;x++) {
+	for (var x=0;x<array1.length;x++) {
 		$(".feedback").append(array2[x] + " : " + array1[x] + "<br>");
 	}
 }
@@ -315,6 +314,7 @@ var meter = height = 0;
 var idArray = new Array();
 var answerArray= new Array();
 var counter=0;
+
 function confirm() {
     $("#backb").fadeIn();
     $("#backb").css({"left":"150px"});
@@ -390,15 +390,18 @@ function confirmLifestyle() {
     $("#backbL").fadeIn();
     $("#backbL").css({ "left": "150px" });
 	var proceed = false;
+	idArray.push(id);
+	
 	if (type == "INPUTT" || type == "INPUTN" || type == "INPUTND") {
 		var answer = $("#" + id).val();
+		answerArray.push(answer);
 
 		if (type == "INPUTN") {
 		    var intRegex = /^\d+$/;
 		    if (intRegex.test(answer)) {
 		        $(".feedback").fadeIn();
 		        $(".feedback").append(id + ": " + answer + "<br>");
-		        $.get('DA', { value: answer, answerID: id, sessionID: sessionID });
+		        $.get('DA', { value: answer, answerID: id, sessionID: sessionID, last:lastNumber });
 		        proceed = true;
 		    }
 		    else {
@@ -409,7 +412,7 @@ function confirmLifestyle() {
 		    if (intRegex.test(answer)) {
 		        $(".feedback").fadeIn();
 		        $(".feedback").append(id + ": " + answer + "<br>");
-		        $.get('DA', { value: answer, answerID: id, sessionID: sessionID });
+		        $.get('DA', { value: answer, answerID: id, sessionID: sessionID, last:lastNumber });
 		        proceed = true;
 		    } else {
 		        alert("Please Enter a valid number in the " + id + " field");
@@ -419,27 +422,30 @@ function confirmLifestyle() {
 		else {
 		    $(".feedback").fadeIn();
 		    $(".feedback").append(id + ": " + answer + "<br>");
-		    $.get('DA', { value: answer, answerID: id, sessionID: sessionID });
+		    $.get('DA', { value: answer, answerID: id, sessionID: sessionID, last:lastNumber });
 		    proceed = true;
 		}
 	}
 	else if (type == "YES-NO") {
 		$(".feedback").fadeIn();
 		$(".feedback").append(id + ": " + yesOrno + "<br>");
-		$.get('DA', { value: yesOrno, answerID: id, sessionID: sessionID });
+		$.get('DA', { value: yesOrno, answerID: id, sessionID: sessionID, last:lastNumber });
 		proceed = true;
+		answerArray.push(yesOrno);
 	}
 	else if (type == "MALE-FEMALE") {
 		$(".feedback").fadeIn();
 		$(".feedback").append(id + ": " + gendertype + "<br>");
-		$.get('DA', { value: gendertype, answerID: id, sessionID: sessionID });
+		$.get('DA', { value: gendertype, answerID: id, sessionID: sessionID, last:lastNumber });
 		proceed = true;
+		answerArray.push(gendertype);
 	}
 	else if (type == "OPTIONAL") {
 		$(".feedback").fadeIn();
 		$(".feedback").append(id + ": " + opt + "<br>");
-		$.get('DA', { value: opt, answerID: id, sessionID: sessionID });
+		$.get('DA', { value: opt, answerID: id, sessionID: sessionID, last:lastNumber });
 		proceed = true;
+		answerArray.push(opt);
 	}
 	if (proceed) {
 		ajaxCallLifestyle("question", sessionID);
@@ -612,7 +618,7 @@ function splash() {
 	$("#splash").delay(2000).effect("puff", 500);
 }
 
-var ontoLifestyle = function () {
+function ontoLifestyle() {
         stage = 3;
         $("#symptomsresultsC").fadeOut();
         $("#contButton").fadeIn();
@@ -620,36 +626,5 @@ var ontoLifestyle = function () {
         $("#advisor").animate({ "height": "47%" }, 1000, "easeInOutCirc");
         $("#menu").fadeIn();
         $("#patient").animate({ "bottom": "2.55%" }, 1000, "easeInOutCirc");
-
-        $.get('DA', { command: "question", sessionID: sessionID }, function (data) {
-            question = data.question;
-            id = data.id;
-            type = data.type;
-            options = data.options;
-            updateP();
-
-            $("#advisorH1").html(question);
-
-            if (type == "INPUTT" || type == "INPUTN" || type == "INPUTND") {
-                $("#lifestyle .questions").html('<input id="' + id + '" value="" type="' + id + '" placeholder="Enter Your ' + id + ' Here">');
-            }
-            else if (type == "MALE-FEMALE") {
-                $("#lifestyle .questions").html('<div id="male" onclick="gSpecific(this)"><img src="images/male-sign.jpg"></div><div id="female" onclick="gSpecific(this)"><img src="images/female-sign.jpg"></div>');
-            }
-            else if (type == "YES-NO") {
-                $("#lifestyle .questions").html('<div id="yesbutton" class="yes" value="yes" onclick="yesno(yes)">Yes</div><div id="nobutton" class="no" value="no" onclick="yesno(no)">No</div>');
-            } else
-                if (type == "OPTIONAL") {
-                    theOptions = options.split('-');
-                    $("#lifestyle .questions").html("");
-                    for (var i = 0; i < theOptions.length; i++) {
-                        $("#lifestyle .questions").append('<div class="options" id="' + theOptions[i] + '">' + theOptions[i] + '</div>');
-                    }
-
-                }
-                else {
-                    alert("Guess what, you have Diabetes :-O draft a bucket list and enjoy life while you still can, Goodbye")
-                }
-
-        });
+        ajaxCallLifestyle('question', sessionID)
     }
