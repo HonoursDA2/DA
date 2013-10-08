@@ -88,13 +88,34 @@ function submitSymptoms() {
 
 var count = 0;
 
+function changeArray(array1, array2) {
+	var newArray = new Array();
+	var newidArray = new Array();
+	alert(array1.length);
+		
+	for (var x=0;x<array1.length -1;x++) {
+		newArray.push(array1[x]);
+		newidArray.push(array2[x]);
+	}
+
+	restartFeedback (newArray,newidArray);
+	answerArray = new Array();
+	idArray = new Array();
+	for (var x=0;x<newArray.length;x++) {
+		answerArray.push(newArray[x]);
+		idArray.push(idArray[x]);
+	}
+}
+
 function revert() {
+	$(".feedback").html("");	
+	changeArray(answerArray,idArray);
 	$("#backb").fadeOut();
 	$("#backb").css({"right":"150px"});
     $.get('DA', { command: "restart",stage:"stage1", sessionID: sessionID }, function(responseText){
 	    ajaxCall("question", sessionID);
 	});
-	$(".feedback").html("");
+	
 }
 
 function revertL() {
@@ -284,9 +305,9 @@ function profile() {
 
 }
 
-function restartFeedback() {
+function restartFeedback(array1, array2) {
 	for (var x=0;x<idArray.length-1;x++) {
-		$(".feedback").append(idArray[x] + " : " + answerArray[x] + "<br>");
+		$(".feedback").append(array2[x] + " : " + array1[x] + "<br>");
 	}
 }
 
