@@ -181,21 +181,17 @@
             measures to prevent the onset of Diabetes.Managing Diabetes is the same as preventing it,as it encourages a healthy diet and lifestyle.
            *")	         
         )
-    (Information (question "5. Diabetes complications*") (explanation "Type 2 diabetes may increase the risk of Alzheimer's disease. The poorer your blood sugar control, the greater the risk appears to be. One theory is that cardiovascular problems caused by diabetes could contribute to dementia by blocking blood flow to the brain or causing strokes. Other possibilities are that too much insulin in the blood leads to brain-damaging inflammation, or lack of insulin in the brain deprives brain cells of glucose.-
-            Diabetes dramatically increases the risk of various cardiovascular problems, including coronary artery disease with chest pain (angina), heart attack, stroke and narrowing of arteries (atherosclerosis). If you have diabetes, you are more likely to have heart disease or stroke.-
+    (Information (question "5. Diabetes complications*") (explanation " Diabetes dramatically increases the risk of various cardiovascular problems, including coronary artery disease with chest pain (angina), heart attack, stroke and narrowing of arteries (atherosclerosis). If you have diabetes, you are more likely to have heart disease or stroke.-
             Diabetes can damage the blood vessels of the retina (diabetic retinopathy), potentially leading to blindness. -
-            The kidneys contain millions of tiny blood vessel clusters (glomeruli) that filter waste from your blood. Diabetes can damage this delicate filtering system. Severe damage can lead to kidney failure or irreversible endstage kidney disease, which may require dialysis or a kidney transplant-
+            The kidneys contain millions of tiny blood vessel clusters that filter waste from your blood. Diabetes can damage this delicate filtering system. Severe damage can lead to kidney failure or irreversible endstage kidney disease, which may require dialysis or a kidney transplant.-
             Excess sugar can injure the walls of the tiny blood vessels (capillaries) that nourish your nerves, especially in the legs. This can cause tingling, numbness, burning or pain that usually begins at the tips of the toes or fingers and gradually spreads upward. Left untreated, you could lose all sense of feeling in the affected limbs. Damage to the nerves related to digestion can cause problems with nausea, vomiting, diarrhea or constipation. For men, it may lead to erectile dysfunction.-
             Nerve damage in the feet or poor blood flow to the feet increases the risk of various foot complications. Left untreated, cuts and blisters can become serious infections. Severe damage might require toe, foot or even leg amputation.-
-            The bones of people with Osteoporosis become thin and weak and are much more likely to fracture, especially the hip, spine, and wrist.-
             Diabetes may leave you more susceptible to skin problems, including bacterial and fungal infections.With gum infections being a major concern
             *")
             (questionType "MULTIPLE*")
-        	(caption "Diabetes has a lot of complications that can result if not managed appropriately, early diagnosis plays a large role in
-            preventing the complications from arising. Either because the body is insulin resistant or the pancreas is not 
-            producing enough insulin, this leads to a high blood glucose level througouht the body, which can cause infections and disease over a period of time. 
-            Badly managed Diabetes will eventally result in death.*")
-        	(options "Alzheimer's disease-Cardiovascular Disease-Eye damage-Kidney damage-Nerve damage-Foot damage-Osteoporosis-Skin and mouth conditions.*")	
+        	(caption "Diabetes has a lot of complications that can manifest if the disease is not managed appropriately, early diagnosis plays a large role in
+            preventing the complications from arising.*")
+        	(options "Cardiovascular Disease-Eye damage-Kidney damage-Nerve damage-Foot damage-Skin and mouth conditions.*")	
         )
     (Information (question "4. What are the symptoms of Diabetes*") (explanation "The fluctuation in blood glucose levels leads to a sensitivity to light. Also another reason is a result of the tissue being pulled from the eye lenses to be used for energy by the body.-
             This is caused by dehydration in the body, the mouth tends to get dry because of the high loss of liquids through urination.-
@@ -215,48 +211,48 @@
             Yeast organisms are present in most woman, but these organisms tend to overgrow in a sugar rich environment. A result of badly managed diabetes.
             *")
         (questionType "MULTIPLE*")
-        (options "Blurred Vision-Dry Mouth-Erectile Dysfunction-Exesive Urination-Extreme Hunger-Extreme Thirst-Fatigue-Frequent Headaches-Gestational Diabetes-Gum Infection-Irritability-Nausea-Numbness-Slow Healing Wounds-Weightloss-Yeast Infection*")
+        (options "Blurred Vision-Dry Mouth-Erectile Dysfunction-Excesive Urination-Extreme Hunger-Extreme Thirst-Fatigue-Frequent Headaches-Gestational Diabetes-Gum Infection-Irritability-Nausea-Numbness-Slow Healing Wounds-Weightloss-Yeast Infection*")
         (caption "Diabetes can be picked up through the symptoms that manifest over time. There are alot of symptoms that come with Diabetes. 
             Although with Type 2 Diabetes, these signs of Diabetes might not be made visible through symptoms for a very long time, making it difficult for someone to know their Diabetes status*"))
-    (Information(question  "3. What are the types of Diabetes?*") (explanation "Type 1 Diabetes occurs when the beta cells in the pancreas are damaged. 
-            Therefore the pancreas does not produce insulin anymore. Type 1 normally occurs in people under the age of 30 (it used to be called Juvenile Diabetes).-Type 2 Diabetes occurs when the beta cells in the body are resistant to the effect of insulin. 
+    (Information(question  "3. What are the different types of Diabetes?*") (explanation "Type 1 Diabetes occurs when the beta cells in the pancreas are damaged. 
+            Because of this, the pancreas does not produce insulin anymore. Type 1 normally occurs in people under the age of 30 (it used to be called Juvenile Diabetes).-Type 2 Diabetes occurs when the cells in the body are resistant to the effect of insulin. 
             It develops gradually over a period of time.There is a high association with a family history of Diabetes and obesity. 
             Type 2 normally occurs in people older than 40 years of age-.
             This type of diabetes affects about 2% to 10% of females during last months of pregnancy. 
-            Pregnant women have enough insulin, but the effect of insulin is partially blocked by other hormones produced in the placenta during pregnancy.
-            This causes a rise in sugar levels.
-            The disease normally disappears after pregnancy.-
-            Prediabetes is the precursor of diabetes where the blood glucose levels 
-            are higher than normal but not high enough to be considered as Diabetes. 
-            However, if the condition is tackled at this stage through diet, 
-            exercise and other healthy lifestyle changes (weight management programme), the risk can be significantly reduced.*")
+            Pregnant women have enough insulin, but the effect of insulin is partially blocked by other hormones produced in the placenta during the pregnancy.
+            This causes an abnormal rise in sugar levels in the body.
+            The is a complication of pregnancy and normally disappears after the pregnancy.-
+            Prediabetes, also known as impaired  glucose tolerance is the condition where the blood glucose levels in the body  
+            are much higher than normal but not high enough to be classified as Diabetes. 
+            If the condition is tackled at an early stage through diet, 
+            exercise and other healthy lifestyle changes (weight management programme), the risk of going on ot develop Type 2 Diabetes can be significantly reduced.*")
         (questionType "MULTIPLE*")
         (options "Type 1-Type 2-Gestational-Prediabetes*")
-        (caption "There are three distinct types of Diabetes, along with prediabetes which is sort of the prelude to Diabetes that should raise many warning bells because of rising blood sugar levels in the body.*")
-        )
-    (Information (question "2. What are the causes of Diabetes?*") 
-        (explanation "Obesity is thought to be the primary cause of Type 2 Diabetes in people who already have a family history of the disease
+        (caption "There are two distinct types of Diabetes: Type 1 Diabetes and Type 2 Diabetes. Prediabetes is a condition that may eventually lead to Diabetes. Gestational Diabetes is a condition that occurs in some woman during pregnacy that may (in some cases) eventually lead to Type 2 Diabetes after the pregnancy.*"))
+    (Information (question "2. What are the risk factors of Diabetes?*") 
+        (explanation "Obesity is thought to be a primary cause of Type 2 Diabetes in people who already have a family history of the disease.
             When a person is obese, the body has to deal with more nutrients than it can handle, 
             to counter this the cells stop reacting to insulin as long as the body is overweight. 
             This leads to the whole body to eventually be resistant to insulin, the onset of Type 2 Diabetes-
-            If someone in your family has has Type 2 Diabetes, then you are at risk of developing the disease
-            The closer the realtive the greater the risk, with studies showing that people with one parent with Diabetes has double the risk,
-            while people with two diabtic parents have six times the risk of being diagnosed with Diabetes, with mothers presenting a greater risk than fathers.
+            If someone in your family has has Type 2 Diabetes, then you too are at risk of developing the disease.
+            The closer the realtive the greater the risk, with studies showing that people with one parent with Diabetes have double the risk,
+            while people with two diabetic parents have six times the risk of being diagnosed with Diabetes, with mothers presenting a greater risk than fathers.
             Famiily history is a great contributing factor that people often down play and take for granted.-
-            If the pancreas is damaged and not working properly this leads to insufficient insulin secretion, the onset of Type 1 Diabetes*")
+            If the pancreas is damaged and not working properly this leads to insufficient insulin secretion, the onset of Type 1 Diabetes.*")
         (questionType "MULTIPLE*")
         (options "Obesity-Family History-Pancreas malfunction*")
-        (caption "There are a few causes of Diabetes that play a significant role in your chances of getting the Disease, these are obesity, family history of Diabetes and the 
-            malfunctioning of the Pancreas(~)*"))
+        (caption "There are a few risk factors that will vastly increase your chances of developing Diabetes, these are obesity, family history of Diabetes and the 
+            malfunctioning of the Pancreas*"))
     (Information (question "1. What is Diabetes Mellitus?*") (explanation "Diabetes Mellitus, more commonly known simply as Diabetes is a chronic medical condition where a person has 
             high blood sugar levels.This is either because the insulin production in the body is insufficient or because the body does not respond properly to insulin*"))
-        (Information (question "0. KEYWORDS*") (explanation "Glucose is the most important simple sugar in a human metabolism, blood glucose is the level of glucose present in the blood stream-
-            	Gastroparesis is a disease of the muscles of the stomach or the nerves controlling the muscles that causes the muscles to stop working, affecting the digestive process-
+        (Information (question "0. KEYWORDS*") (explanation "Glucose is the most important simple sugar in a human metabolism, blood glucose is the level of glucose present in the blood stream.-
+             The cardiovascular system consists of the heart, blood vessels and the blood that the blood vessels transport throughout the body. The cardiovasuclar system is powered by the heart.-
+             Gastroparesis is a disease of the muscles of the stomach or the nerves controlling the muscles that causes the muscles to stop working, affecting the digestive process.-
              Insulin is a hormone produced by the Pancreas that is the main regulator of the glucose (sugar) in the blood.-
              The Pancreas is long soft organ behind your stomach and infront of your spine, it produces insulin to help break down the food and hormones that halp control the blood sugar levels.-
-            Yeast is a type of fungus; yeast infection refers to the fungus scientifically known as Candida*")
+            Yeast is a type of fungus.*")
         (questionType "MULTIPLE*") 
-        (options "Blood Glucose-Gastroparesis-Insulin-Pancreas-Yeast*")
+        (options "Blood Glucose-Cardiovascular-Gastroparesis-Insulin-Pancreas-Yeast*")
         (caption "Important keywords that will be needed to understand defintions*")
         )      
     )
@@ -322,7 +318,6 @@
     ; (retract ?feedback)     
     ; )
     )
-
 (defrule removeBack
     ?back <- (Go-Back)
     ?theOrder <- (Order (counter ?order1)(lastAsked ?last)(current ?current) (points ?points))
@@ -385,7 +380,6 @@
     	(printout out5 ?theCaption)
     )
 ;Asks the initial set of questions
-
 (defrule removeInitial
     (declare (salience 5))
     (Ask-Question-Lifestyle)
@@ -500,9 +494,7 @@
                    )
                    )
                )
-            )
-       
-       
+            )      
 (defrule printSymptoms
     (Symptoms)
     (Reason (name ?name) (explanation ?explanation))
@@ -560,7 +552,7 @@
     		)
         )
  )
-
+;Family history
 (defrule familyH
     (declare (salience 10))
     (sectionFact (name Family-History) (value ?yesno))
@@ -570,6 +562,7 @@
     	(modify ?question (ask no)) else
         (modify ?question (ask yes)) 
      )
+     (uncertain ?yesno)
      )
 (defrule family
     (sectionFact (name Family-Type) (value ?family))
@@ -583,6 +576,7 @@
         (bind ?point 2))
     ?point
     )
+;Add points for race
 (deffunction race (?race)
     (bind ?point 0)
    (if (eq White ?race) then
@@ -592,22 +586,25 @@
     	(assert (Feedback (order ?*currentQuestion*) (stage INITIAL)(explanation "Non white ethnic groups have a higher prevalence of diabetes, with certain ethnic groups having a higher rate of diabetes-related complications and deaths caused by Diabetes.*"))) 
     ?point
     )
-;Adds points depending on the race
+;Age
 (defrule ageR
     (sectionFact (name Age) (value ?age))
   	=>
     (bind ?*points* (+ ?*points* (age ?age)))
     )
+;Race
 (defrule raceR
     (sectionFact (name Race) (value ?race))
   	=>
     (bind ?*points* (+ ?*points* (race ?race)))
      )
+;family history
 (defrule FH
     (sectionFact (name Family-History) (value ?history))
   	=>
      	(bind ?*points* (+ ?*points* (uncertain ?history)))
     )
+;Asses diabetes percentage and provide feedback
 (deffunction assessPercentage()
     (bind ?percentage (* (/ ?*points* ?*total*) 100))
     (if (> ?percentage  75) then
@@ -643,7 +640,7 @@
             (bind ?value 5))
         )
     ( assert (Feedback (order ?*currentQuestion*) (stage INITIAL)(explanation "The older you get the more likely you are of getting Diabetes,
-                this is because you tend to exercise less, lose muscle mass and gain weight as you age.*")))
+                this is because you tend to exercise less, lose muscle mass and gain weight as you age. Also as people age they are less able to process glucose appropriately and therefore have a greater risk of developing type 2 Diabetes.*")))
     ?value
     )
 (defrule teachDiabetes
@@ -652,7 +649,7 @@
     ( assert (Feedback (order ?*currentQuestion*) (stage INITIAL) (explanation "Diabetes is the most common chronic disease, currently estimated to affect about 330 Million people worldwide.
                 The biggest issues surrounding diabetes are a lack of awareness and education on the Disease*")))
     ( assert (Feedback (order ?*currentQuestion*) (stage INITIAL) (explanation "The only way to test for Diabetes is to do a blood glucose test at a hospital and receive an official diagnosis from a qualified Doctor. This system only provides a risk assesment.*")))
-    ( assert (Feedback (order ?*currentQuestion*) (stage FINAL) (explanation "Please remember that the only way to test for Diabetes is to do a blood glucose test at a hospital and receive an official diagnosis from a qualified Doctor. This system only provides a risk assesment toraise awareness and education on the Disease.*")))
+    ( assert (Feedback (order ?*currentQuestion*) (stage FINAL) (explanation "Please remember that the only way to test for Diabetes is to do a blood glucose test at a hospital and receive an official diagnosis from a qualified Doctor. This system only provides a risk assesment to raise awareness and education on the Disease.*")))
     )
 ;if pregnant
 (defrule pregnancy
@@ -668,21 +665,22 @@
      ( assert (Feedback (order ?*currentQuestion*) (stage FINAL) (explanation "Please remember that the only way to test for Diabetes is to do a blood glucose test at a hospital and receive an official diagnosis from a qualified Doctor. This system only provides a risk assesment toraise awareness and education on the Disease.*")))
     
      )
-
 ;if pregnant increase points because of the chances of gestational Diabetes
 (defrule SmokenAlcoholYes
     (sectionFact (name ?name) (value ?frequency))
   	=>
     (bind ?*points* (+ ?*points* (SmokenAlcohol ?name ?frequency)))	
     )
+;smoke and diabetic status
 (defrule smoker
     (sectionFact (name Smoke-Frequency) (value ?frequency))
   	(sectionFact (name Diabetic) (value ?yesno))
   	=>
     (smoker ?yesno ?frequency)
     )
+;feedback based on diabetes and smoke frequency
 (deffunction smoker(?yesno ?frequency)
-    (if (eq ?yesno No) then
+    (if (neq ?yesno Yes) then
          (if (neq ?frequency Hardly) then 
           ( assert (Feedback (order ?*currentQuestion*) (stage LIFESTYLE) (explanation "As a smoker and a non Diabetic, your chances of developing Diabetes is much higher.Ths is because smoking increases your blood sugar levels, and can lead to Diabetes along with its many complications over time.*")))
           )
@@ -692,11 +690,13 @@
         ) 
      )
  )
+;Blood pressure
 (defrule bloodPressure2
     (sectionFact (name Blood-Pressure) (value ?frequency))
     =>
     (bind ?*points* (+ ?*points* (bp ?frequency) ))
     )
+;points for exercise, feedback
 (defrule exerciseNo
     (sectionFact (name Exercise) (value No))
   	=>
@@ -704,16 +704,18 @@
     	( assert (Feedback (order ?*currentQuestion*) (stage LIFESTYLE) (explanation "No exercise at all? please try incorporate physical ectivity into you daily life, even if it means walking instead of driving
                 , exercise is important as it is essential to keep the body active and running.*")))
         )
+;add points exercise frequency
 (defrule exerciseYes 
     (sectionFact (name Exercise-Frequency) (value ?fact))
 	 =>
     	(bind ?*points* (+  ?*points* (exercise ?fact)))	
     )
+;deduct points for exercise
 (deffunction exercise (?frequency)
     (bind ?point 0)
     (if (eq Frequently ?frequency) then
         (bind ?point -15)
-        ( assert (Feedback (order ?*currentQuestion*) (stage LIFESTYLE)(explanation "Frequent exercise, keep it up!*")))else
+        ( assert (Feedback (order ?*currentQuestion*) (stage LIFESTYLE)(explanation "Frequent exercise, keep it up*")))else
         (if (eq Occassionaly ?frequency) then
             (bind ?point -5)
             ( assert (Feedback (order ?*currentQuestion*) (stage LIFESTYLE)(explanation "Occasional exercise is healthy, just try and maintain it, and maybe improve the frequency if possible.*")))
@@ -721,11 +723,12 @@
         )
     ?point 
     )
+;points for pregnancy status
 (deffunction pregnant (?status)
     (bind ?value 0)
     (if (eq ?status Yes) then
         (bind ?value 5) 
-        ( assert (Feedback (order ?*currentQuestion*) (stage INITIAL)(explanation "Because you are currently pregnant, you have a high chance of getting gestational Diabetes,
+        ( assert (Feedback (order ?*currentQuestion*) (stage INITIAL)(explanation "Because you are currently pregnant, you have a high chance of developing gestational Diabetes,
                     this will most likely disappear after the pregnancy, but you should make sure
                     you manage your diet aswell as your physical activity throughout your pregnancy.*")))else
         (if (eq ?status No) then
@@ -735,6 +738,7 @@
         )
     ?value
     )
+;Points for family type, feedback for family type
 (deffunction family (?relative)
     (bind ?points 0)
     (if (eq Parent ?relative) then
@@ -752,14 +756,15 @@
                         			( assert (Feedback (order ?*currentQuestion*)  (stage INITIAL)(explanation "Your relative had/has Diabetes, this means you are more likely than the average person to contract this disease, please tale the necessary precautions*")))
     	 							(bind ?points 5) else
                         (if (eq Child ?relative) then
-                            ( assert (Feedback (order ?*currentQuestion*) (stage INITIAL) (explanation "Your child has Diabetes, then it is most likely that you also have Diabetes, or someone else in your family has it.")))
+                            ( assert (Feedback (order ?*currentQuestion*) (stage INITIAL) (explanation "Your child has Diabetes, then it is most likely that you also have Diabetes, or someone else in your family has it.*")))
              				(bind ?points 20)
                             ))
             ))
             ))
-    ( assert (Feedback (order ?*currentQuestion*) (stage INTITIAL) (explanation "Diabetes often runs in families, its is not a guarentee, but the chances are always migh higher provided trhere is a family history of the disease.")))
+    ( assert (Feedback (order ?*currentQuestion*) (stage INTITIAL) (explanation "Diabetes often runs in families, its is not a guarentee, but the chances are always migh higher provided trhere is a family history of the disease.*")))
     ?points
     )
+;Points for alcohol consumption
 (deffunction SmokenAlcohol(?name ?frequency)
     (bind ?point 0) 
     (if (eq Smoke-Frequency ?name) then 
@@ -774,6 +779,7 @@
         )
     ?point
     )
+;asserts feedback depending on blood pressure, ads points
 (deffunction bp(?bp)
     (bind ?point 0) 
     (if (eq Low ?bp) then
@@ -799,7 +805,6 @@
     (assert (Total ?*total*))
     (assert (Points ?*points*))
     )
-
 ;If no knowledge of diabetes do not ask if diabetic.
 (defrule diabetesKnowledge
     (declare (salience 10))
@@ -852,18 +857,21 @@
     (modify ?question (ask yes))
     )
     )
+;Gets initial quesitons feedback feedback
 (defrule getFeedbackI
     (Get FeedbackI)
     (Feedback (stage INITIAL) (explanation ?explanation))
     =>
     (printout out ?explanation )
     )
+;Gets lifestyle feedback
 (defrule getFeedbackL
     (Get FeedbackL)
     (Feedback (stage LIFESTYLE) (explanation ?explanation))
     =>
     (printout out ?explanation )
     )
+;Gets final feedback
 (defrule getFeedbackF
     (Get FeedbackF)
     (Feedback (stage FINAL) (explanation ?explanation))
@@ -882,14 +890,14 @@
         (modify ?question (ask yes))   
         )
     )
+;Ceks the BMI and their phyiscal activity.
 (defrule fatnExcercise
-    (sectionFact (name Exercise)(value No))
-    (sectionFact (name weight-classification)(value Obese))
+    (sectionFact (name Exercise)(value ?yesno))
+    (sectionFact (name weight-classification)(value ?classification))
         =>
-    ( assert (Feedback (order ?*currentQuestion*) (stage FINAL) (explanation "Your BMI is above 30kg/m^2 and you mentioned that you do not exercise, this is a major problem that will only increase your
-            chances of getting Diabetes, it is strongly advised that you start to exercise more regularly in order to reduce your chances of Diabetes. Obesity is amajor contributing fact to Diabetes.")))
-        
+       (weightExercise ?yesno ?classification)
     )
+;Checks the BMI and responds acccordingly
 (deffunction weightExercise (?yesno ?classification)
     (if (eq ?yesno No ) then
     (if (eq ?classification Obese) then
@@ -903,7 +911,6 @@
            )
        )  
  )
-
 (defrule change
     (declare (salience 10))
     ?change <- (change-last ?last)
@@ -996,10 +1003,12 @@
                 	)            
      
 )
+;Adds a symptom
 (deffunction addSymptom(?fact)
         (assert (Symptom ?fact))
     )
+;Adds important feedback to the final feedback list 
 (deffunction start ()
     (bind ?url (str-cat "*   Please check the following site for the questionnaire: " "http://bit.ly/159vbwa *")) 
-    ( assert (Feedback (order ?*currentQuestion*) (stage FINAL) (explanation ?url)))
-    )
+    ( assert (Feedback (order ?*currentQuestion*) (stage FINAL) (explanation ?url))))
+    
