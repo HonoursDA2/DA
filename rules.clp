@@ -5,7 +5,7 @@
 (defglobal ?*questionNumber* = 19)
 (defglobal ?*stage1* = 1)
 (defglobal ?*stage2* = 12)
-
+(defglobal ?*name* = "")
 (deftemplate sectionFact
     (slot stage)
     (slot name)
@@ -510,6 +510,7 @@
   	=>
     (printout out ?name)
     (retract ?request)
+    
     )
 ;Returns the list of symptoms.
 (defrule getSymptoms
@@ -663,7 +664,7 @@
 (defrule diabeticNo
     (sectionFact (name Diabetic) (value No))
     =>
-    ( assert (Feedback (order ?*currentQuestion*) (stage INITIAL) (explanation "The only way to test for Diabetes is to do a blood glucose test at a hospital and receive an official diagnosis from a qualified Doctor. This system only provides a risk assesment.*")))
+    ( assert (Feedback (order ?*currentQuestion*) (stage INITIAL) (url "diabetes-test.jpg*")(explanation "The only way to test for Diabetes is to do a blood glucose test at a hospital and receive an official diagnosis from a qualified Doctor. This system only provides a risk assesment.*")))
      ( assert (Feedback (order ?*currentQuestion*) (stage FINAL) (explanation "Please remember that the only way to test for Diabetes is to do a blood glucose test at a hospital and receive an official diagnosis from a qualified Doctor. This system only provides a risk assesment toraise awareness and education on the Disease.*")))
     
      )
@@ -825,7 +826,7 @@
     =>
     (if (eq ?yesno No) then
     (modify ?question (ask no))
-    ( assert (Feedback (order ?*currentQuestion*) (stage LIFESTYLE)(explanation "No smoking you say..? Thats quite commendable, try not to get into this habit as it is quite hard to shake and has a lot of negative effects on the body in the long term.*")))
+    ( assert (Feedback (order ?*currentQuestion*) (stage LIFESTYLE)(url "smoke.jpg")(explanation "No smoking you say..? Thats quite commendable, try not to get into this habit as it is quite hard to shake and has a lot of negative effects on the body in the long term.*")))
     else
     (modify ?question (ask yes))
     )
@@ -948,7 +949,9 @@
     												(assert (sectionFact (stage INITIAL)(name Gender)(value ?fact) (order ?last))	)		
                                                     else
                     												(if (eq Name ?factToAdd) then
-    														(assert (sectionFact (stage INITIAL)(name Name)(value ?fact) (order ?last)))			
+    														(assert (sectionFact (stage INITIAL)(name Name)(value ?fact) (order ?last)))
+                                							(bind ?*name* ?fact)
+                                							(start)
                                                              else
                     														(if (eq Diabetes-Knowledge ?factToAdd) then
                                                                     (assert (sectionFact (stage INITIAL)(name Diabetes-Knowledge)(value ?fact) (order ?last)))
@@ -1013,6 +1016,6 @@
     )
 ;Adds important feedback to the final feedback list 
 (deffunction start ()
-    (bind ?url (str-cat "*   Please check the following site for the questionnaire: " "http://bit.ly/159vbwa *")) 
-    ( assert (Feedback (order ?*currentQuestion*) (stage FINAL) (explanation ?url))))
+    (bind ?gratitude (str-cat ?*name* ", thank you for using the Diabetes Assessment Expert System. Click on Diabetes Information below for more in-depth explanations and definitions or click restart to retake the assessment.*")) 
+    ( assert (Feedback (stage FINAL) (explanation ?gratitude))))
     
