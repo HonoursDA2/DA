@@ -110,7 +110,7 @@ function revert() {
 	$(".feedback").html("");	
 	changeArray(answerArray,idArray);
 	$("#backb").fadeOut();
-	$("#backb").css({"right":"150px"});
+	$("#button").css({"left":"0px"});
     $.get('DA', { command: "restart",stage:"stage1", sessionID: sessionID }, function(responseText){
 	    ajaxCall("question", sessionID);
 	});
@@ -321,7 +321,7 @@ var counter=0;
 
 function confirm() {
     $("#backb").fadeIn();
-    $("#backb").css({"left":"150px"});
+    $("#button").css({"left":"150px"});
 	var proceed = false;
 	idArray.push(id);
 	
@@ -392,7 +392,7 @@ function confirm() {
 
 function confirmLifestyle() {
     $("#backbL").fadeIn();
-    $("#backbL").css({ "left": "150px" });
+    $("#contButton").css({ "left": "150px" });
 	var proceed = false;
 	idArray.push(id);
 	
@@ -587,6 +587,10 @@ $(function () {
         $('#advisorH1').text(advisor);
     });
 
+    $("#symptomsresultsC").on('mouseover', '.symptomsresults div', function () {
+        $("#advisorH1").html("");
+    });
+
     $("#symptomsresultsC").on('click', '#cont', ontoLifestyle);
 
     $("body").keyup(function (e) {
@@ -600,8 +604,8 @@ $(function () {
             else if (stage == 2.5) {
                 $("#advisorH1").fadeIn();
                 ontoLifestyle();
-                
-	
+
+
             }
             else if (stage == 3) {
                 confirmLifestyle();
@@ -614,6 +618,26 @@ $(function () {
         return true;
     });
 
+    $(".questions").on('click','.options,#yesbutton,#nobutton,#male,#female',function () {
+        if (stage == 1) {
+            confirm();
+        }
+        else if (stage == 2) {
+            submitSymptoms();
+        }
+        else if (stage == 2.5) {
+            $("#advisorH1").fadeIn();
+            ontoLifestyle();
+
+
+        }
+        else if (stage == 3) {
+            confirmLifestyle();
+        }
+        else {
+            return false;
+        }
+    });
 
 });
 
