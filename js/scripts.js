@@ -259,6 +259,7 @@ var advisor = "";
 var submitArray = new Array();
 var symptomName = symptomID = symptomExplanation = new Array();
 var feedbackArray = new Array();
+var url = "";
 var contclicked = false;
 function profile() {
     $.get('DA', { command: "profile", sessionID: sessionID }, function (responseText1) {
@@ -287,9 +288,10 @@ function profile() {
             $("#profile div.speech").animate({ "height": "72%" });
             $.get('DA', { command: "getFeedback", sessionID: sessionID, stage: "stage1" }, function (responseText3) {
                 feedbackArray = responseText3.feedback.split("*");
+                url = responseText3.url.split('*');
 
                 for (var i = 0; i < feedbackArray.length - 1; i++) {
-                    $(".summary").append('<div class="symptomsresults"><img src="images/symptoms/noImage.png"><div><h3>' + feedbackArray[i] + '</h3></div></div>');
+                    $(".summary").append('<div class="symptomsresults"><img src="images/feedback/'+url[i]+'"><div><h3>' + feedbackArray[i] + '</h3></div></div>');
                 }
                 $(".summary").delay(1000).fadeIn();
             });

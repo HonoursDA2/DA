@@ -386,11 +386,15 @@ try {
 				}
 		getEngine(sessionID).run();
 		String feedback= getEngine(sessionID).getOutputRouter("out").toString();
+		String url= getEngine(sessionID).getOutputRouter("out2").toString();
 		((StringWriter)(getEngine(sessionID).getOutputRouter("out"))).getBuffer().setLength(0);
+		((StringWriter)(getEngine(sessionID).getOutputRouter("out2"))).getBuffer().setLength(0);
+		
 		PrintWriter out = response.getWriter();
 		response.setContentType("application/json"); 
 		JSONObject jsonObject = new JSONObject();
 		jsonObject.put("feedback", feedback);
+		jsonObject.put("url", url);
 		out.print(jsonObject);
 		out.flush();
 		System.out.println(feedback);
