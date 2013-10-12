@@ -240,8 +240,9 @@ function ajaxCall(command, sessionID) {
 	                    $.get('DA', { command: "getFeedback", sessionID: sessionID, stage: "stage2" }, function (responseText) {
 
 	                        feedbackArray = responseText.feedback.split("*");
+	                        url = responseText.url.split("*");
 	                        for (var i = 0; i < feedbackArray.length - 1; i++) {
-	                            $("#lifesummary").append('<div class="symptomsresults"><img src="images/symptoms/noImage.png"><div><h3>' + feedbackArray[i] + '</h3></div></div>');
+	                            $("#lifesummary").append('<div class="symptomsresults"><img src="images/feedback/'+url[i]+'"><div><h3>' + feedbackArray[i] + '</h3></div></div>');
 	                        }
 	                        meter= responseText.percentage;
 	                        updateP;
@@ -261,6 +262,7 @@ var symptomName = symptomID = symptomExplanation = new Array();
 var feedbackArray = new Array();
 var url = "";
 var contclicked = false;
+
 function profile() {
     $.get('DA', { command: "profile", sessionID: sessionID }, function (responseText1) {
         $('#advisorH1').text(responseText1);

@@ -71,7 +71,7 @@
     (slot stage)
     (slot order)
     (slot url
-        (default "noImage.jpg"))
+        (default "noImage.png*"))
     )
 (deffacts Questions
     ;Initial questions
@@ -682,14 +682,10 @@
     )
 ;feedback based on diabetes and smoke frequency
 (deffunction smoker(?yesno ?frequency)
-    (if (neq ?yesno Yes) then
-         (if (neq ?frequency Hardly) then 
-          ( assert (Feedback (order ?*currentQuestion*) (stage LIFESTYLE) (explanation "As a smoker and a non Diabetic, your chances of developing Diabetes is much higher.Ths is because smoking increases your blood sugar levels, and can lead to Diabetes along with its many complications over time.*")))
-          )
+    (if (eq ?yesno No) then
+          ( assert (Feedback (order ?*currentQuestion*) (stage LIFESTYLE)(url "smoke.jpg*") (explanation "As a smoker and a non Diabetic, your chances of developing Diabetes is much higher.Ths is because smoking increases your blood sugar levels, and can lead to Diabetes along with its many complications over time.*")))
      else 
-    	(if (eq ?yesno Yes) then
-         	( assert (Feedback (order ?*currentQuestion*) (stage LIFESTYLE) (explanation "Smoking increases your blood sugar levels, this will make the disease much harder to control aswell as increasing the chances of developing many Diabetes related complications over time.*")))
-        ) 
+         	( assert (Feedback (order ?*currentQuestion*) (stage LIFESTYLE)(url "smoke.jpg*")(explanation "Smoking increases your blood sugar levels, this will make the disease much harder to control aswell as increasing the chances of developing many Diabetes related complications over time.*")))
      )
  )
 ;Blood pressure
@@ -703,7 +699,7 @@
     (sectionFact (name Exercise) (value No))
   	=>
         (bind ?*points* (+ ?*points* 15))
-    	( assert (Feedback (order ?*currentQuestion*) (stage LIFESTYLE) (explanation "No exercise at all? please try incorporate physical ectivity into you daily life, even if it means walking instead of driving
+    	( assert (Feedback (order ?*currentQuestion*) (stage LIFESTYLE) (url "exercise.jpg*")(explanation "No exercise at all? please try incorporate physical ectivity into you daily life, even if it means walking instead of driving
                 , exercise is important as it is essential to keep the body active and running.*")))
         )
 ;add points exercise frequency
@@ -717,12 +713,13 @@
     (bind ?point 0)
     (if (eq Frequently ?frequency) then
         (bind ?point -15)
-        ( assert (Feedback (order ?*currentQuestion*) (stage LIFESTYLE)(explanation "Frequent exercise, keep it up*")))else
+        ( assert (Feedback (order ?*currentQuestion*)(url "exercise.jpg*")(stage LIFESTYLE)(explanation "Frequent exercise, keep it up*")))else
         (if (eq Occassionaly ?frequency) then
             (bind ?point -5)
-            ( assert (Feedback (order ?*currentQuestion*) (stage LIFESTYLE)(explanation "Occasional exercise is healthy, just try and maintain it, and maybe improve the frequency if possible.*")))
+            ( assert (Feedback (order ?*currentQuestion*)(url "exercise.jpg*")(stage LIFESTYLE)(explanation "Occasional exercise is healthy, just try and maintain it, and maybe improve the frequency if possible.*")))
             )
         )
+    ( assert (Feedback (order ?*currentQuestion*)(url "exercise.jpg*")(stage LIFESTYLE)(explanation "Exercise has many benefits for the body, it increases the sensitivity to inlsuin. It enhances the use of bood glucose reduces cholesterol, lowers blood pressure, burns calories and decreases weight over time.*")))
     ?point 
     )
 ;points for pregnancy status
@@ -789,7 +786,7 @@
         (if (eq Average ?bp) then
             (bind ?point 5) else 
             (if (eq High ?bp) then
-                ( assert (Feedback (order ?*currentQuestion*) (stage LIFESTYLE)(explanation "A high blood pressure is very dangerous, this is one of the risk factors that can 
+                ( assert (Feedback (order ?*currentQuestion*)(url "bloodpressure.jpg*")(stage LIFESTYLE)(explanation "A high blood pressure is very dangerous, this is one of the risk factors that can 
                             increase your chance of getting heart disease, along with a stroke and other deadly complications.*")))
                 (bind ?point 10)
                 )
@@ -841,10 +838,12 @@
     =>
     (if (eq ?yesno No) then
     (modify ?question (ask no))
-    ( assert (Feedback (order ?*currentQuestion*) (stage LIFESTYLE) (explanation "No alcohol consumption, thats great, keep this up!Alcohol has a high sugar content, this raises the blood sugar levels in the body, forcing the pancreas to work harder. Frequent alcohol consumption 
+    ( assert (Feedback (order ?*currentQuestion*) (stage LIFESTYLE) (url "alcohol.jpg*")(explanation "No alcohol consumption, thats great, keep this up!Alcohol has a high sugar content, this raises the blood sugar levels in the body, forcing the pancreas to work harder. Frequent alcohol consumption 
                     is not advised in order to maintain a healthy pancreas.*")))
     else
-     (modify ?question (ask yes)) 
+     (modify ?question (ask yes))
+        ( assert (Feedback (order ?*currentQuestion*) (stage LIFESTYLE)(url "alcohol.jpg*")(explanation "Alcohol has a high sugar content, this raises the blood sugar levels in the body, forcing the pancreas to work harder. Frequent alcohol consumption 
+                    is not advised in order to maintain a healthy pancreas.*"))) 
            )
         )
 ;If no dont ask how often.
@@ -871,9 +870,10 @@
 ;Gets lifestyle feedback
 (defrule getFeedbackL
     (Get FeedbackL)
-    (Feedback (stage LIFESTYLE) (explanation ?explanation))
+    (Feedback (stage LIFESTYLE) (explanation ?explanation)(url ?imageurl))
     =>
     (printout out ?explanation )
+    (printout out2 ?imageurl)
     )
 ;Gets final feedback
 (defrule getFeedbackF
@@ -905,12 +905,12 @@
 (deffunction weightExercise (?yesno ?classification)
     (if (eq ?yesno No ) then
     (if (eq ?classification Obese) then
-        ( assert (Feedback (order ?*currentQuestion*) (stage FINAL) (url "BMI.GIF*")(explanation "Your BMI is above 30kg/m^2 (Obese) and you mentioned that you do not exercise, this is a major problem that will only increase your
-            chances of getting Diabetes, it is strongly advised that you start to exercise more regularly in order to reduce your chances of Diabetes. Obesity is amajor contributing fact to Diabetes.")))
+        ( assert (Feedback (order ?*currentQuestion*) (stage FINAL) (explanation "Your BMI is above 30kg/m^2 (Obese) and you mentioned that you do not exercise, this is a major problem that will only increase your
+            chances of getting Diabetes, it is strongly advised that you start to exercise more regularly in order to reduce your chances of Diabetes. Obesity is amajor contributing fact to Diabetes.*")))
         else
         	(if (eq ?classification Overweight) then
             	  ( assert (Feedback (order ?*currentQuestion*) (stage FINAL) (explanation "Your BMI is above 25kg/m^2 (Overweight) and you mentioned that you do not exercise, this is a major problem that will only increase your
-            		chances of getting Diabetes, it is strongly advised that you start to exercise more regularly in order to reduce your chances of Diabetes. This could lead to obesity.")))
+            		chances of getting Diabetes, it is strongly advised that you start to exercise more regularly in order to reduce your chances of Diabetes. This could lead to obesity.*")))
        			)
            )
        )  
