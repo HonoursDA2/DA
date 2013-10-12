@@ -732,7 +732,7 @@
                     this will most likely disappear after the pregnancy, but you should make sure
                     you manage your diet aswell as your physical activity throughout your pregnancy.*")))else
         (if (eq ?status No) then
-            ( assert (Feedback (order ?*currentQuestion*) (stage INITIAL) (explanation "If you plan on getting pregnant, be sure to check on your blood sugar levels with your doctor during the pregnancy.
+            ( assert (Feedback (order ?*currentQuestion*) (stage INITIAL)(url "gestational.jpg*")(explanation "If you plan on getting pregnant, be sure to check on your blood sugar levels with your doctor during the pregnancy.
             Gestatioal Diabetes occurs in about 2% to 5% of all pregnacies, making it one of the most common health problems associated with pregnancy.*")))
             (bind ?value 0))
         )
