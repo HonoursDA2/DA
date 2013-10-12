@@ -30,6 +30,7 @@ function countClicks() {
 var extraName = extraUrl = extraExp = extraAdd = "";
 function submitSymptoms() {
     stage = 2.5;
+    active = false;
 	$("#advisorH1").html("");
 	//$("#advisorH1").fadeOut();
 	
@@ -562,6 +563,7 @@ function updateP() {
 /*------------------------------------------------*/
 
 var opt = "";
+var active = true;
 $(function () {
     $(".questions,#lifestyle").on('click', '.options', function () {
         opt = $(this).attr("id");
@@ -576,11 +578,13 @@ $(function () {
     });
 
     $('#symptomsContainer').on('mouseover', '.buttons', function () {
-        var symID = $(this).attr("id");
+        if (active) {
+            var symID = $(this).attr("id");
 
-        var index = symptomID.indexOf(symID);
+            var index = symptomID.indexOf(symID);
 
-        $("#advisorH1").html(symptomExplanation[index]);
+            $("#advisorH1").html(symptomExplanation[index]);
+        }
     });
 
     $("#symptomsContainer").on('mouseleave', '.buttons', function () {
@@ -618,7 +622,7 @@ $(function () {
         return true;
     });
 
-    $(".questions").on('click','.options,#yesbutton,#nobutton,#male,#female',function () {
+    $(".questions").on('click', '.options,#yesbutton,#nobutton,#male,#female', function () {
         if (stage == 1) {
             confirm();
         }
