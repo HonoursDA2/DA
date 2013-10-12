@@ -70,6 +70,8 @@
         (default "*"))
     (slot stage)
     (slot order)
+    (slot url
+        (default "noImage.jpg"))
     )
 (deffacts Questions
     ;Initial questions
@@ -473,7 +475,7 @@
    
    (if (> ?bmi 30) then 
    	(assert (weight-classification Obese))
-        ( assert (Feedback (order ?*currentQuestion*) (stage INITIAL) (explanation "Your BMI is above 30 kg/m^2, this classifies you as Obese,
+        ( assert (Feedback (order ?*currentQuestion*) (stage INITIAL) (url "BMI.GIF*")(explanation "Your BMI is above 30 kg/m^2, this classifies you as Obese,
                         this is very concerning because Obesity is a cause of Type 2 Diabetes.
                         You need to urgently try to manage your diet and incorporate some exercise into your daily/weekly routine.*"))) 
        (bind ?*points* (+ ?*points* 20))
@@ -583,7 +585,7 @@
         (bind ?point 1)
          else
         (bind ?point 3))
-    	(assert (Feedback (order ?*currentQuestion*) (stage INITIAL)(explanation "Non white ethnic groups have a higher prevalence of diabetes, with certain ethnic groups having a higher rate of diabetes-related complications and deaths caused by Diabetes.*"))) 
+    	(assert (Feedback (order ?*currentQuestion*) (stage INITIAL)(url "ethnicity.jpeg*")(explanation "Non white ethnic groups have a higher prevalence of diabetes, with certain ethnic groups having a higher rate of diabetes-related complications and deaths caused by Diabetes.*"))) 
     ?point
     )
 ;Age
@@ -633,22 +635,22 @@
 (deffunction age (?age)
     (bind ?value 0)
     (if (> ?age 59) then
-        ( assert (Feedback (order ?*currentQuestion*) (stage INITIAL)(explanation "Being older than 60, it means is less likely that you can manage a rigorous physical 
+        ( assert (Feedback (order ?*currentQuestion*) (stage INITIAL)(url "age.jpg*")(explanation "Being older than 60, it means is less likely that you can manage a rigorous physical 
                     workout, I strongly recommend that you watch your diet.*")))
         (bind ?value 10) else
         (if (> ?age 45) then
             (bind ?value 5))
         )
-    ( assert (Feedback (order ?*currentQuestion*) (stage INITIAL)(explanation "The older you get the more likely you are of getting Diabetes,
+    ( assert (Feedback (order ?*currentQuestion*) (stage INITIAL)(url "age.jpg*")(explanation "The older you get the more likely you are of getting Diabetes,
                 this is because you tend to exercise less, lose muscle mass and gain weight as you age. Also as people age they are less able to process glucose appropriately and therefore have a greater risk of developing type 2 Diabetes.*")))
     ?value
     )
 (defrule teachDiabetes
     (sectionFact (name Diabetes-Knowledge) (value No))
     =>
-    ( assert (Feedback (order ?*currentQuestion*) (stage INITIAL) (explanation "Diabetes is the most common chronic disease, currently estimated to affect about 330 Million people worldwide.
+    ( assert (Feedback (order ?*currentQuestion*) (stage INITIAL) (url "diabetes-world.gif*")(explanation "Diabetes is the most common chronic disease, currently estimated to affect about 330 Million people worldwide.
                 The biggest issues surrounding diabetes are a lack of awareness and education on the Disease*")))
-    ( assert (Feedback (order ?*currentQuestion*) (stage INITIAL) (explanation "The only way to test for Diabetes is to do a blood glucose test at a hospital and receive an official diagnosis from a qualified Doctor. This system only provides a risk assesment.*")))
+    ( assert (Feedback (order ?*currentQuestion*) (stage INITIAL) (url "diabetes-test.jpg*")(explanation "The only way to test for Diabetes is to do a blood glucose test at a hospital and receive an official diagnosis from a qualified Doctor. This system only provides a risk assesment.*")))
     ( assert (Feedback (order ?*currentQuestion*) (stage FINAL) (explanation "Please remember that the only way to test for Diabetes is to do a blood glucose test at a hospital and receive an official diagnosis from a qualified Doctor. This system only provides a risk assesment to raise awareness and education on the Disease.*")))
     )
 ;if pregnant
@@ -728,7 +730,7 @@
     (bind ?value 0)
     (if (eq ?status Yes) then
         (bind ?value 5) 
-        ( assert (Feedback (order ?*currentQuestion*) (stage INITIAL)(explanation "Because you are currently pregnant, you have a high chance of developing gestational Diabetes,
+        ( assert (Feedback (order ?*currentQuestion*) (stage INITIAL)(url "gestational.jpg*")(explanation "Because you are currently pregnant, you have a high chance of developing gestational Diabetes,
                     this will most likely disappear after the pregnancy, but you should make sure
                     you manage your diet aswell as your physical activity throughout your pregnancy.*")))else
         (if (eq ?status No) then
@@ -742,21 +744,21 @@
 (deffunction family (?relative)
     (bind ?points 0)
     (if (eq Parent ?relative) then
-     	( assert (Feedback (order ?*currentQuestion*) (stage INITIAL)(explanation "Your parent has/had Diabetes, a person whos parent is diabetic is 2x more likely to get the disease then the average person.*")))
+     	( assert (Feedback (order ?*currentQuestion*) (stage INITIAL)(url "family-tree.gif*")(explanation "Your parent has/had Diabetes, a person whos parent is diabetic is 2x more likely to get the disease then the average person.*")))
         (bind ?points 10) else
         (if (eq Sibling ?relative) then
      		(bind ?points 15)
-            ( assert (Feedback (order ?*currentQuestion*)  (stage INITIAL)(explanation "Your sibling has/had Diabetes, this means the chances of you getting the disease are very high, because you share a lot of the same genes.*"))) else
+            ( assert (Feedback (order ?*currentQuestion*)  (stage INITIAL)(url "family-tree.gif*")(explanation "Your sibling has/had Diabetes, this means the chances of you getting the disease are very high, because you share a lot of the same genes.*"))) else
             	(if (eq AuntOrUncle ?relative) then
      				(bind ?points 7) else 
                 		(if (eq Grandparent ?relative) then
-    	 					( assert (Feedback (order ?*currentQuestion*)  (stage INITIAL)(explanation "Your grandparent had/has Diabetes, this means you are more likely than the average person to contract this disease, please tale the necessary precautions*")))
+    	 					( assert (Feedback (order ?*currentQuestion*)  (url "family-tree.gif*")(stage INITIAL)(explanation "Your grandparent had/has Diabetes, this means you are more likely than the average person to contract this disease, please tale the necessary precautions*")))
                     		(bind ?points 6) else 
                 				(if (eq Other ?relative) then
-                        			( assert (Feedback (order ?*currentQuestion*)  (stage INITIAL)(explanation "Your relative had/has Diabetes, this means you are more likely than the average person to contract this disease, please tale the necessary precautions*")))
+                        			( assert (Feedback (order ?*currentQuestion*)  (url "family-tree.gif*")(stage INITIAL)(explanation "Your relative had/has Diabetes, this means you are more likely than the average person to contract this disease, please tale the necessary precautions*")))
     	 							(bind ?points 5) else
                         (if (eq Child ?relative) then
-                            ( assert (Feedback (order ?*currentQuestion*) (stage INITIAL) (explanation "Your child has Diabetes, then it is most likely that you also have Diabetes, or someone else in your family has it.*")))
+                            ( assert (Feedback (order ?*currentQuestion*) (stage INITIAL) (url "family-tree.gif*")(explanation "Your child has Diabetes, then it is most likely that you also have Diabetes, or someone else in your family has it.*")))
              				(bind ?points 20)
                             ))
             ))
@@ -860,9 +862,11 @@
 ;Gets initial quesitons feedback feedback
 (defrule getFeedbackI
     (Get FeedbackI)
-    (Feedback (stage INITIAL) (explanation ?explanation))
+    (Feedback (stage INITIAL) (explanation ?explanation) (url ?imageurl))
     =>
     (printout out ?explanation )
+    (printout out2 ?imageurl)
+    
     )
 ;Gets lifestyle feedback
 (defrule getFeedbackL
@@ -901,7 +905,7 @@
 (deffunction weightExercise (?yesno ?classification)
     (if (eq ?yesno No ) then
     (if (eq ?classification Obese) then
-        ( assert (Feedback (order ?*currentQuestion*) (stage FINAL) (explanation "Your BMI is above 30kg/m^2 (Obese) and you mentioned that you do not exercise, this is a major problem that will only increase your
+        ( assert (Feedback (order ?*currentQuestion*) (stage FINAL) (url "BMI.GIF*")(explanation "Your BMI is above 30kg/m^2 (Obese) and you mentioned that you do not exercise, this is a major problem that will only increase your
             chances of getting Diabetes, it is strongly advised that you start to exercise more regularly in order to reduce your chances of Diabetes. Obesity is amajor contributing fact to Diabetes.")))
         else
         	(if (eq ?classification Overweight) then
