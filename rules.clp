@@ -2,9 +2,9 @@
 (defglobal ?*currentQuestion* = 1)
 (defglobal ?*points* = 0)
 (defglobal ?*total* = 160)
-(defglobal ?*questionNumber* = 19)
+(defglobal ?*questionNumber* = 23)
 (defglobal ?*stage1* = 1)
-(defglobal ?*stage2* = 12)
+(defglobal ?*stage2* = 16)
 (defglobal ?*name* = "")
 (deftemplate sectionFact
     (slot stage)
@@ -86,16 +86,20 @@
     (Question (section Initial)(type "Family-History")(text "Do you have relatives who have been diagnosed with Diabetes?")(answerType "OPTIONAL")(options "Yes-No-Uncertain" )(order 9))
     (Question (section Initial)(type "Family-Type")(text "Is this relative any of the following?")(answerType "OPTIONAL")(options "Parent-Child-Sibling-Grandparent-AuntOrUncle-Other" )(order 10))
     (Question (section Initial)(type "Pregnant")(text "Are you Pregnant?") (answerType "YES-NO") (order 11))
+    (Question (section Initial)(type "Info")(text "NB: The following questions aim to assess your knowledge of keywords used in the rest of the assessment.") (answerType "OPTIONAL")(options "O.K" ) (order 12))
+    (Question (section Initial)(type "Insulin")(text "Do you know what Insulin is?") (answerType "YES-NO") (order 13))
+    (Question (section Initial)(type "Glucose")(text "Do you know what Glucose is?") (answerType "YES-NO") (order 14))
+    (Question (section Initial)(type "Gastro")(text "Do you know what Gastroparesis is?") (answerType "YES-NO") (order 15))
     ;Lifestyle questions
-    (Question (section Lifestyle)(type "Smoke")(text "Do You smoke cigarettes?") (answerType "YES-NO")(order 12))
-    (Question (section Lifestyle)(type "Smoke-Frequency")(text "How often do you smoke, please be honest?") (answerType "OPTIONAL")(options "Hardly-Occassionaly-Frequently" ) (order 13))
-    (Question (section Lifestyle)(type "Alcohol")(text "Do you consume any alcohol?") (answerType "YES-NO")(order 14))
+    (Question (section Lifestyle)(type "Smoke")(text "Do You smoke cigarettes?") (answerType "YES-NO")(order 16))
+    (Question (section Lifestyle)(type "Smoke-Frequency")(text "How often do you smoke, please be honest?") (answerType "OPTIONAL")(options "Hardly-Occassionaly-Frequently" ) (order 17))
+    (Question (section Lifestyle)(type "Alcohol")(text "Do you consume any alcohol?") (answerType "YES-NO")(order 18))
     (Question (section Lifestyle)(type "Alcohol-Frequency")(text "Yes some people may say that alcohol is healthy.. but remember, ONLY in moderation!
-            How often do you drink alcohol?") (answerType "OPTIONAL")(options "Hardly-Occassionaly-Frequently" )(order 15))
-    (Question (section Lifestyle)(type "Exercise")(text "Do you do any sort of explicit physical exercise?") (answerType "YES-NO")(order 16))
-    (Question (section Lifestyle)(type "Exercise-Frequency")(text "That's great, How often do you exercise?") (answerType "OPTIONAL")(options "Hardly-Occassionaly-Frequently" )(order 17))
-    (Question (section Lifestyle)(type "Blood-Pressure-Knowledge")(text "Have you checked your blood pressure recently?") (answerType "YES-NO")(order 18))
-    (Question (section Lifestyle)(type "Blood-Pressure")(text "What level is your blood pressure?") (answerType "OPTIONAL")(options "Low-Average-High" )(order 19))
+            How often do you drink alcohol?") (answerType "OPTIONAL")(options "Hardly-Occassionaly-Frequently" )(order 19))
+    (Question (section Lifestyle)(type "Exercise")(text "Do you do any sort of explicit physical exercise?") (answerType "YES-NO")(order 20))
+    (Question (section Lifestyle)(type "Exercise-Frequency")(text "That's great, How often do you exercise?") (answerType "OPTIONAL")(options "Hardly-Occassionaly-Frequently" )(order 21))
+    (Question (section Lifestyle)(type "Blood-Pressure-Knowledge")(text "Have you checked your blood pressure recently?") (answerType "YES-NO")(order 22))
+    (Question (section Lifestyle)(type "Blood-Pressure")(text "What level is your blood pressure?") (answerType "OPTIONAL")(options "Low-Average-High" )(order 23))
     (Order (counter 1) (lastAsked 0) (current 0))
     (Feedback (order 0))
     )
@@ -124,10 +128,10 @@
    (Reason (name Frequent-Headache)(type SYMPTOM)(points 4)(url "headache.jpg")(explanation "Frequnt Headaches - This is due to the high level of glucose in the blood, this leads to frequent headaches experiecned for prolonged periods of time."))
    (Reason (name Extreme-Thirst)(type SYMPTOM)(points 10)(url "thirsty.gif")(explanation "Extreme Thirst - Dehydration is caused by excess urine, this prompts an increased desire for water consumption."))
    (Reason (name Excessive-Urination)(type SYMPTOM)(points 10)(url "urination.jpg")(explanation "Excessive Urination - There is a high loss of Glucose through the urine."))
-   (Reason (name Nausea)(type SYMPTOM)(url "nausea.jpg")(points 5)(explanation "Nausea - Nausea is caused by gastroparesis.")(extraInfo "Gastroparesis is a disease of the muscles of the stomach or the nerves controlling the muscles that causes the muscles to stop working, affecting the digestive process"))
+   (Reason (name Nausea)(type SYMPTOM)(url "nausea.jpg")(points 5)(explanation "Nausea - Nausea is one of the symptoms of gastroparesis."))
    (Reason (name Weightloss)(type SYMPTOM)(points 10)(url "weightloss.jpg")(explanation "Weightloss - Insulin deficiency leads to loss of weight, as the sugar cannot be converted into energy, so the body seeks alternative sources like muscle tissue and fat."))
    (Reason (name Irritability)(type SYMPTOM)(points 1)(url "irritability.jpg")(explanation "Irritability - Caused by a lack of energy. As the sugar is not being converted into energy to be used by the cells."))
-   (Reason (name Yeast-Infection)(type SYMPTOM)(points 8)(url "yeast.jpg")(explanation "Yeast Infection - Yeast organisms are present in most woman, but these organisms tend to overgrow in a sugar rich environment. A result of badly managed diabetes")
+   (Reason (name Yeast-Infection)(type SYMPTOM)(points 8)(url "yeast.jpg")(explanation "Yeast Infection - Yeast (a type of fungus) organisms are present in most woman, but these organisms tend to overgrow in a sugar rich environment. A result of badly managed diabetes")
     	(extraInfo "Yeast is a type of fungus; yeast infection refers to the fungus scientifically known as Candida"))
    (Reason (name Blurred-Vision)(type SYMPTOM)(points 3)(url "vision.jpg")(explanation "Blurred Vision - The fluctuation in blood glucose levels leads to a light sensitivity. Also this can be caused by the tissue being pulled from the eye lenses to be used for energy by the body."))
    (Reason (name Slow-Healing-Wounds)(type SYMPTOM)(url "wound.jpg")(points 5)(explanation "Slow Healing Wounds - Elevated blood sugar levels cause narrowing of blood vessels, leading to a decreased blood flow and oxygen to the wounds."))
@@ -681,6 +685,22 @@
   	=>
     (bind ?*points* (+ ?*points* (SmokenAlcohol ?name ?frequency)))	
     )
+
+(defrule definitions
+    (sectionFact (name ?def) (value ?answer))
+  	=>
+    (if (eq ?answer No) then
+    (if (eq ?def Insulin) then
+            ( assert (Feedback (order ?*currentQuestion*) (stage INITIAL) (url "insulin.jpg*")(explanation "Insulin is a hormone produced by the Pancreas that is the main regulator of the glucose in the blood.*")))
+    		else (if (eq ?def Glucose) then
+                ( assert (Feedback (order ?*currentQuestion*) (stage INITIAL)(url "glucose.gif*")(explanation "Glucose is the most important simple sugar in a human metabolism, blood glucose is the level of glucose present in the blood stream.*")))
+                else (if (eq ?def Gastro) then
+                 ( assert (Feedback (order ?*currentQuestion*) (stage INITIAL)(url "gastro.jpg*")(explanation "Gastroparesis is a disease of the muscles of the stomach and the nerves in the stomach that causes the muscles to stop working, affecting the digestive process, resulting in pain, nausea and vommiting during digestion.*")))   
+                    )
+                )
+            )
+        )
+    )
 ;smoke and diabetic status
 (defrule smoker
     (sectionFact (name Smoke-Frequency))
@@ -1016,6 +1036,17 @@
     																																							 else
                     																																				(if (eq Family-Type ?factToAdd) then
     																																									(assert (sectionFact (stage INITIAL)(name Family-Type)(value ?fact) (order ?last)))
+                                                                                																						 else
+                    																																						(if (eq Insulin ?factToAdd) then
+    																																											(assert (sectionFact (stage INITIAL)(name Insulin)(value ?fact) (order ?last)))
+                                                                                																						 		else
+                    																																							(if (eq Glucose ?factToAdd) then
+    																																												(assert (sectionFact (stage INITIAL)(name Glucose)(value ?fact) (order ?last)))
+                                                                                																						 			else
+                    																																									(if (eq Gastro ?factToAdd) then
+    																																														(assert (sectionFact (stage INITIAL)(name Gastro)(value ?fact) (order ?last)))
+                                                                                																						))
+                                                                                    )
                                                                                 																						)
                                                                                     																					) 
                                                                             																			)	        
