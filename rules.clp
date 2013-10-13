@@ -451,9 +451,12 @@
     )
 ;Asks the questions relating to Lifestyle.
 (defrule finished
-    (Order (counter ?number))
+    (Order (counter ?number) (lastAsked ?number1)(current ?number1))
     =>
-    (if (eq ?number ?*questionNumber*)then 
+    (if (eq ?number ?*questionNumber* ) then 
+    	(assert (Assessment Complete))
+        )
+    (if (eq ?number (+ ?*questionNumber* 1)) then 
     	(assert (Assessment Complete))
         )
     )
@@ -610,27 +613,31 @@
 ;Asses diabetes percentage and provide feedback
 (deffunction assessPercentage()
     (bind ?percentage (* (/ ?*points* ?*total*) 100))
+    (if (> ?percentage  90) then
+       ( assert (Feedback (order ?*currentQuestion*) (stage FINAL) (explanation " You have an extremely high risk of Diabetes!!! This  a great concern and should be dealt with immediately
+                    you should go to the nearest hospital and seek professional medical attention a soon as possible. Only after blood glucose tests, can you be oficially diagnosed with Diabetes*"))) else
     (if (> ?percentage  75) then
-       ( assert (Feedback (order ?*currentQuestion*) (stage FINAL) (explanation " You have a very high risk of Diabetes, this is a great concern and should be dealt with immediately
+       ( assert (Feedback (order ?*currentQuestion*) (stage FINAL) (explanation " You have a very high risk of Diabetes! This should be viewed as a great concern and should be dealt with immediately
                     you should go to the nearest hospital and seek professional medical attention a soon as possible. Only after blood glucose tests, can you be oficially diagnosed with Diabetes*"))) else
         (if (> ?percentage 50) then
-            ( assert (Feedback (order ?*currentQuestion*) (stage FINAL) (explanation " Your chances of getting diabetes is greater than 50 percent, this is higher than usual  and should be checked with a medical professional.*"))) else
-            (if (> ?percentage 35) then
+            ( assert (Feedback (order ?*currentQuestion*) (stage FINAL) (explanation " Your chances of getting diabetes is greater than 50 percent, this is higher than the average person and should be checked with a medical professional.*"))) else
+            (if (> ?percentage 40) then
                 ( assert (Feedback (order ?*currentQuestion*) (stage FINAL) (explanation "Your risk of Diabetes is around the 50% region, this should be seen as a concern and should be taken as a warning sign.
                                 *"))) else 
-                (if ( > ?percentage 25) then
+                (if ( > ?percentage 30) then
                     ( assert (Feedback (order ?*currentQuestion*) (stage FINAL) (explanation " You have a low risk of Diabetes, it should not be anything to worry about, provided you continue to eat well
                                     and live a healthy lifestyle.*"))) else 
-                    ( assert (Feedback (order ?*currentQuestion*) (stage FINAL) (explanation "You have a very low risk of Diabetes, this is because of your lack of threatening risk factors
-                                    and decent lifestyle habits, please do continue and remember to eat healthy and keep active!*")))
+                    ( assert (Feedback (order ?*currentQuestion*) (stage FINAL) (explanation "You have a very low risk of Diabetes, this is because of your lack of threatening risk factors, symptoms
+                                    and your decent lifestyle habits, please do continue and remember to eat healthy and keep active.Diabetes cannot be cured but it can be prevented!*")))
                     )
                 ) 
          	)
         )
+        )
 
         (bind ?percentage (* (/ ?*points* ?*total*) 100))
         (bind ?number (format nil %3.0f ?percentage))    
-    	(bind ?text (str-cat "You have a " (str-cat ?number "% Risk of Diabetes*")))
+    	(bind ?text (str-cat "You have a " (str-cat ?number "% Risk of Diabetes.*")))
         ( assert (Feedback (order ?*currentQuestion*) (stage FINAL) (explanation ?text)))
     )
 (deffunction age (?age)
@@ -676,13 +683,21 @@
     )
 ;smoke and diabetic status
 (defrule smoker
-    (sectionFact (name Smoke-Frequency) (value ?frequency))
-  	(sectionFact (name Diabetic) (value ?yesno))
+    (sectionFact (name Smoke-Frequency))
+  	(sectionFact (name Diabetic) (value ?yesno)) 
   	=>
-    (smoker ?yesno ?frequency)
+    (smoker ?yesno)
     )
+
+(defrule smoker2
+    (sectionFact (name Smoke-Frequency))
+  	(sectionFact (name Diabetes-Knowledge) (value No))
+  	=>
+    ( assert (Feedback (order ?*currentQuestion*) (stage LIFESTYLE)(url "smoke.jpg*")(explanation "Smoking increases your blood sugar levels, this will make the disease much harder to control aswell as increasing the chances of developing many Diabetes related complications over time.*")))
+    )
+
 ;feedback based on diabetes and smoke frequency
-(deffunction smoker(?yesno ?frequency)
+(deffunction smoker(?yesno)
     (if (eq ?yesno No) then
           ( assert (Feedback (order ?*currentQuestion*) (stage LIFESTYLE)(url "smoke.jpg*") (explanation "As a smoker and a non Diabetic, your chances of developing Diabetes is much higher.Ths is because smoking increases your blood sugar levels, and can lead to Diabetes along with its many complications over time.*")))
      else 
@@ -691,6 +706,7 @@
  )
 ;Blood pressure
 (defrule bloodPressure2
+    (declare (salience 10))
     (sectionFact (name Blood-Pressure) (value ?frequency))
     =>
     (bind ?*points* (+ ?*points* (bp ?frequency) ))
@@ -714,7 +730,7 @@
     (bind ?point 0)
     (if (eq Frequently ?frequency) then
         (bind ?point -15)
-        ( assert (Feedback (order ?*currentQuestion*)(url "exercise.jpg*")(stage LIFESTYLE)(explanation "Frequent exercise, keep it up*")))else
+        ( assert (Feedback (order ?*currentQuestion*)(url "exercise.jpg*")(stage LIFESTYLE)(explanation "Frequent exercise you say?, keep it up!!*")))else
         (if (eq Occassionaly ?frequency) then
             (bind ?point -5)
             ( assert (Feedback (order ?*currentQuestion*)(url "exercise.jpg*")(stage LIFESTYLE)(explanation "Occasional exercise is healthy, just try and maintain it, and maybe improve the frequency if possible.*")))
@@ -812,7 +828,8 @@
     ?question <- (Question (section Initial) (type "Diabetic") (text ?questionText) (answerType ?answerType) (ask ?yesno))
     =>
     (if (eq ?answer No) then
-    (modify ?question (ask no)) else
+    (modify ?question (ask no))    
+         else
          (if (eq ?answer Yes) then
         (modify ?question (ask yes))
         )
@@ -838,15 +855,26 @@
   	?question <- (Question (section Lifestyle) (type "Alcohol-Frequency") (text ?questionText) (answerType ?answerType))
     =>
     (if (eq ?yesno No) then
-    (modify ?question (ask no))
+    	(modify ?question (ask no))
+    else
+     	(modify ?question (ask yes))
+     )
+ )
+
+(defrule alcohol2
+    (declare (salience 10))
+    (sectionFact (name Alcohol) (value ?yesno))
+  	 =>
+    (if (eq ?yesno No) then
     ( assert (Feedback (order ?*currentQuestion*) (stage LIFESTYLE) (url "alcohol.jpg*")(explanation "No alcohol consumption, thats great, keep this up!Alcohol has a high sugar content, this raises the blood sugar levels in the body, forcing the pancreas to work harder. Frequent alcohol consumption 
                     is not advised in order to maintain a healthy pancreas.*")))
     else
-     (modify ?question (ask yes))
-        ( assert (Feedback (order ?*currentQuestion*) (stage LIFESTYLE)(url "alcohol.jpg*")(explanation "Alcohol has a high sugar content, this raises the blood sugar levels in the body, forcing the pancreas to work harder. Frequent alcohol consumption 
+        ( assert (Feedback (order ?*currentQuestion*) (stage LIFESTYLE)(url "alcohol.jpg*")(explanation "Drinking in moderation is generally o.k. But alcohol has a high sugar content, this raises the blood sugar levels in the body, forcing the pancreas to work harder. Frequent alcohol consumption 
                     is not advised in order to maintain a healthy pancreas.*"))) 
            )
         )
+
+
 ;If no dont ask how often.
 (defrule exercise
     (declare (salience 10))
