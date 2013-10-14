@@ -214,9 +214,7 @@ function ajaxCall(command, sessionID) {
 	                updateP();
 	            }
 
-	            if (id.indexOf('-') === -1) {
 	                document.getElementById("lif").src = "images/factors/" + id + ".jpg";
-	            }
 
 	            $("#advisorH1").html(question);
 
