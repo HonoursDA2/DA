@@ -214,6 +214,11 @@ body
     cursor:pointer;
 }
 
+#dExtraInfo h2
+{
+    text-align:left;
+}
+
 #dInfoOptions
 {
     height:100%;
