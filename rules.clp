@@ -253,7 +253,7 @@
             high blood sugar levels. This is either because the insulin production in the body is insufficient or because the body does not respond properly to insulin*"))
         (Information (question "0. KEYWORDS*") (explanation "Glucose is the most important simple sugar in a human metabolism, blood glucose is the level of glucose present in the blood stream.-
              The cardiovascular system consists of the heart, blood vessels and the blood that the blood vessels transport throughout the body. The cardiovascular system is powered by the heart.-
-            Chronic disease is a long lasting diseae that can be controlled but not cured.-
+            Chronic diseases are long lasting diseases that can be controlled but not cured.-
             Dehydration is an excessive loss of body water.- 
             Erectile relates to the act of having an erect penis during sexual intercourse.-
             Fatigue is a mental and/or physical state of being tired and weak.-
