@@ -328,7 +328,7 @@ var counter=0;
 
 function confirm() {
     $("#backb").fadeIn();
-    $("#button").css({"left":"150px"});
+    $("#button").css({"left":"160px"});
 	var proceed = false;
 	idArray.push(id);
 	
@@ -399,7 +399,7 @@ function confirm() {
 
 function confirmLifestyle() {
     $("#backbL").fadeIn();
-    $("#contButton").css({ "left": "150px" });
+    $("#contButton").css({ "left": "160px" });
 	var proceed = false;
 	idArray.push(id);
 	

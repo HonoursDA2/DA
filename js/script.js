@@ -163,9 +163,9 @@ $(function () {
     });
 
     $("#dExtraInfo").hover(function () {
-        $(this).animate({ "bottom": "0"},2000,"easeOutElastic");
+        $(this).stop().animate({ "bottom": "0"},2000,"easeOutElastic");
     }, function () {
-        $(this).animate({ "bottom": "-43.5%"},1000,"easeOutCubic");
+        $(this).stop().animate({ "bottom": "-43.5%" }, 1000, "easeOutCubic");
     });
 
     $('.next').on('mouseenter', rscroll);
