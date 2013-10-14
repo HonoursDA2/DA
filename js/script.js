@@ -1,7 +1,7 @@
 ﻿var question = type = id = "";
 var extraQ = extraT = extraO = extraE = extraC = extraObj = new Array();
 var dOptions = dExplanations = new Array();
-
+var currentInfo = "";
 window.onload = function () {
     //splash();
     initialize();
@@ -47,14 +47,21 @@ function calctops(obje) {
 }
 
 function showInfo(index,obj) {
+   // $("#keyw").html("");
+    //$("#keywExp").html("");   
     $("#optPos").fadeOut();
     $("#quePos").fadeIn();
     var top = calctops(obj);
     $("#quePos").css({ "top": top });
     if (extraT[index] == "MULTIPLE") {
+        currentInfo = extraC[index];
         dOptions = extraO[index].split("-");
         dExplanations = extraE[index].split("-");
         $("#dInfo").html(extraC[index]);
+        currentInfo = extraC[index];
+        checkForKeywords(currentInfo);    
+        $("#keyw").html(keywordString);
+        appendInfo(explanations);
         $("#dInfoOptions").html("");
         for (var i = 0; i < dOptions.length; i++) {
             extraObj[i] = { dOpt: dOptions[i], dExp: dExplanations[i] };
@@ -66,6 +73,10 @@ function showInfo(index,obj) {
     else if (extraT[index] == "SINGLE") {
         $("#dInfoOptions").html("");
         $("#dInfo").html(extraE[index]);
+        currentInfo = extraE[index];
+        checkForKeywords(currentInfo);    
+        $("#keyw").html(keywordString);
+        appendInfo(explanations);    
     }
 }
 
@@ -74,7 +85,48 @@ function displayInfo(index, obj) {
     $("#optPos").fadeIn();
     $("#optPos").css({ "top": top });
     $("#dInfo").html(extraObj[index].dExp);
+    currentInfo = extraObj[index].dExp;
+    checkForKeywords(currentInfo);
+    $("#keyw").html(keywordString);
+    appendInfo(explanations);
+    
 }
+
+
+    var keywordHash = {};
+    var keywords = explanations = new Array();
+    function fillKeywords() {
+        keywords = extraO[0].split("-");
+        explanations = extraE[0].split("-");
+        for ( var count =0; count <keywords.length;count++) {
+            keywordHash[keywords[count].toLowerCase()] = [explanations[count]];
+        }
+    }
+
+    var keywordString = "";
+    var explanations = "";
+    function checkForKeywords(currentText) {  
+         $("#keyw").html("");
+        $("#keywExp").html("");
+         keywordString = "";
+      explanations = "";
+        var lower = currentText.toLowerCase();
+        for (var count =0;count<keywords.length;count++) {
+            var keyword = keywords[count].toLowerCase();
+            if (lower.indexOf(keyword) != -1) {
+                keywordString = keywordString +  "-" + keyword;
+                explanations = explanations + keywordHash[keyword] + "-";
+
+            }
+        }
+    }
+
+    function appendInfo (text) {
+        var array = text.split("-");
+    for (var count =0; count <array.length;count++) {
+        $("#keywExp").append(array[count] + "<br><br>");
+    }
+    }
 
 $(function () {
 
@@ -146,6 +198,7 @@ $(function () {
             extraO = data.options.split("*");
             extraE = data.explanations.split("*");
             extraC = data.caption.split("*");
+            fillKeywords();
 
             for (var i = 0; i < extraQ.length; i++) {
                 $("#diabetesQues").append("<div onclick='showInfo(" + i + ",this)'>" + extraQ[i] + "</div>");

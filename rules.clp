@@ -87,9 +87,9 @@
     (Question (section Initial)(type "Family-Type")(text "Is this relative any of the following?")(answerType "OPTIONAL")(options "Parent-Child-Sibling-Grandparent-AuntOrUncle-Other" )(order 10))
     (Question (section Initial)(type "Pregnant")(text "Are you Pregnant?") (answerType "YES-NO") (order 11))
     (Question (section Initial)(type "Info")(text "NB: The following questions aim to assess your knowledge of keywords used in the rest of the assessment.") (answerType "OPTIONAL")(options "O.K" ) (order 12))
-    (Question (section Initial)(type "Insulin")(text "Do you know what Insulin is?") (answerType "YES-NO") (order 13))
-    (Question (section Initial)(type "Glucose")(text "Do you know what Glucose is?") (answerType "YES-NO") (order 14))
-    (Question (section Initial)(type "Gastro")(text "Do you know what Gastroparesis is?") (answerType "YES-NO") (order 15))
+    (Question (section Initial)(type "Insulin-Knowledge")(text "Do you know what Insulin is?") (answerType "YES-NO") (order 13))
+    (Question (section Initial)(type "Glucose-Knowledge")(text "Do you know what Glucose is?") (answerType "YES-NO") (order 14))
+    (Question (section Initial)(type "Gastro-Knowledge")(text "Do you know what Gastroparesis is?") (answerType "YES-NO") (order 15))
     ;Lifestyle questions
     (Question (section Lifestyle)(type "Smoke")(text "Do You smoke cigarettes?") (answerType "YES-NO")(order 16))
     (Question (section Lifestyle)(type "Smoke-Frequency")(text "How often do you smoke, please be honest?") (answerType "OPTIONAL")(options "Hardly-Occassionaly-Frequently" ) (order 17))
@@ -262,41 +262,6 @@
         (caption "Important keywords that will be needed to understand defintions*")
         )      
     )
-(defrule restart
-    (Restart ?section)
-    =>
-    (restart ?section)
-    )
-(defrule removeRestart
-    (declare (salience 3))
-    ?restart <- (Restart INITIAL)
-    =>
-    (retract ?restart)
-    )
-(defrule restartInitialQ
-    (declare (salience 5))  
-    (Restart INITIAL)
-    ?question1 <-(Question (section Initial) (ask no) (order ?order))
-    ?question2 <-(Question (section Initial) (ask yes) (order ?order1 ))  
-    =>
-    (if (eq ?order (- ?order1 1)) then
-      (modify ?question1 (ask yes))   
-      )
-    )
-(defrule restartInitialF
-    (declare (salience 10))   
-    (Restart INITIAL)
-    ?fact<-(sectionFact (stage INITIAL))
-    =>
-    (retract ?fact)
-    )
-(defrule restartInitialFb
-    (declare (salience 8))
-    (Restart INITIAL)
-    ?feedback <-(Feedback (stage INITIAL))
-    =>
-    (retract ?feedback)
-    )
 (defrule goBack
     (declare (salience 10))
     (Go-Back)
@@ -330,49 +295,6 @@
     =>
     (modify ?theOrder (counter ?last))
     (retract ?back)
-    )
-(defrule removeRestartL
-    (declare (salience 3))
-    ?restart <- (Restart LIFESTYLE)
-    ?order <- (Order (counter ?number))
-    =>
-    (retract ?restart)
-    (modify ?order (counter ?*stage2*))
-    )
-(defrule restartInitialL
-    (declare (salience 5))  
-    (Restart LIFESTYLE)
-    ?question1 <-(Question (section Lifestyle) (ask no) (order ?order))
-    ?question2 <-(Question (section Lifestyle) (ask yes) (order ?order1 ))  
-    =>
-    (if (eq ?order (- ?order1 1)) then
-      (modify ?question1 (ask yes))   
-      )
-    )
-(defrule restartInitialFL
-    (declare (salience 10))   
-    (Restart LIFESTYLE)
-    ?fact<-(sectionFact (stage LIFESTYLE))
-    =>
-    (retract ?fact)
-    )
-(defrule restartInitialFbL
-    (declare (salience 8))
-    (Restart LIFESTYLE)
-    ?feedback <-(Feedback (stage LIFESTYLE))
-    =>
-    (retract ?feedback)
-    )
-(deffunction restart (?section)
-    (if (eq ?section stage1) then
-        (bind ?*points* 0)        
-        (bind ?*nextQuestion* ?*stage1*)
-        (assert (Restart INITIAL))
-         else
-            (if (eq ?section stage2) then
-            (bind ?*nextQuestion* ?*stage2*)    
-            (assert (Restart LIFESTYLE))
-                ))
     )
 ;Returns informationpertaining to the selected symptoms experienced by the user
 (defrule getInfo
@@ -489,12 +411,12 @@
           else
         	(if (> ?bmi 25) then
        		( assert (weight-classification Overweight))
-                ( assert (Feedback (order ?*currentQuestion*) (stage INITIAL) (explanation "Your BMI is above 25 kg/m^2, this classifies you as Overweight,
+                ( assert (Feedback (order ?*currentQuestion*) (stage INITIAL)(url "BMI.GIF*")(explanation "Your BMI is above 25 kg/m^2, this classifies you as Overweight,
                             this is slightly concerning if this is mostly body fat and not muscle.*"))
                (bind ?*points* (+ ?*points* 10)) else
            		(if (> ?bmi 18.5) then 
                 		(assert (weight-classification OptimalWeight))
-                    	( assert (Feedback (order ?*currentQuestion*) (stage INITIAL) (explanation "Your BMI is between the range of 18kg/m^2 and 25 kg/m^2, this classifies you as having an Optimal weight, well done!
+                    	( assert (Feedback (order ?*currentQuestion*) (stage INITIAL)(url "BMI.GIF*")(explanation "Your BMI is between the range of 18kg/m^2 and 25 kg/m^2, this classifies you as having an Optimal weight, well done!
                                 Keep doing what your are doing :)*")))) else
                 			(if (< ?bmi 18.5 ) then
                    			(assert (weight-classification Underweight))
@@ -685,16 +607,15 @@
   	=>
     (bind ?*points* (+ ?*points* (SmokenAlcohol ?name ?frequency)))	
     )
-
 (defrule definitions
     (sectionFact (name ?def) (value ?answer))
   	=>
     (if (eq ?answer No) then
-    (if (eq ?def Insulin) then
+    (if (eq ?def Insulin-Knowledge) then
             ( assert (Feedback (order ?*currentQuestion*) (stage INITIAL) (url "insulin.jpg*")(explanation "Insulin is a hormone produced by the Pancreas that is the main regulator of the glucose in the blood.*")))
-    		else (if (eq ?def Glucose) then
+    		else (if (eq ?def Glucose-Knowledge) then
                 ( assert (Feedback (order ?*currentQuestion*) (stage INITIAL)(url "glucose.gif*")(explanation "Glucose is the most important simple sugar in a human metabolism, blood glucose is the level of glucose present in the blood stream.*")))
-                else (if (eq ?def Gastro) then
+                else (if (eq ?def Gastro-Knowledge) then
                  ( assert (Feedback (order ?*currentQuestion*) (stage INITIAL)(url "gastro.jpg*")(explanation "Gastroparesis is a disease of the muscles of the stomach and the nerves in the stomach that causes the muscles to stop working, affecting the digestive process, resulting in pain, nausea and vommiting during digestion.*")))   
                     )
                 )
@@ -708,14 +629,12 @@
   	=>
     (smoker ?yesno)
     )
-
 (defrule smoker2
     (sectionFact (name Smoke-Frequency))
   	(sectionFact (name Diabetes-Knowledge) (value No))
   	=>
     ( assert (Feedback (order ?*currentQuestion*) (stage LIFESTYLE)(url "smoke.jpg*")(explanation "Smoking increases your blood sugar levels, this will make the disease much harder to control aswell as increasing the chances of developing many Diabetes related complications over time.*")))
     )
-
 ;feedback based on diabetes and smoke frequency
 (deffunction smoker(?yesno)
     (if (eq ?yesno No) then
@@ -756,7 +675,6 @@
             ( assert (Feedback (order ?*currentQuestion*)(url "exercise.jpg*")(stage LIFESTYLE)(explanation "Occasional exercise is healthy, just try and maintain it, and maybe improve the frequency if possible.*")))
             )
         )
-    ( assert (Feedback (order ?*currentQuestion*)(url "exercise.jpg*")(stage LIFESTYLE)(explanation "Exercise has many benefits for the body, it increases the sensitivity to inlsuin. It enhances the use of bood glucose reduces cholesterol, lowers blood pressure, burns calories and decreases weight over time.*")))
     ?point 
     )
 ;points for pregnancy status
@@ -777,27 +695,27 @@
 ;Points for family type, feedback for family type
 (deffunction family (?relative)
     (bind ?points 0)
+    (assert (Feedback (order ?*currentQuestion*) (stage INTITIAL) (url "family-tree.gif*")(explanation "Diabetes often runs in families, its is not a guarentee, but the chances are always migh higher provided that there is a family history of the disease.*")))
     (if (eq Parent ?relative) then
-     	( assert (Feedback (order ?*currentQuestion*) (stage INITIAL)(url "family-tree.gif*")(explanation "Your parent has/had Diabetes, a person whos parent is diabetic is 2x more likely to get the disease then the average person.*")))
+     	( assert (Feedback (order ?*currentQuestion*) (stage INITIAL)(url "family-tree.gif*")(explanation "Your parent has/had Diabetes, a person whos parent is diabetic is 2x more likely to get the disease then the average person. This is because Diabetes has a strong genetic basis.*")))
         (bind ?points 10) else
         (if (eq Sibling ?relative) then
      		(bind ?points 15)
-            ( assert (Feedback (order ?*currentQuestion*)  (stage INITIAL)(url "family-tree.gif*")(explanation "Your sibling has/had Diabetes, this means the chances of you getting the disease are very high, because you share a lot of the same genes.*"))) else
+            ( assert (Feedback (order ?*currentQuestion*)  (stage INITIAL)(url "family-tree.gif*")(explanation "Your sibling has/had Diabetes, this means the chances of you getting the disease are very high.This is because Diabetes has a strong genetic basis.*"))) else
             	(if (eq AuntOrUncle ?relative) then
      				(bind ?points 7) else 
                 		(if (eq Grandparent ?relative) then
-    	 					( assert (Feedback (order ?*currentQuestion*)  (url "family-tree.gif*")(stage INITIAL)(explanation "Your grandparent had/has Diabetes, this means you are more likely than the average person to contract this disease, please tale the necessary precautions*")))
+    	 					( assert (Feedback (order ?*currentQuestion*)  (url "family-tree.gif*")(stage INITIAL)(explanation "Your grandparent had/has Diabetes, this means you are more likely than the average person to contract this disease. This is because Diabetes has a strong genetic basis; please tale the necessary precautions*")))
                     		(bind ?points 6) else 
                 				(if (eq Other ?relative) then
-                        			( assert (Feedback (order ?*currentQuestion*)  (url "family-tree.gif*")(stage INITIAL)(explanation "Your relative had/has Diabetes, this means you are more likely than the average person to contract this disease, please tale the necessary precautions*")))
+                        			( assert (Feedback (order ?*currentQuestion*)  (url "family-tree.gif*")(stage INITIAL)(explanation "Your relative had/has Diabetes, this means you are more likely than the average person to contract this disease.This is because Diabetes has a strong genetic basis; please take the necessary precautions.*")))
     	 							(bind ?points 5) else
                         (if (eq Child ?relative) then
-                            ( assert (Feedback (order ?*currentQuestion*) (stage INITIAL) (url "family-tree.gif*")(explanation "Your child has Diabetes, then it is most likely that you also have Diabetes, or someone else in your family has it.*")))
+                            ( assert (Feedback (order ?*currentQuestion*) (stage INITIAL) (url "family-tree.gif*")(explanation "Your child has Diabetes, then it is likely that you also have Diabetes, or someone else in your family has it.This is because Diabetes has a strong genetic basis.*")))
              				(bind ?points 20)
                             ))
             ))
             ))
-    ( assert (Feedback (order ?*currentQuestion*) (stage INTITIAL) (explanation "Diabetes often runs in families, its is not a guarentee, but the chances are always migh higher provided trhere is a family history of the disease.*")))
     ?points
     )
 ;Points for alcohol consumption
@@ -880,7 +798,6 @@
      	(modify ?question (ask yes))
      )
  )
-
 (defrule alcohol2
     (declare (salience 10))
     (sectionFact (name Alcohol) (value ?yesno))
@@ -893,8 +810,6 @@
                     is not advised in order to maintain a healthy pancreas.*"))) 
            )
         )
-
-
 ;If no dont ask how often.
 (defrule exercise
     (declare (salience 10))
@@ -906,6 +821,12 @@
     else
     (modify ?question (ask yes))
     )
+    )
+(defrule exercise2
+    (declare (salience 10))
+    (sectionFact (name Exercise) (value ?yesno))
+    =>
+    ( assert (Feedback (order ?*currentQuestion*)(url "exercise.jpg*")(stage LIFESTYLE)(explanation "Exercise has many benefits for the body, it increases the sensitivity to inlsuin. It enhances the use of bood glucose reduces cholesterol, lowers blood pressure, burns calories and decreases weight over time.*")))
     )
 ;Gets initial quesitons feedback feedback
 (defrule getFeedbackI
@@ -975,100 +896,13 @@
      )
 ;Adds a fact to the working memory.
 (deffunction addFact(?factToAdd ?fact ?last)
-
-    (assert (change-last ?last))
-
-       				(if (eq Weight ?factToAdd) then
-    					(assert (sectionFact (stage INITIAL)(name Weight)(value ?fact) (order ?last)))
-            else
-       						(if (eq Height ?factToAdd) then
-                    (assert (sectionFact (stage INITIAL)(name Height)(value ?fact) (order ?last)))
-    							else
-       								(if (eq Age ?factToAdd) then
-    						(assert (sectionFact (stage INITIAL)(name Age)(value ?fact) (order ?last)))			
-                           		 else
-                    						(if (eq Smoke ?factToAdd) then
-    									(assert (sectionFact (stage LIFESTYLE)(name Smoke)(value ?fact)(order ?last)))			
-                                    	else
-                    								(if (eq Alcohol ?factToAdd) then
-    										(assert (sectionFact (stage LIFESTYLE)(name Alcohol)(value ?fact) (order ?last)))			
-                                            else
-                    										(if (eq Gender ?factToAdd) then
-    												(assert (sectionFact (stage INITIAL)(name Gender)(value ?fact) (order ?last))	)		
-                                                    else
-                    												(if (eq Name ?factToAdd) then
-    														(assert (sectionFact (stage INITIAL)(name Name)(value ?fact) (order ?last)))
-                                							(bind ?*name* ?fact)
-                                							(start)
-                                                             else
-                    														(if (eq Diabetes-Knowledge ?factToAdd) then
-                                                                    (assert (sectionFact (stage INITIAL)(name Diabetes-Knowledge)(value ?fact) (order ?last)))
-    																			else
-                    																(if (eq Diabetic ?factToAdd) then
-    																		(assert (sectionFact (stage INITIAL)(name Diabetic)(value ?fact) (order ?last)))	
-                                                                            else
-                    																		(if (eq Family-History ?factToAdd) then
-                                                                                    (assert (sectionFact (stage INITIAL)(name Family-History)(value ?fact) (order ?last)))
-    																							else
-                    																				(if (eq Pregnant ?factToAdd) then
-                                                                                            (assert (sectionFact (stage INITIAL)(name Pregnant)(value ?fact) (order ?last)))
-    																									else
-                    																						(if (eq Race ?factToAdd) then
-                                                                                                    (assert (sectionFact (stage INITIAL)(name Race)(value ?fact) (order ?last)))
-    																											else
-                    																								(if (eq Exercise ?factToAdd) then
-                                                                                                            (assert (sectionFact (stage LIFESTYLE)(name Exercise)(value ?fact) (order ?last)))
-    																													else
-                    																										(if (eq Blood-Pressure-Knowledge ?factToAdd) then
-                                                                                                                    (assert (sectionFact (stage INITIAL)(name Blood-Pressure-Knowledge)(value ?fact) (order ?last)))
-    																															else
-                    																												(if (eq Smoke-Frequency ?factToAdd) then
-                                                                  																	(assert (sectionFact (stage LIFESTYLE)(name Smoke-Frequency)(value ?fact) (order ?last)))
-    																																	else
-                    																														(if (eq Alcohol-Frequency ?factToAdd) then
-                                                                           																	 (assert (sectionFact (stage LIFESTYLE)(name Alcohol-Frequency)(value ?fact) (order ?last)))
-    																																			else
-                    																																(if (eq Exercise-Frequency ?factToAdd) then
-                                                                                (assert (sectionFact (stage LIFESTYLE)(name Exercise-Frequency)(value ?fact) (order ?last)))
-    																																					else
-                    																																		(if (eq Blood-Pressure ?factToAdd) then
-                                                                                        																(assert (sectionFact (stage LIFESTYLE)(name Blood-Pressure)(value ?fact) (order ?last)))
-    																																							 else
-                    																																				(if (eq Family-Type ?factToAdd) then
-    																																									(assert (sectionFact (stage INITIAL)(name Family-Type)(value ?fact) (order ?last)))
-                                                                                																						 else
-                    																																						(if (eq Insulin ?factToAdd) then
-    																																											(assert (sectionFact (stage INITIAL)(name Insulin)(value ?fact) (order ?last)))
-                                                                                																						 		else
-                    																																							(if (eq Glucose ?factToAdd) then
-    																																												(assert (sectionFact (stage INITIAL)(name Glucose)(value ?fact) (order ?last)))
-                                                                                																						 			else
-                    																																									(if (eq Gastro ?factToAdd) then
-    																																														(assert (sectionFact (stage INITIAL)(name Gastro)(value ?fact) (order ?last)))
-                                                                                																						))
-                                                                                    )
-                                                                                																						)
-                                                                                    																					) 
-                                                                            																			)	        
-                                                                        																	)
-                                                                    																)
-                                                            																)
-                                                            															)
-                                                        													)													
-                                                        											)
-                                                											)
-                                        											)
-                                        									)
-                                    								)
-                                
-                                							)
-                            						)
-                    						)
-                    				)
-                			)
-                	)            
-     
-)
+(assert (change-last ?last))
+(assert (sectionFact (stage INITIAL)(name ?factToAdd)(value ?fact) (order ?last)))    
+(if (eq Name ?factToAdd) then
+	(bind ?gratitude (str-cat ?fact ", thank you for using the Diabetes Assessment Expert System. Click on Diabetes Information below for more in-depth explanations and definitions or click restart to retake the assessment.*"))
+ 	( assert (Feedback (stage FINAL) (explanation ?gratitude)))
+ )
+ )
 ;Adds a symptom
 (deffunction addSymptom(?fact)
         (assert (Symptom ?fact))
@@ -1077,4 +911,3 @@
 (deffunction start ()
     (bind ?gratitude (str-cat ?*name* ", thank you for using the Diabetes Assessment Expert System. Click on Diabetes Information below for more in-depth explanations and definitions or click restart to retake the assessment.*")) 
     ( assert (Feedback (stage FINAL) (explanation ?gratitude))))
-    
