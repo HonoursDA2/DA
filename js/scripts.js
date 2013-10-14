@@ -208,10 +208,16 @@ function ajaxCall(command, sessionID) {
 	            options = data.options;
 	            meter = data.percentage;
 	            lastNumber = data.qNumber;
-	            if (meter.length>0) {
-	            	updateP();
+
+
+	            if (meter.length > 0) {
+	                updateP();
 	            }
-	            
+
+	            if (id.indexOf('-') === -1) {
+	                document.getElementById("lif").src = "images/factors/" + id + ".jpg";
+	            }
+
 	            $("#advisorH1").html(question);
 
 	            if (type == "INPUTT" || type == "INPUTN" || type == "INPUTND") {
@@ -243,9 +249,9 @@ function ajaxCall(command, sessionID) {
 	                        feedbackArray = responseText.feedback.split("*");
 	                        url = responseText.url.split("*");
 	                        for (var i = 0; i < feedbackArray.length - 1; i++) {
-	                            $("#lifesummary").append('<div class="symptomsresults"><img src="images/feedback/'+url[i]+'"><div><h3>' + feedbackArray[i] + '</h3></div></div>');
+	                            $("#lifesummary").append('<div class="symptomsresults"><img src="images/feedback/' + url[i] + '"><div><h3>' + feedbackArray[i] + '</h3></div></div>');
 	                        }
-	                        meter= responseText.percentage;
+	                        meter = responseText.percentage;
 	                        updateP;
 	                    });
 	                    done = true;

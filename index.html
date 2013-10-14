@@ -23,9 +23,13 @@
 
 	<div id="diabetesInfo">
 		<div id="toolbar"><p>Diabetes Information</p> <img src="images/icons/back.png" onclick="backtoSplash()"></div>
-		<div class="speech">
+		<div class="speech" id="dbInfo">
 		<div id="dInfoOptions"></div>
 		<div id="dInfo"></div>
+        <div id="dExtraInfo">
+        <h1>Complicated Words Here</h1>
+        <h2>Explanation here</h2>
+        </div>
 		</div>
 		<div id="diabetesQues"></div>
 	</div>
@@ -38,7 +42,7 @@
 	<div class="summary"></div>
 	</div>
 
-	<div class="questions">	</div><img class="illust" src="images/symptoms/noImage.png">
+	<div class="questions">	</div><img class="illust" id="pro" src="images/symptoms/noImage.png">
 	<div id="backb" onclick="revert()">Back
 
 	</div><div id="button" onclick="confirm()" title="">Continue</div>
@@ -88,7 +92,7 @@
 
 	<div id="backbL" onclick="revertL()">Back</div><div id="contButton" onclick="confirmLifestyle()">Continue</div>
 	<div id="lifestyle">
-	<div class="questions"></div><img class="illust" src="images/symptoms/noImage.png">
+	<div class="questions"></div><img class="illust" id="lif" src="images/symptoms/noImage.png">
 	<div class="feedback"></div>
 	</div>
 

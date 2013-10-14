@@ -35,7 +35,8 @@ function backtoSplash() {
     $("#splash").show("puff", 500);
     $("#splash #moreInfo,#splash #theAdvisor").css({ "opacity": "1", "box-shadow": "0px 2px 5px -2px gray" });
     $("#diabetesInfo").fadeOut();
-    $("#diabetesInfo").css({"z-index":"4"});
+    $("#diabetesInfo").css({ "z-index": "4" });
+    $("#ffeedbackC").css({ "z-index": "4" });
 }
 
 function calctop(obje) {
@@ -136,7 +137,7 @@ $(function () {
         $("#splash #theAdvisor").css({ "opacity": "0.2" });
         $(this).css({ "box-shadow": "0 2px 15px -2px red" });
         $("#diabetesInfo").fadeIn();
-        $("#diabetesInfo").css({ "z-index": "10" });
+        $("#ffeedbackC").css({ "z-index": "3" });
         $("#splash").delay(1500).effect("puff", 1000);
         $.get('DA', { command: "getInfo", sessionID: sessionID }, function (data) {
 
@@ -159,6 +160,12 @@ $(function () {
 
     $("#lb3").click(function () {
         window.location.reload();
+    });
+
+    $("#dExtraInfo").hover(function () {
+        $(this).animate({ "bottom": "0"},2000,"easeOutElastic");
+    }, function () {
+        $(this).animate({ "bottom": "-43.5%"},1000,"easeOutCubic");
     });
 
     $('.next').on('mouseenter', rscroll);
