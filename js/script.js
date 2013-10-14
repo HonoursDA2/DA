@@ -118,7 +118,9 @@ function displayInfo(index, obj) {
                 explanations = explanations + keywordHash[keyword] + "-";
 
             }
+
         }
+        keywordString = keywordString + "-";
     }
 
     function appendInfo (text) {

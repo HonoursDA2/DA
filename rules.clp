@@ -104,11 +104,11 @@
     (Feedback (order 0))
     )
 (deffacts Description
-   (Description(name Fatigue)(type SYMPTOM) (id "fatigue")(explanation "Do you feel tired a lot? An overwhelming feeling of tiredness that can not be explained."))
+   (Description(name Fatigue)(type SYMPTOM) (id "fatigue")(explanation "Do you feel tired a lot? An overwhelming feeling of tiredness that cannot be explained."))
    (Description(name Frequent-Headache)(type SYMPTOM)(id "headache") (explanation "Do you have frequent headaches and do they sometimes last a long time (2-3 days)?*"))
    (Description(name Extreme-Thirst)(type SYMPTOM) (id "thirst") (explanation "Do you feel thirsty often throughout the day?*"))
    (Description (name Excessive-Urination)(type SYMPTOM)(id "urinating") (explanation "Do you make frequent trips to the toilet to urinate (pee)?*"))
-   (Description (name Nausea)(id "nausea")(type SYMPTOM)(explanation "Do you have an uneasy feeling in your stomach? A feeling that makes you feel like vomitting, especially after eating?*"))
+   (Description (name Nausea)(id "nausea")(type SYMPTOM)(explanation "Do you have an uneasy feeling in your stomach? A feeling that makes you feels like vomiting, especially after eating?*"))
    (Description (name Weightloss)(type SYMPTOM)(id "weightloss") (explanation "Have you lost weight over the recent months/years, even though you have not been trying to do so actively?*"))
    (Description (name Irritability)(type SYMPTOM)(id "irritability")(explanation "Do you feel easily irritated and agitated, for no known reason?*"))
    (Description (name Yeast-Infection)(type SYMPTOM)(id "yeast")(explanation "Do you experience itching, burning, soreness, pain during sexual intercourse and urination?*"))
@@ -122,10 +122,10 @@
    (Description(name Dry-Mouth)(type SYMPTOM)(id "dryMouth")(explanation "Does your mouth feel dry at  times, do you often find that you have little to no saliva in your mouth?*"))
    (Description(name Abdominal-Pain)(type SYMPTOM) (id "abdominal")(explanation "Does the area surrounding your stomach pain, especially after eating food and during digestion?*"))
     )
-;The list of symp toms and their explanations
+;The list of symptoms and their explanations
 (deffacts symptomReason
    (Reason (name Fatigue)(type SYMPTOM)(points 2)(url "fatigue.jpg")(explanation "Fatigue - The glucose is not being converted into energy this weakens the cells and causes fatigue."))
-   (Reason (name Frequent-Headache)(type SYMPTOM)(points 4)(url "headache.jpg")(explanation "Frequnt Headaches - This is due to the high level of glucose in the blood, this leads to frequent headaches experiecned for prolonged periods of time."))
+   (Reason (name Frequent-Headache)(type SYMPTOM)(points 4)(url "headache.jpg")(explanation "Frequent Headaches - This is due to the high level of glucose in the blood, this leads to frequent headaches experienced for prolonged periods of time."))
    (Reason (name Extreme-Thirst)(type SYMPTOM)(points 10)(url "thirsty.gif")(explanation "Extreme Thirst - Dehydration is caused by excess urine, this prompts an increased desire for water consumption."))
    (Reason (name Excessive-Urination)(type SYMPTOM)(points 10)(url "urination.jpg")(explanation "Excessive Urination - There is a high loss of Glucose through the urine."))
    (Reason (name Nausea)(type SYMPTOM)(url "nausea.jpg")(points 5)(explanation "Nausea - Nausea is one of the symptoms of gastroparesis."))
@@ -140,7 +140,7 @@
         (extraInfo "Diabetes reduces the body’s resistance to infection, which increases the probability of the gums becoming infected."))
    (Reason (name Extreme-Hunger)(type SYMPTOM)(points 8)(url "hunger.jpg")(explanation "Extreme Hunger - The dropping blood sugar levels lead to a desire for more food and energy."))
    (Reason (name Erectile-Dysfunction)(type SYMPTOM)(points 10)(url "dysfunction.jpg")(explanation " Erectile Dysfunction - This is a result of the nerve damage in the body.") )
-   (Reason (name Gestational-Diabetes)(type SYMPTOM)(points 10)(url "gestational.jpg")(explanation "Gestational Diabetes - During pregnancy there is a lot of hormonal activity within the body, this affects the functioning of the insulin and might alter/interfere with how the body responmds tot he insulin. This condition usually subsides after the pregnacny") )
+   (Reason (name Gestational-Diabetes)(type SYMPTOM)(points 10)(url "gestational.jpg")(explanation "Gestational Diabetes - During pregnancy there is a lot of hormonal activity within the body, this affects the functioning of the insulin and might alter/interfere with how the body responds to the insulin. This condition usually subsides after the pregnancy") )
    (Reason (name Dry-Mouth)(type SYMPTOM)(url "drymouth.jpg")(points 7)(explanation "Dry Mouth - This is caused by dehydration in the body.") 
         (extraInfo "Dehydration is a result of the high demand for bodily fluids drawn from the tissues to help excrete the excess sugar from the body"))
    (Reason (name Abdominal-Pain)(type SYMPTOM)(points 8)(url "abdominal.jpg")(explanation "Abdominal Pain - Because of the gastroparesis, the stomach cannot empty its contents properly leading to stomach pain and cramping") 
@@ -149,17 +149,17 @@
     )
 ; Extra information that accompanies the symptoms
 (deffacts Information
-    (Information (question "7. Diabetes management*") (explanation "Type 1 Diabetes is difficult to control thus the treatment is a daily task.The strict regimen includes a carefully calculated diet, 
+    (Information (question "7. Diabetes management*") (explanation "Type 1 Diabetes is difficult to control thus the treatment is a daily task. The strict regimen includes a carefully calculated diet, 
             planned physical activity and multiple insulin injections (frequently). 
             As well as a home blood glucose testing facility to check the levels throughout the day.-
-            Type 2 Diabetes treatment typically includes diet control, frequent exercise, a home blood glucose testing facility 
+            Type 2 Diabetes treatment typically includes diet control, frequent exercise, and a home blood glucose testing facility 
             and in certain cases oral medication and insulin injections. The majority of Type 2 Diabetics do not require insulin injections.-
             Gestational Diabetes is brought about by hormonal effects of the pregnancy, thus no supplementary insulin is required. 
             The patient needs to ensure they exercise appropriately and maintain a healthy diet throughout the pregnancy to avoid developing type 2 Diabetes in the long run.-
             As a diabetic, your body cannot make proper use of insulin, leading to a high blood glucose level throughout the body.
-			One needs to eat healthy to to keep the blood sugar levels within range, this is a very critical aspect of living with Diabetes.
-            A dietitian can help cater a diet specific for you as this depends on your BMI(Body Mass Index), medicine, lifestyle and any health problems that one might have.            
-            A healthy diebetic should do the following:
+			One needs to eat healthy to keep the blood sugar levels within range, this is a very critical aspect of living with Diabetes.
+            A dietician can help cater a diet specific for you as this depends on your BMI(Body Mass Index), medicine, lifestyle and any health problems that one might have.            
+            A healthy diabetic should do the following:
             Limit foods that are high in sugar.
             Eat small portions spread throughout the day.
             Watch the carbohydrate intake.
@@ -168,12 +168,12 @@
             Limit the intake of alcohol.
             Use less salt.-
             Exercise is essential for a diabetic, it will not just help with weightloss, but it will also help the body
-            use insulin better, so it can convert glucose into energy for cells.It does not even have to be very strenuous, 
-            even just walking reguarly will help.
+            use insulin better, so it can convert glucose into energy for cells. It does not even have to be very strenuous, 
+            even just walking regularly will help.
             Stress should be managed, because stress hormones, may alter blood glucose levels directly.
-            Meditaion could be utilized as a very useful tool to manage stress.-
+            Meditation could be utilized as a very useful tool to manage stress.-
             Diabetics should take good care of their feet, skin, eyes and teeth and gum.
-            Diabetics have a higher risk of blindness, cataracs and gum problems.So basic dental hygiene like brushing teeth  and flossing along with regular dentist vists will help tremendously.
+            Diabetics have a higher risk of blindness, cataracts and gum problems. So basic dental hygiene like brushing teeth  and flossing along with regular dentist visits will help tremendously.
             Because of the loss of sensation, this could mean not noticing a wound or infection for a prolonged period of time, so it is advised to check your feet regularly.*"
             )
         (caption "These are tips on how to manage a life after having being diagnosed with Diabetes.
@@ -182,17 +182,17 @@
             (questionType "MULTIPLE*")
         	(options "Type 1-Type 2-Gestational-Diet-Lifestyle-Body Maintenance*")	
         )
-    (Information (question "6. Diabetes prevention*") (explanation "Diabetes can be prevented, if the right precautions and mindset are incorporated into everyday life. There are certain things that
-            are not in ones control, like family history and age. But one can take full control of their weight, lifestlye, habits and diet. Please refer to the response to question 7 for the appropriate
-            measures to prevent the onset of Diabetes.Managing Diabetes is the same as preventing it,as it encourages a healthy diet and lifestyle.
+    (Information (question "6. Diabetes prevention*") (explanation "Diabetes can be prevented, if the right precautions and mind-set are incorporated into everyday life. There are certain things that
+            are not in one’s control, like family history and age. But one can take full control of their weight, lifestyle, habits and diet. Please refer to the response to question 7 for the appropriate
+            measures to prevent the onset of Diabetes. Managing Diabetes is the same as preventing it, as it encourages a healthy diet and lifestyle.
            *")	         
         )
     (Information (question "5. Diabetes complications*") (explanation " Diabetes dramatically increases the risk of various cardiovascular problems, including coronary artery disease with chest pain (angina), heart attack, stroke and narrowing of arteries (atherosclerosis). If you have diabetes, you are more likely to have heart disease or stroke.-
             Diabetes can damage the blood vessels of the retina (diabetic retinopathy), potentially leading to blindness. -
-            The kidneys contain millions of tiny blood vessel clusters that filter waste from your blood. Diabetes can damage this delicate filtering system. Severe damage can lead to kidney failure or irreversible endstage kidney disease, which may require dialysis or a kidney transplant.-
-            Excess sugar can injure the walls of the tiny blood vessels (capillaries) that nourish your nerves, especially in the legs. This can cause tingling, numbness, burning or pain that usually begins at the tips of the toes or fingers and gradually spreads upward. Left untreated, you could lose all sense of feeling in the affected limbs. Damage to the nerves related to digestion can cause problems with nausea, vomiting, diarrhea or constipation. For men, it may lead to erectile dysfunction.-
+            The kidneys contain millions of tiny blood vessel clusters that filter waste from your blood. Diabetes can damage this delicate filtering system. Severe damage can lead to kidney failure or irreversible end stage kidney disease, which may require dialysis or a kidney transplant.-
+            Excess sugar can injure the walls of the tiny blood vessels (capillaries) that nourish your nerves, especially in the legs. This can cause tingling, numbness, burning or pain that usually begins at the tips of the toes or fingers and gradually spreads upward. Left untreated, you could lose all sense of feeling in the affected limbs. Damage to the nerves related to digestion can cause problems with nausea, vomiting, diarrhoea or constipation. For men, it may lead to erectile dysfunction.-
             Nerve damage in the feet or poor blood flow to the feet increases the risk of various foot complications. Left untreated, cuts and blisters can become serious infections. Severe damage might require toe, foot or even leg amputation.-
-            Diabetes may leave you more susceptible to skin problems, including bacterial and fungal infections.With gum infections being a major concern
+            Diabetes may leave you more susceptible to skin problems, including bacterial and fungal infections. With gum infections being a major concern
             *")
             (questionType "MULTIPLE*")
         	(caption "Diabetes has a lot of complications that can manifest if the disease is not managed appropriately, early diagnosis plays a large role in
@@ -201,65 +201,71 @@
         )
     (Information (question "4. What are the symptoms of Diabetes*") (explanation "The fluctuation in blood glucose levels leads to a sensitivity to light. Also another reason is a result of the tissue being pulled from the eye lenses to be used for energy by the body.-
             This is caused by dehydration in the body, the mouth tends to get dry because of the high loss of liquids through urination.-
-            This is a result of the nerve damage in the body, leading to males not being able to perform sexually. A lot of males experience erectile dysfuction-            
+            This is a result of the nerve damage in the body, leading to males not being able to perform sexually. A lot of males experience erectile dysfunction-            
             There is a high loss of Glucose through the urine, this causes one to go to the toilet very often.-
             The dropping blood sugar levels lead to a desire for more food and energy, causing a continuous feeling of hunger.-
             Dehydration is caused by excess urine, this prompts an increased desire for water consumption.-  
             The glucose is not being converted into energy this weakens the cells and causes fatigue.-
             This is due to the high level of glucose(~) in the blood, this leads to frequent headaches experienced for prolonged periods of time.-
-            During pregnancy there is a lot of hormonal activity within the body, this affects the functioning of the insulin and might alter/interfere with how the body responmds tot he insulin. This condition usually subsides after the pregnacny-
+            During pregnancy there is a lot of hormonal activity within the body, this affects the functioning of the insulin and might alter/interfere with how the body responds to the insulin. This condition usually subsides after the pregnancy-
             High glucose levels in saliva promotes growth of bacteria that cause gum disease, because bacteria thrives in such an environment.-
             This is caused by a lack of energy. As the sugar is not being converted into energy to be used by the cells, leading to irritability.-
             Nausea is caused by gastroparesis.-
             The nerves in the body get damaged over time, leading to a tingling sensation, pain and an eventual loss of sensation.-
-            Elevated blood sugar levels are caused by the gradual narrowing of blood vessels, leading to a decreased blood flow and oxygen to the wounds.This increases the amount of time taken to heal. -
+            Elevated blood sugar levels are caused by the gradual narrowing of blood vessels, leading to a decreased blood flow and oxygen to the wounds. This increases the amount of time taken to heal. -
             Insulin deficiency leads to loss of weight, as the sugar cannot be converted into energy, so the body seeks alternative sources like muscle tissue and fat, gradually eating away at the body.-
-            Yeast organisms are present in most woman, but these organisms tend to overgrow in a sugar rich environment. A result of badly managed diabetes.
+            Yeast organisms are present in most women, but these organisms tend to overgrow in a sugar rich environment. A result of badly managed diabetes.
             *")
         (questionType "MULTIPLE*")
-        (options "Blurred Vision-Dry Mouth-Erectile Dysfunction-Excesive Urination-Extreme Hunger-Extreme Thirst-Fatigue-Frequent Headaches-Gestational Diabetes-Gum Infection-Irritability-Nausea-Numbness-Slow Healing Wounds-Weightloss-Yeast Infection*")
-        (caption "Diabetes can be picked up through the symptoms that manifest over time. There are alot of symptoms that come with Diabetes. 
+        (options "Blurred Vision-Dry Mouth-Erectile Dysfunction-Excessive Urination-Extreme Hunger-Extreme Thirst-Fatigue-Frequent Headaches-Gestational Diabetes-Gum Infection-Irritability-Nausea-Numbness-Slow Healing Wounds-Weightloss-Yeast Infection*")
+        (caption "Diabetes can be picked up through the symptoms that manifest over time. There are a lot of symptoms that come with Diabetes. 
             Although with Type 2 Diabetes, these signs of Diabetes might not be made visible through symptoms for a very long time, making it difficult for someone to know their Diabetes status*"))
     (Information(question  "3. What are the different types of Diabetes?*") (explanation "Type 1 Diabetes occurs when the beta cells in the pancreas are damaged. 
             Because of this, the pancreas does not produce insulin anymore. Type 1 normally occurs in people under the age of 30 (it used to be called Juvenile Diabetes).-Type 2 Diabetes occurs when the cells in the body are resistant to the effect of insulin. 
-            It develops gradually over a period of time.There is a high association with a family history of Diabetes and obesity. 
+            It develops gradually over a period of time. There is a high association with a family history of Diabetes and obesity. 
             Type 2 normally occurs in people older than 40 years of age-.
             This type of diabetes affects about 2% to 10% of females during last months of pregnancy. 
             Pregnant women have enough insulin, but the effect of insulin is partially blocked by other hormones produced in the placenta during the pregnancy.
             This causes an abnormal rise in sugar levels in the body.
-            The is a complication of pregnancy and normally disappears after the pregnancy.-
+            This is a complication of pregnancy and normally disappears after the pregnancy.-
             Prediabetes, also known as impaired  glucose tolerance is the condition where the blood glucose levels in the body  
             are much higher than normal but not high enough to be classified as Diabetes. 
             If the condition is tackled at an early stage through diet, 
-            exercise and other healthy lifestyle changes (weight management programme), the risk of going on ot develop Type 2 Diabetes can be significantly reduced.*")
+            exercise and other healthy lifestyle changes (weight management programme), the risk of going on to develop Type 2 Diabetes can be significantly reduced.*")
         (questionType "MULTIPLE*")
         (options "Type 1-Type 2-Gestational-Prediabetes*")
-        (caption "There are two distinct types of Diabetes: Type 1 Diabetes and Type 2 Diabetes. Prediabetes is a condition that may eventually lead to Diabetes. Gestational Diabetes is a condition that occurs in some woman during pregnacy that may (in some cases) eventually lead to Type 2 Diabetes after the pregnancy.*"))
+        (caption "There are two distinct types of Diabetes: Type 1 Diabetes and Type 2 Diabetes. Prediabetes is a condition that may eventually lead to Diabetes. Gestational Diabetes is a condition that occurs in some woman during pregnancy that may (in some cases) eventually lead to Type 2 Diabetes after the pregnancy.*"))
     (Information (question "2. What are the risk factors of Diabetes?*") 
         (explanation "Obesity is thought to be a primary cause of Type 2 Diabetes in people who already have a family history of the disease.
             When a person is obese, the body has to deal with more nutrients than it can handle, 
-            to counter this the cells stop reacting to insulin as long as the body is overweight. 
+            to counter this, the cells stop reacting to insulin as long as the body is overweight. 
             This leads to the whole body to eventually be resistant to insulin, the onset of Type 2 Diabetes-
-            If someone in your family has has Type 2 Diabetes, then you too are at risk of developing the disease.
-            The closer the realtive the greater the risk, with studies showing that people with one parent with Diabetes have double the risk,
+            If someone in your family had/has Type 2 Diabetes, then you too are at risk of developing the disease.
+            The closer the relative the greater the risk, with studies showing that people with one parent with Diabetes have double the risk,
             while people with two diabetic parents have six times the risk of being diagnosed with Diabetes, with mothers presenting a greater risk than fathers.
-            Famiily history is a great contributing factor that people often down play and take for granted.-
+            Family history is a great contributing factor that people often down play and take for granted.-
             If the pancreas is damaged and not working properly this leads to insufficient insulin secretion, the onset of Type 1 Diabetes.*")
         (questionType "MULTIPLE*")
         (options "Obesity-Family History-Pancreas malfunction*")
         (caption "There are a few risk factors that will vastly increase your chances of developing Diabetes, these are obesity, family history of Diabetes and the 
             malfunctioning of the Pancreas*"))
     (Information (question "1. What is Diabetes Mellitus?*") (explanation "Diabetes Mellitus, more commonly known simply as Diabetes is a chronic medical condition where a person has 
-            high blood sugar levels.This is either because the insulin production in the body is insufficient or because the body does not respond properly to insulin*"))
+            high blood sugar levels. This is either because the insulin production in the body is insufficient or because the body does not respond properly to insulin*"))
         (Information (question "0. KEYWORDS*") (explanation "Glucose is the most important simple sugar in a human metabolism, blood glucose is the level of glucose present in the blood stream.-
-             The cardiovascular system consists of the heart, blood vessels and the blood that the blood vessels transport throughout the body. The cardiovasuclar system is powered by the heart.-
-             Gastroparesis is a disease of the muscles of the stomach or the nerves controlling the muscles that causes the muscles to stop working, affecting the digestive process.-
-             Insulin is a hormone produced by the Pancreas that is the main regulator of the glucose (sugar) in the blood.-
-             The Pancreas is long soft organ behind your stomach and infront of your spine, it produces insulin to help break down the food and hormones that halp control the blood sugar levels.-
-            Yeast is a type of fungus.*")
+             The cardiovascular system consists of the heart, blood vessels and the blood that the blood vessels transport throughout the body. The cardiovascular system is powered by the heart.-
+            Chronic disease is a long lasting diseae that can be controlled but not cured.-
+            Dehydration is an excessive loss of body water.- 
+            Erectile relates to the act of having an erect penis during sexual intercourse.-
+            Fatigue is a mental and/or physical state of being tired and weak.-
+            Gastroparesis is a disease of the muscles of the stomach or the nerves controlling the muscles that causes the muscles to stop working, affecting the digestive process.-
+            Gestational relates to the time during a pregnancy.- 
+            Insulin is a hormone produced by the Pancreas that is the main regulator of the glucose (sugar) in the blood.-
+            Obesity is a medial condition in which the body has excess fat to the extent that it has negative effects on health (resulting in a shorter life expectancy).- 
+            The Pancreas is long soft organ behind your stomach and in front of your spine, it produces insulin to help break down the food and hormones that help control the blood sugar levels.-
+            Secretion is the process of releasing a substance.*") 
         (questionType "MULTIPLE*") 
-        (options "Blood Glucose-Cardiovascular-Gastroparesis-Insulin-Pancreas-Yeast*")
-        (caption "Important keywords that will be needed to understand defintions*")
+        (options "Blood Glucose-Cardiovascular System-Chronic Disease-Dehydration-Erectile-Fatigue-Gastroparesis-Gestational-Insulin-Obesity-Pancreas-Secretion*")
+        (caption "Important keywords that will be needed to understand definitions*")
         )      
     )
 (defrule goBack
@@ -296,7 +302,7 @@
     (modify ?theOrder (counter ?last))
     (retract ?back)
     )
-;Returns informationpertaining to the selected symptoms experienced by the user
+;Returns information pertaining to the selected symptoms experienced by the user
 (defrule getInfo
     (Get Info)
     (Information (question ?question) (explanation ?explanation)(questionType ?type) (options ?theOptions) (caption ?theCaption)) 
@@ -417,7 +423,7 @@
            		(if (> ?bmi 18.5) then 
                 		(assert (weight-classification OptimalWeight))
                     	( assert (Feedback (order ?*currentQuestion*) (stage INITIAL)(url "BMI.GIF*")(explanation "Your BMI is between the range of 18kg/m^2 and 25 kg/m^2, this classifies you as having an Optimal weight, well done!
-                                Keep doing what your are doing :)*")))) else
+                                Keep doing what you are doing :)*")))) else
                 			(if (< ?bmi 18.5 ) then
                    			(assert (weight-classification Underweight))
                               ( assert (Feedback (order ?*currentQuestion*) (stage INITIAL) (explanation "Your BMI is below, 18 kg/m^2, you are slightly underweight, a bit more body mass would be great.*")))
@@ -464,7 +470,7 @@
     	(assert (Has-Symptom ?symptom))
     	(retract ?command)
     )
-;If the suer is male then they are not pregnant and dont show yeast infection * gestational symtoms.
+;If the user is male then they are not pregnant and don’t show yeast infection * gestational symptoms.
 (defrule isGender
     (declare (salience 10))
     (sectionFact (name Gender) (value ?gender))
@@ -501,7 +507,7 @@
   	=>
     (bind ?*points* (+ ?*points* (family ?family)))
     )
-;If family history is uncertain add an amount to points probability wise
+;If family history is uncertain add an amount to points 
 (deffunction uncertain(?value)
     (bind ?point 0)
     (if (eq Uncertain ?value) then
@@ -515,7 +521,7 @@
         (bind ?point 1)
          else
         (bind ?point 3))
-    	(assert (Feedback (order ?*currentQuestion*) (stage INITIAL)(url "ethnicity.jpeg*")(explanation "Non white ethnic groups have a higher prevalence of diabetes, with certain ethnic groups having a higher rate of diabetes-related complications and deaths caused by Diabetes.*"))) 
+    	(assert (Feedback (order ?*currentQuestion*) (stage INITIAL)(url "ethnicity.jpeg*")(explanation "Non-white ethnic groups have a higher prevalence of diabetes, with certain ethnic groups having a higher rate of diabetes-related complications and deaths caused by Diabetes.*"))) 
     ?point
     )
 ;Age
@@ -541,12 +547,12 @@
     (bind ?percentage (* (/ ?*points* ?*total*) 100))
     (if (> ?percentage  90) then
        ( assert (Feedback (order ?*currentQuestion*) (stage FINAL) (explanation " You have an extremely high risk of Diabetes!!! This  a great concern and should be dealt with immediately
-                    you should go to the nearest hospital and seek professional medical attention a soon as possible. Only after blood glucose tests, can you be oficially diagnosed with Diabetes*"))) else
+                    you should go to the nearest hospital and seek professional medical attention as soon as possible. Only after blood glucose tests, can you be officially diagnosed with Diabetes*"))) else
     (if (> ?percentage  75) then
        ( assert (Feedback (order ?*currentQuestion*) (stage FINAL) (explanation " You have a very high risk of Diabetes! This should be viewed as a great concern and should be dealt with immediately
-                    you should go to the nearest hospital and seek professional medical attention a soon as possible. Only after blood glucose tests, can you be oficially diagnosed with Diabetes*"))) else
+                    you should go to the nearest hospital and seek professional medical attention as soon as possible. Only after blood glucose tests, can you be officially diagnosed with Diabetes*"))) else
         (if (> ?percentage 50) then
-            ( assert (Feedback (order ?*currentQuestion*) (stage FINAL) (explanation " Your chances of getting diabetes is greater than 50 percent, this is higher than the average person and should be checked with a medical professional.*"))) else
+            ( assert (Feedback (order ?*currentQuestion*) (stage FINAL) (explanation " Your chances of getting diabetes is greater than 50%, this is higher than the average person and should be checked with a medical professional.*"))) else
             (if (> ?percentage 40) then
                 ( assert (Feedback (order ?*currentQuestion*) (stage FINAL) (explanation "Your risk of Diabetes is around the 50% region, this should be seen as a concern and should be taken as a warning sign.
                                 *"))) else 
@@ -554,7 +560,7 @@
                     ( assert (Feedback (order ?*currentQuestion*) (stage FINAL) (explanation " You have a low risk of Diabetes, it should not be anything to worry about, provided you continue to eat well
                                     and live a healthy lifestyle.*"))) else 
                     ( assert (Feedback (order ?*currentQuestion*) (stage FINAL) (explanation "You have a very low risk of Diabetes, this is because of your lack of threatening risk factors, symptoms
-                                    and your decent lifestyle habits, please do continue and remember to eat healthy and keep active.Diabetes cannot be cured but it can be prevented!*")))
+                                    and your decent lifestyle habits, please do continue and remember to eat healthy and keep active. Diabetes cannot be cured but it can be prevented!*")))
                     )
                 ) 
          	)
@@ -598,7 +604,7 @@
     (sectionFact (name Diabetic) (value No))
     =>
     ( assert (Feedback (order ?*currentQuestion*) (stage INITIAL) (url "diabetes-test.jpg*")(explanation "The only way to test for Diabetes is to do a blood glucose test at a hospital and receive an official diagnosis from a qualified Doctor. This system only provides a risk assesment.*")))
-     ( assert (Feedback (order ?*currentQuestion*) (stage FINAL) (explanation "Please remember that the only way to test for Diabetes is to do a blood glucose test at a hospital and receive an official diagnosis from a qualified Doctor. This system only provides a risk assesment toraise awareness and education on the Disease.*")))
+     ( assert (Feedback (order ?*currentQuestion*) (stage FINAL) (explanation "Please remember that the only way to test for Diabetes is to do a blood glucose test at a hospital and receive an official diagnosis from a qualified Doctor. This system only provides a risk assesment to raise awareness and education on the Disease.*")))
     
      )
 ;if pregnant increase points because of the chances of gestational Diabetes
@@ -616,7 +622,7 @@
     		else (if (eq ?def Glucose-Knowledge) then
                 ( assert (Feedback (order ?*currentQuestion*) (stage INITIAL)(url "glucose.gif*")(explanation "Glucose is the most important simple sugar in a human metabolism, blood glucose is the level of glucose present in the blood stream.*")))
                 else (if (eq ?def Gastro-Knowledge) then
-                 ( assert (Feedback (order ?*currentQuestion*) (stage INITIAL)(url "gastro.jpg*")(explanation "Gastroparesis is a disease of the muscles of the stomach and the nerves in the stomach that causes the muscles to stop working, affecting the digestive process, resulting in pain, nausea and vommiting during digestion.*")))   
+                 ( assert (Feedback (order ?*currentQuestion*) (stage INITIAL)(url "gastro.jpg*")(explanation "Gastroparesis is a disease of the muscles of the stomach and the nerves in the stomach that causes the muscles to stop working, affecting the digestive process, resulting in pain, nausea and vomiting during digestion.*")))   
                     )
                 )
             )
@@ -633,14 +639,14 @@
     (sectionFact (name Smoke-Frequency))
   	(sectionFact (name Diabetes-Knowledge) (value No))
   	=>
-    ( assert (Feedback (order ?*currentQuestion*) (stage LIFESTYLE)(url "smoke.jpg*")(explanation "Smoking increases your blood sugar levels, this will make the disease much harder to control aswell as increasing the chances of developing many Diabetes related complications over time.*")))
+    ( assert (Feedback (order ?*currentQuestion*) (stage LIFESTYLE)(url "smoke.jpg*")(explanation "Smoking increases your blood sugar levels, this will make the disease much harder to control as well as increasing the chances of developing many Diabetes related complications over time.*")))
     )
 ;feedback based on diabetes and smoke frequency
 (deffunction smoker(?yesno)
     (if (eq ?yesno No) then
-          ( assert (Feedback (order ?*currentQuestion*) (stage LIFESTYLE)(url "smoke.jpg*") (explanation "As a smoker and a non Diabetic, your chances of developing Diabetes is much higher.Ths is because smoking increases your blood sugar levels, and can lead to Diabetes along with its many complications over time.*")))
+          ( assert (Feedback (order ?*currentQuestion*) (stage LIFESTYLE)(url "smoke.jpg*") (explanation "As a smoker and a non-Diabetic, your chances of developing Diabetes is much higher.Ths is because smoking increases your blood sugar levels, and can lead to Diabetes along with its many complications over time.*")))
      else 
-         	( assert (Feedback (order ?*currentQuestion*) (stage LIFESTYLE)(url "smoke.jpg*")(explanation "Smoking increases your blood sugar levels, this will make the disease much harder to control aswell as increasing the chances of developing many Diabetes related complications over time.*")))
+         	( assert (Feedback (order ?*currentQuestion*) (stage LIFESTYLE)(url "smoke.jpg*")(explanation "Smoking increases your blood sugar levels, this will make the disease much harder to control as well as increasing the chances of developing many Diabetes related complications over time.*")))
      )
  )
 ;Blood pressure
@@ -655,7 +661,7 @@
     (sectionFact (name Exercise) (value No))
   	=>
         (bind ?*points* (+ ?*points* 15))
-    	( assert (Feedback (order ?*currentQuestion*) (stage LIFESTYLE) (url "exercise.jpg*")(explanation "No exercise at all? please try incorporate physical ectivity into you daily life, even if it means walking instead of driving
+    	( assert (Feedback (order ?*currentQuestion*) (stage LIFESTYLE) (url "exercise.jpg*")(explanation "No exercise at all? please try incorporate physical activity into you daily life, even if it means walking instead of driving
                 , exercise is important as it is essential to keep the body active and running.*")))
         )
 ;add points exercise frequency
@@ -684,10 +690,10 @@
         (bind ?value 5) 
         ( assert (Feedback (order ?*currentQuestion*) (stage INITIAL)(url "gestational.jpg*")(explanation "Because you are currently pregnant, you have a high chance of developing gestational Diabetes,
                     this will most likely disappear after the pregnancy, but you should make sure
-                    you manage your diet aswell as your physical activity throughout your pregnancy.*")))else
+                    you manage your diet as well as your physical activity throughout your pregnancy.*")))else
         (if (eq ?status No) then
             ( assert (Feedback (order ?*currentQuestion*) (stage INITIAL)(url "gestational.jpg*")(explanation "If you plan on getting pregnant, be sure to check on your blood sugar levels with your doctor during the pregnancy.
-            Gestatioal Diabetes occurs in about 2% to 5% of all pregnacies, making it one of the most common health problems associated with pregnancy.*")))
+            Gestational Diabetes occurs in about 2% to 5% of all pregnancies, making it one of the most common health problems associated with pregnancy.*")))
             (bind ?value 0))
         )
     ?value
@@ -695,23 +701,23 @@
 ;Points for family type, feedback for family type
 (deffunction family (?relative)
     (bind ?points 0)
-    (assert (Feedback (order ?*currentQuestion*) (stage INTITIAL) (url "family-tree.gif*")(explanation "Diabetes often runs in families, its is not a guarentee, but the chances are always migh higher provided that there is a family history of the disease.*")))
+    (assert (Feedback (order ?*currentQuestion*) (stage INTITIAL) (url "family-tree.gif*")(explanation "Diabetes often runs in families, it is not a guarantee, but the chances are always might higher provided that there is a family history of the disease.*")))
     (if (eq Parent ?relative) then
-     	( assert (Feedback (order ?*currentQuestion*) (stage INITIAL)(url "family-tree.gif*")(explanation "Your parent has/had Diabetes, a person whos parent is diabetic is 2x more likely to get the disease then the average person. This is because Diabetes has a strong genetic basis.*")))
+     	( assert (Feedback (order ?*currentQuestion*) (stage INITIAL)(url "family-tree.gif*")(explanation "Your parent has/had Diabetes, a person who’s parent is diabetic is 2x more likely to get the disease than the average person. This is because Diabetes has a strong genetic basis.*")))
         (bind ?points 10) else
         (if (eq Sibling ?relative) then
      		(bind ?points 15)
-            ( assert (Feedback (order ?*currentQuestion*)  (stage INITIAL)(url "family-tree.gif*")(explanation "Your sibling has/had Diabetes, this means the chances of you getting the disease are very high.This is because Diabetes has a strong genetic basis.*"))) else
+            ( assert (Feedback (order ?*currentQuestion*)  (stage INITIAL)(url "family-tree.gif*")(explanation "Your sibling has/had Diabetes, this means the chances of you getting the disease are very high. This is because Diabetes has a strong genetic basis.*"))) else
             	(if (eq AuntOrUncle ?relative) then
      				(bind ?points 7) else 
                 		(if (eq Grandparent ?relative) then
-    	 					( assert (Feedback (order ?*currentQuestion*)  (url "family-tree.gif*")(stage INITIAL)(explanation "Your grandparent had/has Diabetes, this means you are more likely than the average person to contract this disease. This is because Diabetes has a strong genetic basis; please tale the necessary precautions*")))
+    	 					( assert (Feedback (order ?*currentQuestion*)  (url "family-tree.gif*")(stage INITIAL)(explanation "Your grandparent had/has Diabetes, this means you are more likely than the average person to contract this disease. This is because Diabetes has a strong genetic basis; please take the necessary precautions*")))
                     		(bind ?points 6) else 
                 				(if (eq Other ?relative) then
-                        			( assert (Feedback (order ?*currentQuestion*)  (url "family-tree.gif*")(stage INITIAL)(explanation "Your relative had/has Diabetes, this means you are more likely than the average person to contract this disease.This is because Diabetes has a strong genetic basis; please take the necessary precautions.*")))
+                        			( assert (Feedback (order ?*currentQuestion*)  (url "family-tree.gif*")(stage INITIAL)(explanation "Your relative had/has Diabetes, this means you are more likely than the average person to contract this disease. This is because Diabetes has a strong genetic basis; please take the necessary precautions.*")))
     	 							(bind ?points 5) else
                         (if (eq Child ?relative) then
-                            ( assert (Feedback (order ?*currentQuestion*) (stage INITIAL) (url "family-tree.gif*")(explanation "Your child has Diabetes, then it is likely that you also have Diabetes, or someone else in your family has it.This is because Diabetes has a strong genetic basis.*")))
+                            ( assert (Feedback (order ?*currentQuestion*) (stage INITIAL) (url "family-tree.gif*")(explanation "Your child has Diabetes, then it is likely that you also have Diabetes, or someone else in your family has it. This is because Diabetes has a strong genetic basis.*")))
              				(bind ?points 20)
                             ))
             ))
@@ -773,7 +779,7 @@
         )
         )
     )
-;If no, dont ask how often.
+;If no, don’t ask how often.
 (defrule smokeNo
     (declare (salience 10))
     (sectionFact (name Smoke) (value ?yesno))  	
@@ -781,12 +787,12 @@
     =>
     (if (eq ?yesno No) then
     (modify ?question (ask no))
-    ( assert (Feedback (order ?*currentQuestion*) (stage LIFESTYLE)(url "smoke.jpg")(explanation "No smoking you say..? Thats quite commendable, try not to get into this habit as it is quite hard to shake and has a lot of negative effects on the body in the long term.*")))
+    ( assert (Feedback (order ?*currentQuestion*) (stage LIFESTYLE)(url "smoke.jpg")(explanation "No smoking you say..? That’s quite commendable, try not to get into this habit as it is quite hard to shake and has a lot of negative effects on the body in the long term.*")))
     else
     (modify ?question (ask yes))
     )
     )
-;If no, dont ask how often.
+;If no, don’t ask how often.
 (defrule alcohol
     (declare (salience 10))
     (sectionFact (name Alcohol) (value ?yesno))
@@ -803,14 +809,14 @@
     (sectionFact (name Alcohol) (value ?yesno))
   	 =>
     (if (eq ?yesno No) then
-    ( assert (Feedback (order ?*currentQuestion*) (stage LIFESTYLE) (url "alcohol.jpg*")(explanation "No alcohol consumption, thats great, keep this up!Alcohol has a high sugar content, this raises the blood sugar levels in the body, forcing the pancreas to work harder. Frequent alcohol consumption 
+    ( assert (Feedback (order ?*currentQuestion*) (stage LIFESTYLE) (url "alcohol.jpg*")(explanation "No alcohol consumption, that’s great, keep this up! Alcohol has high sugar content, this raises the blood sugar levels in the body, forcing the pancreas to work harder. Frequent alcohol consumption 
                     is not advised in order to maintain a healthy pancreas.*")))
     else
-        ( assert (Feedback (order ?*currentQuestion*) (stage LIFESTYLE)(url "alcohol.jpg*")(explanation "Drinking in moderation is generally o.k. But alcohol has a high sugar content, this raises the blood sugar levels in the body, forcing the pancreas to work harder. Frequent alcohol consumption 
+        ( assert (Feedback (order ?*currentQuestion*) (stage LIFESTYLE)(url "alcohol.jpg*")(explanation "Drinking in moderation is generally o.k. But alcohol has high sugar content, this raises the blood sugar levels in the body, forcing the pancreas to work harder. Frequent alcohol consumption 
                     is not advised in order to maintain a healthy pancreas.*"))) 
            )
         )
-;If no dont ask how often.
+;If no don’t ask how often.
 (defrule exercise
     (declare (salience 10))
     (sectionFact (name Exercise) (value ?yesno))
@@ -826,9 +832,9 @@
     (declare (salience 10))
     (sectionFact (name Exercise) (value ?yesno))
     =>
-    ( assert (Feedback (order ?*currentQuestion*)(url "exercise.jpg*")(stage LIFESTYLE)(explanation "Exercise has many benefits for the body, it increases the sensitivity to inlsuin. It enhances the use of bood glucose reduces cholesterol, lowers blood pressure, burns calories and decreases weight over time.*")))
+    ( assert (Feedback (order ?*currentQuestion*)(url "exercise.jpg*")(stage LIFESTYLE)(explanation "Exercise has many benefits for the body, it increases the sensitivity to insulin. It enhances the use of blood glucose reduces cholesterol, lowers blood pressure, burns calories and decreases weight over time.*")))
     )
-;Gets initial quesitons feedback feedback
+;Gets initial questions feedback
 (defrule getFeedbackI
     (Get FeedbackI)
     (Feedback (stage INITIAL) (explanation ?explanation) (url ?imageurl))
@@ -852,7 +858,7 @@
     =>
     (printout out ?explanation )
     )
-;If no dont ask what the rate is.
+;If no don’t ask what the rate is.
 (defrule bloodPressure1
     (declare (salience 10))
     (sectionFact (name Blood-Pressure-Knowledge)(value ?yesno))
@@ -864,19 +870,19 @@
         (modify ?question (ask yes))   
         )
     )
-;Ceks the BMI and their phyiscal activity.
+;Checks the BMI and their physical activity.
 (defrule fatnExcercise
     (sectionFact (name Exercise)(value ?yesno))
     (sectionFact (name weight-classification)(value ?classification))
         =>
        (weightExercise ?yesno ?classification)
     )
-;Checks the BMI and responds acccordingly
+;Checks the BMI and responds accordingly
 (deffunction weightExercise (?yesno ?classification)
     (if (eq ?yesno No ) then
     (if (eq ?classification Obese) then
         ( assert (Feedback (order ?*currentQuestion*) (stage FINAL) (explanation "Your BMI is above 30kg/m^2 (Obese) and you mentioned that you do not exercise, this is a major problem that will only increase your
-            chances of getting Diabetes, it is strongly advised that you start to exercise more regularly in order to reduce your chances of Diabetes. Obesity is amajor contributing fact to Diabetes.*")))
+            chances of getting Diabetes, it is strongly advised that you start to exercise more regularly in order to reduce your chances of Diabetes. Obesity is a major contributing fact to Diabetes.*")))
         else
         	(if (eq ?classification Overweight) then
             	  ( assert (Feedback (order ?*currentQuestion*) (stage FINAL) (explanation "Your BMI is above 25kg/m^2 (Overweight) and you mentioned that you do not exercise, this is a major problem that will only increase your
