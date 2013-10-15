@@ -165,7 +165,7 @@ function ajaxCall(command, sessionID) {
 
 		    if (type == "INPUTT" || type == "INPUTN" || type == "INPUTND") {
 		        $(".questions").html('<input id="' + id + '" value="" type="' + id + '" placeholder="Enter Your ' + id + ' Here">');
-		    }
+		    	}
 		    else if (type == "MALE-FEMALE") {
 		        $(".questions").html('<div id="male" onclick="gSpecific(this)"><img src="images/male-sign.jpg"></div><div id="female" onclick="gSpecific(this)"><img src="images/female-sign.jpg"></div>');
 		    }
@@ -246,11 +246,12 @@ function ajaxCall(command, sessionID) {
 
 	                        feedbackArray = responseText.feedback.split("*");
 	                        url = responseText.url.split("*");
+	                        meter = responseText.percentage;
+	                        updateP();
 	                        for (var i = 0; i < feedbackArray.length - 1; i++) {
 	                            $("#lifesummary").append('<div class="symptomsresults"><img src="images/feedback/' + url[i] + '"><div><h3>' + feedbackArray[i] + '</h3></div></div>');
 	                        }
-	                        meter = responseText.percentage;
-	                        updateP;
+	
 	                    });
 	                    done = true;
 	                }
@@ -280,7 +281,7 @@ function profile() {
 
             updateP();
             $("#symptomsContainer").html("");
-            for (var i = 1; i < symptomName.length - 1; i++) {
+            for (var i = 0; i < symptomName.length - 1; i++) {
                 $("#symptomsContainer").append('<div class="buttons" id="' + symptomID[i] + '" value = "' + symptomName[i] + '" onclick="clicked(' + i + ')">' + symptomName[i].replace("-", " ") + '</div>');
                 buttonObject = { id: "#" + symptomID[i], clicked: false };
                 submitArray[i - 1] = buttonObject;
@@ -296,6 +297,8 @@ function profile() {
             $.get('DA', { command: "getFeedback", sessionID: sessionID, stage: "stage1" }, function (responseText3) {
                 feedbackArray = responseText3.feedback.split("*");
                 url = responseText3.url.split('*');
+                meter = responseText3.percentage;
+	            updateP();
 
                 for (var i = 0; i < feedbackArray.length - 1; i++) {
                     $(".summary").append('<div class="symptomsresults"><img src="images/feedback/'+url[i]+'"><div><h3>' + feedbackArray[i] + '</h3></div></div>');
@@ -464,6 +467,8 @@ function confirmLifestyle() {
 
         $.get('DA', { command: "getFeedback", sessionID: sessionID, stage: "stage3" }, function (responseText) {
             var backfeed = responseText.feedback.split("*");
+            meter = responseText.percentage;
+	        updateP();
 
             $(".ffeedback").html("");
             for (var i = 0; i < backfeed.length; i++) {
@@ -520,48 +525,48 @@ function gSpecific(gender) {
 function updateP() {
 
     height = 330 * (meter / 100);
-
-
-    if (meter >= 0) {
-        $("#percentage").css({ "height": height + "px" });
-        $("#pvalue").html(meter + "%");
-        $("#pvalue").css({ "color": "lime" });
-        $('.imgBg').attr('src', function (i, e) {
-            return e.replace("images/level/lime.jpg", "images/level/lime.jpg");
-        });
-    }
-    if (meter >= 20) {
-        $("#percentage").css({ "height": height + "px", "background": "rgba(0,200,0,0.5)" });
-        $("#pvalue").html(meter + "%");
-        $("#pvalue").css({ "color": "rgba(0,200,0,0.5)" });
-        $('.imgBg').attr('src', function (i, e) {
-            return e.replace("images/level/lime.jpg", "images/level/green.jpg");
-        });
-    }
-    if (meter >= 40) {
-        $("#percentage").css({ "height": height + "px", "color": "black", "background": "rgba(255,255,0,0.5)" });
-        $("#pvalue").html(meter + "%");
-        $("#pvalue").css({ "color": "rgba(255,255,0,0.5)" });
-        $('.imgBg').attr('src', function (i, e) {
-            return e.replace("images/level/green.jpg", "images/level/yellow.jpg");
-        });
-    }
-    if (meter >= 60) {
-        $("#percentage").css({ "height": height + "px", "color": "white", "background": "rgba(255,155,0,0.5)" });
-        $("#pvalue").html(meter + "%");
-        $("#pvalue").css({ "color": "rgba(255,155,0,0.5)" });
-        $('.imgBg').attr('src', function (i, e) {
-            return e.replace("images/level/yellow.jpg", "images/level/orange.jpg");
-        });
-    }
+	$("#pvalue").html(meter + "%");
     if (meter >= 80) {
         $("#percentage").css({ "height": height + "px", "background": "rgba(255,0,0,0.5)" });
-        $("#pvalue").html(meter + "%");
+        
         $("#pvalue").css({ "color": "rgba(255,0,0,0.5)" });
         $('.imgBg').attr('src', function (i, e) {
             return e.replace("images/level/orange.jpg", "images/level/red.jpg");
         });
     }
+    else
+    if (meter >= 40) {
+        $("#percentage").css({ "height": height + "px", "color": "black", "background": "rgba(255,255,0,0.5)" });
+        $("#pvalue").css({ "color": "rgba(255,255,0,0.5)" });
+        $('.imgBg').attr('src', function (i, e) {
+            return e.replace("images/level/green.jpg", "images/level/yellow.jpg");
+        });
+    }
+    else
+    if (meter >= 20) {
+        $("#percentage").css({ "height": height + "px", "background": "rgba(0,200,0,0.5)" });
+        $("#pvalue").css({ "color": "rgba(0,200,0,0.5)" });
+        $('.imgBg').attr('src', function (i, e) {
+            return e.replace("images/level/lime.jpg", "images/level/green.jpg");
+        });
+    }
+    else
+    if (meter >= 60) {
+        $("#percentage").css({ "height": height + "px", "color": "white", "background": "rgba(255,155,0,0.5)" });
+        $("#pvalue").css({ "color": "rgba(255,155,0,0.5)" });
+        $('.imgBg').attr('src', function (i, e) {
+            return e.replace("images/level/yellow.jpg", "images/level/orange.jpg");
+        });
+    } else
+    if (meter >= 0) {
+        $("#percentage").css({ "height": height + "px" });
+        $("#pvalue").css({ "color": "lime" });
+        $('.imgBg').attr('src', function (i, e) {
+            return e.replace("images/level/lime.jpg", "images/level/lime.jpg");
+        });
+    }
+    
+
 }
 
 /*------------------------------------------------*/

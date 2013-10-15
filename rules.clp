@@ -2,7 +2,7 @@
 (defglobal ?*currentQuestion* = 1)
 (defglobal ?*points* = 0)
 (defglobal ?*total* = 160)
-(defglobal ?*questionNumber* = 23)
+(defglobal ?*questionNumber* = 24)
 (defglobal ?*stage1* = 1)
 (defglobal ?*stage2* = 16)
 (defglobal ?*name* = "")
@@ -322,6 +322,7 @@
     (retract ?question)
     )
 (defrule askQuestionInitial
+    (declare (salience -5))
     ?ask <- (Ask-Question-Initial)
     ?question <- (Question (section Initial)(type ?type)(text ?questionText) (answerType ?answerType) (ask yes) (order ?current) (options ?options))
     ?order <- (Order (counter ?counter))
@@ -341,6 +342,7 @@
         )
     )
 (defrule askQuestionLifestyle
+    (declare (salience -5))
     ?ask <- (Ask-Question-Lifestyle)
     ?question <- (Question (section Lifestyle)(type ?type)(text ?questionText) (answerType ?answerType) (ask yes) (order ?current) (options ?options))
     ?order <- (Order (counter ?counter))
@@ -394,6 +396,7 @@
     )
 ;Shows the explanation of the symptom in question.
 (defrule finalFeedback
+    (declare (salience -6))
     (Assessment Complete)
     =>
     (assessPercentage())
@@ -841,6 +844,7 @@
     =>
     (printout out ?explanation )
     (printout out2 ?imageurl)
+    (printout out6 (str-cat (* (/ ?*points* ?*total*) 100) "*"))
     
     )
 ;Gets lifestyle feedback
@@ -850,13 +854,15 @@
     =>
     (printout out ?explanation )
     (printout out2 ?imageurl)
+    (printout out6 (str-cat (* (/ ?*points* ?*total*) 100) "*"))
     )
 ;Gets final feedback
 (defrule getFeedbackF
     (Get FeedbackF)
     (Feedback (stage FINAL) (explanation ?explanation))
     =>
-    (printout out ?explanation )
+    (printout out ?explanation)
+    (printout out6 (str-cat (* (/ ?*points* ?*total*) 100) "*"))
     )
 ;If no don’t ask what the rate is.
 (defrule bloodPressure1

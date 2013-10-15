@@ -279,7 +279,7 @@ try {
 	public String decimal(String decimalString) {
 		if (decimalString.length()>0){
 		double d = Double.parseDouble(decimalString);
-        DecimalFormat f = new DecimalFormat("#");  // this will helps you to always keeps in two decimal places
+        DecimalFormat f = new DecimalFormat("#");  // this will helps you to always keeps in no decimal places
         return f.format(d) +""; 
     }
     return decimalString;
@@ -386,14 +386,16 @@ try {
 		getEngine(sessionID).run();
 		String feedback= getEngine(sessionID).getOutputRouter("out").toString();
 		String url= getEngine(sessionID).getOutputRouter("out2").toString();
+		percentage= getEngine(sessionID).getOutputRouter("out6").toString();	
 		((StringWriter)(getEngine(sessionID).getOutputRouter("out"))).getBuffer().setLength(0);
 		((StringWriter)(getEngine(sessionID).getOutputRouter("out2"))).getBuffer().setLength(0);
-		
+		((StringWriter)(getEngine(sessionID).getOutputRouter("out6"))).getBuffer().setLength(0);
 		PrintWriter out = response.getWriter();
 		response.setContentType("application/json"); 
 		JSONObject jsonObject = new JSONObject();
 		jsonObject.put("feedback", feedback);
 		jsonObject.put("url", url);
+		jsonObject.put("percentage",tokenizeString2(percentage,"*"));
 		out.print(jsonObject);
 		out.flush();
 		System.out.println(feedback);
@@ -427,11 +429,14 @@ try {
 	public String tokenizeString(String text, String delimeter) {
 		StringTokenizer tokenizer =  new StringTokenizer (text, delimeter);
 		String resultString="";
-		int number=0;
 		while (tokenizer.hasMoreElements()){
 			resultString += tokenizer.nextElement().toString()+"*";
-			number++;
 		}
-		return number + "*" + resultString;
+		return resultString;
+	}
+
+		public String tokenizeString2(String text, String delimeter) {
+		StringTokenizer tokenizer =  new StringTokenizer (text, delimeter);
+		return decimal(tokenizer.nextElement().toString());
 	}
 }
