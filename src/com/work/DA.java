@@ -7,6 +7,11 @@ import org.json.*;
 import java.util.StringTokenizer;
 import java.util.*;
 import java.text.*;
+/**
+DA servelt class for the Diabetes Advisor 2 Web application.
+@authour Benjamin Mmari <mmrben001@myuct.ac.za>
+@version 1.0 October 28th 2013
+**/
 
 public class DA extends HttpServlet{
 
@@ -32,7 +37,11 @@ public class DA extends HttpServlet{
 	Map<String, String[]> params = null;
 	ArrayList<sessionData> sessions = new ArrayList<sessionData>();
 	ServletContext servletContext = null;
-
+/**
+sessionData is a class that shall be assigned to each new session with the webapplciation
+sessions are created on web page load. With this approach there can be multiple sessions within the same browser. sessionData
+contains the jessObject and other parameters that keep track of which stage the assessment applciation is.
+**/
 	private class sessionData {
 		boolean symptomsChecked;
 		boolean initialComplete;
@@ -73,6 +82,7 @@ public class DA extends HttpServlet{
 		return Integer.parseInt(sessionID.charAt(sessionID.length()-1)+"");
 	}
 
+
 	public void doGet(HttpServletRequest request,
 			HttpServletResponse response) 
 		throws IOException, ServletException
@@ -108,8 +118,9 @@ public class DA extends HttpServlet{
 	public String engineCounter() {
 		return "engine"+ objects;
 	}
-
-	//load the jess rulesfile. ccheck if the server is initialized
+	/**Load the jess rulesfile. ccheck if the server is initialized. Returns the sessionID to be used by the particular session for future correspondance.
+	 * @return a sessionID to be used throughout this session.
+	**/	
 	protected String checkInitialized()
 		throws ServletException {
 		Rete tempEngine = null;
@@ -145,7 +156,9 @@ public class DA extends HttpServlet{
 		}
 		return sessionID;
 	}
-	//chose the appropriate function depending on the input from the front-end
+	/**
+	*Choose the appropriate function depending on the values in the request.
+	**/
 	public void chooseFunction()
 		throws IOException, JessException, JSONException, ServletException
 	{
@@ -180,8 +193,8 @@ try {
 						}  else if ( request.getParameter("command").equals("getFeedback")) {
 							getFeedback(request.getParameter("stage"), request.getParameter("sessionID"));
 
-						} else if ( request.getParameter("command").equals("restart")) {
-							restart(request.getParameter("stage"), request.getParameter("sessionID"));
+						} else if ( request.getParameter("command").equals("back")) { 
+							back(request.getParameter("stage"), request.getParameter("sessionID"));
 
 						}
 				}
@@ -191,7 +204,10 @@ try {
 				System.out.println(e.getMessage());
 			}
 	}
-
+	/**
+	* Returns the Rete object used in this session.
+	@param sessionID The sessionID of session that made the request.
+	**/
 	public Rete getEngine (String sessionID) {
 		Rete currentEngine = null;
 		try {
@@ -204,10 +220,11 @@ try {
 		}
 		return currentEngine;
 	}
-
+	/**
+	* If this is the first call to the server then this will set the firstSession boolean value to true.
+	**/
 	public void initialize() 
 		throws ServletException, IOException, JessException {
-		System.out.println("CAALLING ME");
 		String session = "";
 		if (
 			//getServletContext().getInitParameter("first").equals("false"))	
@@ -224,7 +241,7 @@ try {
 		response.getWriter().write(session);
 	}
 
-	public void restart(String stage, String sessionID) throws JessException {
+	public void back(String stage, String sessionID) throws JessException {
 		if (stage.equals("stage2")){
 		sessions.get(getInt(sessionID)).setInitialComplete(true);
 		}
