@@ -112,7 +112,7 @@ function revert() {
 	changeArray(answerArray,idArray);
 	$("#backb").fadeOut();
 	$("#button").css({"left":"0px"});
-    $.get('DA', { command: "restart",stage:"stage1", sessionID: sessionID }, function(responseText){
+    $.get('DA', { command: "back",stage:"stage1", sessionID: sessionID }, function(responseText){
 	    ajaxCall("question", sessionID);
 	});
 	
@@ -121,7 +121,7 @@ function revert() {
 function revertL() {
 	$(".feedback").html("");	
 	changeArray(answerArray,idArray);
-    $.get('DA', { command: "restart", stage: "stage2", sessionID: sessionID }, function (responseText) {
+    $.get('DA', { command: "back", stage: "stage2", sessionID: sessionID }, function (responseText) {
         ajaxCallLifestyle("question", sessionID);
     });
 }

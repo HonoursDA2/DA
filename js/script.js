@@ -213,7 +213,7 @@ $(function () {
         window.open('http://bit.ly/159vbwa', '_blank');
     });
 
-    $("#lb3").click(function () {
+    $("#lb3").click(function () {ui
         window.location.reload();
     });
 

@@ -7,6 +7,11 @@ import org.json.*;
 import java.util.StringTokenizer;
 import java.util.*;
 import java.text.*;
+/**
+* DA servelt class for the Diabetes Advisor 2 Web application.
+* @authour Benjamin Mmari <mmrben001@myuct.ac.za>
+* @version 1.0 October 28th 2013
+**/
 
 public class DA extends HttpServlet{
 
@@ -32,7 +37,11 @@ public class DA extends HttpServlet{
 	Map<String, String[]> params = null;
 	ArrayList<sessionData> sessions = new ArrayList<sessionData>();
 	ServletContext servletContext = null;
-
+/**
+* sessionData is a class that shall be assigned to each new session with the webapplciation
+* sessions are created on web page load. With this approach there can be multiple sessions within the same browser. sessionData
+* contains the jessObject and other parameters that keep track of which stage the assessment applciation is.
+**/
 	private class sessionData {
 		boolean symptomsChecked;
 		boolean initialComplete;
@@ -68,10 +77,14 @@ public class DA extends HttpServlet{
 			initialComplete = value;
 		}
 	}
-
+	/**
+	*Returns the integer at the end of the string.
+	* @param sessionID the string to be parsed, contains an integer as its last character.
+	**/
 	public int getInt(String sessionID) {
 		return Integer.parseInt(sessionID.charAt(sessionID.length()-1)+"");
 	}
+
 
 	public void doGet(HttpServletRequest request,
 			HttpServletResponse response) 
@@ -108,8 +121,9 @@ public class DA extends HttpServlet{
 	public String engineCounter() {
 		return "engine"+ objects;
 	}
-
-	//load the jess rulesfile. ccheck if the server is initialized
+	/**Load the jess rulesfile. ccheck if the server is initialized. Returns the sessionID to be used by the particular session for future correspondance.
+	 * @return a sessionID to be used throughout this session.
+	**/	
 	protected String checkInitialized()
 		throws ServletException {
 		Rete tempEngine = null;
@@ -145,7 +159,9 @@ public class DA extends HttpServlet{
 		}
 		return sessionID;
 	}
-	//chose the appropriate function depending on the input from the front-end
+	/**
+	*Choose the appropriate function depending on the values in the request.
+	**/
 	public void chooseFunction()
 		throws IOException, JessException, JSONException, ServletException
 	{
@@ -180,8 +196,8 @@ try {
 						}  else if ( request.getParameter("command").equals("getFeedback")) {
 							getFeedback(request.getParameter("stage"), request.getParameter("sessionID"));
 
-						} else if ( request.getParameter("command").equals("restart")) {
-							restart(request.getParameter("stage"), request.getParameter("sessionID"));
+						} else if ( request.getParameter("command").equals("back")) { 
+							back(request.getParameter("stage"), request.getParameter("sessionID"));
 
 						}
 				}
@@ -191,7 +207,10 @@ try {
 				System.out.println(e.getMessage());
 			}
 	}
-
+	/**
+	* Returns the Rete object used in this session.
+	@param sessionID The sessionID of session that made the request.
+	**/
 	public Rete getEngine (String sessionID) {
 		Rete currentEngine = null;
 		try {
@@ -204,10 +223,11 @@ try {
 		}
 		return currentEngine;
 	}
-
+	/**
+	* If this is the first call to the server then this will set the firstSession boolean value to true.
+	**/
 	public void initialize() 
 		throws ServletException, IOException, JessException {
-		System.out.println("CAALLING ME");
 		String session = "";
 		if (
 			//getServletContext().getInitParameter("first").equals("false"))	
@@ -224,7 +244,10 @@ try {
 		response.getWriter().write(session);
 	}
 
-	public void restart(String stage, String sessionID) throws JessException {
+	/**
+	* Sends a request to the Rete object to go back to the previous state.
+	**/
+	public void back(String stage, String sessionID) throws JessException {
 		if (stage.equals("stage2")){
 		sessions.get(getInt(sessionID)).setInitialComplete(true);
 		}
@@ -232,7 +255,10 @@ try {
 		getEngine(sessionID).run();
 
 	}
-
+	/**
+	* Tells the Rete object to ask the next question. Sends the question to the browser to be displayed.
+	* @param sessionID the sessionID assocaited with the request.
+	**/
 	public void question(String sessionID) throws IOException, JessException, JSONException, ServletException	{ 
 		String text ="DEFAULT"; 		
 		String section="";
@@ -275,7 +301,10 @@ try {
 			sessions.get(getInt(sessionID)).setInitialComplete(true);
 		}
 	}
-
+	/**
+	* Formats to 0 decimal places, rounds up.
+	* @param decimalString the number to be formatted.
+	**/
 	public String decimal(String decimalString) {
 		if (decimalString.length()>0){
 		double d = Double.parseDouble(decimalString);
@@ -286,6 +315,10 @@ try {
 
 	}
 
+	/**
+	* Tells the Rete object to return the list of symptoms to be sent to the browser for display.
+	* @param sessionID the sessionID assocaited with the request.
+	**/
 	public void symptomList(String sessionID) 
 		throws IOException, JessException, JSONException {	
 		if (!(sessions.get(getInt(sessionID))).getSymptomsChecked()) {
@@ -332,7 +365,10 @@ try {
 
 		} 	
 	}
-
+	/**
+	* Tells the Rete object to return all the Diabetes information to be displayed by the browser.
+	* @param sessionID the sessionID assocaited with the request.
+	**/
 	public void diabetesInfo(String sessionID) 
 		throws JessException, IOException, JSONException	{
 		getEngine(sessionID).assertString("(Get Info)");
@@ -359,7 +395,10 @@ try {
 		out.flush();
 	}
 
-
+	/**
+	* Sends a greeting message to the browser with the users name, after retireval fromt he Rete object.
+	* @param sessionID the sessionID assocaited with the request.
+	**/
 	public void profile(String sessionID)
 		throws JessException, IOException	{
 		getEngine(sessionID).assertString("(Get Name)");
@@ -371,6 +410,11 @@ try {
 		response.getWriter().write("Hello "+name+" I am Dr Mellitus! welcome to the Diabetes Advisory Expert System, please select the symptoms you are currently experiencing then click SUBMIT" );
 	}
 
+	/**
+	* Tells the Rete object to send the feedback associated with the most recent completed stage.
+	* @param stage The most recent stage that was completed by the user.
+	* @param sessionID the sessionID assocaited with the request.
+	**/
 	public void getFeedback(String stage,String sessionID)
 		throws JessException, IOException, JSONException	{
 			if (stage.equals("stage1")) {
@@ -400,7 +444,10 @@ try {
 		out.flush();
 		System.out.println(feedback);
 	}
-
+	/**
+	* Sends the list of explanations for the symptoms experienced by the user.
+	*@param sessionID the sessionID assocaited with the request.
+	**/
 	public void symptoms(String sessionID)
 		throws JessException, JSONException, IOException {
 		getEngine(sessionID).assertString("(Get Symptoms)");
@@ -426,6 +473,12 @@ try {
 		out.flush();
 	}
 
+	/**
+	* Returns a string with the values seperated by an asterix '*'.
+	* @param text The text to be parsed.
+	* @param delimeter The delimeter used to seperate the text.
+	**/
+
 	public String tokenizeString(String text, String delimeter) {
 		StringTokenizer tokenizer =  new StringTokenizer (text, delimeter);
 		String resultString="";
@@ -434,7 +487,11 @@ try {
 		}
 		return resultString;
 	}
-
+	/**
+	* Returns the formatted value of a number.
+	* @param text The text to be parsed.
+	* @param delimeter The delimeter used to seperate the text.
+	**/
 		public String tokenizeString2(String text, String delimeter) {
 		StringTokenizer tokenizer =  new StringTokenizer (text, delimeter);
 		return decimal(tokenizer.nextElement().toString());
