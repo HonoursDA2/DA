@@ -120,12 +120,33 @@ html, body
     top:250px;
 }
 
+#homesection .section h1
+{
+    color:Gray;
+}
+
+#interfacesection .section h1
+{
+    color:rgb(0,0,155);
+}
+
+#essection .section h1
+{
+    transform:rotate(-90deg) scale(2);-webkit-transform:rotate(-90deg) scale(2);
+    color:rgb(155,0,0); 
+}
+
+#downloadsection .section h1
+{
+    color:Green;
+}
+
 .content
 {
     height:100%;
     position:absolute;
     opacity:1;
-    margin-left:200px;
+    margin-left:220px;
     top:0;
 }
 
@@ -151,6 +172,9 @@ a:hover
 }
 
 #homesection:target,#diabetes:target, #interfacesection:target,#essection:target,#downloadsection:target
+#nav #home a:hover{color:Gray;border-left:rgb(55,55,55) 1px solid;border-right:rgb(55,55,55) 1px solid;}
+#nav #interface a:hover{color:blue;border-left:rgb(0,0,155) 1px solid;border-right:rgb(0,0,155) 1px solid;}
+#nav #download a:hover{color:green;border-left:rgb(0,155,0) 1px solid;border-right:rgb(0,155,0) 1px solid;}
 {
     top:160px;
     animation:move 1s ease;
