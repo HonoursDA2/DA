@@ -109,6 +109,8 @@ html, body
     position:absolute;
     left:0;
     padding:50px;
+    box-sizing:border-box;
+    border-right:silver 1px solid;
 }
 
 .section h1
