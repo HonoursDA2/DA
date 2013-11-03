@@ -87,7 +87,7 @@ html, body
     color:rgb(155,0,0);
 }
 
-#homesection, #interfacesection, #essection,#downloadsection
+#homesection, #diabetes, #interfacesection, #essection,#downloadsection
 {
     width:100.999%;
     height:100%;
@@ -150,7 +150,7 @@ a:hover
     border-left:rgb(155,0,0) 1px solid;border-right:rgb(155,0,0) 1px solid;
 }
 
-#homesection:target,#interfacesection:target,#essection:target,#downloadsection:target
+#homesection:target,#diabetes:target, #interfacesection:target,#essection:target,#downloadsection:target
 {
     top:160px;
     animation:move 1s ease;
