@@ -528,42 +528,43 @@ function updateP() {
 	$("#pvalue").html(meter + "%");
     if (meter >= 80) {
         $("#percentage").css({ "height": height + "px", "background": "rgba(255,0,0,0.5)" });
-        
         $("#pvalue").css({ "color": "rgba(255,0,0,0.5)" });
-        $('.imgBg').attr('src', function (i, e) {
-            return e.replace("images/level/orange.jpg", "images/level/red.jpg");
-        });
+        document.getElementById("proImg").src = "images/level/red.jpg";
+        document.getElementById("symImg").src = "images/level/red.jpg";
+        document.getElementById("feedImg").src = "images/level/red.jpg";
+
     }
+    else
+        if (meter >= 60) {
+            $("#percentage").css({ "height": height + "px", "color": "white", "background": "rgba(255,155,0,0.5)" });
+            $("#pvalue").css({ "color": "rgba(255,155,0,0.5)" });
+            document.getElementById("proImg").src = "images/level/orange.jpg";
+            document.getElementById("symImg").src = "images/level/orange.jpg";
+            document.getElementById("feedImg").src = "images/level/orange.jpg";
+    } 
     else
     if (meter >= 40) {
         $("#percentage").css({ "height": height + "px", "color": "black", "background": "rgba(255,255,0,0.5)" });
         $("#pvalue").css({ "color": "rgba(255,255,0,0.5)" });
-        $('.imgBg').attr('src', function (i, e) {
-            return e.replace("images/level/green.jpg", "images/level/yellow.jpg");
-        });
+        document.getElementById("proImg").src = "images/level/yellow.jpg";
+        document.getElementById("symImg").src = "images/level/yellow.jpg";
+        document.getElementById("feedImg").src = "images/level/yellow.jpg";
     }
     else
     if (meter >= 20) {
         $("#percentage").css({ "height": height + "px", "background": "rgba(0,200,0,0.5)" });
         $("#pvalue").css({ "color": "rgba(0,200,0,0.5)" });
-        $('.imgBg').attr('src', function (i, e) {
-            return e.replace("images/level/lime.jpg", "images/level/green.jpg");
-        });
+        document.getElementById("proImg").src = "images/level/green.jpg";
+        document.getElementById("symImg").src = "images/level/green.jpg";
+        document.getElementById("feedImg").src = "images/level/green.jpg";
     }
     else
-    if (meter >= 60) {
-        $("#percentage").css({ "height": height + "px", "color": "white", "background": "rgba(255,155,0,0.5)" });
-        $("#pvalue").css({ "color": "rgba(255,155,0,0.5)" });
-        $('.imgBg').attr('src', function (i, e) {
-            return e.replace("images/level/yellow.jpg", "images/level/orange.jpg");
-        });
-    } else
     if (meter >= 0) {
         $("#percentage").css({ "height": height + "px" });
         $("#pvalue").css({ "color": "lime" });
-        $('.imgBg').attr('src', function (i, e) {
-            return e.replace("images/level/lime.jpg", "images/level/lime.jpg");
-        });
+        document.getElementById("proImg").src = "images/level/lime.jpg";
+        document.getElementById("symImg").src = "images/level/lime.jpg";
+        document.getElementById("feedImg").src = "images/level/lime.jpg";
     }
     
 
