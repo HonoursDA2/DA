@@ -27,7 +27,7 @@ h1 span
     display:block;
     font-size:0.4em;
     font-style:italic;
-    color:silver;
+    color:Gray;
 }
 
 #logo
@@ -90,7 +90,7 @@ h1 span
     color:rgb(155,0,0);
 }
 
-#homesection, #diabetes, #interfacesection, #essection,#downloadsection
+#homesection, #diabetessection, #interfacesection, #essection, #archsection, #downloadsection
 {
     width:100%;
     height:100%;
@@ -138,12 +138,12 @@ p, ul, li,ol
     color:Silver;
 }
 
-#diabetes .section
+#diabetessection .section
 {
     background:rgba(231, 76, 60,1.0);
 }
 
-#diabetes h1
+#diabetessection h1
 {
     color:rgb(155,0,0);
 }
@@ -202,7 +202,7 @@ p, ul, li,ol
     font-weight:100;
 }
 
-#homesection .content h1,#interfacesection .content h1
+#homesection .content h1
 {
     color:White;
     text-transform:uppercase;
@@ -211,7 +211,7 @@ p, ul, li,ol
     top:0;
 }
 
-#homesection .content img,#interfacesection .content img
+#homesection .content img
 {
     position:relative;
     width:100%;
@@ -238,7 +238,7 @@ a:hover
 #nav #home a:hover{color:Gray;border-left:rgb(55,55,55) 1px solid;border-right:rgb(55,55,55) 1px solid;}
 #nav #interface a:hover{color:blue;border-left:rgb(0,0,155) 1px solid;border-right:rgb(0,0,155) 1px solid;}
 #nav #download a:hover{color:green;border-left:rgb(0,155,0) 1px solid;border-right:rgb(0,155,0) 1px solid;}
-#homesection:target,#diabetes:target, #interfacesection:target,#essection:target,#downloadsection:target
+#homesection:target,#diabetessection:target, #interfacesection:target,#essection:target,#archsection:target, #downloadsection:target
 {
     top:160px;
     animation:move 1s ease;
