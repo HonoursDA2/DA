@@ -30,7 +30,7 @@ interactive risk assessment facility as well as advice on Diabetes management an
 user interacts with the system by answering a series of questions dynamically posed by the expert
 system as well as giving input of their currently experienced symptoms. The Expert System provides
 comprehensive feedback throughout the assessment to keep the user involved, followed by a
-percentage diagnosis of the user's chances of having developed Diabetes.</p>
+percentage diagnosis of the user's chances of having developed Diabetes.
         
                 <center>
 <figure>
@@ -38,6 +38,7 @@ percentage diagnosis of the user's chances of having developed Diabetes.</p>
 <figcaption>Screenshot of Expert System initial screen</figcaption>
 </figure>
 </center>
+</p>
 </div>
     </div>
 
@@ -94,7 +95,7 @@ percentage diagnosis of the user's chances of having developed Diabetes.</p>
     <div id="essection">
         <div class="section"><h1>ExpertSystem</h1></div>
 
-        <div class="content"><h1>The Expert System <span>by Ben'jammIn Maaaari (Talbot accent)</span></h1>
+        <div class="content"><h1>The Expert System <span>by Benjamin Mmari</span></h1>
             <p>
                 Expert Systems are a subset of Artificial Intelligence. Their aim is to encapsulate the knowledge of a human expert in a computer. The Expert System developed in this project focuses on Diabetes.
                 This Expert System aims to closely imitate the interaction
@@ -132,6 +133,35 @@ percentage diagnosis of the user's chances of having developed Diabetes.</p>
     </div>
      <div id="archsection">
         <div class="content"><h1>Architecture</h1>
+            <p>
+            This Expert System had two main components to it:
+</p>
+            <ol>
+                <li> The User Interface</li>
+                <li>The Expert System</li>
+            </ol>
+            <p>
+                <br>
+            These two components communicate to eachother through a servlet that relays data between the two, known in the MVC paradigm as a 'Controller'. This web-application is based on the Apache Tomcat server, which allowed us to easily integrate JESS (Java Expert System Shell) and Java to build the back end of the system.
+                <center>
+            <figure>
+  <img src="images/mvc1.png" height="250" width="500"/>
+<figcaption>Model View Controller</figcaption>
+</figure>
+</center>
+<h2>Data Transfer</h2>
+<p>
+With the way the application was developed, the interface has no fore-knowledge of the content of the Expert System. Providing a high level of modularity. Throghout the Diabetes Risk Assessment, the Expert System sends all the data to the interface in JSON format, this is displayed by the interface appropriately. The answer from the users is then sent back to the Expert System in the backend and the interface waits for the next set of data to display. This method of data ehchange dictates the control flow of the application.
+   </p>
+                <center>
+            <figure>
+  <img src="images/activity.jpg" height="250" width="500"/>
+<figcaption>Activity Diagram of the web application components</figcaption>
+</figure>
+</center>
+
+
+        </p>
         </div>
     </div>
     <div id="downloadsection">
@@ -145,9 +175,9 @@ percentage diagnosis of the user's chances of having developed Diabetes.</p>
             <h2>Individual Downloads</h2>
                 <ul>
                     <li><a href="files/Ben_report.pdf">Expert System Report</a></li>
-                     <li><a href="Ben_lit.pdf">Expert System Literature Review</a></li>
-                    <li><a href="Report_Kevv.pdf">HCI Report</a></li>
-                    <li><a href="Report_Kevv.pdf">HCI Literature Review</a></li>
+                     <li><a href="files/Ben_lit.pdf">Expert System Literature Review</a></li>
+                    <li><a href="files/Report_Kevv.pdf">HCI Report</a></li>
+                    <li><a href="files/Report_Kevv.pdf">HCI Literature Review</a></li>
 
 
                 </ul>
