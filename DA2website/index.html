@@ -128,12 +128,12 @@ The intented objectives of this system are:
                 <li>Lifestyle of the patient.</li> 
                 <ul>
                 <br>
-            Throghout the Assessment the Expert System offers comprehensive feedback to the user as well as a Diabetes Risk percentage, with the aim of indiccating to the user what their Diabetes risk is. The percentage calculation was not based on any medical guidelines as none were available for this
+            Throughout the Assessment the Expert System offers comprehensive feedback to the user as well as a Diabetes Risk percentage, with the aim of indicating to the user what their Diabetes risk is. The percentage calculation was not based on any medical guidelines as none were available for this
             purpose. However, it serves to demonstrate how a quantitative risk evaluation can be incorporated
-            into the system. The Diabetes Information facility offers users with comprehensive definitions of the core concepts associated with Diabetes. This is to riskaise      awareness and education on Diabetes to the general public.
+            into the system. The Diabetes Information facility offers users with comprehensive definitions of the core concepts associated with Diabetes. This is to raise awareness and education on Diabetes to the general public.
             </P> <br>
             <h2>User testing and Evaluation</h2>
-            <p>In order to test the feasiblity and usefulness of the Expert System we did extensive user tests throughout the project. We used a RAD (Rapid Application Development) approach to the development of the Expter System application. This meant that we had high user involvement throughout the development process and had a high prioroty on functional software at all times. The users gave us valuable feedback and suggestions for further improvement of the application. Unfortunaltey we could not test the system on less literate users because of the short time period of the project. We had 3 seperate iterations of user testing, making improvements to the application after each iteration. Different approaches to testing were implemented, with different groups of users. This was to ensure that we received as much good quality feedback as possible through trying different approaches. We made use of a qualified Doctor, UCT medical students and non-medial UCT students.</p>
+            <p>In order to test the feasiblity and usefulness of the Expert System we did extensive user tests throughout the project. We used a RAD (Rapid Application Development) approach to the development of the Expert System application. This meant that we had high user involvement throughout the development process and placed a high priority on functional software at all times. The users gave us valuable feedback and suggestions for further improvement of the application. Unfortunaltey we could not test the system on less literate users because of the short time period of the project as well as the lengthy ethical clearance process. We had 3 seperate iterations of user testing, making improvements to the application after each iteration. Different approaches to testing were implemented, with different groups of users. This was to ensure that we received good quality feedback. We made use of a qualified Doctor, UCT medical students and non-medial UCT students during our testing and evaluation.</p>
             <center>
              <figure>
   <img src="images/iterative.jpg" alt="Iterative development" height="250" width="250"/>
@@ -141,7 +141,7 @@ The intented objectives of this system are:
  </figure>
  </center>
     <h2>Results</h2>
-    <p>A lot of positive feedback was received during the final round of user testing. All of of the users positively rating the Expert System above average as  well as stating that this Expert System has the potential to impact South Africa and raise Diabetes Awareness. The users stated that this system would not be easily understood by a user with only basic computer skills, this aspect of the system will need to be improved in future work. 
+    <p>A lot of positive feedback was received during the final round of user testing. With all of the users positively rating the Expert System above average as  well as stating that this Expert System has the potential to impact South Africa and raise Diabetes Awareness. Some users stated that this system would not be easily understood by a user with only basic computer skills, thus this aspect of the system will need to be improved on in future work. 
          <center>
             <figure>
   <img src="images/i3q7.jpg" height="300" width="600"/>
@@ -164,7 +164,7 @@ The intented objectives of this system are:
             </ol>
             <p>
                 <br>
-            These two components communicate to eachother through a servlet that relays data between the two, known in the MVC paradigm as a 'Controller'. This web-application is based on the <a href="http://tomcat.apache.org/">Apache Tomcat server</a>, which allowed us to easily integrate <a href="http://www.jessrules.com/jess/index.shtml">JESS</a>(Java Expert System Shell) and Java to build the back end of the system.
+            These two components communicate to eachother through a servlet that relays data between the two, known in the MVC paradigm as a 'Controller'. This web-application is run on the <a href="http://tomcat.apache.org/">Apache Tomcat server</a>, which allowed us to easily integrate <a href="http://www.jessrules.com/jess/index.shtml">JESS</a>(Java Expert System Shell) and Java to build the back end of the system.
                 <center> 
             <figure>
   <img src="images/mvc1.png" height="250" width="500"/>
@@ -173,7 +173,7 @@ The intented objectives of this system are:
 </center>
 <h2>Data Transfer</h2>
 <p>
-With the way the application was developed, the interface has no fore-knowledge of the content of the Expert System. Providing a high level of modularity. Throghout the Diabetes Risk Assessment, the Expert System sends all the data to the interface in JSON format, this is displayed by the interface appropriately. The answer from the users is then sent back to the Expert System in the backend and the interface waits for the next set of data to display. This method of data ehchange dictates the control flow of the application.
+With the way the application was developed, the interface has no fore-knowledge of the content of the Expert System. Providing a high level of modularity. Throghout the Diabetes Risk Assessment, the Expert System sends all the data to the interface in JSON format, this is displayed by the interface appropriately. The answer from the users is then sent back to the Expert System in the backend and the interface waits for the next set of data to display. This method of data exchange dictates the control flow of the application.
    </p>
                 <center>
             <figure>
@@ -184,7 +184,7 @@ With the way the application was developed, the interface has no fore-knowledge 
 <br>
 </p>
 <p>
-With this architecture, changes can be made to either the interface or the Expert System seperately, this low coupling approach allows for the ame interface to be used with a different Expert System, aslong as the correct API commands are utilized.
+With this architecture, changes can be made to either the interface or the Expert System seperately, this low coupling approach allows for the ame interface to be used with a different Expert System, as long as the correct API commands are utilized.
 
 
         </p>
