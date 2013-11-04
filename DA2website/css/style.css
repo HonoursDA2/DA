@@ -154,7 +154,7 @@ p, ul, li,ol
     background:rgba(231, 76, 60,1.0);
 }
 
-#diabetessection h1
+#diabetessection h2
 {
     color:rgb(155,0,0);
 }
@@ -243,7 +243,7 @@ p, ul, li,ol
 {
     position:relative;
     width:100%;
-    height:auto;
+    height:250px;
     top:-20px;left:-20px;
     z-index:-1;
 }
