@@ -175,6 +175,11 @@ p, ul, li,ol
     color:purple;
 }
 
+#archsection a
+{
+    border:0;
+}
+
 #interfacesection .section
 {
     background:rgba(52, 152, 219,1.0);
@@ -219,7 +224,6 @@ p, ul, li,ol
     transform:rotate(-90deg) scale(2.5);-webkit-transform:rotate(-90deg) scale(2.5);
     left:0;
 }
-
 
 #downloadsection .section
 {
