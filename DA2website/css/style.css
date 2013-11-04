@@ -33,6 +33,7 @@ h1 span
 h2
 {
     font-size:2em;
+    padding-right:200px;
 }
 
 .content h1
@@ -182,6 +183,25 @@ p, ul, li,ol
 #interfacesection h2
 {
     color:rgb(0,0,155);
+    display:block;
+    margin-bottom:20px;
+    clear:both;
+}
+
+
+#itoeinfo, #itoe, #blah
+{
+    display:inline-block;
+    vertical-align:top;
+}
+
+#itoeinfo, #blah
+{
+    width:500px;
+    padding:0;
+    font-size:1.5em;
+    color:Gray;
+    margin-right:20px;
 }
 
 #essection .section
@@ -262,11 +282,13 @@ p, ul, li,ol
     position:absolute;
     z-index:1;
     top:0;
-    left:150px;
+    left:130px;
     background:rgba(0,0,0,0.6);
     font-size:2em;
     text-align:center;
     top:100px;
+    border-radius:10px;
+    padding:10px;
 }
 
 #kev a,#ben a,#proposal a
@@ -317,6 +339,22 @@ a:hover
 {
     color:rgb(155,0,0);
     border-left:rgb(155,0,0) 1px solid;border-right:rgb(155,0,0) 1px solid;
+}
+
+.iterations
+{
+    display:inline-block;
+    padding:0;
+    float:left;
+    vertical-align:top;
+    margin:10px;
+    text-transform:uppercase;
+}
+
+#interfacesection h2.iterations
+{
+    color:rgba(52, 152, 219,1.0);
+    clear:none;
 }
 
 #nav #home a:hover{color:Gray;border-left:rgb(55,55,55) 1px solid;border-right:rgb(55,55,55) 1px solid;}
