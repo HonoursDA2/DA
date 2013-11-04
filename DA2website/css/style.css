@@ -30,6 +30,16 @@ h1 span
     color:silver;
 }
 
+h2
+{
+    font-size:2em;
+}
+
+.content h1
+{
+    padding-right:250px;
+}
+
 #logo
 {
     border-radius:50%;
@@ -153,7 +163,7 @@ p, ul, li,ol
     background:rgba(52, 152, 219,1.0);
 }
 
-#interfacesection h1
+#interfacesection h2
 {
     color:rgb(0,0,155);
 }
@@ -163,7 +173,7 @@ p, ul, li,ol
     background:rgba(231, 76, 60,1.0);
 }
 
-#essection h1
+#essection h2
 {
     color:rgb(155,0,0);
 }
@@ -179,7 +189,7 @@ p, ul, li,ol
     background:rgba(46, 204, 113,1.0);
 }
 
-#downloadsection h1
+#downloadsection h2
 {
     color:Green;
 }
@@ -200,24 +210,27 @@ p, ul, li,ol
 {
     font-size:5em;
     font-weight:100;
-}
-
-#homesection .content h1,#interfacesection .content h1
-{
     color:White;
     text-transform:uppercase;
     font-weight:bold;
     position:absolute;
     top:0;
+
 }
 
-#homesection .content img,#interfacesection .content img
+.content .header
 {
     position:relative;
     width:100%;
     height:auto;
     top:-20px;left:-20px;
     z-index:-1;
+}
+
+#downloadsection .content .header
+{
+    height:300px;
+    width:auto;
 }
 
 a
