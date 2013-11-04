@@ -27,7 +27,7 @@ h1 span
     display:block;
     font-size:0.4em;
     font-style:italic;
-    color:Gray;
+    color:silver;
 }
 
 #logo
@@ -202,7 +202,7 @@ p, ul, li,ol
     font-weight:100;
 }
 
-#homesection .content h1
+#homesection .content h1,#interfacesection .content h1
 {
     color:White;
     text-transform:uppercase;
@@ -211,7 +211,7 @@ p, ul, li,ol
     top:0;
 }
 
-#homesection .content img
+#homesection .content img,#interfacesection .content img
 {
     position:relative;
     width:100%;
