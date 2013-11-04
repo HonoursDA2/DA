@@ -250,8 +250,58 @@ p, ul, li,ol
 
 #downloadsection .content .header
 {
-    height:300px;
-    width:auto;
+    height:auto;
+    width:90%;
+    top:-200px;
+}
+
+#kev,#ben,#proposal
+{
+    width:200px;
+    display:inline-block;
+    position:absolute;
+    z-index:1;
+    top:0;
+    left:150px;
+    background:rgba(0,0,0,0.6);
+    font-size:2em;
+    text-align:center;
+    top:100px;
+}
+
+#kev a,#ben a,#proposal a
+{
+    color:White;
+    position:relative;
+    display:inline-block;
+    border:0;
+    text-transform:uppercase;
+    cursor:pointer;
+}
+
+#kev a:hover
+{
+    color:Blue;
+}
+
+#ben a:hover
+{
+    color:red;
+}
+
+#proposal a:hover
+{
+    color:Purple;
+}
+
+#ben
+{
+    left:750px;
+}
+
+#proposal
+{
+    left:450px;
 }
 
 a
