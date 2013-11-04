@@ -31,13 +31,22 @@ user interacts with the system by answering a series of questions dynamically po
 system as well as giving input of their currently experienced symptoms. The Expert System provides
 comprehensive feedback throughout the assessment to keep the user involved, followed by a
 percentage diagnosis of the user's chances of having developed Diabetes.
-        
+        <br>
                 <center>
 <figure>
 <img src="images/cover.jpg" />
 <figcaption>Screenshot of Expert System initial screen</figcaption>
 </figure>
 </center>
+</p>
+<p>
+<br>
+The intented objectives of this system are:
+<ul>
+    <li> To give users a realizstic estimate of their chances of developing Diabetes.</li>
+    <li> To give users comprehenisve information on Diabetes.</li>
+    <li> To provde users with an easy to use, interactive User Interface. That is able to cater for users of all literacy levels.</li>
+</ul>
 </p>
 </div>
     </div>
@@ -46,9 +55,10 @@ percentage diagnosis of the user's chances of having developed Diabetes.
         <div class="section"><h1>Diabetes</h1></div>
         <div class="content"><h1>Diabetes</h1>
         <img class="header" src="images/blood.jpg"/>
-             <p>Diabetes Mellitus, more commonly known as Diabetes, describes a group of metabolic noncommunicable1
+             <p>Diabetes Mellitus, more commonly known as Diabetes, describes a group of metabolic noncommunicable
         diseases in which a person has a high count of blood glucose (sugar) in their
         body. This occurs mainly because of the following two reasons:
+        <lb>
         <ol>
             <li>The body does not produce enough insulin.</li>
             <li>The cells in the body do not react appropriately to the insulin. </li>
@@ -100,7 +110,7 @@ percentage diagnosis of the user's chances of having developed Diabetes.
         <div class="content"><h1>The Expert System <span>by Benjamin Mmari</span></h1>
         <img class="header" src="images/ESS.jpg"/>
             <p>
-                Expert Systems are a subset of Artificial Intelligence. Their aim is to encapsulate the knowledge of a human expert in a computer. The Expert System developed in this project focuses on Diabetes.
+                Expert Systems are a subset of Artificial Intelligence. The aim of an Expert System is to encapsulate the knowledge of a human expert inside a computer. The Expert System developed in this project focuses on Diabetes, an Expert in Diabetes is known as an Endocronologist. Our expert was a family Doctor based in Pretoria, Dr Aluwani Ndwambi. 
                 This Expert System aims to closely imitate the interaction
                 a patient would have with a Doctor during a converstation. A strict process of Knowledge Engineering was followed to acquire the necessary information. In order to achieve this a Doctor was worked with throughout the development phase of the application, other supplementary information was gathered from reputable online sources. The Expert System offers two facilities to the user, a Diabetes Risk Assessment and Diabetes Information facility. 
 
@@ -147,8 +157,8 @@ percentage diagnosis of the user's chances of having developed Diabetes.
             </ol>
             <p>
                 <br>
-            These two components communicate to eachother through a servlet that relays data between the two, known in the MVC paradigm as a 'Controller'. This web-application is based on the Apache Tomcat server, which allowed us to easily integrate JESS (Java Expert System Shell) and Java to build the back end of the system.
-                <center>
+            These two components communicate to eachother through a servlet that relays data between the two, known in the MVC paradigm as a 'Controller'. This web-application is based on the <a href="http://tomcat.apache.org/">Apache Tomcat server</a>, which allowed us to easily integrate <a href="http://www.jessrules.com/jess/index.shtml">JESS</a>(Java Expert System Shell) and Java to build the back end of the system.
+                <center> 
             <figure>
   <img src="images/mvc1.png" height="250" width="500"/>
 <figcaption>Model View Controller</figcaption>
@@ -160,10 +170,14 @@ With the way the application was developed, the interface has no fore-knowledge 
    </p>
                 <center>
             <figure>
-  <img src="images/activity.jpg" height="250" width="500"/>
+  <img src="images/activity.jpg" height="500" width="1000"/>
 <figcaption>Activity Diagram of the web application components</figcaption>
 </figure>
 </center>
+<br>
+</p>
+<p>
+With this architecture, changes can be made to either the interface or the Expert System seperately, this low coupling approach allows for the ame interface to be used with a different Expert System, aslong as the correct API commands are used.
 
 
         </p>
