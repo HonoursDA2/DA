@@ -161,7 +161,9 @@ function ajaxCall(command, sessionID) {
 		    lastNumber = data.qNumber;
 	  		if (meter.length>0) {
 	            	updateP();
-	        }	    $(".profileH1").html(question);
+	        }	    
+			document.getElementById("pro").src = "images/factors/" + id + ".jpg";
+	        $(".profileH1").html(question);
 
 		    if (type == "INPUTT" || type == "INPUTN" || type == "INPUTND") {
 		        $(".questions").html('<input id="' + id + '" value="" type="' + id + '" placeholder="Enter Your ' + id + ' Here">');
