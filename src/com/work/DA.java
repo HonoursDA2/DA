@@ -309,7 +309,14 @@ try {
 		if (decimalString.length()>0){
 		double d = Double.parseDouble(decimalString);
         DecimalFormat f = new DecimalFormat("#");  // this will helps you to always keeps in no decimal places
-        return f.format(d) +""; 
+        double theNumber = 0;
+        theNumber = Double.parseDouble(decimalString);
+        if (theNumber > 100 ) {
+        	return "100";
+        } else
+        	{
+        		return f.format(d) +"";
+         	}
     }
     return decimalString;
 

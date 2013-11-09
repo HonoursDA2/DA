@@ -572,8 +572,15 @@
 
         (bind ?percentage (* (/ ?*points* ?*total*) 100))
         (bind ?number (format nil %3.0f ?percentage))    
-    	(bind ?text (str-cat "You have a " (str-cat ?number "% Risk of Diabetes.*")))
+    	(bind ?text (str-cat "You have a " (str-cat (if100 ?number) "% Risk of Diabetes.*")))
         ( assert (Feedback (order ?*currentQuestion*) (stage FINAL) (explanation ?text)))
+    )
+(deffunction if100(?percentage)
+    (bind ?return ?percentage)
+    (if (> ?percentage 100) then
+        (bind ?return 100)
+        )
+    ?return
     )
 (deffunction age (?age)
     (bind ?value 0)
