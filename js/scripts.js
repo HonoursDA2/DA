@@ -520,8 +520,15 @@ function checkDifference(newMeter) {
 	if (newMeter > 0 ){
 	var newM = newMeter;
 	if (newM != meter) {
-		playSound();
+	    playSound();
+
+	    var element = document.getElementById("chances");
+	    element.classList.remove("animateme");
+	    element.offsetWidth = element.offsetWidth;
+	    element.classList.add("animateme");
 	}
+	
+
 	meter=newM;
 }
 }
@@ -570,8 +577,6 @@ function updateP(newMeter) {
         document.getElementById("symImg").src = "images/level/lime.jpg";
         document.getElementById("feedImg").src = "images/level/lime.jpg";
     }
-    
-
 }
 
 /*------------------------------------------------*/

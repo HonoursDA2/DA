@@ -858,9 +858,13 @@ span#woman
     background:white;
     display:none;
     text-align:center;
-    transform:scale(1);-webkit-transform:scale(1);
     transition:500ms ease;-webkit-transition:500ms ease;
-    animation:alert;-webkit-animation:alert 2s;
+}
+
+.animateme
+{
+    transform:scale(1);-webkit-transform:scale(1);    
+    animation:alert 1s;-webkit-animation:alert 1s;
 }
 
 @-webkit-keyframes alert {
