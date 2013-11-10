@@ -47,7 +47,7 @@
     	(slot caption
         (default " *"))
     )
-(deftemplate advice
+(deftemplate advice`
     (slot text)
     )
 (deftemplate Input
@@ -131,20 +131,16 @@
    (Reason (name Nausea)(type SYMPTOM)(url "nausea.jpg")(points 5)(explanation "Nausea - Nausea is one of the symptoms of gastroparesis."))
    (Reason (name Weightloss)(type SYMPTOM)(points 10)(url "weightloss.jpg")(explanation "Weightloss - Insulin deficiency leads to loss of weight, as the sugar cannot be converted into energy, so the body seeks alternative sources like muscle tissue and fat."))
    (Reason (name Irritability)(type SYMPTOM)(points 1)(url "irritability.jpg")(explanation "Irritability - Caused by a lack of energy. As the sugar is not being converted into energy to be used by the cells."))
-   (Reason (name Yeast-Infection)(type SYMPTOM)(points 8)(url "yeast.jpg")(explanation "Yeast Infection - Yeast (a type of fungus) organisms are present in most woman, but these organisms tend to overgrow in a sugar rich environment. A result of badly managed diabetes")
-    	(extraInfo "Yeast is a type of fungus; yeast infection refers to the fungus scientifically known as Candida"))
+   (Reason (name Yeast-Infection)(type SYMPTOM)(points 8)(url "yeast.jpg")(explanation "Yeast Infection - Yeast (a type of fungus) organisms are present in most woman, but these organisms tend to overgrow in a sugar rich environment. A result of badly managed diabetes"))
    (Reason (name Blurred-Vision)(type SYMPTOM)(points 3)(url "vision.jpg")(explanation "Blurred Vision - The fluctuation in blood glucose levels leads to a light sensitivity. Also this can be caused by the tissue being pulled from the eye lenses to be used for energy by the body."))
    (Reason (name Slow-Healing-Wounds)(type SYMPTOM)(url "wound.jpg")(points 8)(explanation "Slow Healing Wounds - Elevated blood sugar levels cause narrowing of blood vessels, leading to a decreased blood flow and oxygen to the wounds."))
    (Reason (name Numbness)(type SYMPTOM)(points 4)(url "numb.jpg")(explanation "Numbness - The nerves in the body get damaged over time, leading to a tingling sensation, pain and eventual loss of sensation"))
-   (Reason (name Gum-Infection)(type SYMPTOM)(points 8)(url "teethandgum.jpg")(explanation "Gum Infection - High glucose levels in saliva promotes growth of bacteria that cause gum disease.") 
-        (extraInfo "Diabetes reduces the body’s resistance to infection, which increases the probability of the gums becoming infected."))
+   (Reason (name Gum-Infection)(type SYMPTOM)(points 8)(url "teethandgum.jpg")(explanation "Gum Infection - High glucose levels in saliva promotes growth of bacteria that cause gum disease.") )
    (Reason (name Extreme-Hunger)(type SYMPTOM)(points 8)(url "hunger.jpg")(explanation "Extreme Hunger - The dropping blood sugar levels lead to a desire for more food and energy."))
    (Reason (name Erectile-Dysfunction)(type SYMPTOM)(points 10)(url "dysfunction.jpg")(explanation " Erectile Dysfunction - This is a result of the nerve damage in the body.") )
    (Reason (name Gestational-Diabetes)(type SYMPTOM)(points 10)(url "gestational.jpg")(explanation "Gestational Diabetes - During pregnancy there is a lot of hormonal activity within the body, this affects the functioning of the insulin and might alter/interfere with how the body responds to the insulin. This condition usually subsides after the pregnancy") )
-   (Reason (name Dry-Mouth)(type SYMPTOM)(url "drymouth.jpg")(points 7)(explanation "Dry Mouth - This is caused by dehydration in the body.") 
-        (extraInfo "Dehydration is a result of the high demand for bodily fluids drawn from the tissues to help excrete the excess sugar from the body"))
-   (Reason (name Abdominal-Pain)(type SYMPTOM)(points 8)(url "abdominal.jpg")(explanation "Abdominal Pain - Because of the gastroparesis, the stomach cannot empty its contents properly leading to stomach pain and cramping") 
-        (extraInfo "Gastroparesis is a disease of the muscles of the stomach or the nerves controlling the muscles that causes the muscles to stop working, affecting the digestive process"))
+   (Reason (name Dry-Mouth)(type SYMPTOM)(url "drymouth.jpg")(points 7)(explanation "Dry Mouth - This is caused by dehydration in the body."))
+   (Reason (name Abdominal-Pain)(type SYMPTOM)(points 8)(url "abdominal.jpg")(explanation "Abdominal Pain - Because of the gastroparesis, the stomach cannot empty its contents properly leading to stomach pain and cramping.") )
    
     )
 ; Extra information that accompanies the symptoms
@@ -541,9 +537,18 @@
      )
 ;family history
 (defrule FH
+
     (sectionFact (name Family-History) (value ?history))
   	=>
      	(bind ?*points* (+ ?*points* (uncertain ?history)))
+    )
+
+(deffunction checkPercentage(?percentage)
+    (bind ?return ?percentage)
+    (if (> ?percentage 100) then
+        (bind ?return 100.00)
+        )
+    ?return
     )
 ;Asses diabetes percentage and provide feedback
 (deffunction assessPercentage()
@@ -571,17 +576,12 @@
         )
 
         (bind ?percentage (* (/ ?*points* ?*total*) 100))
-        (bind ?number (format nil %3.0f ?percentage))    
-    	(bind ?text (str-cat "You have a " (str-cat (if100 ?number) "% Risk of Diabetes.*")))
+    	(bind ?number (checkPercentage ?percentage))    
+    	(bind ?number (format nil %3.0f ?number))    
+    	(bind ?text (str-cat "You have a " (str-cat ?number "% Risk of Diabetes.*")))
         ( assert (Feedback (order ?*currentQuestion*) (stage FINAL) (explanation ?text)))
     )
-(deffunction if100(?percentage)
-    (bind ?return ?percentage)
-    (if (> ?percentage 100) then
-        (bind ?return 100)
-        )
-    ?return
-    )
+
 (deffunction age (?age)
     (bind ?value 0)
     (if (> ?age 59) then
