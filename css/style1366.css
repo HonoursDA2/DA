@@ -384,7 +384,7 @@ body
     width:20%;
 }
 
-#profile .questions .options,#lifestyle .questions .options
+#profile .questions .options,#lifestyle .questions .options,#profile .questions .moptions,#lifestyle .questions .moptions
 {
     width:45%;height:27.5%;
     position:relative;

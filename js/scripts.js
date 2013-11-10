@@ -10,6 +10,18 @@ function clicked(i) {
 	}
 }
 
+function choice(i) {
+	var j = i;
+	if (!choiceArray[j].clicked) {
+		$(choiceArray[j].id).css({ "color": "rgba(255,0,0,0.7)", "border-bottom": "5px solid rgba(255,0,0,0.7)" });
+		choiceArray[j].clicked = true;
+	}
+	else {
+		$(choiceArray[j].id).css({ "color": "grey", "border-bottom": "0px solid rgba(255,0,0,0.7)" });
+		choiceArray[j].clicked = false;
+	}
+}
+
 function initialize() {
 	$.get('DA', { command: "init" }, function (responseText) {
 		setSession(responseText);
@@ -143,6 +155,8 @@ function getSession() {
 }
 
 var theOptions = new Array();
+var choiceArray = new Array();
+
 var lastNumber = 0;
 function ajaxCall(command, sessionID) {
 	$.ajax({
@@ -180,6 +194,14 @@ function ajaxCall(command, sessionID) {
 		            $(".questions").html("");
 		            for (var i = 0; i < theOptions.length; i++) {
 		                $(".questions").append('<div class="options" id="' + theOptions[i] + '">' + theOptions[i] + '</div>');
+		            }
+                } else if (type == "MULTIPLE") {
+		            theOptions = options.split('-');
+		            $(".questions").html("");
+		            for (var i = 0; i < theOptions.length; i++) {
+		                $(".questions").append('<div class="moptions" id="' + theOptions[i] + '"value="'+theOptions[i]+'" onclick="choice(' + i + ')">' + theOptions[i] + '</div>');
+		            	 var choiceObject = { id: "#" + theOptions[i], clicked: false };
+		            	choiceArray[i]= choiceObject;
 		            }
                 }
                 else {
@@ -382,6 +404,19 @@ function confirm() {
 		$.get('DA', { value: opt, answerID: id, sessionID: sessionID, last:lastNumber});
 		proceed = true;
 		answerArray.push(opt);
+	} 
+	else if (type == "MULTIPLE") {
+		var answer1 = "";
+		for (var x=0; x<choiceArray.length; x++) {
+			if (choiceArray[x].clicked ) {
+				answer1 = answer1 + $(choiceArray[x].id).attr('value')+'*';
+			}
+		}
+		$(".feedback").fadeIn();
+		$(".feedback").append(id + ": " + answer1 + "<br>");
+		$.get('DA', { value: answer1, answerID: id, sessionID: sessionID, last:lastNumber});
+		proceed = true;
+		answerArray.push(answer1);
 	}
 	if (proceed) {
 		ajaxCall("question", sessionID);
