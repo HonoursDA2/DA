@@ -354,6 +354,7 @@ body
 	width:67.5%;
 	position:absolute;
 	left:1.25%;
+	background:white;
 }
 
 #profile .questions, #lifestyle .questions,.illust
@@ -855,8 +856,43 @@ span#woman
     box-shadow: 0px 0px 10px 1px silver;
     z-index:5;
     background:white;
-    text-align:center;
     display:none;
+    text-align:center;
+    transform:scale(1);-webkit-transform:scale(1);
+    transition:500ms ease;-webkit-transition:500ms ease;
+    animation:alert;-webkit-animation:alert 2s;
+}
+
+@-webkit-keyframes alert {
+  0%   { transform: scale(1); -webkit-transform: scale(1);}
+  25%  { transform: scale(1.2); -webkit-transform: scale(1.2);}
+  50%  { transform: scale(1); -webkit-transform: scale(1);}
+  75%   { transform: scale(1.2); -webkit-transform: scale(1.2);}
+  100% { transform: scale(1); -webkit-transform: scale(1);}
+}
+
+@-moz-keyframes alert {
+  0%   { transform: scale(1); -moz-transform: scale(1);}
+  25%  { transform: scale(1.2); -moz-transform: scale(1.2);}
+  50%  { transform: scale(1); -moz-transform: scale(1);}
+  75%   { transform: scale(1.2); -moz-transform: scale(1.2);}
+  100% { transform: scale(1); -moz-transform: scale(1);}
+}
+
+@-o-keyframes alert {
+  0%   { transform: scale(1); -o-transform: scale(1);}
+  25%  { transform: scale(1.2); -o-transform: scale(1.2);}
+  50%  { transform: scale(1); -o-transform: scale(1);}
+  75%   { transform: scale(1.2); -o-transform: scale(1.2);}
+  100% { transform: scale(1); -o-transform: scale(1);}
+}
+
+@keyframes alert {
+  0%   { transform: scale(1); -webkit-transform: scale(1);}
+  25%  { transform: scale(1.2); -webkit-transform: scale(1.2);}
+  50%  { transform: scale(1); -webkit-transform: scale(1);}
+  75%   { transform: scale(1.2); -webkit-transform: scale(1.2);}
+  100% { transform: scale(1); -webkit-transform: scale(1);}
 }
 
 #chances p
@@ -1127,6 +1163,11 @@ span#woman
     width:70%;
     overflow:auto;
     box-shadow:none;
+}
+
+#profile .symptomsresults div h1
+{
+    font-size:2.5em;
 }
 
 #directions
