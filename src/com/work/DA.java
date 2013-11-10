@@ -175,7 +175,15 @@ try {
 							String answerID = request.getParameter("answerID");
 							String theAnswer = request.getParameter("value");
 							String last = request.getParameter("last");
-							getEngine(request.getParameter("sessionID")).eval("( addFact "+answerID +" " +theAnswer+ " "+ last +")");
+			
+							if (theAnswer.contains("*")) {
+									StringTokenizer tokenizer =  new StringTokenizer (theAnswer, "*");
+									while (tokenizer.hasMoreElements()){
+										getEngine(request.getParameter("sessionID")).eval("( addFact "+answerID +" " +tokenizer.nextElement()+ " "+ last +")");		
+									}
+							} else {
+								getEngine(request.getParameter("sessionID")).eval("( addFact "+answerID +" " +theAnswer+ " "+ last +")");
+							}
 							getEngine(request.getParameter("sessionID")).run();
 				}
 			  
@@ -504,6 +512,8 @@ try {
 		}
 		return resultString;
 	}
+
+
 	/**
 	* Returns the formatted value of a number.
 	* @param text The text to be parsed.
