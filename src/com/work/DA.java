@@ -22,6 +22,7 @@ public class DA extends HttpServlet{
 	StringWriter sw5 = new StringWriter();
 	StringWriter sw6 = new StringWriter();
 	StringWriter sw7 = new StringWriter();
+	StringWriter sw8 = new StringWriter();
 	HttpServletRequest request = null;
 	HttpServletResponse response = null;
 	static int objects = 0;
@@ -34,6 +35,8 @@ public class DA extends HttpServlet{
 	String jessText5;
 	String questionNumber;	
 	String percentage;
+	String progress;
+
 	Map<String, String[]> params = null;
 	ArrayList<sessionData> sessions = new ArrayList<sessionData>();
 	ServletContext servletContext = null;
@@ -141,6 +144,7 @@ public class DA extends HttpServlet{
 				tempEngine.addOutputRouter("out5", sw5);
 				tempEngine.addOutputRouter("out6", sw6);
 				tempEngine.addOutputRouter("out7", sw7);
+				tempEngine.addOutputRouter("out8", sw8);
 				tempEngine.batch(servletContext.getRealPath(rulesFile));
 				tempEngine.reset();
 				tempEngine.eval("(watch all)");
@@ -276,14 +280,18 @@ try {
 		jessText3 = getEngine(sessionID).getOutputRouter("out3").toString();
 		jessText4 = getEngine(sessionID).getOutputRouter("out4").toString();
 		percentage = getEngine(sessionID).getOutputRouter("out6").toString();
+		questionNumber = getEngine(sessionID).getOutputRouter("out7").toString();	
+		progress = getEngine(sessionID).getOutputRouter("out8").toString();
+		
 		((StringWriter)(getEngine(sessionID).getOutputRouter("out"))).getBuffer().setLength(0);
 		((StringWriter)(getEngine(sessionID).getOutputRouter("out2"))).getBuffer().setLength(0);	
 		((StringWriter)(getEngine(sessionID).getOutputRouter("out3"))).getBuffer().setLength(0);	
 		((StringWriter)(getEngine(sessionID).getOutputRouter("out4"))).getBuffer().setLength(0);
 		((StringWriter)(getEngine(sessionID).getOutputRouter("out4"))).getBuffer().setLength(0);
 		((StringWriter)(getEngine(sessionID).getOutputRouter("out6"))).getBuffer().setLength(0);	
-		questionNumber = getEngine(sessionID).getOutputRouter("out7").toString();	
 		((StringWriter)(getEngine(sessionID).getOutputRouter("out7"))).getBuffer().setLength(0);
+		((StringWriter)(getEngine(sessionID).getOutputRouter("out8"))).getBuffer().setLength(0);
+		
 		response.setContentType("application/json");  
 		PrintWriter out = response.getWriter();
 		JSONObject jsonObject = new JSONObject();
@@ -293,6 +301,8 @@ try {
 		jsonObject.put("options", jessText4);	
 		jsonObject.put("percentage", decimal (percentage));
 		jsonObject.put("qNumber", questionNumber);
+		jsonObject.put("progress", decimal(progress));
+		
 		out.print(jsonObject);
 		out.flush();
 
