@@ -1,5 +1,5 @@
 function clicked(i) {
-	var j = i - 1;
+	var j = i;
 	if (!submitArray[j].clicked) {
 		$(submitArray[j].id).css({ "color": "rgba(255,0,0,0.7)", "border-bottom": "5px solid rgba(255,0,0,0.7)" });
 		submitArray[j].clicked = true;
@@ -16,6 +16,11 @@ function initialize() {
 		ajaxCall("question", responseText);
 	});
 }
+  function playSound() {
+  	var soundFile = "sound/chime.wav";
+ document.getElementById("dummy").innerHTML=
+ "<embed src=\""+soundFile+"\" hidden=\"true\" autostart=\"true\" loop=\"false\" />";
+ }
 
 function countClicks() {
 	var count = 0;
@@ -58,9 +63,8 @@ function submitSymptoms() {
 		        extraUrl = responseText.url;
 		        extraExp = responseText.explanation;
 		        extraAdd = responseText.additional;
-		        meter = responseText.percentage;
 
-			    updateP();
+			    updateP(responseText.percentage);
 
 
 		        symptomNames = extraName.split('*');
@@ -141,52 +145,46 @@ function getSession() {
 var theOptions = new Array();
 var lastNumber = 0;
 function ajaxCall(command, sessionID) {
+	$.ajax({
+		url: 'DA',
+		type: 'GET',
+		dataType: 'json',
+		data: {
+		    command: command,
+		    sessionID: sessionID
+		},
+		contentType: 'application/json',
+		mimeType: 'application/json',
+		success: function (data) {
+		    question = data.question;
+		    id = data.id;
+		    type = data.type;
+		    options = data.options;
+		    lastNumber = data.qNumber;
+		    	            	updateP(data.percentage);	    
+			document.getElementById("pro").src = "images/factors/" + id + ".jpg";
+	        $(".profileH1").html(question);
 
-    $.ajax({
-        url: 'DA',
-        type: 'GET',
-        dataType: 'json',
-        data: {
-            command: command,
-            sessionID: sessionID
-        },
-        contentType: 'application/json',
-        mimeType: 'application/json',
-        success: function (data) {
-            question = data.question;
-            id = data.id;
-            type = data.type;
-            options = data.options;
-            meter = data.percentage;
-            lastNumber = data.qNumber;
-            if (meter.length > 0) {
-                updateP();
-            }
-            document.getElementById("pro").src = "images/factors/" + id + ".jpg";
-            $(".profileH1").html(question);
-
-            if (type == "INPUTT" || type == "INPUTN" || type == "INPUTND") {
-                $(".questions").html('<input id="' + id + '" value="" type="' + id + '" placeholder="Enter Your ' + id + ' Here">');
+		    if (type == "INPUTT" || type == "INPUTN" || type == "INPUTND") {
+		        $(".questions").html('<input id="' + id + '" value="" type="' + id + '" placeholder="Enter Your ' + id + ' Here">');
                 $(".questions input").focus();
-            }
-            else if (type == "MALE-FEMALE") {
-                $(".questions").html('<div id="male" onclick="gSpecific(this)"><img src="images/male-sign.jpg"></div><div id="female" onclick="gSpecific(this)"><img src="images/female-sign.jpg"></div>');
-            }
-            else if (type == "YES-NO") {
-                $(".questions").html('<div id="yesbutton" class="yes" value="yes" onclick="yesno(yes)">Yes</div><div id="nobutton" class="no" value="no" onclick="yesno(no)">No</div>');
-            } else
-                if (type == "OPTIONAL") {
-                    theOptions = options.split('-');
-                    $(".questions").html("");
-                    for (var i = 0; i < theOptions.length; i++) {
-                        $(".questions").append('<div class="options" id="' + theOptions[i] + '">' + theOptions[i] + '</div>');
-                    }
-
+		    	}
+		    else if (type == "MALE-FEMALE") {
+		        $(".questions").html('<div id="male" onclick="gSpecific(this)"><img src="images/male-sign.jpg"></div><div id="female" onclick="gSpecific(this)"><img src="images/female-sign.jpg"></div>');
+		    }
+		    else if (type == "YES-NO") {
+		        $(".questions").html('<div id="yesbutton" class="yes" value="yes" onclick="yesno(yes)">Yes</div><div id="nobutton" class="no" value="no" onclick="yesno(no)">No</div>');
+		    } else
+		        if (type == "OPTIONAL") {
+		            theOptions = options.split('-');
+		            $(".questions").html("");
+		            for (var i = 0; i < theOptions.length; i++) {
+		                $(".questions").append('<div class="options" id="' + theOptions[i] + '">' + theOptions[i] + '</div>');
+		            }
                 }
                 else {
                     profile();
                 }
-
         }
     });
 
@@ -209,12 +207,11 @@ function ajaxCall(command, sessionID) {
 	            id = data.id;
 	            type = data.type;
 	            options = data.options;
-	            meter = data.percentage;
 	            lastNumber = data.qNumber;
 
 
 	            if (meter.length > 0) {
-	                updateP();
+	                updateP(data.percentage);
 	            }
 
 	                document.getElementById("lif").src = "images/factors/" + id + ".jpg";
@@ -250,8 +247,7 @@ function ajaxCall(command, sessionID) {
 
 	                        feedbackArray = responseText.feedback.split("*");
 	                        url = responseText.url.split("*");
-	                        meter = responseText.percentage;
-	                        updateP();
+	                        updateP(responseText.percentage);
 	                        for (var i = 0; i < feedbackArray.length - 1; i++) {
 	                            $("#lifesummary").append('<div class="symptomsresults"><img src="images/feedback/' + url[i] + '"><div><h3>' + feedbackArray[i] + '</h3></div></div>');
 	                        }
@@ -259,10 +255,8 @@ function ajaxCall(command, sessionID) {
 	                    });
 	                    done = true;
 	                }
-
 	        }
 	    });
-
 		}
 
 var done = false;
@@ -281,14 +275,12 @@ function profile() {
             symptomName = responseText2.symptomNames.split("*");
             symptomID = responseText2.symptomIDs.split("*");
             symptomExplanation = responseText2.explanation.split("*");
-            meter = responseText2.percentage;
-
-            updateP();
+            updateP( responseText2.percentage);
             $("#symptomsContainer").html("");
-            for (var i = 0; i < symptomName.length - 1; i++) {
+            for (var i = 0; i < symptomName.length -1 ; i++) {
                 $("#symptomsContainer").append('<div class="buttons" id="' + symptomID[i] + '" value = "' + symptomName[i] + '" onclick="clicked(' + i + ')">' + symptomName[i].replace("-", " ") + '</div>');
                 buttonObject = { id: "#" + symptomID[i], clicked: false };
-                submitArray[i - 1] = buttonObject;
+                submitArray[i] = buttonObject;
             }
             $("#symptomsContainer").append('<div class="buttons" id="submitB" onclick="submitSymptoms()">Submit</div>');
 
@@ -301,8 +293,7 @@ function profile() {
             $.get('DA', { command: "getFeedback", sessionID: sessionID, stage: "stage1" }, function (responseText3) {
                 feedbackArray = responseText3.feedback.split("*");
                 url = responseText3.url.split('*');
-                meter = responseText3.percentage;
-	            updateP();
+                updateP( responseText3.percentage);
 
                 for (var i = 0; i < feedbackArray.length - 1; i++) {
                     $(".summary").append('<div class="symptomsresults"><img src="images/feedback/'+url[i]+'"><div><h3>' + feedbackArray[i] + '</h3></div></div>');
@@ -471,8 +462,7 @@ function confirmLifestyle() {
 
         $.get('DA', { command: "getFeedback", sessionID: sessionID, stage: "stage3" }, function (responseText) {
             var backfeed = responseText.feedback.split("*");
-            meter = responseText.percentage;
-	        updateP();
+            updateP( responseText.percentage);
 
             $(".ffeedback").html("");
             for (var i = 0; i < backfeed.length; i++) {
@@ -526,9 +516,19 @@ function gSpecific(gender) {
 	}
 }
 
-function updateP() {
+function checkDifference(newMeter) {
+	if (newMeter > 0 ){
+	var newM = newMeter;
+	if (newM != meter) {
+		playSound();
+	}
+	meter=newM;
+}
+}
 
-    height = 330 * (meter / 100);
+function updateP(newMeter) {
+	checkDifference(newMeter);
+	height = 330 * (meter / 100);
 	$("#pvalue").html(meter + "%");
     if (meter >= 80) {
         $("#percentage").css({ "height": height + "px", "background": "rgba(255,0,0,0.5)" });
