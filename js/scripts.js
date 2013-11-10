@@ -142,52 +142,53 @@ var theOptions = new Array();
 var lastNumber = 0;
 function ajaxCall(command, sessionID) {
 
-	$.ajax({
-		url: 'DA',
-		type: 'GET',
-		dataType: 'json',
-		data: {
-		    command: command,
-		    sessionID: sessionID
-		},
-		contentType: 'application/json',
-		mimeType: 'application/json',
-		success: function (data) {
-		    question = data.question;
-		    id = data.id;
-		    type = data.type;
-		    options = data.options;
-		    meter = data.percentage;
-		    lastNumber = data.qNumber;
-	  		if (meter.length>0) {
-	            	updateP();
-	        }	    
-			document.getElementById("pro").src = "images/factors/" + id + ".jpg";
-	        $(".profileH1").html(question);
+    $.ajax({
+        url: 'DA',
+        type: 'GET',
+        dataType: 'json',
+        data: {
+            command: command,
+            sessionID: sessionID
+        },
+        contentType: 'application/json',
+        mimeType: 'application/json',
+        success: function (data) {
+            question = data.question;
+            id = data.id;
+            type = data.type;
+            options = data.options;
+            meter = data.percentage;
+            lastNumber = data.qNumber;
+            if (meter.length > 0) {
+                updateP();
+            }
+            document.getElementById("pro").src = "images/factors/" + id + ".jpg";
+            $(".profileH1").html(question);
 
-		    if (type == "INPUTT" || type == "INPUTN" || type == "INPUTND") {
-		        $(".questions").html('<input id="' + id + '" value="" type="' + id + '" placeholder="Enter Your ' + id + ' Here">');
-		    	}
-		    else if (type == "MALE-FEMALE") {
-		        $(".questions").html('<div id="male" onclick="gSpecific(this)"><img src="images/male-sign.jpg"></div><div id="female" onclick="gSpecific(this)"><img src="images/female-sign.jpg"></div>');
-		    }
-		    else if (type == "YES-NO") {
-		        $(".questions").html('<div id="yesbutton" class="yes" value="yes" onclick="yesno(yes)">Yes</div><div id="nobutton" class="no" value="no" onclick="yesno(no)">No</div>');
-		    } else
-		        if (type == "OPTIONAL") {
-		            theOptions = options.split('-');
-		            $(".questions").html("");
-		            for (var i = 0; i < theOptions.length; i++) {
-		                $(".questions").append('<div class="options" id="' + theOptions[i] + '">' + theOptions[i] + '</div>');
-		            }
+            if (type == "INPUTT" || type == "INPUTN" || type == "INPUTND") {
+                $(".questions").html('<input id="' + id + '" value="" type="' + id + '" placeholder="Enter Your ' + id + ' Here">');
+                $(".questions input").focus();
+            }
+            else if (type == "MALE-FEMALE") {
+                $(".questions").html('<div id="male" onclick="gSpecific(this)"><img src="images/male-sign.jpg"></div><div id="female" onclick="gSpecific(this)"><img src="images/female-sign.jpg"></div>');
+            }
+            else if (type == "YES-NO") {
+                $(".questions").html('<div id="yesbutton" class="yes" value="yes" onclick="yesno(yes)">Yes</div><div id="nobutton" class="no" value="no" onclick="yesno(no)">No</div>');
+            } else
+                if (type == "OPTIONAL") {
+                    theOptions = options.split('-');
+                    $(".questions").html("");
+                    for (var i = 0; i < theOptions.length; i++) {
+                        $(".questions").append('<div class="options" id="' + theOptions[i] + '">' + theOptions[i] + '</div>');
+                    }
 
-		        }
-		        else {
-		            profile();
-		        }
+                }
+                else {
+                    profile();
+                }
 
-		}
-	});
+        }
+    });
 
 	}
 
@@ -222,6 +223,7 @@ function ajaxCall(command, sessionID) {
 
 	            if (type == "INPUTT" || type == "INPUTN" || type == "INPUTND") {
 	                $("#lifestyle .questions").html('<input id="' + id + '" value="" type="' + id + '" placeholder="Enter Your ' + id + ' Here">');
+	                $("#lifestyle .questions input").focus();
 	            }
 	            else if (type == "MALE-FEMALE") {
 	                $("#lifestyle .questions").html('<div id="male" onclick="gSpecific(this)"><img src="images/male-sign.jpg"></div><div id="female" onclick="gSpecific(this)"><img src="images/female-sign.jpg"></div>');
