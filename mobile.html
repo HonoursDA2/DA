@@ -3,6 +3,7 @@
 	<html xmlns="http://www.w3.org/1999/xhtml">
 	<head>
 	    <title>Diabetes Advisor</title>
+        <meta name="viewport" content="initial-scale=1.0">
 	    <link href="css/style800.css" rel="stylesheet" type="text/css"/>
 	    <link href="css/fonts.css" rel="stylesheet" type="text/css" />
 	    <script src="js/JQuery.js" type="text/javascript"></script>
@@ -84,19 +85,18 @@
 	</div>
 
 	<div id="symptoms">
-	<div class="prev"></div><div class="next"></div>
 	<div id="symptomsContainer">
 	</div>
 	
 	</div>
 
-	<div id="backbL" onclick="revertL()">Back</div><div id="contButton" onclick="confirmLifestyle()">Continue</div>
 	<div id="lifestyle">
 	<div class="questions"></div><img class="illust" id="lif" src="images/symptoms/noImage.png">
 	<div class="feedback"></div>
 	</div>
 
 	</div>
+    <div id="backbL" onclick="revertL()">Back</div><div id="contButton" onclick="confirmLifestyle()">Continue</div>
 	<span id="dummy"></span>
 
 	<div id="chances"><p>Your Chances of Diabetes are: <span id="pvalue"></span></p></div>
