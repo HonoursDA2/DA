@@ -157,8 +157,12 @@ function getSession() {
 }
 
 function progressbar(data) {
+	if (data === undefined) {
+		
+	} else {
     $("#pbar").html(data);
     $("#thebar").css({ "width": data +"%" });
+    }
 }
 
 var theOptions = new Array();
