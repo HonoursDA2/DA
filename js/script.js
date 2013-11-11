@@ -1,4 +1,4 @@
-﻿var question = type = id = "";
+﻿var question = type = id = progress = "";
 var extraQ = extraT = extraO = extraE = extraC = extraObj = new Array();
 var dOptions = dExplanations = new Array();
 var currentInfo = "";
@@ -6,6 +6,7 @@ window.onload = function () {
     //splash();
     initialize();
     titles();
+    progressp();
 }
 
 
@@ -13,6 +14,11 @@ function titles() {
     $("#backb").attr('title', 'Made a mistake ? Click this button to start over');
     $("#button").attr('title', 'Click to Continue with the assessment/Alternatively, press enter to continue');
     $("input").attr('title', 'click to enter details');
+}
+
+function progressp() {
+    var pos = $("#progress").offset().left - 150; 
+    $("#progress").css({ "left": pos + "px" });
 }
 
 function splash() {

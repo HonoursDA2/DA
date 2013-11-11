@@ -35,6 +35,62 @@ body
     overflow:auto;
 }
 
+#progress
+{
+    width:300px;
+    height:50px;
+    background:rgba(255,255,255,0.7);
+    border-radius:5px;
+    box-shadow:0px 0px 2px silver;-webkit-box-shadow:0px 0px 2px silver;
+    position:absolute;
+    left:50%;bottom:-40px;
+    padding:10px;
+    z-index:4;
+    text-align:center;
+    transition:500ms ease;-webkit-transition:500ms ease;
+    cursor:pointer;
+}
+
+#progress:hover
+{
+    bottom:0;
+}
+
+#progress p
+{
+    font-family:helvetica;
+}
+
+#bar
+{
+    height:50%;
+    width:100%;
+    box-shadow:inset 0px 0px 10px 2px silver;
+    background:rgb(235,235,235);
+    position:relative;
+    border-radius:15px;
+    padding:2px;
+    box-sizing:border-box;
+    border:1px silver solid;
+    font-family:helvetica;
+}
+
+#bar p
+{
+    z-index:2;
+    font-family:helvetica;
+    position:relative;
+}
+
+#thebar
+{
+    height:100%;width:0;
+    background-image:linear-gradient(white,silver);
+    position:absolute;
+    top:0;
+    border-radius:20px;
+}
+
 #splash #logoC
 {
     position:relative;
