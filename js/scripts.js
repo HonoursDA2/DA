@@ -59,7 +59,7 @@ function submitSymptoms() {
 	var symptomURLS = new Array();
 	var symptomExp = new Array();
 	var symptomAdditional = new Array();
-		var clickedSymptoms ="";
+	var clickedSymptoms ="";
 
 	for (var x = 0; x < submitArray.length; x++) {
 		    
@@ -75,7 +75,9 @@ function submitSymptoms() {
 		        extraUrl = responseText.url;
 		        extraExp = responseText.explanation;
 		        extraAdd = responseText.additional;
+		        progress = responseText.progress;
 
+		        progressbar(progress);
 			    updateP(responseText.percentage);
 
 
@@ -239,7 +241,9 @@ function ajaxCall(command, sessionID) {
 	            type = data.type;
 	            options = data.options;
 	            lastNumber = data.qNumber;
+	            progress = data.progress;
 
+	            progressbar(progress);
 
 	            if (meter.length > 0) {
 	                updateP(data.percentage);
@@ -656,6 +660,18 @@ $(function () {
 
     $("#symptomsresultsC").on('mouseover', '.symptomsresults div', function () {
         $("#advisorH1").html("");
+    });
+
+    var pclick = false;
+    $("#progress").click(function () {
+        if (!pclick) {
+            $(this).css({ "bottom": "0px" });
+            pclick = true;
+        }
+        else {
+            $(this).css({ "bottom": "-40px" });
+            pclick = false;
+        }
     });
 
     $("#symptomsresultsC").on('click', '#cont', ontoLifestyle);
